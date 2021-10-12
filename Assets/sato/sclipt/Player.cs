@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+
         //ç∂âEëÄçÏ
         float inputX = Input.GetAxis("Horizontal");
         float inputZ = Input.GetAxis("Vertical");
@@ -47,5 +48,13 @@ public class Player : MonoBehaviour
         if(transform.position.y<=1.0f) {
             Jump_Count = 0;
         }
+    }
+
+    void OnCollisionStay(Collision collision) {
+        
+        if(collision.gameObject.tag=="Wall") {
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 0.2f, 0.0f), ForceMode.Impulse);
+        }
+
     }
 }
