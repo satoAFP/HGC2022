@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
 
     //private変数-----------------------------------------
     private Vector3 push;//加算したいベクトル量
-    private int Jump_Count;//連続でジャンプした回数をカウント
+    private int Jump_Count = 0;//連続でジャンプした回数をカウント
+    private bool Jump_Flag = true;//
 
     // Start is called before the first frame update
     void Start() {
@@ -31,11 +32,20 @@ public class Player : MonoBehaviour
         transform.Translate(moveX, 0.0f, moveZ);
 
         //ジャンプ操作
-        if (transform.position.y <= 1.0f && Max_Jmup != Jump_Count) {
+        if (transform.position.y <= 1.0f || Max_Jmup - 1 != Jump_Count) {
             if (Input.GetKey(KeyCode.Space)) {
-                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-                Jump_Count++;
+                if (Jump_Flag == true) {
+                    this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+                    Jump_Count++;
+                    Jump_Flag = false;
+                }
             }
+            else {
+                Jump_Flag = true;
+            }
+        }
+        if(transform.position.y<=1.0f) {
+            Jump_Count = 0;
         }
     }
 }
