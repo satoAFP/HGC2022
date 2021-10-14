@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //インスペクターで設定----------------------------------
+    //インスペクターで設定----------------------------------------------------
+    [Header("自動操作モード")]
+    public bool auto_move;
     [Header("移動速度")]
     public float moveSpeed;
     [Header("ジャンプ力")]
@@ -12,10 +14,10 @@ public class Player : MonoBehaviour
     [Header("最大ジャンプ回数")]
     public int Max_Jmup;
 
-    //private変数-----------------------------------------
+    //private変数--------------------------------------------------------------
     private Vector3 push;//加算したいベクトル量
     private int Jump_Count = 0;//連続でジャンプした回数をカウント
-    private bool Jump_Flag = true;//
+    private bool Jump_Flag = true;//ジャンプしているかのフラグ
 
     // Start is called before the first frame update
     void Start() {
@@ -24,10 +26,18 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+        float inputX;
+        float inputZ;
 
-        //左右操作
-        float inputX = Input.GetAxis("Horizontal");
-        float inputZ = Input.GetAxis("Vertical");
+        if (auto_move == false) {
+            //左右操作
+            inputX = Input.GetAxis("Horizontal");
+            inputZ = Input.GetAxis("Vertical");
+        }
+        else {
+            inputX = 0;
+            inputZ = 1;
+        }
         float moveX = inputX * moveSpeed * Time.deltaTime;
         float moveZ = inputZ * moveSpeed * Time.deltaTime;
         transform.Translate(moveX, 0.0f, moveZ);
