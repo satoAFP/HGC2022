@@ -15,9 +15,11 @@ public class Player : MonoBehaviour
     public int Max_Jmup;
 
     //private変数--------------------------------------------------------------
-    private Vector3 push;//加算したいベクトル量
-    private int Jump_Count = 0;//連続でジャンプした回数をカウント
-    private bool Jump_Flag = true;//ジャンプしているかのフラグ
+    private Vector3 push;           //加算したいベクトル量
+    private int Jump_Count = 0;     //連続でジャンプした回数をカウント
+    private bool Jump_Flag = true;  //ジャンプしているかのフラグ
+    private float inputX = 0;       //X軸の移動ベクトル
+    private float inputZ = 1;       //Z軸の移動ベクトル
 
     // Start is called before the first frame update
     void Start() {
@@ -26,18 +28,13 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
-        float inputX;
-        float inputZ;
 
         if (auto_move == false) {
             //左右操作
             inputX = Input.GetAxis("Horizontal");
             inputZ = Input.GetAxis("Vertical");
         }
-        else {
-            inputX = 0;
-            inputZ = 1;
-        }
+
         float moveX = inputX * moveSpeed * Time.deltaTime;
         float moveZ = inputZ * moveSpeed * Time.deltaTime;
         transform.Translate(moveX, 0.0f, moveZ);
@@ -64,6 +61,15 @@ public class Player : MonoBehaviour
         
         if(collision.gameObject.tag=="Wall") {
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 0.2f, 0.0f), ForceMode.Impulse);
+        }
+
+    }
+
+    void OnCollisionEnter(Collision collision) {
+
+        if (collision.gameObject.tag == "Move_direction") {
+            //collision.gameObject.GetComponent<"">
+
         }
 
     }
