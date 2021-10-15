@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GimmickChoice : MonoBehaviour
 {
-
+    //–¼‘O
+    public GameObject ActionChoice;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +19,11 @@ public class GimmickChoice : MonoBehaviour
         
     }
 
-    //void OnTriggerEnter (Collision other)
-    //{
-    //    if(other.gameObject.tag=="GimmickChoice")
-    //    {
-
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "GimmickChoice")
+        {
+            ActionChoice.SetActive(true);
+        }
+    }
 }
