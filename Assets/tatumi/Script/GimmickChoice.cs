@@ -18,11 +18,11 @@ public class GimmickChoice : MonoBehaviour
         
     }
 
-    void OnTriggerEnter (Collision collision)
-    {
-        if(other.gameObject.tag=="GimmickChoice")
-        {
+    //void OnTriggerEnter (Collision other)
+    //{
+    //    if(other.gameObject.tag=="GimmickChoice")
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }
