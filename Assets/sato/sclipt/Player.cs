@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private float inputX = 0;       //X軸の移動ベクトル
     private float inputZ = 1;       //Z軸の移動ベクトル
 
+
     // Start is called before the first frame update
     void Start() {
         push = new Vector3(0.0f, push_power, 0.0f);
@@ -29,15 +30,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() {
 
-        if (auto_move == false) {
-            //左右操作
-            inputX = Input.GetAxis("Horizontal");
-            inputZ = Input.GetAxis("Vertical");
-        }
+        MOVE(inputX, inputZ);
 
-        float moveX = inputX * moveSpeed * Time.deltaTime;
-        float moveZ = inputZ * moveSpeed * Time.deltaTime;
-        transform.Translate(moveX, 0.0f, moveZ);
+        //if (auto_move == false) {
+        //    //左右操作
+        //    inputX = Input.GetAxis("Horizontal");
+        //    inputZ = Input.GetAxis("Vertical");
+        //}
+
+        //float moveX = inputX * moveSpeed * Time.deltaTime;
+        //float moveZ = inputZ * moveSpeed * Time.deltaTime;
+        //transform.Translate(moveX, 0.0f, moveZ);
 
         //ジャンプ操作
         if (transform.position.y <= 1.0f || Max_Jmup - 1 != Jump_Count) {
@@ -58,19 +61,49 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionStay(Collision collision) {
-        
+        //壁に触れているとY軸への力付与
         if(collision.gameObject.tag=="Wall") {
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 0.2f, 0.0f), ForceMode.Impulse);
         }
-
     }
 
     void OnCollisionEnter(Collision collision) {
-
+        //自動移動設定時、このオブジェクトに触れると、指定方向に移動する
         if (collision.gameObject.tag == "Move_direction") {
-            //collision.gameObject.GetComponent<"">
+            switch(collision.gameObject.GetComponent<Direction>().direction) {
+                case 1:
+                    inputX = -1;
+                    inputZ = 0;
+                    break;
+                case 2:
+                    inputX = 1;
+                    inputZ = 0;
+                    break;
+                case 3:
+                    inputZ = 1;
+                    inputX = 0;
+                    break;
+                case 4:
+                    inputZ = -1;
+                    inputX = 0;
+                    break;
+            }
 
         }
 
     }
+
+
+    private void MOVE(float x, float z) {
+        if (auto_move == false) {
+            //左右操作
+            x = Input.GetAxis("Horizontal");
+            z = Input.GetAxis("Vertical");
+        }
+
+        float moveX = x * moveSpeed * Time.deltaTime;
+        float moveZ = z * moveSpeed * Time.deltaTime;
+        transform.Translate(moveX, 0.0f, moveZ);
+    }
+
 }
