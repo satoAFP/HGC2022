@@ -30,17 +30,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() {
 
+        //移動処理
         MOVE(inputX, inputZ);
-
-        //if (auto_move == false) {
-        //    //左右操作
-        //    inputX = Input.GetAxis("Horizontal");
-        //    inputZ = Input.GetAxis("Vertical");
-        //}
-
-        //float moveX = inputX * moveSpeed * Time.deltaTime;
-        //float moveZ = inputZ * moveSpeed * Time.deltaTime;
-        //transform.Translate(moveX, 0.0f, moveZ);
 
         //ジャンプ操作
         if (transform.position.y <= 1.0f || Max_Jmup - 1 != Jump_Count) {
@@ -71,19 +62,19 @@ public class Player : MonoBehaviour
         //自動移動設定時、このオブジェクトに触れると、指定方向に移動する
         if (collision.gameObject.tag == "Move_direction") {
             switch(collision.gameObject.GetComponent<Direction>().direction) {
-                case 1:
+                case 1://左
                     inputX = -1;
                     inputZ = 0;
                     break;
-                case 2:
+                case 2://右
                     inputX = 1;
                     inputZ = 0;
                     break;
-                case 3:
+                case 3://前
                     inputZ = 1;
                     inputX = 0;
                     break;
-                case 4:
+                case 4://後
                     inputZ = -1;
                     inputX = 0;
                     break;
@@ -93,17 +84,16 @@ public class Player : MonoBehaviour
 
     }
 
-
+    //移動処理関数
     private void MOVE(float x, float z) {
         if (auto_move == false) {
             //左右操作
             x = Input.GetAxis("Horizontal");
             z = Input.GetAxis("Vertical");
         }
-
+        //速度の設定
         float moveX = x * moveSpeed * Time.deltaTime;
         float moveZ = z * moveSpeed * Time.deltaTime;
         transform.Translate(moveX, 0.0f, moveZ);
     }
-
 }
