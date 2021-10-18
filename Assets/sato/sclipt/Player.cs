@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private int Select_order = 0;   //ボタンを押された順番を記憶
     private int Action_count = 0;   //アクションをした回数をカウント
     private bool Action_check = false;//アクションを一回しか使えないよう管理
+    private bool Movestop = false; //アクションを選択するとき主人公を止める用
 
 
     //構造体-------------------------------------------------------------------
@@ -52,30 +53,57 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+        //アクションブロックに到達するといったん止める処理
+        if (Movestop == false) {
+            
+            //移動処理
+            MOVE(inputX, inputZ); Debug.Log($"inputX");
 
-        //移動処理
-        MOVE(inputX, inputZ);
-
-        //選択した順番とアクションブロックに乗った順番が連動する
-        if (jump.push_num == Action_count && Action_check == true) {
-            //ジャンプ操作
-            if (transform.position.y <= 1.0f || Max_Jmup - 1 != Jump_Count) {
-                if (jump.push == true) {
-                    if (Jump_Flag == true) {
-                        this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-                        Jump_Count++;
-                        Jump_Flag = false;
+            //ジャンプを選択したとき--------------------------------------------------------------
+            if (jump.push_num == Action_count && Action_check == true) {
+                //ジャンプ操作
+                if (transform.position.y <= 1.0f || Max_Jmup - 1 != Jump_Count) {
+                    if (jump.push == true) {
+                        if (Jump_Flag == true) {
+                            this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+                            Jump_Count++;
+                            Jump_Flag = false;
+                        }
+                    }
+                    else {
+                        Jump_Flag = true;
                     }
                 }
-                else {
-                    Jump_Flag = true;
+                if (transform.position.y <= 1.0f) {
+                    Jump_Count = 0;
                 }
+                jump.push = false;
+                Action_check = false;
             }
-            if (transform.position.y <= 1.0f) {
-                Jump_Count = 0;
+
+            //しゃがみを選択したとき--------------------------------------------------------------
+            if (squat.push_num == Action_count && Action_check == true) {
+                this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
+                squat.push = false;
+                Action_check = false;
             }
-            jump.push = false;
-            Action_check = false;
+
+            //くっつきを選択したとき--------------------------------------------------------------
+            if (stick.push_num == Action_count && Action_check == true) {
+
+
+                stick.push = false;
+                Action_check = false;
+            }
+
+            //ストップを選択したとき--------------------------------------------------------------
+            if (stop.push_num == Action_count && Action_check == true) {
+
+
+                stop.push = false;
+                Action_check = false;
+            }
         }
     }
 
@@ -109,9 +137,12 @@ public class Player : MonoBehaviour
             }
         }
 
+        //アクションブロックに乗るたびカウント
         if (collision.gameObject.tag == "Action") {
             Action_count++;
             Action_check = true;
+            Movestop = true;
+            collision.gameObject.SetActive(false);
         }
 
     }
@@ -129,8 +160,7 @@ public class Player : MonoBehaviour
         transform.Translate(moveX, 0.0f, moveZ);
     }
 
-    //-----------------------------------------------------------------------------------
-    //ボタンでの操作選択
+    //ボタンでの操作選択----------------------------------------------------------------
     public void Push_jump() {
         jump.push = true;
         Select_order++;
@@ -146,13 +176,17 @@ public class Player : MonoBehaviour
     public void Push_stick() {
         stick.push = true;
         Select_order++;
-        stick.push_num = Select_order;
+        stick.push_num = Select_order; 
     }
 
     public void Push_stop() {
         stop.push = true;
         Select_order++;
         stop.push_num = Select_order;
+    }
+
+    public void Push_start() {
+        Movestop = false;
     }
 
 }
