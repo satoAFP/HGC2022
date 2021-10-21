@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ButtonChoice : MonoBehaviour
+{
+    [Header("非表示対象オブジェクト")]
+    public GameObject Button;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void PushButton()
+    {
+        Button.SetActive(false);
+    }
+}
