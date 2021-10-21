@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     //インスペクターで設定----------------------------------------------------
     [Header("自動操作モード")]
     public bool auto_move;
+    [Header("カード最大選択回数")]
+    public int Max_Card;
+
     [Header("移動速度")]
     public float moveSpeed;
     [Header("ジャンプ力")]
@@ -15,16 +18,16 @@ public class Player : MonoBehaviour
     public int Max_Jmup;
 
     //private変数--------------------------------------------------------------
-    private Vector3 push;           //加算したいベクトル量
-    private int Jump_Count = 0;     //連続でジャンプした回数をカウント
-    private bool Jump_Flag = true;  //ジャンプしているかのフラグ
-    private float inputX = 0;       //X軸の移動ベクトル
-    private float inputZ = 1;       //Z軸の移動ベクトル
-    private int Select_order = 0;   //ボタンを押された順番を記憶
-    private int Action_count = 0;   //アクションをした回数をカウント
-    private bool Action_check = false;//アクションを一回しか使えないよう管理
-    private bool Movestop = false; //アクションを選択するとき主人公を止める用
-
+    private Vector3 push;               //加算したいベクトル量
+    private int Jump_Count = 0;         //連続でジャンプした回数をカウント
+    private bool Jump_Flag = true;      //ジャンプしているかのフラグ
+    private float inputX = 0;           //X軸の移動ベクトル
+    private float inputZ = 1;           //Z軸の移動ベクトル
+    private int Select_order = 0;       //ボタンを押された順番を記憶
+    private int Action_count = 0;       //アクションをした回数をカウント
+    private bool Action_check = false;  //アクションを一回しか使えないよう管理
+    private bool Movestop = false;      //アクションを選択するとき主人公を止める用
+    private int[] Card_order;           //カードを選択した順番を記憶
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -44,11 +47,22 @@ public class Player : MonoBehaviour
     Buttan stick = new Buttan(false, 0);
     Buttan stop = new Buttan(false, 0);
 
+    //列挙----------------------------------------------------------------------
+    //カードの種類
+    public enum Card
+    {
+        JUMP,
+        SQUAT,
+        STICK,
+        STOP
+    }
+    
 
     // Start is called before the first frame update
     void Start() {
+        //初期化
         push = new Vector3(0.0f, push_power, 0.0f);
-
+        Card_order = new int[Max_Card];
     }
 
     // Update is called once per frame
@@ -57,7 +71,7 @@ public class Player : MonoBehaviour
         if (Movestop == false) {
             
             //移動処理
-            MOVE(inputX, inputZ); Debug.Log($"inputX");
+            MOVE(inputX, inputZ);
 
             //ジャンプを選択したとき--------------------------------------------------------------
             if (jump.push_num == Action_count && Action_check == true) {
@@ -110,7 +124,7 @@ public class Player : MonoBehaviour
     void OnCollisionStay(Collision collision) {
         //壁に触れているとY軸への力付与
         if(collision.gameObject.tag=="Wall") {
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 0.2f, 0.0f), ForceMode.Impulse);
+            transform.Translate(0.0f, 0.15f, 0.0f);
         }
     }
 
@@ -163,30 +177,37 @@ public class Player : MonoBehaviour
     //ボタンでの操作選択----------------------------------------------------------------
     public void Push_jump() {
         jump.push = true;
-        Select_order++;
-        jump.push_num = Select_order;
+        Card_order[Select_order] = (int)Card.JUMP;  //ボタンを押した順番を記憶
+        Select_order++;                             //順番を進める用
+        jump.push_num = Select_order;               //押された順番とアクションブロックを踏んだ回数を一致させる
     }
 
     public void Push_squat() {
         squat.push = true;
+        Card_order[Select_order] = (int)Card.SQUAT;
         Select_order++;
         squat.push_num = Select_order;
     }
 
     public void Push_stick() {
         stick.push = true;
+        Card_order[Select_order] = (int)Card.STICK;
         Select_order++;
         stick.push_num = Select_order; 
     }
 
     public void Push_stop() {
         stop.push = true;
+        Card_order[Select_order] = (int)Card.STOP;
         Select_order++;
         stop.push_num = Select_order;
     }
 
+    //アクション開始ボタン
     public void Push_start() {
         Movestop = false;
     }
+
+   
 
 }
