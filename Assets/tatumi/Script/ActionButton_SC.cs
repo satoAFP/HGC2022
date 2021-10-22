@@ -14,7 +14,9 @@ public class ActionButton_SC : MonoBehaviour
     [Header("必ず自身を指定")]
     public GameObject Object;
 
-   
+    [Header("触らない")]
+    public string NowStage;
+
     [Header("子の要素数")]
     [Header("複数枚表示---------------------------------")]
     public int Child_num;
@@ -24,9 +26,6 @@ public class ActionButton_SC : MonoBehaviour
 
     [Header("複製数指定")]
     public GameObject[] childGameObjects;
-   
-
-    private string NowStage;
   
     // Start is called before the first frame update
     void Start()

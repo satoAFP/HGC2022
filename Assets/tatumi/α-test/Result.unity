@@ -1188,11 +1188,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117929341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bee0b005b44f3b49a8ba339bcfd12a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 880937ba954f27a47a04b72ff9529801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName:
-  - Stage-2
+  Back_Stage: 
 --- !u!114 &2117929344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1237,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2117929343}
-        m_TargetAssemblyTypeName: Scenemove, Assembly-CSharp
+        m_TargetAssemblyTypeName: Back_Scenemove, Assembly-CSharp
         m_MethodName: PushButton
         m_Mode: 1
         m_Arguments:
