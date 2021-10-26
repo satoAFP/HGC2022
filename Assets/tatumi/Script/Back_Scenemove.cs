@@ -10,7 +10,7 @@ public class Back_Scenemove : MonoBehaviour
 
     ActionButton_SC script; //QÆŒ³Script‚ª“ü‚é•Ï”
 
-    public string Back_Stage;
+    private string Back_Stage;
 
     // Use this for initialization
     void Start()
@@ -27,7 +27,7 @@ public class Back_Scenemove : MonoBehaviour
         if(Back_Stage=="Stage")
         SceneManager.LoadScene("Stage-2");
         if (Back_Stage == "Stage-2")
-            SceneManager.LoadScene("Title");
+           ;
     }
 }
 
