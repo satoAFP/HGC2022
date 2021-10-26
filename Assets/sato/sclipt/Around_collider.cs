@@ -20,9 +20,11 @@ public class Around_collider : MonoBehaviour
         if (collider.tag == "Wall") {
             wall_check = true;
         }
-        else {
+    }
+
+    private void OnTriggerExit(Collider collider) {
+        if (collider.tag == "Wall") {
             wall_check = false;
         }
-
     }
 }

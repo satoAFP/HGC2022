@@ -23,9 +23,6 @@ public class Player : MonoBehaviour
     
     //private変数--------------------------------------------------------------
     private Vector3 push;               //加算したいベクトル量
-    private BoxCollider[] col;          //主人公の周りで判定取る用
-    private int Jump_Count = 0;         //連続でジャンプした回数をカウント
-    private bool Jump_Flag = true;      //ジャンプしているかのフラグ
     private float inputX = 0;           //X軸の移動ベクトル
     private float inputZ = 1;           //Z軸の移動ベクトル
     private int Select_order = 0;       //ボタンを押された順番を記憶
@@ -33,6 +30,9 @@ public class Player : MonoBehaviour
     private bool Movestop = true;       //アクションを選択するとき主人公を止める用
     private int[] Card_order;           //カードを選択した順番を記憶
     private bool wall_stick = false;    //壁にくっつける状態
+    private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
+    private bool walljump_check = false;//壁ジャンプかどうか判断
+    private int walljump_time = 100;     //横移動する時間
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -61,17 +61,14 @@ public class Player : MonoBehaviour
         STICK,
         STOP
     }
-    
+
 
     // Start is called before the first frame update
     void Start() {
         //初期化
         push = new Vector3(0.0f, push_power, 0.0f);
         Card_order = new int[Max_Card];
-        Action_check= new bool[4];
-
-        //col[0]が左　col[1]が右　col[2]が前
-        //col = Around_collision.GetComponents<BoxCollider>();
+        Action_check = new bool[4];
     }
 
     // Update is called once per frame
@@ -88,8 +85,32 @@ public class Player : MonoBehaviour
             if (Card_order[Select_order] == (int)Card.JUMP && Action_check[(int)Card.JUMP] == true) {
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-                //1アクション、1プレイ
+
+                if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+                    walljump_check = true;
+                    walljump = 0.1f;
+                }
+                //右に壁がある処理
+                if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+                    walljump_check = true;
+                    walljump = -0.1f;
+                }
+
+                //ジャンプ処理終了
                 Action_check[(int)Card.JUMP] = false;
+            }
+            //壁ジャンプ処理
+            if (walljump_check == true) {
+                if (walljump_time != 0) {
+                    transform.Translate(walljump, 0.0f, 0.0f);
+                    if (walljump < 0)
+                        walljump += 0.001f;
+                    else
+                        walljump -= 0.001f;
+                }
+                else
+                    walljump_check = false;
+                walljump_time--;
             }
 
             //しゃがみを選択したとき--------------------------------------------------------------
@@ -100,19 +121,25 @@ public class Player : MonoBehaviour
                 this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
 
-            Debug.Log($"{Around_collision[0].GetComponent<Around_collider>().wall_check == false}");
+            
 
             //くっつきを選択したとき--------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.STICK && Action_check[(int)Card.STICK] == true) {
-                wall_stick = true;
+                //左に壁がある処理
+                if (Around_collision[0].GetComponent<Around_collider>().wall_check == true)
+                    this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                else
+                    this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 //右に壁がある処理
-                if (Around_collision[0].GetComponent<Around_collider>().wall_check == false) {
-                    this.GetComponent<Rigidbody>().constraints =RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-                }
-
-          
-
-                Action_check[(int)Card.STICK] = false;
+                if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
+                    this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                else
+                    this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                //前に壁がある処理
+                if (Around_collision[2].GetComponent<Around_collider>().wall_check == true) 
+                    wall_stick = true;
+                else
+                    wall_stick = false;
             }
 
             //ストップを選択したとき--------------------------------------------------------------
@@ -126,12 +153,10 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionStay(Collision collision) {
-        //壁に触れているとY軸への力付与
-        if(collision.gameObject.tag=="wall") {
+        //くっつき状態の時、壁に触れているとY軸への力付与
+        if(collision.gameObject.tag=="Wall") {
             if (wall_stick == true) {
-                //if()
-
-                transform.Translate(0.0f, 0.15f, 0.0f);
+                transform.Translate(0.0f,0.2f,0.0f);
             }
         }
     }
@@ -159,12 +184,17 @@ public class Player : MonoBehaviour
             }
         }
 
-        //アクションブロックに乗るたびカウント
+        //アクションを選択した順番に実行される
         if (collision.gameObject.tag == "Action") {
             collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
             Select_order++;//アクション内容を一つ進める
 
+            //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
+            //くっつき状態解除
+            Action_check[(int)Card.STICK] = false;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            wall_stick = false;
 
             //次のアクションのフラグをtrueにする
             switch (Card_order[Select_order]) {
