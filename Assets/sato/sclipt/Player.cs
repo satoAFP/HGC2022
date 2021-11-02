@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
 
     [Header("ジャンプ力")]
     public float push_power;
+
+    [Header("ハイジャンプ力(ジャンプの何倍か)")]
+    public float highjump_power;
+
     [Header("最大ジャンプ回数")]
     public int Max_Jmup;
     
@@ -152,6 +156,7 @@ public class Player : MonoBehaviour
             //走るを選択したとき------------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.RUN && Action_check[(int)Card.RUN] == true) {
 
+                //倍率が変わる
                 run_power = runSpeed;
 
                 Action_check[(int)Card.RUN] = false;
@@ -159,6 +164,8 @@ public class Player : MonoBehaviour
 
             //ハイジャンプを選択したとき----------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.HIGHJUMP && Action_check[(int)Card.HIGHJUMP] == true) {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * highjump_power, ForceMode.Impulse);
 
                 Action_check[(int)Card.HIGHJUMP] = false;
             }
