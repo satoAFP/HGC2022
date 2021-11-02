@@ -14,11 +14,17 @@ public class Player : MonoBehaviour
     [Header("カード最大選択回数")]
     public int Max_Card;
 
+    [Header("カードの種類数")]
+    public int Kind_Card;
+
     [Header("移動速度")]
     public float moveSpeed;
 
     [Header("走る速度(移動速度の何倍か)")]
     public float runSpeed;
+
+    [Header("前方向への力(幅跳び、スライディングで使用)")]
+    public float flontMove;
 
     [Header("ジャンプ力")]
     public float push_power;
@@ -42,6 +48,8 @@ public class Player : MonoBehaviour
     private bool walljump_check = false;//壁ジャンプかどうか判断
     private int walljump_time = 100;    //横移動する時間
     private float run_power = 1;        //移動速度代入
+    private Vector3 flont_push;         //移動方向へより力を加える(幅跳びで使用)
+    private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -81,15 +89,34 @@ public class Player : MonoBehaviour
         //初期化
         push = new Vector3(0.0f, push_power, 0.0f);
         Card_order = new int[Max_Card];
-        Action_check = new bool[4];
+        Action_check = new bool[Kind_Card];
     }
 
     // Update is called once per frame
     void FixedUpdate() {
-        //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-        //アクションブロックに到達するといったん止める処理
-        if (Movestop == false) {
+        //幅跳び、スライディングで使用する移動量の向き変更
+        if (inputX == -1) {
+            flont_push = new Vector3(-flontMove, push_power, 0.0f);
+            flont_sliding = new Vector3(-flontMove, 0.0f, 0.0f);
+        }
+        if (inputX == 1) {
+            flont_push = new Vector3(flontMove, push_power, 0.0f);
+            flont_sliding = new Vector3(flontMove, 0.0f, 0.0f);
+        }
+        if (inputZ == -1) {
+            flont_push = new Vector3(0.0f, push_power, -flontMove);
+            flont_sliding = new Vector3(0.0f, 0.0f, -flontMove);
+        }
+        if (inputZ == 1) {
+            flont_push = new Vector3(0.0f, push_power, flontMove);
+            flont_sliding = new Vector3(0.0f, 0.0f, flontMove);
+        }
+
+        
+
+            //アクションブロックに到達するといったん止める処理
+            if (Movestop == false) {
             
             //移動処理
             MOVE(inputX, inputZ);
@@ -99,40 +126,16 @@ public class Player : MonoBehaviour
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
-                if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
-                    walljump_check = true;
-                    walljump = 0.1f;
-                }
-                //右に壁がある処理
-                if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
-                    walljump_check = true;
-                    walljump = -0.1f;
-                }
-
                 //ジャンプ処理終了
                 Action_check[(int)Card.JUMP] = false;
             }
-            //壁ジャンプ処理
-            if (walljump_check == true) {
-                if (walljump_time != 0) {
-                    transform.Translate(walljump, 0.0f, 0.0f);
-                    if (walljump < 0)
-                        walljump += 0.001f;
-                    else
-                        walljump -= 0.001f;
-                }
-                else
-                    walljump_check = false;
-                walljump_time--;
-            }
+            
 
             //しゃがみを選択したとき--------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.SQUAT && Action_check[(int)Card.SQUAT] == true) {
                 this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
             }
-            else {
-                this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
+
 
             //くっつきを選択したとき--------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.STICK && Action_check[(int)Card.STICK] == true) {
@@ -153,6 +156,7 @@ public class Player : MonoBehaviour
                     wall_stick = false;
             }
 
+
             //走るを選択したとき------------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.RUN && Action_check[(int)Card.RUN] == true) {
 
@@ -162,6 +166,7 @@ public class Player : MonoBehaviour
                 Action_check[(int)Card.RUN] = false;
             }
 
+
             //ハイジャンプを選択したとき----------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.HIGHJUMP && Action_check[(int)Card.HIGHJUMP] == true) {
                 //ジャンプさせる処理
@@ -170,24 +175,52 @@ public class Player : MonoBehaviour
                 Action_check[(int)Card.HIGHJUMP] = false;
             }
 
+
             //壁キックを選択したとき--------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.WALLKICK && Action_check[(int)Card.WALLKICK] == true) {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+                //左に壁がある処理
+                if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+                    walljump_check = true;
+                    walljump = 0.1f;
+                }
+                //右に壁がある処理
+                if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+                    walljump_check = true;
+                    walljump = -0.1f;
+                }
 
                 Action_check[(int)Card.WALLKICK] = false;
             }
+            //壁ジャンプ処理
+            if (walljump_check == true) {
+                if (walljump_time != 0) {
+                    transform.Translate(walljump, 0.0f, 0.0f);
+                    if (walljump < 0)
+                        walljump += 0.001f;
+                    else
+                        walljump -= 0.001f;
+                }
+                else
+                    walljump_check = false;
+                walljump_time--;
+            }
+
 
             //幅跳びを選択したとき----------------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.LONGJUMP && Action_check[(int)Card.LONGJUMP] == true) {
-
+                this.GetComponent<Rigidbody>().AddForce(flont_push, ForceMode.Impulse);
                 Action_check[(int)Card.LONGJUMP] = false;
             }
 
             //スライディングを選択したとき--------------------------------------------------------------------------------------
             if (Card_order[Select_order] == (int)Card.SLIDING && Action_check[(int)Card.SLIDING] == true) {
-
+                this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
+                this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
                 Action_check[(int)Card.SLIDING] = false;
             }
-
 
         }
     }
@@ -228,6 +261,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Action") {
             collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
             Select_order++;//アクション内容を一つ進める
+            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
