@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+
         //選んだアクションをtext_dataに格納
         for (int i = 0; i < Select_order; i++)  {
             if(Card_order[i] == (int)Card.JUMP) {
@@ -346,6 +347,10 @@ public class Player : MonoBehaviour
                     Action_check[(int)Card.SLIDING] = true;
                     break;
             }
+        }
+
+        if (collision.gameObject.tag == "Acceleration") {
+            this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
         }
 
     }
