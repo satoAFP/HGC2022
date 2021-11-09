@@ -106,36 +106,36 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+        //選んだアクションをtext_dataに格納
         for (int i = 0; i < Select_order; i++)  {
             if(Card_order[i] == (int)Card.JUMP) {
-                text_data[i] = "ジャンプ ← ";
+                text_data[i] = "ジャンプ → ";
             }
             if (Card_order[i] == (int)Card.SQUAT) {
-                text_data[i] = "しゃがみ ← ";
+                text_data[i] = "しゃがみ → ";
             }
             if (Card_order[i] == (int)Card.STICK) {
-                text_data[i] = "くっつく ← ";
+                text_data[i] = "くっつく → ";
             }
             if (Card_order[i] == (int)Card.RUN) {
-                text_data[i] = "走る ← ";
+                text_data[i] = "走る → ";
             }
             if (Card_order[i] == (int)Card.HIGHJUMP) {
-                text_data[i] = "ハイジャンプ ← ";
+                text_data[i] = "ハイジャンプ → ";
             }
             if (Card_order[i] == (int)Card.WALLKICK) {
-                text_data[i] = "壁キック ← ";
+                text_data[i] = "壁キック → ";
             }
             if (Card_order[i] == (int)Card.LONGJUMP) {
-                text_data[i] = "幅跳び ← ";
+                text_data[i] = "幅跳び → ";
             }
             if (Card_order[i] == (int)Card.SLIDING) {
-                text_data[i] = "スライディング ← ";
-                
+                text_data[i] = "スライディング → ";
             }
-            Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3]
-                 + text_data[4] + text_data[5] + text_data[6] + text_data[7];
-            Debug.Log("" + text_data[i]);
         }
+        //選択したアクション実際表示
+        Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3]
+                 + text_data[4] + text_data[5] + text_data[6] + text_data[7];
 
         //幅跳び、スライディングで使用する移動量の向き変更
         if (inputX == -1) {
@@ -418,7 +418,7 @@ public class Player : MonoBehaviour
         if (Select_order > 0) {
             Select_order -= 1;
             Card_order[Select_order] = -1;
-            text_data[Select_order] = "";
+            text_data[Select_order] = "";   //カードテキストの中身消去
         }
     }
 
