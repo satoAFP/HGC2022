@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
     private string[] text_data;         //アクション内容格納変数
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
+    private bool deth_flag = false;     //脂肪判定用フラグ
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour
         //選択したアクション実際表示
         Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3]
                  + text_data[4] + text_data[5] + text_data[6] + text_data[7];
+
 
         //幅跳び、スライディングで使用する移動量の向き変更
         if (inputX == -1) {
