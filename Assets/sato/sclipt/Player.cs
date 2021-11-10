@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     private Vector3 flont_push;         //移動方向へより力を加える(幅跳びで使用)
     private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
     private string[] text_data;         //アクション内容格納変数
+    private bool select_time = true;    //開始ボタンを押すと、カード選択できない
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -157,7 +158,7 @@ public class Player : MonoBehaviour
         }
 
 
-        //アクションブロックに到達するといったん止める処理
+        //最初アクションを選択するときと、セレクトブロックに到達するといったん止める処理
         if (Movestop == false) {
 
             //移動処理
@@ -304,8 +305,10 @@ public class Player : MonoBehaviour
 
         //アクションを選択した順番に実行される
         if (collision.gameObject.tag == "Action") {
-            collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
+            //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
+
             Select_order++;//アクション内容を一つ進める
+
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -349,7 +352,30 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "Acceleration") {
+        //アクション再選択
+        if (collision.gameObject.tag == "Select") {
+            //動きを止める
+            Movestop = true;
+
+            //再選択できる
+            select_time = true;
+
+            //順番を最初からにする
+            Select_order = 0;
+
+            //アクション選択の中身初期化
+            for (int i = 0; i < Max_Card; i++) {
+                Card_order[i] = -1;
+            }
+
+            //アクション表示テキストの中身初期化
+            for (int i = 0; i < Max_Card; i++) {
+                text_data[i] = "";
+            }
+        }
+
+            //加速床の処理
+            if (collision.gameObject.tag == "Acceleration") {
             this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
         }
 
@@ -371,50 +397,67 @@ public class Player : MonoBehaviour
     //ボタンでの操作選択----------------------------------------------------------------
     //通常アクション-----------------------------------
     public void Push_jump() {//ジャンプボタン
-        Card_order[Select_order] = (int)Card.JUMP;  //ボタンを押した順番を記憶
-        Select_order++;                             //順番を進める用
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.JUMP;  //ボタンを押した順番を記憶
+            Select_order++;                             //順番を進める用
+        }
     }
 
     public void Push_squat() {//しゃがみボタン
-        Card_order[Select_order] = (int)Card.SQUAT;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.SQUAT;
+            Select_order++;
+        }
     }
 
     public void Push_stick() {//くっつきボタン
-        Card_order[Select_order] = (int)Card.STICK;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.STICK;
+            Select_order++;
+        }
     }
 
     public void Push_run() {//走るボタン
-        Card_order[Select_order] = (int)Card.RUN;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.RUN;
+            Select_order++;
+        }
     }
 
     //合体アクション------------------------------------
     public void Push_highjump() {//しゃがみ+ジャンプ＝ハイジャンプ
-        Card_order[Select_order] = (int)Card.HIGHJUMP;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.HIGHJUMP;
+            Select_order++;
+        }
     }
 
     public void Push_wallkick() {//くっつき+ジャンプ＝壁キック
-        Card_order[Select_order] = (int)Card.WALLKICK;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.WALLKICK;
+            Select_order++;
+        }
     }
 
     public void Push_longjump() {//走る+ジャンプ＝幅跳び
-        Card_order[Select_order] = (int)Card.LONGJUMP;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.LONGJUMP;
+            Select_order++;
+        }
     }
 
     public void Push_sliding() {//しゃがみ+走る＝スライディング
-        Card_order[Select_order] = (int)Card.SLIDING;
-        Select_order++;
+        if (select_time) {
+            Card_order[Select_order] = (int)Card.SLIDING;
+            Select_order++;
+        }
     }
 
     //アクション開始ボタン
     public void Push_start() {
-        Movestop = false;//アクションループのメイン部分を動かす
-        Select_order = -1;//アクションブロックに乗った時、最初に加算されてしまうから-1
+        Movestop = false;   //アクションループのメイン部分を動かす
+        Select_order = -1;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+        select_time = false;//アクション開始するとカードを選択できない
     }
 
     //選択したアクションを一つ戻す
