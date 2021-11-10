@@ -40,14 +40,14 @@ public class movehammer : MonoBehaviour
 
         if(back==true)
         {
-            nowhammeRad = 1.0f;
+            nowhammeRad = 1.0f*moveSpeed;
         }
         else
         {
-            nowhammeRad = -1.0f;
+            nowhammeRad = -1.0f*moveSpeed;
         }
 
-        nowhammeRad = (int)nowhammeRad;
+       // nowhammeRad = (int)nowhammeRad;
 
         transform.Rotate(new Vector3(x, y, nowhammeRad));
 
