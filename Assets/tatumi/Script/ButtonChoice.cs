@@ -46,20 +46,17 @@ public class ButtonChoice : MonoBehaviour
             Debug.Log("Left");
 
             Button.SetActive(false);
-            if(script.now==0)
-            {
-                script.objs[script.now] = this.gameObject;
-                script.now++;
-            }
-            else
-            {
-                //script.now++;
-                script.objs[script.now] = this.gameObject;
-            }
+            //è¡Ç¶ÇΩéûèâä˙à íuÇ…ñﬂÇÈ
+            this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+
+            script.objs[script.now] = this.gameObject;
+            script.now++;
+            
         }
         //âEÉNÉä
         else if(Input.GetMouseButtonDown(1))
         {
+            pos = this.gameObject.transform.position;
             Debug.Log("Right");
             Debug.Log($"pos.y={pos.y:0.00}");
             if (pos.x<=600)
@@ -91,6 +88,11 @@ public class ButtonChoice : MonoBehaviour
         else if(Input.GetMouseButtonDown(2))
         {
             this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+        }
+        else if(set==false)
+        {
+            Button.SetActive(true);
+           
         }
        
     }
