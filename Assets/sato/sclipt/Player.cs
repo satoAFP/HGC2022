@@ -390,7 +390,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider collider) {
         if (collider.gameObject.tag == "safe_zone") {
-            Debug.Log("aaa");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
