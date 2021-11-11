@@ -28,7 +28,7 @@ public class Result : MonoBehaviour
         ActionButton = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         script = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
-        stage = script.NowStage;
+      //  stage = script.NowStage;
     }
 
     // 更新
@@ -40,8 +40,8 @@ public class Result : MonoBehaviour
         //ステージ
         Text stage_text = stage_object.GetComponent<Text>();
 
-        if (stage == "Stage-2")
-            stage_text.text = "coming soon...";
+        //if (stage == "Stage-2")
+        //    stage_text.text = "coming soon...";
 
         // テキストの表示を入れ替える
         score_text.text = "Score:" + score_num;
