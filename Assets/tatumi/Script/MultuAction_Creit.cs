@@ -27,11 +27,8 @@ public class MultuAction_Creit : MonoBehaviour
         //pos=800位置にいるやつ全取得
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Multi_action1");
 
-        if (blocks[0] == null)
-        {
-            ;
-        }
-        else
+        //オブジェクトが二つ以上の時
+        if (blocks.Length >= 2)
         {
             //名前を見る（この辺りは別scriptで判定したほうがよさそう）
             if (blocks[0].name.Contains(target) == true)
@@ -42,7 +39,7 @@ public class MultuAction_Creit : MonoBehaviour
                     // プレハブをGameObject型で取得
                     GameObject obj = (GameObject)Resources.Load("highjump");
                     // プレハブを元に、インスタンスを生成、
-                    Instantiate(obj, new Vector3(800.0f, 0.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
+                    Instantiate(obj, new Vector3(800.0f, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
 
                     for (int i = 0; i != 2; i++)
                     {
@@ -51,7 +48,12 @@ public class MultuAction_Creit : MonoBehaviour
                 }
             }
         }
-        
+        //それ以下なら
+        else
+        {
+            Debug.Log("Out!!"); ;
+        }
+
     }
 }
         
