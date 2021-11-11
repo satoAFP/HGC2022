@@ -24,7 +24,7 @@ public class ActionButton_SC : MonoBehaviour
     [Header("•¡»”w’è")]
     public int[] Duplicate;
 
-    [Header("•¡»”w’è")]
+    [Header("•¡»Objw’è")]
     public GameObject[] childGameObjects;
   
     // Start is called before the first frame update
