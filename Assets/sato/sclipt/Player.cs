@@ -57,7 +57,8 @@ public class Player : MonoBehaviour
     private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
     private string[] text_data;         //アクション内容格納変数
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
-    private bool safe_flag = true;     //死亡判定用フラグ
+    private bool safe_flag = true;      //死亡判定用フラグ
+    private Vector3 stop_check;         //フレーム毎に主人公の座標取得
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -105,6 +106,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < Max_Card; i++) {
             text_data[i] = "";
         }
+        stop_check = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -303,21 +305,7 @@ public class Player : MonoBehaviour
             //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
 
             Select_order++;//アクション内容を一つ進める
-
-            //元のサイズに戻す
-            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-            //しゃがみ状態解除
-            Action_check[(int)Card.SQUAT] = false;
-
-            //くっつき状態解除
-            Action_check[(int)Card.STICK] = false;
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            wall_stick = false;
-
-            //走る状態解除
-            run_power = 1.0f;
-
+            
             //次のアクションのフラグをtrueにする
             switch (Card_order[Select_order]) {
                 case (int)Card.JUMP:
@@ -349,6 +337,20 @@ public class Player : MonoBehaviour
 
         //アクション再選択
         if (collision.gameObject.tag == "Select") {
+            //元のサイズに戻す
+            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            //しゃがみ状態解除
+            Action_check[(int)Card.SQUAT] = false;
+
+            //くっつき状態解除
+            Action_check[(int)Card.STICK] = false;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            wall_stick = false;
+
+            //走る状態解除
+            run_power = 1.0f;
+
             //動きを止める
             Movestop = true;
 
@@ -370,8 +372,25 @@ public class Player : MonoBehaviour
         }
 
 
-        //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") {
+        if (collision.gameObject.tag == "action_delete") {
+            //元のサイズに戻す
+            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            //しゃがみ状態解除
+            Action_check[(int)Card.SQUAT] = false;
+
+            //くっつき状態解除
+            Action_check[(int)Card.STICK] = false;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            wall_stick = false;
+
+            //走る状態解除
+            run_power = 1.0f;
+        }
+
+
+            //加速床の処理
+            if (collision.gameObject.tag == "Acceleration") {
             this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
         }
 
