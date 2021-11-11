@@ -47,7 +47,7 @@ public class ActionButton_SC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == SceneName)
+        if (SceneManager.GetActiveScene().name == SceneName|| SceneManager.GetActiveScene().name==NowStage)
         {
             ;
         }
