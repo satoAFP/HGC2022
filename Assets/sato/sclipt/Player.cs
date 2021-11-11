@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
     private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
     private string[] text_data;         //アクション内容格納変数
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
-    private bool deth_flag = false;     //脂肪判定用フラグ
+    private bool safe_flag = true;     //死亡判定用フラグ
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -272,15 +273,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    void OnCollisionStay(Collision collision) {
-        //くっつき状態の時、壁に触れているとY軸への力付与
-        if(collision.gameObject.tag=="Wall") {
-            if (wall_stick == true) {
-                transform.Translate(0.0f,0.2f,0.0f);
-            }
-        }
-    }
+    
 
     void OnCollisionEnter(Collision collision) {
         //自動移動設定時、このオブジェクトに触れると、指定方向に移動する
@@ -376,12 +369,32 @@ public class Player : MonoBehaviour
             }
         }
 
-            //加速床の処理
-            if (collision.gameObject.tag == "Acceleration") {
+
+        //加速床の処理
+        if (collision.gameObject.tag == "Acceleration") {
             this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
         }
 
     }
+
+
+    void OnCollisionStay(Collision collision) {
+        //くっつき状態の時、壁に触れているとY軸への力付与
+        if (collision.gameObject.tag == "Wall") {
+            if (wall_stick == true) {
+                transform.Translate(0.0f, 0.2f, 0.0f);
+            }
+        }
+    }
+
+
+    private void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "safe_zone") {
+            Debug.Log("aaa");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
 
     //移動処理関数
     private void MOVE(float x, float z) {

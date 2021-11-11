@@ -587,9 +587,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4032292972821505409}
-        m_TargetAssemblyTypeName: ButtonChoice, Assembly-CSharp
-        m_MethodName: PushButton
+      - m_Target: {fileID: 925598463155847617, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Push_jump
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 925598463155847617, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: Push_start
         m_Mode: 1
