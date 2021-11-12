@@ -77,4 +77,10 @@ public class Multi_Action_move : MonoBehaviour
         script.objs[script.now] = this.gameObject;
         script.now++;
     }
+
+    //–â‘è“_
+    //public void Set_Active(bool set)
+    //{
+    //    PushButton(set);
+    //}
 }

@@ -61,25 +61,25 @@ public class ButtonChoice : MonoBehaviour
             Debug.Log($"pos.y={pos.y:0.00}");
             if (pos.x<=600)
             //Œ»Ý‚ÌˆÊ’u‚©‚çˆÚ“®‚¹‚¸
-            this.gameObject.transform.position = new Vector3(800.0f, pos.y, pos.z);
+            this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
             else if(pos.x<=1200)
                 //Œ»Ý‚ÌˆÊ’u‚©‚çˆÚ“®
-                this.gameObject.transform.position = new Vector3(pos.x+200.0f, pos.y, pos.z);
+                this.gameObject.transform.position = new Vector3(pos.x+130.0f, pos.y, pos.z);
             else
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
 
             pos = this.gameObject.transform.position;
 
-            if (pos.x == 800.0f && this.tag != "Multi_action1")
+            if (pos.x == 530.0f && this.tag != "Multi_action1")
             {
                 Debug.Log("tag1 get");//ok
                 this.tag = "Multi_action1";
             }
-            else if (pos.x == 1000.0f)
+            else if (pos.x == 660.0f)
                 this.tag = "Multi_action2";
-            else if (pos.x == 1200.0f)
+            else if (pos.x == 790.0f)
                 this.tag = "Multi_action3";
-            else if (pos.x == 1400.0f)
+            else if (pos.x == 920.0f)
                 this.tag = "Multi_action4";
             else
                 this.tag = "Untagged";
