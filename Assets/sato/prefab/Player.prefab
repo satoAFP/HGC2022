@@ -58,47 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
---- !u!23 &4428356767922974303
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3581987697858519795}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4428356767929339356
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +150,7 @@ Transform:
   m_Children:
   - {fileID: 4428356768960279019}
   - {fileID: 4428356769617381691}
-  - {fileID: 4250859810890545225}
+  - {fileID: 7917725674731610650}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -299,6 +258,8 @@ MonoBehaviour:
   highjump_power: 2
   Max_Jmup: 2
   Select_text: {fileID: 0}
+  anim: {fileID: 0}
+  sura_model: {fileID: 7397928891541518496}
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
---- !u!1001 &4428356768088727458
+--- !u!1001 &7668452521381414385
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -532,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.52
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -568,29 +529,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
       propertyPath: m_Name
-      value: suraimu    jyanpu
+      value: suraimu_model
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2586607309129781981, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a135b7ee837a0774ebd2ca855cc6f6d1, type: 2}
-    - target: {fileID: 2586607309129781981, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: a135b7ee837a0774ebd2ca855cc6f6d1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
---- !u!1 &3581987697858519795 stripped
+--- !u!1 &7397928891541518496 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
-  m_PrefabInstance: {fileID: 4428356768088727458}
+  m_PrefabInstance: {fileID: 7668452521381414385}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4250859810890545225 stripped
+--- !u!4 &7917725674731610650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1455534a262aab049b6718de12f2c7a2, type: 3}
-  m_PrefabInstance: {fileID: 4428356768088727458}
+  m_PrefabInstance: {fileID: 7668452521381414385}
   m_PrefabAsset: {fileID: 0}
