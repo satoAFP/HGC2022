@@ -168,6 +168,8 @@ public class Player : MonoBehaviour
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
             Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
             around_collision_check = true;
+
+            //¶‰E‚»‚ê‚¼‚ê•Ç‚ÉG‚ê‚Ä‚¢‚é‚Æ‚«‚ÌŒ©‚½–Ú‚ğ’²®
             if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
                 sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
