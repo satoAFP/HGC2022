@@ -34,6 +34,9 @@ public class Multi_Action_move : MonoBehaviour
 
         pos = this.gameObject.transform.position;
         first_x = pos.x;
+
+        script.multi_objs[script.multi_now] = this.gameObject;
+        script.multi_now++;
     }
 
     // Update is called once per frame
@@ -81,6 +84,6 @@ public class Multi_Action_move : MonoBehaviour
     //–â‘è“_
     //public void Set_Active(bool set)
     //{
-    //    PushButton(set);
+    //    set?active(true);
     //}
 }

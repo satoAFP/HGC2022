@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class DeletAction : MonoBehaviour
 {
-    [Header("覚える限度数")]
+    [Header("覚える通常限度数")]
     //オブジェ格納用変数
     public GameObject[] objs;
 
+    [Header("覚える合体アクション限度数")]
+    //オブジェ格納用変数
+    public GameObject[] multi_objs;
+
     [Header("触らない")]
-    public int now;
+    public int now,multi_now;
+
+    public int[] timing;
 
     // Start is called before the first frame update
     void Start()
