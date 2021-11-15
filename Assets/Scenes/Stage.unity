@@ -23581,6 +23581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActionBotton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2107841399216229786, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3845970861033432157, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_SizeDelta.x
       value: 70.31
@@ -23588,6 +23592,18 @@ PrefabInstance:
     - target: {fileID: 3845970861033432157, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -35.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895599409597414166, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895599409770339938, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895599410004540586, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8895599410227843380, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: objs.Array.size

@@ -36,6 +36,7 @@ public class Multi_Action_move : MonoBehaviour
         first_x = pos.x;
 
         script.multi_objs[script.multi_now] = this.gameObject;
+        script.timing[script.multi_now] = script.now;
         script.multi_now++;
     }
 
@@ -82,8 +83,8 @@ public class Multi_Action_move : MonoBehaviour
     }
 
     //–â‘è“_
-    //public void Set_Active(bool set)
-    //{
-    //    set?active(true);
-    //}
+    public void Set_Active(bool a)
+    {
+        Button.SetActive(a);
+    }
 }

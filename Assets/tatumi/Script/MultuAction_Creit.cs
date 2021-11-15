@@ -37,7 +37,7 @@ public class MultuAction_Creit : MonoBehaviour
                 {
                     //ハイジャンプ作成（位置はｘ＝800）
                     // プレハブをGameObject型で取得
-                    GameObject obj = (GameObject)Resources.Load("highjump");
+                    GameObject obj = (GameObject)Resources.Load("multi_highjump");
                     // プレハブを元に、インスタンスを生成、
                     Instantiate(obj, new Vector3(530.0f, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
 
@@ -45,6 +45,8 @@ public class MultuAction_Creit : MonoBehaviour
                     {
                         blocks[i].GetComponent<ButtonChoice>().Set_Active(true);
                     }
+
+
                 }
             }
         }
