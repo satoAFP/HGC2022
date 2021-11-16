@@ -40,13 +40,27 @@ public class Player : MonoBehaviour
     [Header("選択されたアクション表示用テキスト")]
     public Text Select_text;
 
+
+    //アニメーション管理変数---------------------------------------------------
+    [Header("スライムのアニメーション")]
+    public Animator anim;
+
+    [Header("ヒストリーのスライムのモデル")]
+    public GameObject sura_model;
+
+
+    //他オブジェクトでも使用
+    [Header("主人公を止める用")]
+    [Header("ここから下は触らない--------------")]
+    public bool Movestop = true;
+
+
     //private変数--------------------------------------------------------------
     private Vector3 push;               //加算したいベクトル量
     private float inputX = 0;           //X軸の移動ベクトル
     private float inputZ = 1;           //Z軸の移動ベクトル
     private int Select_order = 0;       //ボタンを押された順番を記憶
     private bool[] Action_check;        //アクションを一回しか使えないよう管理
-    private bool Movestop = true;       //アクションを選択するとき主人公を止める用
     private int[] Card_order;           //カードを選択した順番を記憶
     private bool wall_stick = false;    //壁にくっつける状態
     private bool around_collision_check = false;//プレイヤーの周りの当たり判定に壁があるとtrueになる
@@ -64,14 +78,7 @@ public class Player : MonoBehaviour
     private Vector3 stop_check;         //フレーム毎に主人公の座標取得
 
 
-    //アニメーション管理変数---------------------------------------------------
-    [Header("スライムのアニメーション")]
-    public Animator anim;
-
-    [Header("ヒストリーのスライムのモデル")]
-    public GameObject sura_model;
-
-
+    
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
