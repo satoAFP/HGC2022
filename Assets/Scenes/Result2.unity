@@ -783,6 +783,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8"
       objectReference: {fileID: 0}
+    - target: {fileID: 2829279030067393620, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PushNextScene
+      objectReference: {fileID: 0}
     - target: {fileID: 5075108761817755444, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
