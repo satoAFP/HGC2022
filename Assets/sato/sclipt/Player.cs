@@ -436,7 +436,7 @@ public class Player : MonoBehaviour
             }
         }
 
-
+        //アクション内容リセット
         if (collision.gameObject.tag == "action_delete") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -453,9 +453,14 @@ public class Player : MonoBehaviour
             run_power = 1.0f;
         }
 
+        //ゴール処理　リザルトに飛ぶ
+        if (collision.gameObject.tag == "Goal") {
+            SceneManager.LoadScene("Result2");
+        }
 
-            //加速床の処理
-            if (collision.gameObject.tag == "Acceleration") {
+
+        //加速床の処理
+        if (collision.gameObject.tag == "Acceleration") {
             this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
         }
 

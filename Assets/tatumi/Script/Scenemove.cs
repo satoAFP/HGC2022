@@ -8,9 +8,11 @@ public class Scenemove : MonoBehaviour
     [Header("ˆÚ“®‚µ‚½‚¢ƒV[ƒ“–¼“ü—Í")]
     public string[] SceneName;
 
-    static public int Scene_num = 6;
+    static public int Scene_num = 0;
 
-    void FixedUpdate() {
+
+    void FixedUpdate() 
+    {
         if (SceneManager.GetActiveScene().name == "Stage1")
             Scene_num = 1;
         if (SceneManager.GetActiveScene().name == "Stage2")
@@ -23,6 +25,8 @@ public class Scenemove : MonoBehaviour
             Scene_num = 5;
         if (SceneManager.GetActiveScene().name == "Stage6")
             Scene_num = 6;
+
+
 
     }
 
