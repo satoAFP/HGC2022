@@ -20,6 +20,17 @@ public class DeletAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+    }
+
+    public void PushButton()
+    {
+        if (now != 0)
+        {
+            objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
+            //object[now]= null;
+            
+            now--;
+        }
     }
 }
