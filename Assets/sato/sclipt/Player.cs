@@ -40,16 +40,32 @@ public class Player : MonoBehaviour
     [Header("選択されたアクション表示用テキスト")]
     public Text Select_text;
 
+
+    //アニメーション管理変数---------------------------------------------------
+    [Header("スライムのアニメーション")]
+    public Animator anim;
+
+    [Header("ヒストリーのスライムのモデル")]
+    public GameObject sura_model;
+
+
+    //他オブジェクトでも使用
+    [Header("主人公を止める用")]
+    [Header("ここから下は触らない--------------")]
+    public bool Movestop = true;
+
+
     //private変数--------------------------------------------------------------
     private Vector3 push;               //加算したいベクトル量
     private float inputX = 0;           //X軸の移動ベクトル
     private float inputZ = 1;           //Z軸の移動ベクトル
     private int Select_order = 0;       //ボタンを押された順番を記憶
     private bool[] Action_check;        //アクションを一回しか使えないよう管理
-    private bool Movestop = true;       //アクションを選択するとき主人公を止める用
     private int[] Card_order;           //カードを選択した順番を記憶
     private bool wall_stick = false;    //壁にくっつける状態
     private bool around_collision_check = false;//プレイヤーの周りの当たり判定に壁があるとtrueになる
+    private Vector3 sura_angle;         //壁にくっついている時のスライムの角度調整
+    private Vector3 sura_pos;           //壁にくっついている時のスライムの位置調整
     private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
     private bool walljump_check = false;//壁ジャンプかどうか判断
     private int walljump_time = 100;    //横移動する時間
@@ -60,6 +76,9 @@ public class Player : MonoBehaviour
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
     private bool safe_flag = true;      //死亡判定用フラグ
     private Vector3 stop_check;         //フレーム毎に主人公の座標取得
+
+
+    
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -98,16 +117,23 @@ public class Player : MonoBehaviour
     void Start() {
         //初期化
         push = new Vector3(0.0f, push_power, 0.0f);
+
         Card_order = new int[Max_Card];
+
         for (int i = 0; i < Max_Card; i++)  {
             Card_order[i] = -1;
         }
+
         Action_check = new bool[Kind_Card];
+
         text_data = new string[Max_Card];
+
         for (int i = 0; i < Max_Card; i++) {
             text_data[i] = "";
         }
+
         stop_check = this.gameObject.transform.position;
+
     }
 
     // Update is called once per frame
@@ -149,6 +175,16 @@ public class Player : MonoBehaviour
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
             Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
             around_collision_check = true;
+
+            //左右それぞれ壁に触れているときの見た目を調整
+            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+                sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
+                sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
+            }
+            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+                sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
+                sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
+            }
         }
         else {
             around_collision_check = false;
@@ -189,6 +225,9 @@ public class Player : MonoBehaviour
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
+                    //ジャンプアニメーション移行
+                    anim.SetBool("jump", true);
+
                     //ジャンプ処理終了
                     Action_check[(int)Card.JUMP] = false;
                 }
@@ -202,12 +241,19 @@ public class Player : MonoBehaviour
 
                 //くっつきを選択したとき--------------------------------------------------------------------------------------------
                 if (Card_order[Select_order] == (int)Card.STICK && Action_check[(int)Card.STICK] == true) {
-                    Debug.Log("aaa");
                     //Y軸が動かないよう固定
-                    if(around_collision_check == true)
+                    if (around_collision_check == true) {
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-                    else
+                        //スライムの調整
+                        sura_model.transform.localEulerAngles = sura_angle;
+                        sura_model.transform.localPosition = sura_pos;
+                    }
+                    else {
+                        //壁がなくなると元の状態に戻す
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                        sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
+                        sura_model.transform.localPosition = new Vector3(0.0f, -0.5f, 0.0f);
+                    }
 
                     
                     //前に壁がある処理
@@ -311,8 +357,16 @@ public class Player : MonoBehaviour
             }
         }
 
-        //アクションを選択した順番に実行される
-        if (collision.gameObject.tag == "Action") {
+        if (collision.gameObject.tag == "Ground") {
+            //着地判定
+            anim.SetBool("jump", false);
+
+        }
+
+
+
+            //アクションを選択した順番に実行される
+            if (collision.gameObject.tag == "Action") {
             //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
 
             Select_order++;//アクション内容を一つ進める
