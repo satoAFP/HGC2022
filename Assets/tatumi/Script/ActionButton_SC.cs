@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 
 
+
 public class ActionButton_SC : MonoBehaviour
 {
     //[Header("このシーン以外は表示しない")]
@@ -16,6 +17,8 @@ public class ActionButton_SC : MonoBehaviour
 
     Player script; //参照元OBJそのものが入る変数
 
+    //回数表示用変数
+    private int[] action_num=new int[8];
 
     //[Header("触らない")]
     //public string NowStage;
@@ -44,6 +47,20 @@ public class ActionButton_SC : MonoBehaviour
             }
         }
 
+        for (int i = 0; i != 8; i++)
+        {
+           
+            //action_numtexts[i]=Instantiate(action_numtext, this.transform, false);
+            //action_numtexts[i].transform.position = new Vector3(19.0f + (i * 130.0f), 117.0f, 0.0f);
+        }
+
+        for (int i = 0; i != Child_num; i++)
+        {
+            action_num[i] = Duplicate[i] + 1;
+
+            //action_numtexts[i].text = action_num[i].ToString();
+        }
+
         //player関連
         player = GameObject.Find("Player"); //オブジェクトの名前から取得して変数に格納する
         script = player.GetComponent<Player>(); //OBJの中にあるScriptを取得して変数に格納する
@@ -60,9 +77,19 @@ public class ActionButton_SC : MonoBehaviour
         //else
         //    Destroy(Object, .01f);
 
-        if(script.Movestop==true)
-        this.SetActive(false);
-        else
-            this.SetActive(true);
+        //if(script.Movestop==true)
+        //this.SetActive(false);
+        //else
+        //    this.SetActive(true);
+    }
+
+    public void set_text(int a,int b)
+    {
+        action_num[a] += b;
+    }
+
+    public int get_score(int a)
+    {
+        return action_num[a];
     }
 }

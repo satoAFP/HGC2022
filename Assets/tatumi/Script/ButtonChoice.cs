@@ -8,6 +8,10 @@ public class ButtonChoice : MonoBehaviour
 
     DeletAction script; //参照元Scriptが入る変数
 
+    GameObject ActionButton; //参照元OBJそのものが入る変数
+
+    ActionButton_SC scriptac; //参照元Scriptが入る変数
+
     [Header("非表示対象オブジェクト")]
     public GameObject Button;
 
@@ -23,10 +27,12 @@ public class ButtonChoice : MonoBehaviour
         BackButton = GameObject.Find("BackButton"); //オブジェクトの名前から取得して変数に格納する
         script = BackButton.GetComponent<DeletAction>(); //OBJの中にあるScriptを取得して変数に格納する
 
+        ActionButton = GameObject.Find("ActionBotton "); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        scriptac = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
+
         pos = this.gameObject.transform.position;
         first_x = pos.x;
 
-        
     }
 
     // Update is called once per frame
@@ -51,7 +57,7 @@ public class ButtonChoice : MonoBehaviour
 
             script.objs[script.now] = this.gameObject;
             script.now++;
-            
+            scriptac.set_text((int)(first_x / 130), -1);
         }
         //右クリ
         else if(Input.GetMouseButtonDown(1))
@@ -92,7 +98,7 @@ public class ButtonChoice : MonoBehaviour
         else if(set==false)
         {
             Button.SetActive(true);
-           
+            scriptac.set_text((int)(first_x / 130), 1);
         }
        
     }
