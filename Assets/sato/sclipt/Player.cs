@@ -455,7 +455,7 @@ public class Player : MonoBehaviour
 
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
-            SceneManager.LoadScene("Result2");
+            SceneManager.LoadScene("Result");
         }
 
 

@@ -48,7 +48,7 @@ public class Scenemove : MonoBehaviour
         if (Scene_num == 5)
             SceneManager.LoadScene("Stage6");
         if (Scene_num == 6)
-            SceneManager.LoadScene("Title2");
+            SceneManager.LoadScene("Title");
 
     }
 }
