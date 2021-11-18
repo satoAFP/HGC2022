@@ -32,7 +32,10 @@ public class ActionButton_SC : MonoBehaviour
 
     [Header("複製Obj指定")]
     public GameObject[] childGameObjects;
-  
+
+    [Header("非表示対象オブジェクト")]
+    public GameObject Button;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,10 +80,10 @@ public class ActionButton_SC : MonoBehaviour
         //else
         //    Destroy(Object, .01f);
 
-        //if(script.Movestop==true)
-        //this.SetActive(false);
-        //else
-        //    this.SetActive(true);
+        if (script.Movestop == true)
+            Button.SetActive(true);
+        else
+            Button.SetActive(false);
     }
 
     public void set_text(int a,int b)

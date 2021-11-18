@@ -12,6 +12,8 @@ public class ButtonChoice : MonoBehaviour
 
     ActionButton_SC scriptac; //参照元Scriptが入る変数
 
+    public bool vanish;
+
     [Header("非表示対象オブジェクト")]
     public GameObject Button;
 
@@ -33,14 +35,15 @@ public class ButtonChoice : MonoBehaviour
         pos = this.gameObject.transform.position;
         first_x = pos.x;
 
+        vanish = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        
+        Button.SetActive(vanish);
 
-       
     }
 
     public void PushButton(bool set)
@@ -51,7 +54,8 @@ public class ButtonChoice : MonoBehaviour
         {
             Debug.Log("Left");
 
-            Button.SetActive(false);
+           // Invoke(nameof(null_active),0.75f);
+            vanish = true;
             //消えた時初期位置に戻る
             this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
@@ -64,11 +68,11 @@ public class ButtonChoice : MonoBehaviour
         {
             pos = this.gameObject.transform.position;
             Debug.Log("Right");
-            Debug.Log($"pos.y={pos.y:0.00}");
-            if (pos.x<=600)
+           // Debug.Log($"pos.y={pos.y:0.00}");
+            if (pos.x<=500)
             //現在の位置から移動せず
             this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
-            else if(pos.x<=1200)
+            else if(pos.x<=790)
                 //現在の位置から移動
                 this.gameObject.transform.position = new Vector3(pos.x+130.0f, pos.y, pos.z);
             else
@@ -76,7 +80,7 @@ public class ButtonChoice : MonoBehaviour
 
             pos = this.gameObject.transform.position;
 
-            if (pos.x == 530.0f && this.tag != "Multi_action1")
+            if (pos.x == 530.0f)
             {
                 Debug.Log("tag1 get");//ok
                 this.tag = "Multi_action1";
@@ -97,10 +101,19 @@ public class ButtonChoice : MonoBehaviour
         }
         else if(set==false)
         {
+            Debug.Log($"first_x={first_x:0.00}");
             Button.SetActive(true);
+            vanish = true;
+            this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+            this.tag = "Untagged";
             scriptac.set_text((int)(first_x / 130), 1);
         }
        
+    }
+
+    void null_active()
+    {
+        Button.SetActive(false);
     }
 
     public void Set_Active(bool set)
