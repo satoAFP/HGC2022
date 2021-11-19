@@ -22,6 +22,7 @@ public class Camera_Control2 : MonoBehaviour
 
     private void Update() {
         MouseUpdate();
+        transform.position += new Vector3(10.0f, 0.0f, 0.0f);
         return;
     }
 
@@ -49,8 +50,10 @@ public class Camera_Control2 : MonoBehaviour
         if (diff.magnitude < Vector3.kEpsilon)
             return;
 
-        if (Input.GetMouseButton(2))
-            transform.Translate(-diff * Time.deltaTime * moveSpeed);
+        if (Input.GetMouseButton(0))
+        {
+            transform.Translate(-diff * Time.deltaTime * moveSpeed); Debug.Log(""+ -diff * Time.deltaTime * moveSpeed);
+        }
         else if (Input.GetMouseButton(1))
             CameraRotate(new Vector2(-diff.y, diff.x) * rotateSpeed);
 
