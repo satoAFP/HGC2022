@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     private bool around_collision_check = false;//プレイヤーの周りの当たり判定に壁があるとtrueになる
     private Vector3 sura_angle;         //壁にくっついている時のスライムの角度調整
     private Vector3 sura_pos;           //壁にくっついている時のスライムの位置調整
+    private bool all_stick = false;     //壁くっつき状態をアクションリセットまで続行
     private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
     private bool walljump_check = false;//壁ジャンプかどうか判断
     private int walljump_time = 100;    //横移動する時間
@@ -241,26 +242,32 @@ public class Player : MonoBehaviour
 
                 //くっつきを選択したとき--------------------------------------------------------------------------------------------
                 if (Card_order[Select_order] == (int)Card.STICK && Action_check[(int)Card.STICK] == true) {
-                    //Y軸が動かないよう固定
-                    if (around_collision_check == true) {
-                        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-                        //スライムの調整
-                        sura_model.transform.localEulerAngles = sura_angle;
-                        sura_model.transform.localPosition = sura_pos;
-                    }
-                    else {
-                        //壁がなくなると元の状態に戻す
-                        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                        sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
-                        sura_model.transform.localPosition = new Vector3(0.0f, -0.5f, 0.0f);
-                    }
-
+                    //くっつき状態維持
+                    all_stick = true;
                     
                     //前に壁がある処理
                     //if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
                     //    wall_stick = true;
                     //else
                     //    wall_stick = false;
+                }
+                if (all_stick == true) 
+                {
+                    if (around_collision_check == true)
+                    {
+                        //Y軸が動かないよう固定
+                        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                        //スライムの調整
+                        sura_model.transform.localEulerAngles = sura_angle;
+                        sura_model.transform.localPosition = sura_pos;
+                    }
+                    else
+                    {
+                        //壁がなくなると元の状態に戻す
+                        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                        sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
+                        sura_model.transform.localPosition = new Vector3(0.0f, -0.5f, 0.0f);
+                    }
                 }
 
 
@@ -279,6 +286,9 @@ public class Player : MonoBehaviour
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push * highjump_power, ForceMode.Impulse);
 
+                    //ジャンプアニメーション移行
+                    anim.SetBool("jump", true);
+
                     Action_check[(int)Card.HIGHJUMP] = false;
                 }
 
@@ -288,6 +298,9 @@ public class Player : MonoBehaviour
                     this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+                    //ジャンプアニメーション移行
+                    anim.SetBool("jump", true);
 
                     //左に壁がある処理
                     if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
@@ -320,6 +333,10 @@ public class Player : MonoBehaviour
                 //幅跳びを選択したとき----------------------------------------------------------------------------------------------
                 if (Card_order[Select_order] == (int)Card.LONGJUMP && Action_check[(int)Card.LONGJUMP] == true) {
                     this.GetComponent<Rigidbody>().AddForce(flont_push, ForceMode.Impulse);
+
+                    //ジャンプアニメーション移行
+                    anim.SetBool("jump", true);
+
                     Action_check[(int)Card.LONGJUMP] = false;
                 }
 
@@ -364,9 +381,9 @@ public class Player : MonoBehaviour
         }
 
 
-
-            //アクションを選択した順番に実行される
-            if (collision.gameObject.tag == "Action") {
+        //アクションを選択した順番に実行される
+        if (collision.gameObject.tag == "Action") 
+        {
             //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
 
             Select_order++;//アクション内容を一つ進める
@@ -412,6 +429,7 @@ public class Player : MonoBehaviour
             Action_check[(int)Card.STICK] = false;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             wall_stick = false;
+            all_stick = false;
 
             //走る状態解除
             run_power = 1.0f;
@@ -448,6 +466,7 @@ public class Player : MonoBehaviour
             Action_check[(int)Card.STICK] = false;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             wall_stick = false;
+            all_stick = false;
 
             //走る状態解除
             run_power = 1.0f;
@@ -473,6 +492,8 @@ public class Player : MonoBehaviour
             if (wall_stick == true) {
                 transform.Translate(0.0f, 0.2f, 0.0f);
             }
+            //着地判定
+            anim.SetBool("jump", false);
         }
     }
 
