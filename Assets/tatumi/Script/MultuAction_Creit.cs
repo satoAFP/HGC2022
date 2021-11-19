@@ -10,6 +10,9 @@ public class MultuAction_Creit : MonoBehaviour
     //名前一部取得（かかわりあるものはすべて取得,小文字不可？）
     private string[] multis=new string[4];
 
+    //合体できるかどうかのサイン用。
+    private string[] multi_oks = new string[4];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,16 +25,8 @@ public class MultuAction_Creit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-    }
-
-    public void PushButton()
-    {
         //左位置にいるやつ全取得
         GameObject[] blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
-
-        //Debug.LogWarning(blocks1[0].gameObject);
-        //Debug.LogWarning(blocks1[1].gameObject);
 
         //左2位置にいるやつ全取得
         GameObject[] blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
@@ -42,12 +37,51 @@ public class MultuAction_Creit : MonoBehaviour
         //右位置にいるやつ全取得
         GameObject[] blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
 
-        multi_action(blocks1, 530.0f);
-        multi_action(blocks2, 660.0f);
-        multi_action(blocks3, 790.0f);
-        multi_action(blocks4, 920.0f);
+        if (blocks1.Length >= 2)
+            multi_oks[0]= multi_OK(blocks1);
+        if (blocks2.Length >= 2)
+            multi_oks[1] = multi_OK(blocks2);
+        if (blocks3.Length >= 2)
+            multi_oks[2] = multi_OK(blocks3);
+        if (blocks4.Length >= 2)
+            multi_oks[3] = multi_OK(blocks4);
 
+        blocks1 = new GameObject[2];
+        blocks2 = new GameObject[2];
+        blocks3 = new GameObject[2];
+        blocks4 = new GameObject[2];
+
+    }
+
+    public void PushButton()
+    {
+
+
+        //左位置にいるやつ全取得
+        GameObject[] blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
+
+        //左2位置にいるやつ全取得
+        GameObject[] blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
+
+        //右2位置にいるやつ全取得
+        GameObject[] blocks3 = GameObject.FindGameObjectsWithTag("Multi_action3");
+
+        //右位置にいるやつ全取得
+        GameObject[] blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
+
+        //これ基礎。直せよ
+            multi_action(blocks1,530.0f);
        
+            multi_OK(blocks2);
+       
+            multi_OK(blocks3);
+        
+            multi_OK(blocks4);
+
+        blocks1 = new GameObject[2];
+        blocks2 = new GameObject[2];
+        blocks3 = new GameObject[2];
+        blocks4 = new GameObject[2];
 
     }
 
@@ -60,14 +94,16 @@ public class MultuAction_Creit : MonoBehaviour
             // プレハブをGameObject型で取得
             if (multi_OK(a) != "null")
             {
-                GameObject obj = (GameObject)Resources.Load(multi_OK(a));
-                // プレハブを元に、インスタンスを生成、
-                Instantiate(obj, new Vector3(b, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
-
                 for (int i = 0; i != 2; i++)
                 {
                     a[i].GetComponent<ButtonChoice>().Set_Active(true);
                 }
+
+                GameObject obj = (GameObject)Resources.Load(multi_OK(a));
+                // プレハブを元に、インスタンスを生成、
+                Instantiate(obj, new Vector3(b, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
+
+               
             }
             else
             Debug.Log("組み合わせが存在しない");
@@ -135,7 +171,14 @@ public class MultuAction_Creit : MonoBehaviour
 
         return "null";
     }
+
+    public string[] get_multi_oks()
+    {
+        return multi_oks;
+    }
 }
+
+
         
     
 

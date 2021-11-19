@@ -17,15 +17,15 @@ public class DeletAction : MonoBehaviour
 
     //名前一部取得（かかわりあるものはすべて取得,小文字不可？）
     private string target = "multi";
-    private bool all_multi_flag;//合体コマンドを同時にした時
+    private int all_multi_flag;//合体コマンドを同時にした時
 
     public int[] timing;
-
+   
     // Start is called before the first frame update
     void Start()
     {
         now = 0;
-        all_multi_flag = false;
+        all_multi_flag = 0;
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class DeletAction : MonoBehaviour
 
     public void PushButton()
     {
+        //消失中に戻るボタン押すやつ対処
         if (now != 0)
         {
 
@@ -57,27 +58,32 @@ public class DeletAction : MonoBehaviour
                     //オブジェ自体削除
                     Destroy(multi_objs[i], .1f);
                     multi_now--;
-                    all_multi_flag = true;
+                    all_multi_flag += 1;
 
 
                     //二段戻し
                     now--;
                     if (now != 0)
+                    {
                         objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
+                        timing[i] = 0;
+                    }
                 }
                 
             }
 
            
             //object[now]= null;
-            if(all_multi_flag==true)
+
+            //同時作成なら
+            if(all_multi_flag>=2)
             {
                 now--;
                 if (now != 0)
                     objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
-                all_multi_flag = false;
             }
-            
+
+            all_multi_flag = 0;
             now--;
         }
     }

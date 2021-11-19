@@ -7528,6 +7528,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1007254566}
+  multi_oks:
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &1014963384
 GameObject:
   m_ObjectHideFlags: 0
@@ -23813,6 +23818,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1283557293647793284, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -23852,6 +23861,22 @@ PrefabInstance:
     - target: {fileID: 1283557293647793284, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -127
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869873697122998498, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_Transition
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869873697122998498, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.007030964
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869873697122998498, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869873697122998498, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2107841398713440460, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_Name
