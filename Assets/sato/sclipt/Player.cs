@@ -140,8 +140,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() {
 
+        //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1) 
+        {
+            for (int i = 0; i < Max_Card - 1; i++) 
+            {
+                Card_order[i] = Card_order[i + 1];
+                text_data[i] = text_data[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+            text_data[Max_Card - 1] = "";
+        }
+
         //選んだアクションをtext_dataに格納
-        for (int i = 0; i < Select_order; i++)  {
+        for (int i = 0; i < Max_Card; i++)  {
             if(Card_order[i] == (int)Card.JUMP) {
                 text_data[i] = "ジャンプ → ";
             }
@@ -222,7 +235,7 @@ public class Player : MonoBehaviour
             if (Select_order != -1) {
 
                 //ジャンプを選択したとき--------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.JUMP && Action_check[(int)Card.JUMP] == true) {
+                if (/*Card_order[Select_order] == (int)Card.JUMP &&*/ Action_check[(int)Card.JUMP] == true) {
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
@@ -231,6 +244,7 @@ public class Player : MonoBehaviour
 
                     //ジャンプ処理終了
                     Action_check[(int)Card.JUMP] = false;
+                    Card_order[0] = -1;
                 }
 
 
@@ -386,10 +400,10 @@ public class Player : MonoBehaviour
         {
             //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
 
-            Select_order++;//アクション内容を一つ進める
+            //Select_order++;//アクション内容を一つ進める
             //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             //次のアクションのフラグをtrueにする
-            switch (Card_order[Select_order]) {
+            switch (Card_order[0]) {
                 case (int)Card.JUMP:
                     Action_check[(int)Card.JUMP] = true;
                     break;
@@ -521,10 +535,27 @@ public class Player : MonoBehaviour
     //ボタンでの操作選択----------------------------------------------------------------
     //通常アクション-----------------------------------
     public void Push_jump() {//ジャンプボタン
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.JUMP;  //ボタンを押した順番を記憶
-            Select_order++;                             //順番を進める用
+        //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
         }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.JUMP;  //ボタンを押した順番を記憶
+                Debug.Log("aaa"+i); Debug.Log("aaa" + Card_order[i]);
+                break;
+            }
+        }
+            
+        
     }
 
     public void Push_squat() {//しゃがみボタン
@@ -580,7 +611,7 @@ public class Player : MonoBehaviour
     //アクション開始ボタン
     public void Push_start() {
         Movestop = false;   //アクションループのメイン部分を動かす
-        Select_order = -1;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+        Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
         select_time = false;//アクション開始するとカードを選択できない
     }
 
