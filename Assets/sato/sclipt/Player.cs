@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     [Header("ここから下は触らない--------------")]
     public bool Movestop = true;
 
+    [Header("ミッション判定用")]
+    public int[] Use_Card_Amount;
+
 
     //private変数--------------------------------------------------------------
     private Vector3 push;               //加算したいベクトル量
@@ -235,7 +238,7 @@ public class Player : MonoBehaviour
             if (Select_order != -1) {
 
                 //ジャンプを選択したとき--------------------------------------------------------------------------------------------
-                if (/*Card_order[Select_order] == (int)Card.JUMP &&*/ Action_check[(int)Card.JUMP] == true) {
+                if (Action_check[(int)Card.JUMP] == true) {
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
@@ -244,21 +247,22 @@ public class Player : MonoBehaviour
 
                     //ジャンプ処理終了
                     Action_check[(int)Card.JUMP] = false;
-                    Card_order[0] = -1;
                 }
 
 
                 //しゃがみを選択したとき--------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.SQUAT && Action_check[(int)Card.SQUAT] == true) {
+                if (Action_check[(int)Card.SQUAT] == true) {
+                    //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
                 }
 
 
                 //くっつきを選択したとき--------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.STICK && Action_check[(int)Card.STICK] == true) {
+                if (Action_check[(int)Card.STICK] == true) {
                     //くっつき状態維持
                     all_stick = true;
-                    
+
                     //前に壁がある処理
                     //if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
                     //    wall_stick = true;
@@ -286,7 +290,7 @@ public class Player : MonoBehaviour
 
 
                 //走るを選択したとき------------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.RUN && Action_check[(int)Card.RUN] == true) {
+                if (Action_check[(int)Card.RUN] == true) {
 
                     //倍率が変わる
                     run_power = runSpeed;
@@ -296,7 +300,7 @@ public class Player : MonoBehaviour
 
 
                 //ハイジャンプを選択したとき----------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.HIGHJUMP && Action_check[(int)Card.HIGHJUMP] == true) {
+                if (Action_check[(int)Card.HIGHJUMP] == true) {
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push * highjump_power, ForceMode.Impulse);
 
@@ -308,7 +312,7 @@ public class Player : MonoBehaviour
 
 
                 //壁キックを選択したとき--------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.WALLKICK && Action_check[(int)Card.WALLKICK] == true) {
+                if (Action_check[(int)Card.WALLKICK] == true) {
                     this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     //ジャンプさせる処理
                     this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
@@ -345,7 +349,7 @@ public class Player : MonoBehaviour
 
 
                 //幅跳びを選択したとき----------------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.LONGJUMP && Action_check[(int)Card.LONGJUMP] == true) {
+                if (Action_check[(int)Card.LONGJUMP] == true) {
                     this.GetComponent<Rigidbody>().AddForce(flont_push, ForceMode.Impulse);
 
                     //ジャンプアニメーション移行
@@ -355,9 +359,12 @@ public class Player : MonoBehaviour
                 }
 
                 //スライディングを選択したとき--------------------------------------------------------------------------------------
-                if (Card_order[Select_order] == (int)Card.SLIDING && Action_check[(int)Card.SLIDING] == true) {
+                if (Action_check[(int)Card.SLIDING] == true) {
+
                     this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
+
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
                     Action_check[(int)Card.SLIDING] = false;
                 }
             }
@@ -406,29 +413,38 @@ public class Player : MonoBehaviour
             switch (Card_order[0]) {
                 case (int)Card.JUMP:
                     Action_check[(int)Card.JUMP] = true;
+                    Use_Card_Amount[(int)Card.JUMP]++;
                     break;
                 case (int)Card.SQUAT:
                     Action_check[(int)Card.SQUAT] = true;
+                    Use_Card_Amount[(int)Card.SQUAT]++;
                     break;
                 case (int)Card.STICK:
                     Action_check[(int)Card.STICK] = true;
+                    Use_Card_Amount[(int)Card.STICK]++;
                     break;
                 case (int)Card.RUN:
                     Action_check[(int)Card.RUN] = true;
+                    Use_Card_Amount[(int)Card.RUN]++;
                     break;
                 case (int)Card.HIGHJUMP:
                     Action_check[(int)Card.HIGHJUMP] = true;
+                    Use_Card_Amount[(int)Card.HIGHJUMP]++;
                     break;
                 case (int)Card.WALLKICK:
                     Action_check[(int)Card.WALLKICK] = true;
+                    Use_Card_Amount[(int)Card.WALLKICK]++;
                     break;
                 case (int)Card.LONGJUMP:
                     Action_check[(int)Card.LONGJUMP] = true;
+                    Use_Card_Amount[(int)Card.LONGJUMP]++;
                     break;
                 case (int)Card.SLIDING:
                     Action_check[(int)Card.SLIDING] = true;
+                    Use_Card_Amount[(int)Card.SLIDING]++;
                     break;
             }
+            Card_order[0] = -1;
         }
 
         //アクション再選択
@@ -550,7 +566,6 @@ public class Player : MonoBehaviour
             if (Card_order[i] == -1)
             {
                 Card_order[i] = (int)Card.JUMP;  //ボタンを押した順番を記憶
-                Debug.Log("aaa"+i); Debug.Log("aaa" + Card_order[i]);
                 break;
             }
         }
@@ -558,53 +573,160 @@ public class Player : MonoBehaviour
         
     }
 
-    public void Push_squat() {//しゃがみボタン
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.SQUAT;
-            Select_order++;
+    public void Push_squat()
+    {//しゃがみボタン
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.SQUAT;  //ボタンを押した順番を記憶
+                break;
+            }
+        }
+
+    }
+
+    public void Push_stick()
+    {//くっつきボタン
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.STICK;  //ボタンを押した順番を記憶
+                break;
+            }
         }
     }
 
-    public void Push_stick() {//くっつきボタン
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.STICK;
-            Select_order++;
+    public void Push_run()
+    {//走るボタン
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
         }
-    }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.RUN;  //ボタンを押した順番を記憶
+                break;
+            }
+        }
 
-    public void Push_run() {//走るボタン
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.RUN;
-            Select_order++;
-        }
     }
 
     //合体アクション------------------------------------
-    public void Push_highjump() {//しゃがみ+ジャンプ＝ハイジャンプ
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.HIGHJUMP;
-            Select_order++;
+    public void Push_highjump()
+    {//しゃがみ+ジャンプ＝ハイジャンプ
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.HIGHJUMP;  //ボタンを押した順番を記憶
+                break;
+            }
         }
     }
 
-    public void Push_wallkick() {//くっつき+ジャンプ＝壁キック
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.WALLKICK;
-            Select_order++;
+    public void Push_wallkick()
+    {//くっつき+ジャンプ＝壁キック
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.WALLKICK;  //ボタンを押した順番を記憶
+                break;
+            }
         }
     }
 
-    public void Push_longjump() {//走る+ジャンプ＝幅跳び
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.LONGJUMP;
-            Select_order++;
+    public void Push_longjump()
+    {//走る+ジャンプ＝幅跳び
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.LONGJUMP;  //ボタンを押した順番を記憶
+                break;
+            }
         }
     }
 
-    public void Push_sliding() {//しゃがみ+走る＝スライディング
-        if (select_time) {
-            Card_order[Select_order] = (int)Card.SLIDING;
-            Select_order++;
+    public void Push_sliding()
+    {//しゃがみ+走る＝スライディング
+     //Card_orderの一番目にデータが入ってないとき順番を一つずらす
+        if (Card_order[0] == -1)
+        {
+            for (int i = 0; i < Max_Card - 1; i++)
+            {
+                Card_order[i] = Card_order[i + 1];
+            }
+            //カードの一番最後のデータを初期化
+            Card_order[Max_Card - 1] = -1;
+        }
+        for (int i = 0; i < Max_Card; i++)
+        {
+            if (Card_order[i] == -1)
+            {
+                Card_order[i] = (int)Card.SLIDING;  //ボタンを押した順番を記憶
+                break;
+            }
         }
     }
 
