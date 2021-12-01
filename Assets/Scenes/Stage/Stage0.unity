@@ -988,6 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vanish: 0
   Button: {fileID: 738882360}
 --- !u!4 &826558996 stripped
 Transform:
@@ -1052,6 +1053,10 @@ PrefabInstance:
     - target: {fileID: 8728402047672828595, guid: 982c477a75b6ede4195a0e5d88bbe178, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728402047672828596, guid: 982c477a75b6ede4195a0e5d88bbe178, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8728402047672828597, guid: 982c477a75b6ede4195a0e5d88bbe178, type: 3}
       propertyPath: m_Materials.Array.data[0]
