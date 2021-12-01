@@ -9,62 +9,49 @@ public class clown : MonoBehaviour
     [Header("‰ñ“]‘¬“x")]
     public float role_Speed;
 
-    private float move_speed = 0.0f;
-    private bool move_check = true;
-    private int frame_count = 0;
+    private Vector3 first_pos;          //ŽålŒö‰ŠúˆÊ’u
+    private float move_speed = 0.0f;    //ã‰º‚ÌˆÚ“®—Ê
+    private int frame_count = 0;        //ã‰º‚Ì“®‚«‚ð§Œä
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //ŽålŒö‚Ì‰ŠúˆÊ’u‹L‰¯
+        first_pos = this.gameObject.transform.localPosition;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //ã‰ºˆÚ“®ˆ—
         frame_count++;
         if (frame_count >= 0 && frame_count < 30)
         {
-            move_speed += 0.001f;
+            move_speed += max_Speed;
         }
-        if (frame_count >= 30 && frame_count < 60)
+        else if (frame_count >= 30 && frame_count < 60)
         {
-            move_speed -= 0.001f;
+            move_speed -= max_Speed;
         }
-        if (frame_count >= 60 && frame_count < 90)
+        else if (frame_count >= 60 && frame_count < 88)
         {
-            move_speed -= 0.001f;
+            move_speed -= max_Speed;
         }
-        if (frame_count >= 90 && frame_count < 120)
+        else if (frame_count >= 88 && frame_count < 116)
         {
-            move_speed += 0.001f;
+            move_speed += max_Speed;
         }
-        if (frame_count == 120)
-        {
-            frame_count = 0;
-            Debug.Log("" + this.gameObject.transform.localPosition.y);
-        }
-
-        //if (move_check)
-        //{
-        //    move_speed += 0.001f;
-        //    if (max_Speed <= move_speed) 
-        //    {
-        //        move_speed = 0.0f;
-        //        move_check = false;
-        //    }
-        //}
-        //else
-        //{
-        //    move_speed -= 0.001f;
-        //    if (-max_Speed >= move_speed)
-        //    {
-        //        move_speed = 0.0f;
-        //        move_check = true;
-        //    }
-        //}
-
+        
+        //ˆÚ“®—Ê‰ÁŽZ
         this.gameObject.transform.localPosition += new Vector3(0.0f, move_speed, 0.0f);
         this.gameObject.transform.localEulerAngles += new Vector3(0.0f, role_Speed, 0.0f);
+
+        //ã‰ºˆÚ“®‚ÌŒë·C³
+        if(frame_count>=115)
+        {
+            frame_count = 0;
+            move_speed = 0.0f;
+            this.gameObject.transform.localPosition = first_pos;
+        }
     }
 }

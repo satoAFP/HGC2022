@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     [Header("ここから下は触らない--------------")]
     public bool Movestop = true;
 
+    [Header("王冠取得判定用")]
+    public int clown_get = 0;
+
     [Header("ミッション判定用")]
     public int[] Use_Card_Amount;
 
@@ -524,6 +527,16 @@ public class Player : MonoBehaviour
             }
             //着地判定
             anim.SetBool("jump", false);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "clown")
+        {
+            clown_get++;
+            Destroy(collider.gameObject);
         }
     }
 
