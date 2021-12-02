@@ -7,7 +7,7 @@ public class Colar : MonoBehaviour
 {
     private int a, b, c;
     private bool A, B, C;
-    private int time;
+    private int time,time2;
 
     private bool OK = false;
 
@@ -25,27 +25,28 @@ public class Colar : MonoBehaviour
         c = 128;
 
         time = 0;
+        time2 = 0;
         //script = button.GetComponent<DeletAction>(); //OBJ‚Ì’†‚É‚ ‚éScript‚ğæ“¾‚µ‚Ä•Ï”‚ÉŠi”[‚·‚é
     }
 
     // Update is called once per frame
     void Update()
     {
-        multi_oks = button.GetComponent<MultuAction_Creit>().get_multi_oks(); //OBJ‚Ì’†‚É‚ ‚éScript‚ğæ“¾‚µ‚Ä•Ï”‚ÉŠi”[‚·‚é
+        time2++;
         OK = false;
-       
 
-        for (int i = 0; i != 4; i++)
+        if (time2 > 10)
         {
-            //–¼‘O‚ÌğŒŒ©’¼‚µ
-            if (multi_oks[i].Contains("multi") == true)
+            multi_oks = button.GetComponent<MultuAction_Creit>().get_multi_oks(); //OBJ‚Ì’†‚É‚ ‚éScript‚ğæ“¾‚µ‚Ä•Ï”‚ÉŠi”[‚·‚é
+           
+            for (int i = 0; i != 4; i++)
             {
-                OK = true;
-               
-                
+                //–¼‘O‚ÌğŒŒ©’¼‚µ
+                if (multi_oks[i].Contains("multi") == true)
+                {
+                    OK = true;
+                }
             }
-            
-
         }
 
         

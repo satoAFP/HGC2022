@@ -39,7 +39,7 @@ public class ActionButton_SC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         //NowStage = SceneManager.GetActiveScene().name;
 
         for (int i = 0; i != Child_num; i++)
@@ -68,6 +68,7 @@ public class ActionButton_SC : MonoBehaviour
         }
 
         //player関連
+        //player関連
         player = GameObject.Find("Player"); //オブジェクトの名前から取得して変数に格納する
         script = player.GetComponent<Player>(); //OBJの中にあるScriptを取得して変数に格納する
 
@@ -83,10 +84,7 @@ public class ActionButton_SC : MonoBehaviour
         //else
         //    Destroy(Object, .01f);
 
-        if (script.Movestop == true)
-            Button.SetActive(true);
-        else
-            Button.SetActive(false);
+        
     }
 
     public void set_text(int a,int b)
