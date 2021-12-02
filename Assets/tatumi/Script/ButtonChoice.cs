@@ -109,6 +109,7 @@ public class ButtonChoice : MonoBehaviour
             else if (Input.GetMouseButtonDown(2))
             {
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                this.tag = "Untagged";
             }
             else if (set == false)
             {

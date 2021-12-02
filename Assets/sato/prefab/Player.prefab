@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 4428356768424044610}
   - component: {fileID: 4428356768424044611}
   - component: {fileID: 4428356768181562247}
+  - component: {fileID: 98788500940316434}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -261,7 +262,23 @@ MonoBehaviour:
   anim: {fileID: 0}
   sura_model: {fileID: 7397928891541518496}
   Movestop: 1
+  clown_get: 0
   Use_Card_Amount: 0000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &98788500940316434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428356768424044609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfbb1c264f807a84db3de45c8a96f777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clown_Clear: 0
+  ClearCard: 0
+  Use_Card_Clear: 0000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0
