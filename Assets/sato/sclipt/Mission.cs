@@ -50,6 +50,7 @@ public class Mission : MonoBehaviour
     {
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
+        Debug.Log("" + use_Card_Amount[0]);
 
         //‰¤Š¥Žæ“¾
         if (clown_get == Clown_Clear) 
