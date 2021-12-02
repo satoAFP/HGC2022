@@ -7528,11 +7528,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1007254566}
-  multi_oks:
-  - 
-  - 
-  - 
-  - 
 --- !u!1 &1014963384
 GameObject:
   m_ObjectHideFlags: 0
@@ -23822,6 +23817,26 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Push_jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 947192482081192180, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1283557293647793284, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -23950,6 +23965,10 @@ PrefabInstance:
       propertyPath: m_Transition
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3253889175666113994, guid: e809ccc9942686648842415b96b6b029, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3528240226706379034, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_Text
       value: 
@@ -24072,7 +24091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8895599409696379816, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8895599409696379816, guid: e809ccc9942686648842415b96b6b029, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.g

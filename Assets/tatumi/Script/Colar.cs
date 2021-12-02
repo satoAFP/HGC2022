@@ -9,9 +9,11 @@ public class Colar : MonoBehaviour
     private bool A, B, C;
     private int time;
 
+    private bool OK = false;
+
     public Button button;
     //合体できるかどうかのサイン用。
-    public string[] multi_oks = new string[4];
+    private string[] multi_oks = new string[4];
 
     MultuAction_Creit script; //参照元Scriptが入る変数
 
@@ -30,19 +32,27 @@ public class Colar : MonoBehaviour
     void Update()
     {
         multi_oks = button.GetComponent<MultuAction_Creit>().get_multi_oks(); //OBJの中にあるScriptを取得して変数に格納する
-        bool OK = false;
-        time++;
+        OK = false;
+       
 
-        for(int i=0;i!=4;i++)
+        for (int i = 0; i != 4; i++)
         {
             //名前の条件見直し
-            if (multi_oks[i] != "null")
-                if(multi_oks[i]!="")
+            if (multi_oks[i].Contains("multi") == true)
+            {
                 OK = true;
+               
+                
+            }
+            
+
         }
+
+        
 
         if (OK == true)
         {
+            time++;
             if (a < 1)
             {
                 A = true;
@@ -85,13 +95,19 @@ public class Colar : MonoBehaviour
 
             ColorBlock cb = button.colors;
             cb.normalColor = new Color32((byte)a, (byte)b, (byte)c, 255);
-            if (time == 30)
+            if (time == 40)
                 cb.highlightedColor = new Color32(255, 255, 0, 255);
             else if (time == 60)
             {
                 cb.highlightedColor = new Color32(255, 255, 255, 255);
                 time = 0;
             }
+            button.colors = cb;
+        }
+        else 
+        {
+            ColorBlock cb = button.colors;
+            cb.normalColor = new Color32(255, 255, 255, 255);
             button.colors = cb;
         }
 

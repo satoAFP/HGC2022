@@ -13,6 +13,11 @@ public class MultuAction_Creit : MonoBehaviour
     //合体できるかどうかのサイン用。
     private string[] multi_oks = new string[4];
 
+    private GameObject[] blocks1 = new GameObject[2];
+    private GameObject[] blocks2 = new GameObject[2];
+    private GameObject[] blocks3 = new GameObject[2];
+    private GameObject[] blocks4 = new GameObject[2];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,31 +30,36 @@ public class MultuAction_Creit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
         //左位置にいるやつ全取得
-        GameObject[] blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
+        blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
         //左2位置にいるやつ全取得
-        GameObject[] blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
+         blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
 
         //右2位置にいるやつ全取得
-        GameObject[] blocks3 = GameObject.FindGameObjectsWithTag("Multi_action3");
+        blocks3 = GameObject.FindGameObjectsWithTag("Multi_action3");
 
         //右位置にいるやつ全取得
-        GameObject[] blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
+        blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
 
         if (blocks1.Length >= 2)
             multi_oks[0]= multi_OK(blocks1);
+        else
+            multi_oks[0] = "null";
         if (blocks2.Length >= 2)
             multi_oks[1] = multi_OK(blocks2);
+        else
+            multi_oks[1] = "null";
         if (blocks3.Length >= 2)
             multi_oks[2] = multi_OK(blocks3);
+        else
+            multi_oks[2] = "null";
         if (blocks4.Length >= 2)
             multi_oks[3] = multi_OK(blocks4);
-
-        blocks1 = new GameObject[2];
-        blocks2 = new GameObject[2];
-        blocks3 = new GameObject[2];
-        blocks4 = new GameObject[2];
+        else
+            multi_oks[3] = "null";
 
     }
 
@@ -70,13 +80,13 @@ public class MultuAction_Creit : MonoBehaviour
         GameObject[] blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
 
         //これ基礎。直せよ
-            multi_action(blocks1,530.0f);
-       
-            multi_OK(blocks2);
-       
-            multi_OK(blocks3);
-        
-            multi_OK(blocks4);
+        multi_action(blocks1, 530.0f);
+
+        multi_action(blocks2, 660.0f);
+
+        multi_action(blocks3, 790.0f);
+
+        multi_action(blocks4, 920.0f);
 
         blocks1 = new GameObject[2];
         blocks2 = new GameObject[2];
