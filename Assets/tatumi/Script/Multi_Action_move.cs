@@ -20,6 +20,8 @@ public class Multi_Action_move : MonoBehaviour
     private Vector3 pos;
     private float first_x;//初期位置
 
+    private bool now_ani;
+
     // Player script; //参照元Scriptが入る変数
 
     // Start is called before the first frame update
@@ -34,6 +36,12 @@ public class Multi_Action_move : MonoBehaviour
 
         pos = this.gameObject.transform.position;
         first_x = pos.x;
+
+        script.multi_objs[script.multi_now] = this.gameObject;
+        script.timing[script.multi_now] = script.now;
+        script.multi_now++;
+
+        now_ani = false;
     }
 
     // Update is called once per frame
@@ -44,25 +52,28 @@ public class Multi_Action_move : MonoBehaviour
 
     public void PushButton()
     {
-        if (action_num == 0)
+        if (now_ani == false)
         {
-            player.GetComponent<Player>().Push_highjump();
-            Set_Back();
-        }
-        else if (action_num == 1)
-        {
-            player.GetComponent<Player>().Push_wallkick();
-            Set_Back();
-        }
-        else if (action_num == 2)
-        {
-            player.GetComponent<Player>().Push_longjump();
-            Set_Back();
-        }
-        else if (action_num == 3)
-        {
-            player.GetComponent<Player>().Push_sliding();
-            Set_Back();
+            if (action_num == 0)
+            {
+                player.GetComponent<Player>().Push_highjump();
+                Set_Back();
+            }
+            else if (action_num == 1)
+            {
+                player.GetComponent<Player>().Push_wallkick();
+                Set_Back();
+            }
+            else if (action_num == 2)
+            {
+                player.GetComponent<Player>().Push_longjump();
+                Set_Back();
+            }
+            else if (action_num == 3)
+            {
+                player.GetComponent<Player>().Push_sliding();
+                Set_Back();
+            }
         }
 
         
@@ -70,7 +81,9 @@ public class Multi_Action_move : MonoBehaviour
 
     void Set_Back()
     {
-        Button.SetActive(false);
+        now_ani = true;
+        Invoke(nameof(null_active), 1.15f);
+        //Button.SetActive(false);
         //消えた時初期位置に戻る
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
@@ -78,9 +91,15 @@ public class Multi_Action_move : MonoBehaviour
         script.now++;
     }
 
-    //問題点
-    //public void Set_Active(bool set)
-    //{
-    //    PushButton(set);
-    //}
+    void null_active()
+    {
+        Button.SetActive(false);
+    }
+
+
+    public void Set_Active(bool a)
+    {
+        now_ani = false;
+        Button.SetActive(a);
+    }
 }
