@@ -31,7 +31,7 @@ public class ZoomCinemachineExtension : CinemachineExtension
     {
         //ƒOƒŒƒSƒŠ[‚³‚ñŠ´Ó
         var transposer = avcam.GetCinemachineComponent<CinemachineTransposer>();
-        transposer.m_FollowOffset = new Vector3(3.0f, 2.0f, -1.0f);
+        transposer.m_FollowOffset = new Vector3(0.0f, 2.5f, -4.0f);
 
         // Aim‚Ì’¼Œã‚¾‚¯ˆ—‚ğÀ{
         if (stage != CinemachineCore.Stage.Aim)
