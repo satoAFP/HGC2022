@@ -20,6 +20,9 @@ public class Mission : MonoBehaviour
     [Header("王冠取得時表示画像")]
     public GameObject Clown_img;
 
+    [Header("ミッション内容テキスト")]
+    public Text Mission_substance_text;
+
     [Header("ミッションクリアテキスト")]
     public Text Mission_text;
 
@@ -43,6 +46,24 @@ public class Mission : MonoBehaviour
     {
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
+
+        //ミッション内容作成
+        if (ClearCard == (int)Card.JUMP)
+            Mission_substance_text.text = "ジャンプを" + Use_Card_Clear[(int)Card.JUMP] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.SQUAT)
+            Mission_substance_text.text = "しゃがみを" + Use_Card_Clear[(int)Card.SQUAT] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.STICK)
+            Mission_substance_text.text = "くっつきを" + Use_Card_Clear[(int)Card.STICK] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.RUN)
+            Mission_substance_text.text = "走るを" + Use_Card_Clear[(int)Card.RUN] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.HIGHJUMP)
+            Mission_substance_text.text = "ハイジャンプを" + Use_Card_Clear[(int)Card.HIGHJUMP] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.WALLKICK)
+            Mission_substance_text.text = "壁キックを" + Use_Card_Clear[(int)Card.WALLKICK] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.LONGJUMP)
+            Mission_substance_text.text = "幅跳びを" + Use_Card_Clear[(int)Card.LONGJUMP] + "回以内の使用でクリア";
+        if (ClearCard == (int)Card.SLIDING)
+            Mission_substance_text.text = "スライディングを" + Use_Card_Clear[(int)Card.SLIDING] + "回以内の使用でクリア";
     }
 
     // Update is called once per frame
@@ -50,7 +71,6 @@ public class Mission : MonoBehaviour
     {
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
-        Debug.Log("" + use_Card_Amount[0]);
 
         //王冠取得
         if (clown_get == Clown_Clear) 
