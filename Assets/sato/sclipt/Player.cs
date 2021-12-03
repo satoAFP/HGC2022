@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     [Header("ジャンプ力")]
     public float push_power;
 
+    [Header("横移動する時間")]
+    public int walljump_time;
+
     [Header("ハイジャンプ力(ジャンプの何倍か)")]
     public float highjump_power;
 
@@ -75,7 +78,6 @@ public class Player : MonoBehaviour
     private bool all_stick = false;     //壁くっつき状態をアクションリセットまで続行
     private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
     private bool walljump_check = false;//壁ジャンプかどうか判断
-    private int walljump_time = 100;    //横移動する時間
     private float run_power = 1;        //移動速度代入
     private Vector3 flont_push;         //移動方向へより力を加える(幅跳びで使用)
     private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
