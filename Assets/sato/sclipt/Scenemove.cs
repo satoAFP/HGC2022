@@ -10,9 +10,16 @@ public class Scenemove : MonoBehaviour
 
     static public int Scene_num = 0;
 
+    static public bool Clown_OK = false;
+    static public bool Mission_OK = false;
 
     void FixedUpdate() 
     {
+        if (GameObject.Find("player").GetComponent<Mission>().Clown_OK == true)
+            Clown_OK = true;
+        if (GameObject.Find("player").GetComponent<Mission>().Mission_OK == true)
+            Mission_OK = true;
+
         if (SceneManager.GetActiveScene().name == "Stage1")
             Scene_num = 1;
         if (SceneManager.GetActiveScene().name == "Stage2")
@@ -25,18 +32,20 @@ public class Scenemove : MonoBehaviour
             Scene_num = 5;
         if (SceneManager.GetActiveScene().name == "Stage6")
             Scene_num = 6;
-
-
-
     }
 
     public void PushScene() 
     {
+        Clown_OK = false;
+        Mission_OK = false;
         SceneManager.LoadScene(SceneName[0]);
     }
 
     public void PushNextScene() 
     {
+        Clown_OK = false;
+        Mission_OK = false;
+
         if (Scene_num == 1) 
             SceneManager.LoadScene("Stage2");
         if (Scene_num == 2)
