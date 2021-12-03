@@ -11,10 +11,15 @@ public class Mission : MonoBehaviour
 
     [Header("ハイジャンプ：4　壁キック：5　幅跳び：6　スライディング：7")]
     [Header("ジャンプ：0　しゃがみ：1　くっつき：2　走り：3")]
-    [Header("何をクリア判定にするか")]
+    [Header("どのアクションカードをクリア判定にするか")]
     public int ClearCard;
 
-    [Header("それぞれ何枚以内でミッションクリアか")]
+    [Header("1：～回以上の使用でクリア")]
+    [Header("0：～回以内の使用でクリア")]
+    [Header("どのミッション内容にするか")]
+    public int Minssion_Num;
+
+    [Header("それぞれのミッション何枚でミッションクリアか")]
     public int[] Use_Card_Clear;
 
     [Header("王冠取得時表示画像")]
@@ -23,11 +28,16 @@ public class Mission : MonoBehaviour
     [Header("ミッション内容テキスト")]
     public Text Mission_substance_text;
 
-    [Header("ミッションクリアテキスト")]
-    public Text Mission_text;
+    [Header("ミッションクリア画像")]
+    public GameObject Mission_img;
 
-    private int clown_get = 0;
-    private int[] use_Card_Amount;
+    private int clown_get = 0;      //プレイヤーから王冠を取得したか判定をとる
+    private int[] use_Card_Amount;  //それぞれのカードを使用した回数を取得
+
+    private int Mission_Use_Card_Clear = 0;
+    private string mission_action = "";
+    private string mission_substance = "";
+
 
     public enum Card
     {
@@ -47,23 +57,57 @@ public class Mission : MonoBehaviour
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
 
-        //ミッション内容作成
+        //ミッションのアクションカード設定
         if (ClearCard == (int)Card.JUMP)
-            Mission_substance_text.text = "ジャンプを" + Use_Card_Clear[(int)Card.JUMP] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.JUMP];
+            mission_action = "ジャンプを";
+        }
         if (ClearCard == (int)Card.SQUAT)
-            Mission_substance_text.text = "しゃがみを" + Use_Card_Clear[(int)Card.SQUAT] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SQUAT];
+            mission_action = "しゃがみを";
+        }
         if (ClearCard == (int)Card.STICK)
-            Mission_substance_text.text = "くっつきを" + Use_Card_Clear[(int)Card.STICK] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.STICK];
+            mission_action = "くっつきを";
+        }
         if (ClearCard == (int)Card.RUN)
-            Mission_substance_text.text = "走るを" + Use_Card_Clear[(int)Card.RUN] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.RUN];
+            mission_action = "走るを";
+        }
         if (ClearCard == (int)Card.HIGHJUMP)
-            Mission_substance_text.text = "ハイジャンプを" + Use_Card_Clear[(int)Card.HIGHJUMP] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.HIGHJUMP];
+            mission_action = "ハイジャンプを";
+        }
         if (ClearCard == (int)Card.WALLKICK)
-            Mission_substance_text.text = "壁キックを" + Use_Card_Clear[(int)Card.WALLKICK] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.WALLKICK];
+            mission_action = "壁キックを";
+        }
         if (ClearCard == (int)Card.LONGJUMP)
-            Mission_substance_text.text = "幅跳びを" + Use_Card_Clear[(int)Card.LONGJUMP] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.LONGJUMP];
+            mission_action = "幅跳びを";
+        }
         if (ClearCard == (int)Card.SLIDING)
-            Mission_substance_text.text = "スライディングを" + Use_Card_Clear[(int)Card.SLIDING] + "回以内の使用でクリア";
+        {
+            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SLIDING];
+            mission_action = "スライディングを";
+        }
+
+        if (Minssion_Num == 0)
+            mission_substance = "回以内の使用でクリア";
+        if (Minssion_Num == 1)
+            mission_substance = "回以上の使用でクリア";
+
+        //ミッション内容作成
+        Mission_substance_text.text = "" + mission_action + "" + Mission_Use_Card_Clear + "" + mission_substance;
+
+        
     }
 
     // Update is called once per frame
@@ -80,14 +124,29 @@ public class Mission : MonoBehaviour
         }
 
         //ミッション用カード使用回数制限
-        if (use_Card_Amount[ClearCard] <= Use_Card_Clear[ClearCard])
+        if (Minssion_Num == 0)
         {
-            //クリアテキスト表示
-            Mission_text.text = "クリア";
+            if (use_Card_Amount[ClearCard] <= Use_Card_Clear[ClearCard])
+            {
+                //クリアテキスト表示
+                Mission_img.gameObject.SetActive(true);
+            }
+            else
+            {
+                Mission_img.gameObject.SetActive(false);
+            }
         }
-        else
+        if(Minssion_Num == 1)
         {
-            Mission_text.text = "失敗";
+            if (use_Card_Amount[ClearCard] >= Use_Card_Clear[ClearCard])
+            {
+                //クリアテキスト表示
+                Mission_img.gameObject.SetActive(true);
+            }
+            else
+            {
+                Mission_img.gameObject.SetActive(false);
+            }
         }
     }
 }
