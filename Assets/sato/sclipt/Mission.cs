@@ -121,11 +121,17 @@ public class Mission : MonoBehaviour
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
 
         //王冠取得
-        if (clown_get <= Clown_Clear) 
+        if (clown_get >= Clown_Clear) 
         {
             //クリアテキスト表示
             Clown_img.gameObject.SetActive(true);
             Clown_OK = true;
+        }
+        else
+        {
+            //クリアテキスト表示
+            Clown_img.gameObject.SetActive(false);
+            Clown_OK = false;
         }
 
         //ミッション用カード使用回数制限

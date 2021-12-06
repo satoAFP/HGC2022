@@ -20,10 +20,16 @@ public class Scenemove : MonoBehaviour
 
     void FixedUpdate() 
     {
-        if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
-            Clown_OK = true;
-        if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
-            Mission_OK = true;
+        //ステージシーンの時
+        if (SceneManager.GetActiveScene().name != "Title"&&
+            SceneManager.GetActiveScene().name != "StageSelect" &&
+            SceneManager.GetActiveScene().name != "Result")
+        {
+            if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
+                Clown_OK = true;
+            if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
+                Mission_OK = true;
+        }
 
         if (SceneManager.GetActiveScene().name == "Result")
         {
@@ -37,8 +43,8 @@ public class Scenemove : MonoBehaviour
             }
         }
 
-            //ステージの遷移
-            if (SceneManager.GetActiveScene().name == "Stage1")
+        //ステージの遷移
+        if (SceneManager.GetActiveScene().name == "Stage1")
             Scene_num = 1;
         if (SceneManager.GetActiveScene().name == "Stage2")
             Scene_num = 2;
