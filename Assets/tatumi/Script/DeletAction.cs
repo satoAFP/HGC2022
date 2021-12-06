@@ -20,12 +20,15 @@ public class DeletAction : MonoBehaviour
     private int all_multi_flag;//合体コマンドを同時にした時
 
     public int[] timing;
+
+    public bool multi_backflag;
    
     // Start is called before the first frame update
     void Start()
     {
         now = 0;
         all_multi_flag = 0;
+        multi_backflag = false;
     }
 
     // Update is called once per frame
@@ -47,9 +50,11 @@ public class DeletAction : MonoBehaviour
             else
             {
                 objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
+                multi_backflag = false;
             }
 
             int S = now;
+           
 
             for (int i = multi_now+1; i != 0; i--)
             {
@@ -60,6 +65,7 @@ public class DeletAction : MonoBehaviour
                     multi_now--;
                     all_multi_flag += 1;
 
+                    multi_backflag = true;
 
                     //二段戻し
                     now--;
@@ -79,6 +85,7 @@ public class DeletAction : MonoBehaviour
             if(all_multi_flag>=2)
             {
                 now--;
+                multi_backflag = true;
                 if (now != 0)
                     objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
             }
