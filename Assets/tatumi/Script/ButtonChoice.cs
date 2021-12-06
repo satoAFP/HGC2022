@@ -52,7 +52,7 @@ public class ButtonChoice : MonoBehaviour
         {
             Debug.Log("è¡Ç¶Ç©ÇØÇƒÇÕÇ»Ç¢");
             //ç∂ÉNÉä
-            if (Input.GetMouseButtonDown(0) || set == true)
+            if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log("Left");
                 //now_ani = true;
@@ -122,14 +122,18 @@ public class ButtonChoice : MonoBehaviour
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
             }
-            else if (set == false)
+            else if (set == true)
             {
-               
-                Button.SetActive(true);
-                vanish = true;
+                script.objs[script.now] = this.gameObject;
+                script.now++;
+
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
                 scriptac.set_text((int)(first_x / 130), 1);
+            }
+            else if (set == false)
+            {
+                scriptac.set_text((int)(first_x / 130), -1);
             }
         }
        

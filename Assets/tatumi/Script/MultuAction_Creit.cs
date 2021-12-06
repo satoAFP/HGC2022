@@ -106,7 +106,7 @@ public class MultuAction_Creit : MonoBehaviour
             {
                 for (int i = 0; i != 2; i++)
                 {
-                    a[i].GetComponent<ButtonChoice>().Set_Active(true);
+                   a[i].GetComponent<ButtonChoice>().Set_Active(true);
                 }
 
                 GameObject obj = (GameObject)Resources.Load(multi_OK(a));
