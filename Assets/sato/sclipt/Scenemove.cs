@@ -8,6 +8,11 @@ public class Scenemove : MonoBehaviour
     [Header("移動したいシーン名入力")]
     public string[] SceneName;
 
+    [Header("王冠")]
+    public GameObject clown;
+    [Header("ミッション")]
+    public GameObject mission;
+
     static public int Scene_num = 0;
 
     static public bool Clown_OK = false;
@@ -15,12 +20,25 @@ public class Scenemove : MonoBehaviour
 
     void FixedUpdate() 
     {
-        if (GameObject.Find("player").GetComponent<Mission>().Clown_OK == true)
+        if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
             Clown_OK = true;
-        if (GameObject.Find("player").GetComponent<Mission>().Mission_OK == true)
+        if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
             Mission_OK = true;
 
-        if (SceneManager.GetActiveScene().name == "Stage1")
+        if (SceneManager.GetActiveScene().name == "Result")
+        {
+            if(Clown_OK==true)
+            {
+                clown.gameObject.SetActive(true);
+            }
+            if (Mission_OK == true)
+            {
+                mission.gameObject.SetActive(true);
+            }
+        }
+
+            //ステージの遷移
+            if (SceneManager.GetActiveScene().name == "Stage1")
             Scene_num = 1;
         if (SceneManager.GetActiveScene().name == "Stage2")
             Scene_num = 2;
@@ -58,6 +76,5 @@ public class Scenemove : MonoBehaviour
             SceneManager.LoadScene("Stage6");
         if (Scene_num == 6)
             SceneManager.LoadScene("Title");
-
     }
 }
