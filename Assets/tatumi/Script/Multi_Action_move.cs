@@ -125,9 +125,9 @@ public class Multi_Action_move : MonoBehaviour
 
     void Set_Back()
     {
-        //now_ani = true;
+        now_ani = true;
         //Invoke(nameof(null_active), 1.15f);
-        //Button.SetActive(false);
+       // Button.SetActive(false);
         //Á‚¦‚½‰ŠúˆÊ’u‚É–ß‚é
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
