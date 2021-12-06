@@ -31,8 +31,14 @@ public class Player : MonoBehaviour
     [Header("ジャンプ力")]
     public float push_power;
 
-    [Header("横移動する時間")]
+    [Header("壁キックのジャンプ力の倍率")]
+    public float wall_kick_power;
+
+    [Header("壁キックの横移動する時間")]
     public int walljump_time;
+
+    [Header("壁キックの横移動する最初のパワー")]
+    public float walljump_first_power;
 
     [Header("ハイジャンプ力(ジャンプの何倍か)")]
     public float highjump_power;
@@ -320,7 +326,7 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.WALLKICK] == true) {
                     this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     //ジャンプさせる処理
-                    this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+                    this.GetComponent<Rigidbody>().AddForce(push * wall_kick_power, ForceMode.Impulse);
 
                     //ジャンプアニメーション移行
                     anim.SetBool("jump", true);
@@ -328,12 +334,12 @@ public class Player : MonoBehaviour
                     //左に壁がある処理
                     if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
                         walljump_check = true;
-                        walljump = 0.1f;
+                        walljump = walljump_first_power;
                     }
                     //右に壁がある処理
                     if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
                         walljump_check = true;
-                        walljump = -0.1f;
+                        walljump = -walljump_first_power;
                     }
 
                     Action_check[(int)Card.WALLKICK] = false;
@@ -343,9 +349,9 @@ public class Player : MonoBehaviour
                     if (walljump_time != 0) {
                         transform.Translate(walljump, 0.0f, 0.0f);
                         if (walljump < 0)
-                            walljump += 0.001f;
+                            walljump += walljump_first_power / walljump_time;
                         else
-                            walljump -= 0.001f;
+                            walljump -= walljump_first_power / walljump_time;
                     }
                     else
                         walljump_check = false;

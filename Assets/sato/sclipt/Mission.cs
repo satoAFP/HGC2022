@@ -10,7 +10,7 @@ public class Mission : MonoBehaviour
     public int Clown_Clear;
 
     [Header("ハイジャンプ：4　壁キック：5　幅跳び：6　スライディング：7")]
-    [Header("ジャンプ：0　しゃがみ：1　くっつき：2　走り：3")]
+    [Header("ジャンプ：0　しゃがみ：1　ひっつき：2　走り：3")]
     [Header("どのアクションカードをクリア判定にするか")]
     public int ClearCard;
 
@@ -30,6 +30,10 @@ public class Mission : MonoBehaviour
 
     [Header("ミッションクリア画像")]
     public GameObject Mission_img;
+
+    [Header("ここから下いじらない-----------")]
+    public bool Clown_OK = false;
+    public bool Mission_OK = false;
 
     private int clown_get = 0;      //プレイヤーから王冠を取得したか判定をとる
     private int[] use_Card_Amount;  //それぞれのカードを使用した回数を取得
@@ -71,7 +75,7 @@ public class Mission : MonoBehaviour
         if (ClearCard == (int)Card.STICK)
         {
             Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.STICK];
-            mission_action = "くっつきを";
+            mission_action = "ひっつきを";
         }
         if (ClearCard == (int)Card.RUN)
         {
@@ -117,10 +121,17 @@ public class Mission : MonoBehaviour
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
 
         //王冠取得
-        if (clown_get == Clown_Clear) 
+        if (clown_get >= Clown_Clear) 
         {
             //クリアテキスト表示
             Clown_img.gameObject.SetActive(true);
+            Clown_OK = true;
+        }
+        else
+        {
+            //クリアテキスト表示
+            Clown_img.gameObject.SetActive(false);
+            Clown_OK = false;
         }
 
         //ミッション用カード使用回数制限
@@ -130,10 +141,12 @@ public class Mission : MonoBehaviour
             {
                 //クリアテキスト表示
                 Mission_img.gameObject.SetActive(true);
+                Mission_OK = true;
             }
             else
             {
                 Mission_img.gameObject.SetActive(false);
+                Mission_OK = false;
             }
         }
         if(Minssion_Num == 1)
@@ -142,10 +155,12 @@ public class Mission : MonoBehaviour
             {
                 //クリアテキスト表示
                 Mission_img.gameObject.SetActive(true);
+                Mission_OK = true;
             }
             else
             {
                 Mission_img.gameObject.SetActive(false);
+                Mission_OK = false;
             }
         }
     }

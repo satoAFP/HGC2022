@@ -256,7 +256,9 @@ MonoBehaviour:
   runSpeed: 2
   flontMove: 10
   push_power: 7
+  wall_kick_power: 0.5
   walljump_time: 100
+  walljump_first_power: 0.1
   highjump_power: 2
   Max_Jmup: 2
   Select_text: {fileID: 0}
@@ -283,7 +285,9 @@ MonoBehaviour:
   Use_Card_Clear: 0000000000000000000000000000000000000000000000000000000000000000
   Clown_img: {fileID: 0}
   Mission_substance_text: {fileID: 0}
-  Mission_text: {fileID: 0}
+  Mission_img: {fileID: 0}
+  Clown_OK: 0
+  Mission_OK: 0
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0
