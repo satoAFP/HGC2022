@@ -49,6 +49,9 @@ public class Player : MonoBehaviour
     [Header("選択されたアクション表示用テキスト")]
     public Text Select_text;
 
+    [Header("壁で止まって死ぬまでの時間")]
+    public int stop_deth_time;
+
 
     //アニメーション管理変数---------------------------------------------------
     [Header("スライムのアニメーション")]
@@ -91,9 +94,9 @@ public class Player : MonoBehaviour
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
     private bool safe_flag = true;      //死亡判定用フラグ
     private Vector3 stop_check;         //フレーム毎に主人公の座標取得
+    private int stop_time_count = 0;    //実際カウントする変数
 
 
-    
 
     //構造体-------------------------------------------------------------------
     //ボタン使用時周り
@@ -147,7 +150,7 @@ public class Player : MonoBehaviour
             text_data[i] = "";
         }
 
-        stop_check = this.gameObject.transform.position;
+        stop_check = new Vector3(0.0f, 0.0f, 0.0f);
 
     }
 
@@ -241,6 +244,18 @@ public class Player : MonoBehaviour
 
         //最初アクションを選択するときと、セレクトブロックに到達するといったん止める処理
         if (Movestop == false) {
+
+            //壁で止まった時死ぬ処理
+            stop_time_count++;
+            if (stop_check == this.gameObject.transform.position) 
+            {
+                if (stop_deth_time == stop_time_count)
+                {
+                    stop_time_count = 0;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            }
+            stop_check = this.gameObject.transform.position;
 
             //移動処理
             MOVE(inputX, inputZ);
@@ -760,12 +775,11 @@ public class Player : MonoBehaviour
 
     //選択したアクションを一つ戻す
     public void Push_back() {
+        //マルチ状態を戻すときに使うboolを取得
+        GameObject.Find("BackButton").GetComponent<DeletAction>();
         //0番目が最初のアクションなのでそれ未満にはならない
-        if (Select_order > 0) {
-            Select_order -= 1;
-            Card_order[Select_order] = -1;
-            text_data[Select_order] = "";   //カードテキストの中身消去
-        }
+        Card_order[0] = -1;
+        text_data[0] = "";   //カードテキストの中身消去
     }
 
     public void check() {
