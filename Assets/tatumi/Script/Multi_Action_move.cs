@@ -58,21 +58,65 @@ public class Multi_Action_move : MonoBehaviour
             {
                 player.GetComponent<Player>().Push_highjump();
                 Set_Back();
+
+                int n = this.transform.parent.childCount;
+
+                Debug.Log($"childs={n:0}");
+
+                GameObject child = transform.Find("image_move").gameObject;
+
+                Debug.Log($"childs={child:0}");
+
+                GameObject newObj = Instantiate(child, this.transform, false);
+                newObj.GetComponent<Image_move>().Move_on = true;
             }
             else if (action_num == 1)
             {
                 player.GetComponent<Player>().Push_wallkick();
                 Set_Back();
+
+                int n = this.transform.parent.childCount;
+
+                Debug.Log($"childs={n:0}");
+
+                GameObject child = transform.Find("image_move").gameObject;
+
+                Debug.Log($"childs={child:0}");
+
+                GameObject newObj = Instantiate(child, this.transform, false);
+                newObj.GetComponent<Image_move>().Move_on = true;
             }
             else if (action_num == 2)
             {
                 player.GetComponent<Player>().Push_longjump();
                 Set_Back();
+
+                int n = this.transform.parent.childCount;
+
+                Debug.Log($"childs={n:0}");
+
+                GameObject child = transform.Find("image_move").gameObject;
+
+                Debug.Log($"childs={child:0}");
+
+                GameObject newObj = Instantiate(child, this.transform, false);
+                newObj.GetComponent<Image_move>().Move_on = true;
             }
             else if (action_num == 3)
             {
                 player.GetComponent<Player>().Push_sliding();
                 Set_Back();
+
+                int n = this.transform.parent.childCount;
+
+                Debug.Log($"childs={n:0}");
+
+                GameObject child = transform.Find("image_move").gameObject;
+
+                Debug.Log($"childs={child:0}");
+
+                GameObject newObj = Instantiate(child, this.transform, false);
+                newObj.GetComponent<Image_move>().Move_on = true;
             }
         }
 
@@ -81,8 +125,8 @@ public class Multi_Action_move : MonoBehaviour
 
     void Set_Back()
     {
-        now_ani = true;
-        Invoke(nameof(null_active), 1.15f);
+        //now_ani = true;
+        //Invoke(nameof(null_active), 1.15f);
         //Button.SetActive(false);
         //è¡Ç¶ÇΩéûèâä˙à íuÇ…ñﬂÇÈ
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
