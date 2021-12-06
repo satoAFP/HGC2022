@@ -58,21 +58,29 @@ public class Multi_Action_move : MonoBehaviour
             {
                 player.GetComponent<Player>().Push_highjump();
                 Set_Back();
+
+               
             }
             else if (action_num == 1)
             {
                 player.GetComponent<Player>().Push_wallkick();
                 Set_Back();
+
+               
             }
             else if (action_num == 2)
             {
                 player.GetComponent<Player>().Push_longjump();
                 Set_Back();
+
+               
             }
             else if (action_num == 3)
             {
                 player.GetComponent<Player>().Push_sliding();
                 Set_Back();
+
+              
             }
         }
 
@@ -82,8 +90,8 @@ public class Multi_Action_move : MonoBehaviour
     void Set_Back()
     {
         now_ani = true;
-        Invoke(nameof(null_active), 1.15f);
-        //Button.SetActive(false);
+       //Invoke(nameof(null_active), 1.15f);
+        Button.SetActive(false);
         //è¡Ç¶ÇΩéûèâä˙à íuÇ…ñﬂÇÈ
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 

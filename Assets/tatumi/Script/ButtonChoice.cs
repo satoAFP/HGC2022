@@ -52,27 +52,39 @@ public class ButtonChoice : MonoBehaviour
         {
             Debug.Log("消えかけてはない");
             //左クリ
-            if (Input.GetMouseButtonDown(0) || set == true)
+            if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log("Left");
-                now_ani = true;
+                //now_ani = true;
+
+                int n = this.transform.parent.childCount;
+
+                Debug.Log($"childs={n:0}"); 
+
+                GameObject child = transform.Find("image_move").gameObject;
+
+                Debug.Log($"childs={child:0}");
+
+                GameObject newObj = Instantiate(child, this.transform, false);
+                newObj.GetComponent<Image_move>().Move_on = true;
+
 
                 //var animator = Button.GetComponent<Animator>();
                 //animator.Play("Selected");
                 //animator.Update(0f);
 
                 //消す処理をscriptに一任
-                if(set==false)
-                Invoke(nameof(null_active), 1.15f);
-                else
-                    Button.SetActive(false);
+                //if (set==false)
+                //Invoke(nameof(null_active), 1.15f);
+                //else
+                //    Button.SetActive(false);
                 //vanish = true;
                 //消えた時初期位置に戻る
                 this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
                 script.objs[script.now] = this.gameObject;
                 script.now++;
-                scriptac.set_text((int)(first_x / 130), -1);
+                scriptac.set_text((int)(first_x / 130), 1);
             }
             //右クリ
             else if (Input.GetMouseButtonDown(1))
@@ -83,7 +95,7 @@ public class ButtonChoice : MonoBehaviour
                 if (pos.x <= 500)
                     //現在の位置から移動せず
                     this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
-                else if (pos.x <= 790)
+                else if (pos.x < 790)
                     //現在の位置から移動
                     this.gameObject.transform.position = new Vector3(pos.x + 130.0f, pos.y, pos.z);
                 else
@@ -100,8 +112,7 @@ public class ButtonChoice : MonoBehaviour
                     this.tag = "Multi_action2";
                 else if (pos.x == 790.0f)
                     this.tag = "Multi_action3";
-                else if (pos.x == 920.0f)
-                    this.tag = "Multi_action4";
+               
                 else
                     this.tag = "Untagged";
             }
@@ -111,14 +122,18 @@ public class ButtonChoice : MonoBehaviour
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
             }
-            else if (set == false)
+            else if (set == true)
             {
-                Debug.Log($"first_x={first_x:0.00}");
-                Button.SetActive(true);
-                vanish = true;
+                script.objs[script.now] = this.gameObject;
+                script.now++;
+
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
                 scriptac.set_text((int)(first_x / 130), 1);
+            }
+            else if (set == false)
+            {
+                scriptac.set_text((int)(first_x / 130), -1);
             }
         }
        
