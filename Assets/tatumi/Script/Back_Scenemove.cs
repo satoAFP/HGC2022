@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//‚¢‚ç‚È‚¢script?
 public class Back_Scenemove : MonoBehaviour
 {
    

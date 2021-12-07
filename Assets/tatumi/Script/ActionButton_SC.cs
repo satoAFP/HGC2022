@@ -12,7 +12,6 @@ public class ActionButton_SC : MonoBehaviour
     //[Header("特定しか存在しない-------------------------")]
     //public string SceneName;
 
-
     GameObject player; //参照元OBJそのものが入る変数
 
     Player script; //参照元OBJそのものが入る変数
@@ -39,33 +38,34 @@ public class ActionButton_SC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(this);
-        //NowStage = SceneManager.GetActiveScene().name;
-
+        //複製処理（現在いらない子）----------------------------------------------------------------------------
         for (int i = 0; i != Child_num; i++)
         {
             for (int k = 0; k != Duplicate[i]; k++)
             {
-               GameObject newObj = Instantiate(childGameObjects[i], this.transform, false);
+                GameObject newObj = Instantiate(childGameObjects[i], this.transform, false);
             }
         }
 
-        for (int i = 0; i != 8; i++)
-        {
-           
-            //action_numtexts[i]=Instantiate(action_numtext, this.transform, false);
-            //action_numtexts[i].transform.position = new Vector3(19.0f + (i * 130.0f), 117.0f, 0.0f);
-        }
+        //for (int i = 0; i != 8; i++)
+        //{
 
+        //    //action_numtexts[i]=Instantiate(action_numtext, this.transform, false);
+        //    //action_numtexts[i].transform.position = new Vector3(19.0f + (i * 130.0f), 117.0f, 0.0f);
+        //}
+        //-----------------------------------------------------------------------------------------------------
+
+        //選んだ数出力（管理）の初期化-------------------------------------------------------------------------
         for (int i = 0; i != Child_num; i++)
         {
-            
+
             action_num[i] = Duplicate[i];
 
             //action_numtexts[i].text = action_num[i].ToString();
         }
+        //------------------------------------------------------------------------------------------------------
 
-        //player関連
+
         //player関連
         player = GameObject.Find("Player"); //オブジェクトの名前から取得して変数に格納する
         script = player.GetComponent<Player>(); //OBJの中にあるScriptを取得して変数に格納する
@@ -75,21 +75,15 @@ public class ActionButton_SC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (SceneManager.GetActiveScene().name == SceneName|| SceneManager.GetActiveScene().name==NowStage)
-        //{
-        //    ;
-        //}
-        //else
-        //    Destroy(Object, .01f);
-
-        
+       
     }
 
+    //関数で選んだ数を増減
     public void set_text(int a,int b)
     {
         action_num[a] += b;
     }
-
+    //現在の数(取得用)
     public int get_score(int a)
     {
         return action_num[a];

@@ -13,6 +13,7 @@ public class ButtonChoice : MonoBehaviour
 
     ActionButton_SC scriptac; //参照元Scriptが入る変数
 
+    //スッーと消えるよう変数（現在凍結）
     public bool vanish;
     private bool now_ani;
 
@@ -32,9 +33,11 @@ public class ButtonChoice : MonoBehaviour
         ActionButton = GameObject.Find("ActionBotton "); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         scriptac = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
+        //最初に出た位置を覚える（戻る処理に使う）
         pos = this.gameObject.transform.position;
         first_x = pos.x;
 
+        //スッーと消えるよう変数（現在凍結）
         vanish = true;
         now_ani = false;
     }
@@ -48,27 +51,31 @@ public class ButtonChoice : MonoBehaviour
 
     public void PushButton(bool set)
     {
+        //スッーと消えるよう変数（現在凍結）
         if (now_ani == false)
         {
-            Debug.Log("消えかけてはない");
+            
             //左クリ
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Left");
+               
                 //now_ani = true;
 
-                int n = this.transform.parent.childCount;
+                //自身の子供から複製対象選択＆動かす-------------------------------
 
-                Debug.Log($"childs={n:0}"); 
+                //子供数取得なお使わん
+                //int n = this.transform.parent.childCount;
 
+               //image_moveを取得（自身の子供が一番早い）
                 GameObject child = transform.Find("image_move").gameObject;
 
-                Debug.Log($"childs={child:0}");
-
+                //複製、動かす信号を発信
                 GameObject newObj = Instantiate(child, this.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
+                //------------------------------------------------------------------
 
 
+                //スッーと消えるよう変数（現在凍結）--------------------------------
                 //var animator = Button.GetComponent<Animator>();
                 //animator.Play("Selected");
                 //animator.Update(0f);
@@ -79,51 +86,59 @@ public class ButtonChoice : MonoBehaviour
                 //else
                 //    Button.SetActive(false);
                 //vanish = true;
+
+                //---------------------------------------------------------------------
+
                 //消えた時初期位置に戻る
                 this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
+                //バックボタンに登録
                 script.objs[script.now] = this.gameObject;
                 script.now++;
+
+                //次回出る数の位置を固定
                 scriptac.set_text((int)(first_x / 130), 1);
             }
             //右クリ
             else if (Input.GetMouseButtonDown(1))
             {
+                //現在位置取得
                 pos = this.gameObject.transform.position;
-                Debug.Log("Right");
-                // Debug.Log($"pos.y={pos.y:0.00}");
+               
                 if (pos.x <= 500)
                     //現在の位置から移動せず
                     this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
-                else if (pos.x < 790)
+                else if (pos.x < 660)
                     //現在の位置から移動
                     this.gameObject.transform.position = new Vector3(pos.x + 130.0f, pos.y, pos.z);
                 else
                     this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
 
+                //移動後の場所取得
                 pos = this.gameObject.transform.position;
 
+                //それぞれの場所でtag付与（マルチクリエイトへ）
                 if (pos.x == 530.0f)
                 {
-                    Debug.Log("tag1 get");//ok
                     this.tag = "Multi_action1";
                 }
                 else if (pos.x == 660.0f)
                     this.tag = "Multi_action2";
-                else if (pos.x == 790.0f)
-                    this.tag = "Multi_action3";
-               
                 else
                     this.tag = "Untagged";
             }
             //真ん中クリ
             else if (Input.GetMouseButtonDown(2))
             {
+                //初期位置へ（タグも再付与）
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
             }
+            //他スクリプトより申請時
             else if (set == true)
             {
+                //マルチクリエイトからの申請
+                //自身の消えた処理と同じ-------------------以下同文
                 script.objs[script.now] = this.gameObject;
                 script.now++;
 
@@ -133,17 +148,20 @@ public class ButtonChoice : MonoBehaviour
             }
             else if (set == false)
             {
+                //バックで戻されたとき、文章初期化位置へ
                 scriptac.set_text((int)(first_x / 130), -1);
             }
         }
        
     }
 
-    void null_active()
-    {
-        Button.SetActive(false);
-    }
+    //Inovekようだったが使わん（アニメーションで使用）
+    //void null_active()
+    //{
+    //    Button.SetActive(false);
+    //}
 
+    //他スクリプトからいじるようかんすう
     public void Set_Active(bool set)
     {
         now_ani = false;
