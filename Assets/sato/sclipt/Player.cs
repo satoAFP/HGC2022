@@ -274,9 +274,9 @@ public class Player : MonoBehaviour
         if (Movestop == false) {
 
             //ï«Ç≈é~Ç‹Ç¡ÇΩéûéÄÇ èàóù
-            stop_time_count++;
-            if (stop_check == this.gameObject.transform.position) 
+            if (stop_check == this.gameObject.transform.position)
             {
+                stop_time_count++;
                 if (stop_deth_time == stop_time_count)
                 {
                     stop_time_count = 0;
