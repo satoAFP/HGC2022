@@ -33,7 +33,7 @@ public class Image_multimove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         pos = this.transform.position;
         sca = this.transform.localScale;
@@ -49,23 +49,23 @@ public class Image_multimove : MonoBehaviour
             image.color = new Color(255, 255, 255, 0);
           
 
-            if (time < 100)
+            if (time < 25)
             {
                 //x=10%
-                this.transform.position = new Vector3(pos.x + add, pos.y + 3.5f, pos.z);
+                this.transform.position = new Vector3(pos.x + add, pos.y + 14.0f, pos.z);
             }
-            else if (time < 300)
+            else if (time < 75)
             {
                 //x=90%
-                this.transform.position = new Vector3(pos.x + add * 4, pos.y + 0.3f, pos.z);
+                this.transform.position = new Vector3(pos.x + add * 16, pos.y + 1.2f, pos.z);
             }
 
-            if (time < 300)
+            if (time < 75)
             {
-                this.transform.localScale = new Vector3(sca.x - 0.003f, sca.y - 0.003f, sca.z);
+                this.transform.localScale = new Vector3(sca.x - 0.012f, sca.y - 0.012f, sca.z);
             }
 
-            if (time == 300)
+            if (time == 75)
             {
                 this.gameObject.SetActive(false);
                 //Destroy(this.gameObject);
@@ -78,8 +78,8 @@ public class Image_multimove : MonoBehaviour
             if (pos.y > -127.0f)
             {
                 //‰º‚ª‚é
-                this.transform.position = new Vector3(pos.x, pos.y - 0.4f, pos.z);
-                image_alp -= 0.02f;
+                this.transform.position = new Vector3(pos.x, pos.y - 0.8f, pos.z);
+                image_alp -= 0.04f;
             }
             else if (pos.y == -127.0f)
             {
@@ -100,8 +100,8 @@ public class Image_multimove : MonoBehaviour
             if (pos.y < -100.0f)
             {
                 //ã‚ª‚é
-                this.transform.position = new Vector3(pos.x, pos.y + 0.4f, pos.z);
-                image_alp += 0.02f;
+                this.transform.position = new Vector3(pos.x, pos.y + 0.8f, pos.z);
+                image_alp += 0.04f;
             }
             else if (pos.y == -100.0f)
             {
