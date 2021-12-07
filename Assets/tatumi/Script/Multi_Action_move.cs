@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Multi_Action_move : MonoBehaviour
 {
+    //番号で何するか決める
     [Header("合体番号")]
     public int action_num;
 
@@ -37,10 +38,14 @@ public class Multi_Action_move : MonoBehaviour
         pos = this.gameObject.transform.position;
         first_x = pos.x;
 
+        //バックとの連携------------------------------
         script.multi_objs[script.multi_now] = this.gameObject;
         script.timing[script.multi_now] = script.now;
+        //作成と同時に登録
         script.multi_now++;
+        //-------------------------------------------
 
+        //アニメーション（泣）
         now_ani = false;
     }
 
@@ -52,8 +57,13 @@ public class Multi_Action_move : MonoBehaviour
 
     public void PushButton()
     {
+        //アニメーション（泣）
         if (now_ani == false)
         {
+            //スクリプトに信号送信
+            GetComponent<Image_multimove>().Move_on = true;
+            
+            //番号によりアクション変更
             if (action_num == 0)
             {
                 player.GetComponent<Player>().Push_highjump();
@@ -89,25 +99,41 @@ public class Multi_Action_move : MonoBehaviour
 
     void Set_Back()
     {
+        //アニメーション（泣）一応動き中に反応しないのも兼ねてる便利
         now_ani = true;
-       //Invoke(nameof(null_active), 1.15f);
-        Button.SetActive(false);
+
+        //アニメーション（泣）
+        //Invoke(nameof(null_active), 1.15f);
+        //Button.SetActive(false);
+
         //消えた時初期位置に戻る
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
+        //バックにマルチ自身を登録
         script.objs[script.now] = this.gameObject;
         script.now++;
     }
 
+    //アニメーション（泣）
     void null_active()
     {
         Button.SetActive(false);
     }
 
-
+    //戻すとき
     public void Set_Active(bool a)
     {
+        ////アニメーション（泣）と反応するように
         now_ani = false;
+
+        //初期状態へ---------------------------------------------------------------------------
+        this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+        this.transform.localScale = new Vector3(1, 1,1);
+
+        GetComponent<Image_multimove>().Move_on = false;
+        GetComponent<Image_multimove>().time = 0;
+
         Button.SetActive(a);
+        //---------------------------------------------------------------------------------------
     }
 }
