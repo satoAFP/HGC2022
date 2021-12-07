@@ -52,6 +52,11 @@ public class Player : MonoBehaviour
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
 
+    [Header("ゲームが始まるカウントを表示するテキスト")]
+    public Text start_time_text;
+
+    [Header("ゲームが始まるカウントの秒数")]
+    public int start_time;
 
     //アニメーション管理変数---------------------------------------------------
     [Header("スライムのアニメーション")]
@@ -85,6 +90,7 @@ public class Player : MonoBehaviour
     private Vector3 sura_angle;         //壁にくっついている時のスライムの角度調整
     private Vector3 sura_pos;           //壁にくっついている時のスライムの位置調整
     private bool all_stick = false;     //壁くっつき状態をアクションリセットまで続行
+    private Vector3 squrt_check;        //しゃがむときの主人公位置変更
     private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
     private bool walljump_check = false;//壁ジャンプかどうか判断
     private float run_power = 1;        //移動速度代入
@@ -94,7 +100,9 @@ public class Player : MonoBehaviour
     private bool select_time = true;    //開始ボタンを押すと、カード選択できない
     private bool safe_flag = true;      //死亡判定用フラグ
     private Vector3 stop_check;         //フレーム毎に主人公の座標取得
-    private int stop_time_count = 0;    //実際カウントする変数
+    private int stop_time_count = 0;    //主人公のストップ時、実際カウントする変数
+    private int start_time_count = 0;   //スタート時、実際カウントする変数
+    private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
 
 
 
@@ -152,10 +160,30 @@ public class Player : MonoBehaviour
 
         stop_check = new Vector3(0.0f, 0.0f, 0.0f);
 
+        squrt_check = new Vector3(0.0f, 0.25f, 0.0f);
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void FixedUpdate() 
+    {
+        //スタート処理-------------------------------------------------
+        //インスペクターで設定した秒数待ってスタート
+        start_time_count++;
+        if (start_time_count == start_time) 
+        {
+            start_time_text.gameObject.SetActive(false);
+            Movestop = false;   //アクションループのメイン部分を動かす
+            Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+            select_time = false;//アクション開始するとカードを選択できない
+        }
+        //60フレーム毎に１秒減らす
+        if ((start_time_count % 60) == 0) 
+        {
+            start_text_time_count--;
+        }
+        //テキストに秒数を出力
+        start_time_text.text = "" + start_text_time_count;
+
 
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1) 
@@ -179,10 +207,10 @@ public class Player : MonoBehaviour
                 text_data[i] = "しゃがみ → ";
             }
             if (Card_order[i] == (int)Card.STICK) {
-                text_data[i] = "くっつく → ";
+                text_data[i] = "ひっつき → ";
             }
             if (Card_order[i] == (int)Card.RUN) {
-                text_data[i] = "走る → ";
+                text_data[i] = "走り → ";
             }
             if (Card_order[i] == (int)Card.HIGHJUMP) {
                 text_data[i] = "ハイジャンプ → ";
@@ -280,7 +308,6 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.SQUAT] == true) {
                     //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
-
                 }
 
 
@@ -431,7 +458,7 @@ public class Player : MonoBehaviour
         //アクションを選択した順番に実行される
         if (collision.gameObject.tag == "Action") 
         {
-            //collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
+            collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
 
             //Select_order++;//アクション内容を一つ進める
             //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
@@ -776,10 +803,12 @@ public class Player : MonoBehaviour
     //選択したアクションを一つ戻す
     public void Push_back() {
         //マルチ状態を戻すときに使うboolを取得
-        GameObject.Find("BackButton").GetComponent<DeletAction>();
-        //0番目が最初のアクションなのでそれ未満にはならない
-        Card_order[0] = -1;
-        text_data[0] = "";   //カードテキストの中身消去
+        if (GameObject.Find("BackButton").GetComponent<DeletAction>().multi_backflag == false)
+        {
+            //0番目が最初のアクションなのでそれ未満にはならない
+            Card_order[0] = -1;
+            text_data[0] = "";   //カードテキストの中身消去
+        }
     }
 
     public void check() {
