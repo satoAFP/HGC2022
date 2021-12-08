@@ -54,7 +54,7 @@ public class ButtonChoice : MonoBehaviour
         //スッーと消えるよう変数（現在凍結）
         if (now_ani == false)
         {
-            
+           
             //左クリ
             if (Input.GetMouseButtonDown(0))
             {
@@ -96,23 +96,54 @@ public class ButtonChoice : MonoBehaviour
                 script.objs[script.now] = this.gameObject;
                 script.now++;
 
-                //次回出る数の位置を固定
+                //使用回数+1
                 scriptac.set_text((int)(first_x / 130), 1);
             }
             //右クリ
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1)&&set==false)
             {
                 //現在位置取得
                 pos = this.gameObject.transform.position;
-               
-                if (pos.x <= 500)
-                    //現在の位置から移動せず
-                    this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
-                else if (pos.x < 660)
-                    //現在の位置から移動
-                    this.gameObject.transform.position = new Vector3(pos.x + 130.0f, pos.y, pos.z);
-                else
+                GameObject[] multi = GameObject.FindGameObjectsWithTag("Multis");
+
+                if (pos.x >= 660)
                     this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                else if (pos.x >= 530)
+                    //次へ
+                    this.gameObject.transform.position = new Vector3(pos.x + 130.0f, pos.y, pos.z);
+
+                else if (pos.x == first_x)
+                {
+                    Debug.Log(pos.x);
+                    //現在の位置から移動
+                    this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
+
+                }
+                else
+                {
+                   
+                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                }
+
+                if (multi.Length == 0)
+                {
+                    this.gameObject.transform.position = new Vector3(660.0f, pos.y, pos.z);
+                   
+                }
+                else if (multi.Length == 1)
+                {
+                    Vector3 multi_pos = multi[0].gameObject.transform.position;
+
+                    if (multi_pos.x == 530.0f)
+                        this.gameObject.transform.position = new Vector3(660.0f, pos.y, pos.z);
+                    else
+                        this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
+                }
+                else if (multi.Length == 2)
+                {
+                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                   
+                }
 
                 //移動後の場所取得
                 pos = this.gameObject.transform.position;
@@ -141,16 +172,19 @@ public class ButtonChoice : MonoBehaviour
                 //自身の消えた処理と同じ-------------------以下同文
                 script.objs[script.now] = this.gameObject;
                 script.now++;
-
+               
                 this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 this.tag = "Untagged";
                 scriptac.set_text((int)(first_x / 130), 1);
             }
+
             else if (set == false)
             {
                 //バックで戻されたとき、文章初期化位置へ
                 scriptac.set_text((int)(first_x / 130), -1);
+
             }
+
         }
        
     }
@@ -166,6 +200,13 @@ public class ButtonChoice : MonoBehaviour
     {
         now_ani = false;
         PushButton(set);
+    }
+
+    //初期位置に戻らす
+    public void Set_Back()
+    {
+        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+        this.tag = "Untagged";
     }
 
 }

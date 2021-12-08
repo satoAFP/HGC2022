@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 7611320576024342078}
   m_Layer: 5
   m_Name: multi_wallkick
-  m_TagString: Untagged
+  m_TagString: Multis
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11b5606f6d9cb247a7837e4f19c4927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
   Move_on: 0
+  bye: 1.5
 --- !u!114 &7611320576024342078
 MonoBehaviour:
   m_ObjectHideFlags: 0

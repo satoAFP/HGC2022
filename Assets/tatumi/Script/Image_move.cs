@@ -17,6 +17,7 @@ public class Image_move : MonoBehaviour
 
     //ここで信号受け渡し＆動きをする。正直関数でいいんじゃね？？？？
     public bool Move_on;
+    public float bye;
 
     // Start is called before the first frame update
     void Start()
@@ -43,24 +44,24 @@ public class Image_move : MonoBehaviour
         if (Move_on == true)
         {
             time++;
-            if (time < 25)
+            if (time < (25/bye))
             {
                 //x=10%,y=60%まで
-                this.transform.position = new Vector3(pos.x + add, pos.y + 10.0f, pos.z);
+                this.transform.position = new Vector3(pos.x + add, pos.y + (10.0f*bye), pos.z);
             }
-            else if (time < 75)
+            else if (time < (75/bye))
             {
                 //x=100%,y=100%まで
-                this.transform.position = new Vector3(pos.x + add * 16, pos.y + 0.8f, pos.z);
+                this.transform.position = new Vector3(pos.x + add * (16*bye), pos.y + (0.8f*bye), pos.z);
             }
 
-            if (time < 75)
+            if (time < (75/bye))
             {
                 //大きさを常一定に減らす
-                this.transform.localScale = new Vector3(sca.x - 0.012f, sca.y - 0.012f, sca.z);
+                this.transform.localScale = new Vector3(sca.x - (0.012f*bye), sca.y - (0.012f*bye), sca.z);
             }
 
-            if (time == 75)
+            if (time == (75/bye))
             {
                 //最後にきえろぉー
                 Destroy(this.gameObject);
