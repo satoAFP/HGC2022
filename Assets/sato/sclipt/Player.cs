@@ -348,6 +348,9 @@ public class Player : MonoBehaviour
                     //倍率が変わる
                     run_power = runSpeed;
 
+                    //ジャンプアニメーション移行
+                    anim.SetBool("run", true);
+
                     Action_check[(int)Card.RUN] = false;
                 }
 
