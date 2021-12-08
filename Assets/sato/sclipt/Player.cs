@@ -58,12 +58,24 @@ public class Player : MonoBehaviour
     [Header("ゲームが始まるカウントの秒数")]
     public int start_time;
 
+
     //アニメーション管理変数---------------------------------------------------
     [Header("スライムのアニメーション")]
     public Animator anim;
 
     [Header("ヒストリーのスライムのモデル")]
     public GameObject sura_model;
+
+
+    //サウンド管理変数---------------------------------------------------------
+    [Header("カード選択時のSE")]
+    public AudioClip se_card;
+
+    [Header("アクション時のSE")]
+    public AudioClip se_action;
+
+    [Header("最初のスタートカウント時のSE")]
+    public AudioClip se_start_count;
 
 
     //他オブジェクトでも使用
@@ -103,7 +115,7 @@ public class Player : MonoBehaviour
     private int stop_time_count = 0;    //主人公のストップ時、実際カウントする変数
     private int start_time_count = 0;   //スタート時、実際カウントする変数
     private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
-
+    private AudioSource audio;          //使用するオーディオソース
 
 
     //構造体-------------------------------------------------------------------
@@ -161,6 +173,11 @@ public class Player : MonoBehaviour
         stop_check = new Vector3(0.0f, 0.0f, 0.0f);
 
         squrt_check = new Vector3(0.0f, 0.25f, 0.0f);
+
+        //ステージ内にあるSE_manager格納
+        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
+        //スタートのカウント時のSE再生
+        audio.PlayOneShot(se_start_count);
     }
 
     // Update is called once per frame
@@ -168,21 +185,26 @@ public class Player : MonoBehaviour
     {
         //スタート処理-------------------------------------------------
         //インスペクターで設定した秒数待ってスタート
-        start_time_count++;
-        if (start_time_count == start_time) 
+        if (Movestop == true)
         {
-            start_time_text.gameObject.SetActive(false);
-            Movestop = false;   //アクションループのメイン部分を動かす
-            Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
-            select_time = false;//アクション開始するとカードを選択できない
+            start_time_count++;
+            if (start_time_count == start_time)
+            {
+                start_time_text.gameObject.SetActive(false);
+                Movestop = false;   //アクションループのメイン部分を動かす
+                Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+                select_time = false;//アクション開始するとカードを選択できない
+            }
+            //60フレーム毎に１秒減らす
+            if ((start_time_count % 60) == 0)
+            {
+                start_text_time_count--;
+                //スタートのカウント時のSE再生
+                audio.PlayOneShot(se_start_count);
+            }
+            //テキストに秒数を出力
+            start_time_text.text = "" + start_text_time_count;
         }
-        //60フレーム毎に１秒減らす
-        if ((start_time_count % 60) == 0) 
-        {
-            start_text_time_count--;
-        }
-        //テキストに秒数を出力
-        start_time_text.text = "" + start_text_time_count;
 
 
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
@@ -348,6 +370,9 @@ public class Player : MonoBehaviour
                     //倍率が変わる
                     run_power = runSpeed;
 
+                    //ジャンプアニメーション移行
+                    anim.SetBool("run", true);
+
                     Action_check[(int)Card.RUN] = false;
                 }
 
@@ -458,45 +483,61 @@ public class Player : MonoBehaviour
         //アクションを選択した順番に実行される
         if (collision.gameObject.tag == "Action") 
         {
-            collision.gameObject.SetActive(false);//一度乗ったアクションブロックは消す
+            //一度乗ったアクションブロックは消す
+            collision.gameObject.SetActive(false);
 
-            //Select_order++;//アクション内容を一つ進める
-            //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             //次のアクションのフラグをtrueにする
             switch (Card_order[0]) {
                 case (int)Card.JUMP:
                     Action_check[(int)Card.JUMP] = true;
                     Use_Card_Amount[(int)Card.JUMP]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.SQUAT:
                     Action_check[(int)Card.SQUAT] = true;
                     Use_Card_Amount[(int)Card.SQUAT]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.STICK:
                     Action_check[(int)Card.STICK] = true;
                     Use_Card_Amount[(int)Card.STICK]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.RUN:
                     Action_check[(int)Card.RUN] = true;
                     Use_Card_Amount[(int)Card.RUN]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.HIGHJUMP:
                     Action_check[(int)Card.HIGHJUMP] = true;
                     Use_Card_Amount[(int)Card.HIGHJUMP]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.WALLKICK:
                     Action_check[(int)Card.WALLKICK] = true;
                     Use_Card_Amount[(int)Card.WALLKICK]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.LONGJUMP:
                     Action_check[(int)Card.LONGJUMP] = true;
                     Use_Card_Amount[(int)Card.LONGJUMP]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
                 case (int)Card.SLIDING:
                     Action_check[(int)Card.SLIDING] = true;
                     Use_Card_Amount[(int)Card.SLIDING]++;
+                    //アクション時のSE再生
+                    audio.PlayOneShot(se_action);
                     break;
             }
+            //アクションの内容消去
             Card_order[0] = -1;
         }
 
@@ -632,8 +673,9 @@ public class Player : MonoBehaviour
                 break;
             }
         }
-            
-        
+
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_squat()
@@ -656,7 +698,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
-
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_stick()
@@ -679,6 +722,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_run()
@@ -701,6 +746,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
 
     }
 
@@ -725,6 +772,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_wallkick()
@@ -747,6 +796,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_longjump()
@@ -769,6 +820,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     public void Push_sliding()
@@ -791,6 +844,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        //カードめくられた時のSE再生
+        audio.PlayOneShot(se_card);
     }
 
     //アクション開始ボタン
