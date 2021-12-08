@@ -15,6 +15,7 @@ public class Image_multimove : MonoBehaviour
     //M†ó‚¯æ‚èB‚¾‚©‚ç‚©‚ñ‚“iˆÈ‰º—ª
     public int time;
     public bool Move_on;
+    public float bye;
 
     // Start is called before the first frame update
     void Start()
@@ -49,23 +50,23 @@ public class Image_multimove : MonoBehaviour
             image.color = new Color(255, 255, 255, 0);
           
 
-            if (time < 25)
+            if (time < (25/bye))
             {
                 //x=10%
-                this.transform.position = new Vector3(pos.x + add, pos.y + 14.0f, pos.z);
+                this.transform.position = new Vector3(pos.x + add, pos.y + (14.0f*bye), pos.z);
             }
-            else if (time < 75)
+            else if (time < (75/bye))
             {
                 //x=90%
-                this.transform.position = new Vector3(pos.x + add * 16, pos.y + 1.2f, pos.z);
+                this.transform.position = new Vector3(pos.x + add * (16*bye), pos.y + (1.2f*bye), pos.z);
             }
 
-            if (time < 75)
+            if (time < (75/bye))
             {
-                this.transform.localScale = new Vector3(sca.x - 0.012f, sca.y - 0.012f, sca.z);
+                this.transform.localScale = new Vector3(sca.x - (0.012f*bye), sca.y - (0.012f*bye), sca.z);
             }
 
-            if (time == 75)
+            if (time == (75/bye))
             {
                 this.gameObject.SetActive(false);
                 //Destroy(this.gameObject);

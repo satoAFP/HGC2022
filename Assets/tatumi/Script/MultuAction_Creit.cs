@@ -15,7 +15,7 @@ public class MultuAction_Creit : MonoBehaviour
 
     //何があるか取得用配列（上限2）
     private GameObject[] blocks1 = new GameObject[2];
-    private GameObject[] blocks2 = new GameObject[2];
+    public GameObject[] blocks2 = new GameObject[2];
  
 
     // Start is called before the first frame update
@@ -36,40 +36,32 @@ public class MultuAction_Creit : MonoBehaviour
         //左位置にいるやつ全取得
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
+        //マルチ作成
+        multi_action(blocks1, 530.0f);
+
         //左2位置にいるやつ全取得
         blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
 
         //オブジェクトの数が二つなら処理開始（カラー用）
         if (blocks1.Length >= 2)
-            multi_oks[0]= multi_OK(blocks1);
+            multi_oks[0] = multi_OK(blocks1);
         else
+        {
             multi_oks[0] = "null";
+
+            blocks1 = new GameObject[1];
+        }
         if (blocks2.Length >= 2)
             multi_oks[1] = multi_OK(blocks2);
         //それ以外ならnull返す
         else
+        {
             multi_oks[1] = "null";
-       
-    }
+            blocks2 = new GameObject[1];
+        }
 
-    public void PushButton()
-    {
+　　　　multi_action(blocks2, 660.0f);
 
-        //左位置にいるやつ全取得
-        GameObject[] blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
-
-        //左2位置にいるやつ全取得
-        GameObject[] blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
-
-       //マルチ作成
-        multi_action(blocks1, 530.0f);
-
-        multi_action(blocks2, 660.0f);
-
-        //初期化
-        blocks1 = new GameObject[2];
-        blocks2 = new GameObject[2];
-       
     }
 
     private void multi_action(GameObject[] a,float b)
@@ -85,21 +77,27 @@ public class MultuAction_Creit : MonoBehaviour
                 {
                     //対象の普通アクションを消す
                    a[i].GetComponent<ButtonChoice>().Set_Active(true);
+                  
                 }
+
                 //プレハブから直接召喚
                 GameObject obj = (GameObject)Resources.Load(multi_OK(a));
                 // プレハブを元に、インスタンスを生成、
                 Instantiate(obj, new Vector3(b, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
 
-               
+            }
+            else 
+            {
+            
+               StartCoroutine(multi_Back(a));
+                  
             }
             
         }
         //それ以下なら
         else
         {
-           
-            
+         
         }
     }
 
@@ -163,6 +161,19 @@ public class MultuAction_Creit : MonoBehaviour
     public string[] get_multi_oks()
     {
         return multi_oks;
+    }
+
+    public IEnumerator multi_Back(GameObject[] a)
+    {
+        for (int i = 0; i != 3; i++)
+        {
+            if(i==0)
+            yield return new WaitForSeconds(0.1f);
+            else
+            //対象の普通アクションを消す
+            a[i-1].GetComponent<ButtonChoice>().Set_Back();
+
+        }
     }
 }
 
