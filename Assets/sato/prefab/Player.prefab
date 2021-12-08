@@ -256,9 +256,15 @@ MonoBehaviour:
   runSpeed: 2
   flontMove: 10
   push_power: 7
+  wall_kick_power: 0.5
+  walljump_time: 100
+  walljump_first_power: 0.1
   highjump_power: 2
   Max_Jmup: 2
   Select_text: {fileID: 0}
+  stop_deth_time: 120
+  start_time_text: {fileID: 0}
+  start_time: 120
   anim: {fileID: 0}
   sura_model: {fileID: 7397928891541518496}
   Movestop: 1
@@ -276,9 +282,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbb1c264f807a84db3de45c8a96f777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clown_Clear: 0
+  Clown_Clear: 1
   ClearCard: 0
+  Minssion_Num: 0
   Use_Card_Clear: 0000000000000000000000000000000000000000000000000000000000000000
+  Clown_img: {fileID: 0}
+  Mission_substance_text: {fileID: 0}
+  Mission_img: {fileID: 0}
+  Clown_OK: 0
+  Mission_OK: 0
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0

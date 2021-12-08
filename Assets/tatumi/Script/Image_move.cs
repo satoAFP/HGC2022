@@ -34,7 +34,7 @@ public class Image_move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //‘å‚«‚³AˆÊ’u‚ğæ“¾
         pos = this.transform.position;
@@ -43,24 +43,24 @@ public class Image_move : MonoBehaviour
         if (Move_on == true)
         {
             time++;
-            if (time < 100)
+            if (time < 25)
             {
                 //x=10%,y=60%‚Ü‚Å
-                this.transform.position = new Vector3(pos.x + add, pos.y + 2.5f, pos.z);
+                this.transform.position = new Vector3(pos.x + add, pos.y + 10.0f, pos.z);
             }
-            else if (time < 300)
+            else if (time < 75)
             {
                 //x=100%,y=100%‚Ü‚Å
-                this.transform.position = new Vector3(pos.x + add * 4, pos.y + 0.2f, pos.z);
+                this.transform.position = new Vector3(pos.x + add * 16, pos.y + 0.8f, pos.z);
             }
 
-            if (time < 300)
+            if (time < 75)
             {
                 //‘å‚«‚³‚ğíˆê’è‚ÉŒ¸‚ç‚·
-                this.transform.localScale = new Vector3(sca.x - 0.003f, sca.y - 0.003f, sca.z);
+                this.transform.localScale = new Vector3(sca.x - 0.012f, sca.y - 0.012f, sca.z);
             }
 
-            if (time == 300)
+            if (time == 75)
             {
                 //ÅŒã‚É‚«‚¦‚ë‚§[
                 Destroy(this.gameObject);
