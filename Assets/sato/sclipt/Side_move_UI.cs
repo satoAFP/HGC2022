@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SE_pos_UI : MonoBehaviour
+public class Side_move_UI : MonoBehaviour
 {
-    [Header("ボタンにマウス乗せたときのSE")]
-    public AudioClip se_on_button;
+    [Header("横に動く速度")]
+    public float move_speed;
+
+    [Header("横に動くポジション")]
+    public float stop_pos;
 
     private Vector3 mp;         //マウスのポジション
+    private Vector3 mem_pos;    //このオブジェクトの初期位置記憶
     private Vector3 pos;        //このオブジェクトのサイズ
     private Vector2 size;       //このオブジェクトのサイズ
-
-    private bool one_SE = true; //ボタンに乗った時、SEが一回しかならない
-    private AudioSource audio;  //使用するオーディオソース
 
     // Start is called before the first frame update
     void Start()
     {
-        //ステージ内にあるSE_manager格納
-        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
-
+        mem_pos = this.gameObject.GetComponent<RectTransform>().position;
         pos = this.gameObject.GetComponent<RectTransform>().position;
         size = this.gameObject.GetComponent<RectTransform>().sizeDelta;
     }
@@ -30,21 +29,25 @@ public class SE_pos_UI : MonoBehaviour
         //マウスのポジション更新
         mp = Input.mousePosition;
 
-
         if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
             (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
         {
-            if (one_SE)
+            if (this.gameObject.GetComponent<RectTransform>().position.x > stop_pos)
             {
-                //SEを流す
-                audio.PlayOneShot(se_on_button);
-                one_SE = false;
+                pos.x -= move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
             }
         }
         else
         {
-            one_SE = true;
+            if (this.gameObject.GetComponent<RectTransform>().position.x < mem_pos.x) 
+            {
+                pos.x += move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
+            }
         }
 
+        
+        
     }
 }
