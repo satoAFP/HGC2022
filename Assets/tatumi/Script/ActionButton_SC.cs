@@ -18,6 +18,7 @@ public class ActionButton_SC : MonoBehaviour
 
     //回数表示用変数
     private int[] action_num=new int[8];
+    private int[] executed_action = new int[8];
 
     //[Header("触らない")]
     //public string NowStage;
@@ -79,13 +80,19 @@ public class ActionButton_SC : MonoBehaviour
     }
 
     //関数で選んだ数を増減
-    public void set_text(int a,int b)
+    public void set_text(int a, int b)
     {
-        action_num[a] += b;
+        if ((action_num[a] + b) >= executed_action[a])
+            action_num[a] += b;
     }
     //現在の数(取得用)
     public int get_score(int a)
     {
-        return action_num[a];
+        return action_num[a] + executed_action[a];
+    }
+
+    public void executed_Action(int num)
+    {
+        executed_action[num] += 1;
     }
 }

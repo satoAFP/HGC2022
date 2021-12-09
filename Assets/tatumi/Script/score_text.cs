@@ -13,6 +13,7 @@ public class score_text : MonoBehaviour
     public int score_number;
 
     private int score;
+   
 
     private Text targetText;
 
@@ -31,4 +32,6 @@ public class score_text : MonoBehaviour
         this.targetText = this.GetComponent<Text>(); 
         this.targetText.text = score.ToString(); 
     }
+
+    
 }

@@ -16713,27 +16713,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588613310}
   m_CullTransparentMesh: 1
---- !u!1 &1610118614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6663980172322320814, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
-  m_PrefabInstance: {fileID: 1013231045162584293}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1610118620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610118614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61d20b7837392c4089e3b63fca16ce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AC_button: {fileID: 1610118614}
-  blocks2:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1610286020
 GameObject:
   m_ObjectHideFlags: 0
@@ -24426,6 +24405,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4027593081968614989, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 140
+      objectReference: {fileID: 0}
     - target: {fileID: 4199673401171422370, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: bye
       value: 1.5
@@ -24433,6 +24416,14 @@ PrefabInstance:
     - target: {fileID: 4199673401261374157, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: m_Text
       value: "\u623B\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199673401367245521, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: score_number
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199673401380745025, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: score_number
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4199673401512026924, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: m_Text
@@ -24521,6 +24512,10 @@ PrefabInstance:
     - target: {fileID: 4199673402305579541, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199673402331336423, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: score_number
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4199673402485975118, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: bye
@@ -24613,6 +24608,18 @@ PrefabInstance:
     - target: {fileID: 6663980172322320814, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
       propertyPath: m_Name
       value: 'ActionBotton '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6663980172322320814, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791259444184491612, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912505306148804854, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e47345fc34c79e4459105c7106cf6395, type: 3}
