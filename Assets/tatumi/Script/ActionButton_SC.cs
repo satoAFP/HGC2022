@@ -91,6 +91,7 @@ public class ActionButton_SC : MonoBehaviour
         return action_num[a] + executed_action[a];
     }
 
+    //実行したアクションを最低数として読み込む
     public void executed_Action(int num)
     {
         executed_action[num] += 1;
