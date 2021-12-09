@@ -8,6 +8,9 @@ public class Multi_Action_move : MonoBehaviour
     [Header("合体番号")]
     public int action_num;
 
+    [Header("複数対象数")]
+    public GameObject[] players;
+
     GameObject player; //参照元OBJそのものが入る変数
 
     GameObject BackButton; //参照元OBJそのものが入る変数
@@ -21,7 +24,7 @@ public class Multi_Action_move : MonoBehaviour
     private Vector3 pos;
     private float first_x;//初期位置
 
-    private bool now_ani;
+    private bool now_ani,Ps_flag;
 
     // Player script; //参照元Scriptが入る変数
 
@@ -45,6 +48,19 @@ public class Multi_Action_move : MonoBehaviour
         script.multi_now++;
         //-------------------------------------------
 
+        //複数取得
+        players=GameObject.FindGameObjectsWithTag("Player");
+
+        //複数対象処理のオンオフ
+        if (players.Length>1)
+        {
+            Ps_flag = true;
+        }
+        else
+        {
+            Ps_flag = false;
+        }
+
         //アニメーション（泣）
         now_ani = false;
     }
@@ -66,30 +82,70 @@ public class Multi_Action_move : MonoBehaviour
             //番号によりアクション変更
             if (action_num == 0)
             {
-                player.GetComponent<Player>().Push_highjump();
-                Set_Back();
-
+                if (Ps_flag == true)
+                {
+                    for(int i=0;i!= players.Length;i++)
+                    {
+                        players[i].GetComponent<Player>().Push_highjump();
+                        Set_Back();
+                    }
+                }
+                else
+                {
+                    player.GetComponent<Player>().Push_highjump();
+                    Set_Back();
+                }
                
             }
             else if (action_num == 1)
             {
-                player.GetComponent<Player>().Push_wallkick();
-                Set_Back();
-
+                if (Ps_flag == true)
+                {
+                    for (int i = 0; i != players.Length; i++)
+                    {
+                        players[i].GetComponent<Player>().Push_highjump();
+                        Set_Back();
+                    }
+                }
+                else
+                {
+                    player.GetComponent<Player>().Push_wallkick();
+                    Set_Back();
+                }
                
             }
             else if (action_num == 2)
             {
-                player.GetComponent<Player>().Push_longjump();
-                Set_Back();
-
+                if (Ps_flag == true)
+                {
+                    for (int i = 0; i != players.Length; i++)
+                    {
+                        players[i].GetComponent<Player>().Push_highjump();
+                        Set_Back();
+                    }
+                }
+                else
+                {
+                    player.GetComponent<Player>().Push_longjump();
+                    Set_Back();
+                }
                
             }
             else if (action_num == 3)
             {
-                player.GetComponent<Player>().Push_sliding();
-                Set_Back();
-
+                if (Ps_flag == true)
+                {
+                    for (int i = 0; i != players.Length; i++)
+                    {
+                        players[i].GetComponent<Player>().Push_highjump();
+                        Set_Back();
+                    }
+                }
+                else
+                {
+                    player.GetComponent<Player>().Push_sliding();
+                    Set_Back();
+                }
               
             }
         }

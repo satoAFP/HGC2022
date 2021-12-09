@@ -180,7 +180,7 @@ public class ButtonChoice : MonoBehaviour
 
             else if (set == false)
             {
-                //バックで戻されたとき、文章初期化位置へ
+                //バックで戻されたとき、数を戻す
                 scriptac.set_text((int)(first_x / 130), -1);
 
             }

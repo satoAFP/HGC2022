@@ -15,7 +15,7 @@ public class MultuAction_Creit : MonoBehaviour
 
     //何があるか取得用配列（上限2）
     private GameObject[] blocks1 = new GameObject[2];
-    public GameObject[] blocks2 = new GameObject[2];
+    private GameObject[] blocks2 = new GameObject[2];
  
 
     // Start is called before the first frame update
