@@ -13,14 +13,15 @@ public class MultuAction_Creit : MonoBehaviour
     //合体できるかどうかのサイン用。
     private string[] multi_oks = new string[4];
 
+    //何があるか取得用配列（上限2）
     private GameObject[] blocks1 = new GameObject[2];
     private GameObject[] blocks2 = new GameObject[2];
-    private GameObject[] blocks3 = new GameObject[2];
-    private GameObject[] blocks4 = new GameObject[2];
+ 
 
     // Start is called before the first frame update
     void Start()
     {
+        //何の種類か判別用nの名前群
         multis[0] = "jump";
         multis[1] = "stick";
         multis[2] = "run";
@@ -35,63 +36,31 @@ public class MultuAction_Creit : MonoBehaviour
         //左位置にいるやつ全取得
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
-        //左2位置にいるやつ全取得
-         blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
-
-        //右2位置にいるやつ全取得
-        blocks3 = GameObject.FindGameObjectsWithTag("Multi_action3");
-
-        //右位置にいるやつ全取得
-        blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
-
-        if (blocks1.Length >= 2)
-            multi_oks[0]= multi_OK(blocks1);
-        else
-            multi_oks[0] = "null";
-        if (blocks2.Length >= 2)
-            multi_oks[1] = multi_OK(blocks2);
-        else
-            multi_oks[1] = "null";
-        if (blocks3.Length >= 2)
-            multi_oks[2] = multi_OK(blocks3);
-        else
-            multi_oks[2] = "null";
-        if (blocks4.Length >= 2)
-            multi_oks[3] = multi_OK(blocks4);
-        else
-            multi_oks[3] = "null";
-
-    }
-
-    public void PushButton()
-    {
-
-
-        //左位置にいるやつ全取得
-        GameObject[] blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
-
-        //左2位置にいるやつ全取得
-        GameObject[] blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
-
-        //右2位置にいるやつ全取得
-        GameObject[] blocks3 = GameObject.FindGameObjectsWithTag("Multi_action3");
-
-        //右位置にいるやつ全取得
-        GameObject[] blocks4 = GameObject.FindGameObjectsWithTag("Multi_action4");
-
-        //これ基礎。直せよ
+        //マルチ作成
         multi_action(blocks1, 530.0f);
 
-        multi_action(blocks2, 660.0f);
+        //左2位置にいるやつ全取得
+        blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
 
-        multi_action(blocks3, 790.0f);
+        //オブジェクトの数が二つなら処理開始（カラー用）
+        if (blocks1.Length >= 2)
+            multi_oks[0] = multi_OK(blocks1);
+        else
+        {
+            multi_oks[0] = "null";
 
-        multi_action(blocks4, 920.0f);
+            blocks1 = new GameObject[1];
+        }
+        if (blocks2.Length >= 2)
+            multi_oks[1] = multi_OK(blocks2);
+        //それ以外ならnull返す
+        else
+        {
+            multi_oks[1] = "null";
+            blocks2 = new GameObject[1];
+        }
 
-        blocks1 = new GameObject[2];
-        blocks2 = new GameObject[2];
-        blocks3 = new GameObject[2];
-        blocks4 = new GameObject[2];
+　　　　multi_action(blocks2, 660.0f);
 
     }
 
@@ -106,24 +75,29 @@ public class MultuAction_Creit : MonoBehaviour
             {
                 for (int i = 0; i != 2; i++)
                 {
+                    //対象の普通アクションを消す
                    a[i].GetComponent<ButtonChoice>().Set_Active(true);
+                  
                 }
 
+                //プレハブから直接召喚
                 GameObject obj = (GameObject)Resources.Load(multi_OK(a));
                 // プレハブを元に、インスタンスを生成、
                 Instantiate(obj, new Vector3(b, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
 
-               
             }
-            else
-            Debug.Log("組み合わせが存在しない");
-
+            else 
+            {
+            
+               StartCoroutine(multi_Back(a));
+                  
+            }
+            
         }
         //それ以下なら
         else
         {
-            Debug.Log("2つ存在しない");
-            
+         
         }
     }
 
@@ -142,24 +116,25 @@ public class MultuAction_Creit : MonoBehaviour
         if (a[0].name.Contains(multis[0]) == true|| a[1].name.Contains(multis[0]) == true)
         {
             action[0] = true;
-            Debug.Log("飛び");
+           
         }
         if (a[0].name.Contains(multis[1]) == true || a[1].name.Contains(multis[1]) == true)
         {
             action[1] = true;
-            Debug.Log("ひっつき");
+            
         }
         if (a[0].name.Contains(multis[2]) == true || a[1].name.Contains(multis[2]) == true)
         {
             action[2] = true;
-            Debug.Log("走り");
+            
         }
         if (a[0].name.Contains(multis[3]) == true || a[1].name.Contains(multis[3]) == true)
         {
             action[3] = true;
-            Debug.Log("しゃがみ");
+            
         }
 
+        //結果を見て何かを判別
         if (action[0] == true)
         {
             if (action[3] == true)
@@ -178,13 +153,27 @@ public class MultuAction_Creit : MonoBehaviour
         else if (action[3] == true && action[2] == true)
             return "multi_sliding";
 
-
+        //何もなければnull
         return "null";
     }
 
+    //文字配列返すよう関数（カラー用）
     public string[] get_multi_oks()
     {
         return multi_oks;
+    }
+
+    public IEnumerator multi_Back(GameObject[] a)
+    {
+        for (int i = 0; i != 3; i++)
+        {
+            if(i==0)
+            yield return new WaitForSeconds(0.1f);
+            else
+            //対象の普通アクションを消す
+            a[i-1].GetComponent<ButtonChoice>().Set_Back();
+
+        }
     }
 }
 

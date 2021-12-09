@@ -9,9 +9,11 @@ public class score_text : MonoBehaviour
 
     ActionButton_SC script; //参照元Scriptが入る変数
 
+    [Header("どこに出すか（左から順に）")]
     public int score_number;
 
     private int score;
+   
 
     private Text targetText;
 
@@ -25,9 +27,11 @@ public class score_text : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //アクションボタン自身とそれぞれのtext連携用
         score = script.get_score(score_number);
         this.targetText = this.GetComponent<Text>(); 
         this.targetText.text = score.ToString(); 
     }
+
+    
 }
