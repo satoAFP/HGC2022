@@ -32,7 +32,7 @@ public class movehammer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (back == true)
         {
