@@ -607,7 +607,8 @@ public class Player : MonoBehaviour
 
         //‰Á‘¬°‚Ìˆ—
         if (collision.gameObject.tag == "Acceleration") {
-            this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
+            //”{—¦‚ª•Ï‚í‚é
+            run_power = runSpeed;
         }
 
     }
