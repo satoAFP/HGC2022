@@ -1462,6 +1462,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Size.x
+      value: 0.011523863
+      objectReference: {fileID: 0}
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.014993043
+      objectReference: {fileID: 0}
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Size.z
+      value: 0.010826119
+      objectReference: {fileID: 0}
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Center.x
+      value: 0.00000092585884
+      objectReference: {fileID: 0}
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0025034826
+      objectReference: {fileID: 0}
+    - target: {fileID: 71320792, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
+      propertyPath: m_Center.z
+      value: 0.00016089028
+      objectReference: {fileID: 0}
     - target: {fileID: 2309135703185431317, guid: 853b11fc263d96e43bbdbdc84f80367a, type: 3}
       propertyPath: m_Name
       value: Clown Variant
@@ -4947,12 +4971,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3894077723441644376, guid: 415313a67f1253b4f81202c3b2f87839, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894077723441644376, guid: 415313a67f1253b4f81202c3b2f87839, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3894077723441644376, guid: 415313a67f1253b4f81202c3b2f87839, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3894077723441644376, guid: 415313a67f1253b4f81202c3b2f87839, type: 3}
       propertyPath: m_LocalPosition.z
