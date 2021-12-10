@@ -103,7 +103,7 @@ public class Multi_Action_move : MonoBehaviour
                 {
                     for (int i = 0; i != players.Length; i++)
                     {
-                        players[i].GetComponent<Player>().Push_highjump();
+                        players[i].GetComponent<Player>().Push_wallkick();
                         Set_Back();
                     }
                 }
@@ -120,7 +120,7 @@ public class Multi_Action_move : MonoBehaviour
                 {
                     for (int i = 0; i != players.Length; i++)
                     {
-                        players[i].GetComponent<Player>().Push_highjump();
+                        players[i].GetComponent<Player>().Push_longjump();
                         Set_Back();
                     }
                 }
@@ -137,7 +137,7 @@ public class Multi_Action_move : MonoBehaviour
                 {
                     for (int i = 0; i != players.Length; i++)
                     {
-                        players[i].GetComponent<Player>().Push_highjump();
+                        players[i].GetComponent<Player>().Push_sliding();
                         Set_Back();
                     }
                 }
@@ -168,6 +168,11 @@ public class Multi_Action_move : MonoBehaviour
         //バックにマルチ自身を登録
         script.objs[script.now] = this.gameObject;
         script.now++;
+
+        //実行したアクションを最低数として設定
+        GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().set_text(action_num+4,1);
+        //実行したアクションを削除予定に追加
+        GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().multi_des_Check(this.gameObject, true);
     }
 
     //アニメーション（泣）
@@ -185,6 +190,11 @@ public class Multi_Action_move : MonoBehaviour
         //初期状態へ---------------------------------------------------------------------------
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
         this.transform.localScale = new Vector3(1, 1,1);
+
+        //実行したアクションを最低数として設定
+        GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().set_text(action_num + 4, -1);
+        //実行したアクションを削除予定に追加
+        GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().multi_des_Check(this.gameObject, false);
 
         GetComponent<Image_multimove>().Move_on = false;
         GetComponent<Image_multimove>().time = 0;

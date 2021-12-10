@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 4114030275048502590}
   - component: {fileID: 7113165790208601319}
   - component: {fileID: 6802746367950753073}
+  - component: {fileID: 2680688042443327874}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -398,3 +399,16 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u5408"
+--- !u!114 &2680688042443327874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7971324591186444392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b391fad4ffeb505498b96caf4cc3498a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score_number: 5
