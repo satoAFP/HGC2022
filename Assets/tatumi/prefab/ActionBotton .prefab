@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b391fad4ffeb505498b96caf4cc3498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score_number: 1
+  score_number: 2
 --- !u!1 &3955829801059902947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 140, y: -127}
+  m_AnchoredPosition: {x: 270, y: -127}
   m_SizeDelta: {x: 100, y: 280}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7613373252112110897
@@ -1881,7 +1881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: -127}
+  m_AnchoredPosition: {x: 140, y: -127}
   m_SizeDelta: {x: 100, y: 280}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7008823307089515973
@@ -2159,10 +2159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d7326e8567a964d925d8df41e19a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  executed_action: 0000000000000000000000000000000000000000000000000000000000000000
   Child_num: 4
   Duplicate: 00000000000000000000000000000000
   childGameObjects:
-  - {fileID: 0}
+  - {fileID: 4199673402305579537}
   - {fileID: 6663980171656458127}
   - {fileID: 6663980172569024287}
   - {fileID: 6663980171799385668}
@@ -2180,9 +2181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AC_button: {fileID: 6663980172322320814}
-  blocks2:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &6663980172569024287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,7 +2222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 270, y: -127}
+  m_AnchoredPosition: {x: 400, y: -127}
   m_SizeDelta: {x: 100, y: 280}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &1368139260925542014
@@ -2475,7 +2473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b391fad4ffeb505498b96caf4cc3498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score_number: 2
+  score_number: 3
 --- !u!1 &9169479021118392211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,4 +2566,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b391fad4ffeb505498b96caf4cc3498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score_number: 3
+  score_number: 1
