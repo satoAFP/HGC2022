@@ -64,7 +64,7 @@ public class ActionButton_SC : MonoBehaviour
         for (int i = 0; i != 8; i++)
         {
 
-            action_num[i] = Duplicate[i];
+            //action_num[i] = Duplicate[i];
             executed_action[i] = 0;
 
             //action_numtexts[i].text = action_num[i].ToString();

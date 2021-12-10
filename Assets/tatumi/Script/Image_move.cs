@@ -18,6 +18,7 @@ public class Image_move : MonoBehaviour
     //ここで信号受け渡し＆動きをする。正直関数でいいんじゃね？？？？
     public bool Move_on;
     public float bye;
+    public float parent_firstx;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,10 @@ public class Image_move : MonoBehaviour
         pos = this.transform.position;
         time = 0;
 
+        this.transform.position = new Vector3(parent_firstx+pos.x, pos.y, pos.z);
+
         //現在地からどれだけの移動幅か求める
-        MAX = 510.0f - tmp.x - 51.0f;
+        MAX = 510.0f - (pos.x+parent_firstx);
 
         //移動幅から移動量を求める
         add = MAX / 1000 + (MAX / 10000);
@@ -47,12 +50,12 @@ public class Image_move : MonoBehaviour
             if (time < (25/bye))
             {
                 //x=10%,y=60%まで
-                this.transform.position = new Vector3(pos.x + add, pos.y + (10.0f*bye), pos.z);
+                this.transform.position = new Vector3(pos.x + add, pos.y + (6.0f*bye), pos.z);
             }
             else if (time < (75/bye))
             {
                 //x=100%,y=100%まで
-                this.transform.position = new Vector3(pos.x + add * (16*bye), pos.y + (0.8f*bye), pos.z);
+                this.transform.position = new Vector3(pos.x + add * (16*bye), pos.y + (0.5f*bye), pos.z);
             }
 
             if (time < (75/bye))

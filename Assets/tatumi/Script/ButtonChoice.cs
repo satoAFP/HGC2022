@@ -70,8 +70,9 @@ public class ButtonChoice : MonoBehaviour
                 GameObject child = transform.Find("image_move").gameObject;
 
                 //ï°êªÅAìÆÇ©Ç∑êMçÜÇî≠êM
-                GameObject newObj = Instantiate(child, this.transform, false);
+                GameObject newObj = Instantiate(child, ActionButton.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
+                newObj.GetComponent<Image_move>().parent_firstx = first_x;
                 //------------------------------------------------------------------
 
 
