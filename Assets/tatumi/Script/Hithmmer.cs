@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Hithmmer : MonoBehaviour
 {
+    [Header("基本ハンマーの元親")]
     //親オブジェ取得（指定）
     public GameObject parent;
 
+    [Header("0=x,1=y,2=z 3つ以上にするとバグります。")]
+    public float[] power=new float[3];
+
     //力
     Vector3 chikara = new Vector3(20.0f, 20.0f, 20.0f);
-
-    //力の加わる中心半径
-    public float radius = 1.0f;
 
     //相手のリジッドを格納
     Rigidbody aiteRigid;
@@ -38,17 +39,17 @@ public class Hithmmer : MonoBehaviour
             //左
             if(parent.GetComponent<movehammer>().Getnowrad()<0)
             {
-                chikara = new Vector3(-20.0f, 5.0f, 0.0f);
+                chikara = new Vector3(-1.0f*power[0], power[1], power[2]);
             }
             //中央
             else if(parent.GetComponent<movehammer>().Getnowrad() == 0)
             {
-                chikara = new Vector3(0.0f, 5.0f, -1.0f);
+                chikara = new Vector3(0.0f, power[1], power[2]);
             }
             //右
             else
             {
-                chikara = new Vector3(20.0f, 5.0f, 0.0f);
+                chikara = new Vector3(power[0], power[1], power[2]);
             }
 
             //相手のrigidをゲットしちゃう
