@@ -15,7 +15,8 @@ public class movehammer : MonoBehaviour
     public bool back;
 
     //private•Ï”-----------------------------------------
-    private float nowhammeRad;
+    [Header("‰ŠúŠp“x[ŒÀ“x‚ğ’´‚¦‚È‚¢‚æ‚¤‚É!]")]
+    public float nowhammeRad;
     private int z;
     private float x, y;
 
@@ -25,13 +26,13 @@ public class movehammer : MonoBehaviour
         x = 0.0f;
         y = 0.0f;
         z = 0;
-        transform.Rotate(new Vector3(x, y, hammerRad));
-        nowhammeRad = 0;
+        transform.Rotate(new Vector3(x, y, nowhammeRad));
+        //nowhammeRad = 0;
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (back == true)
         {

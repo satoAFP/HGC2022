@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 8725295324105395443}
   - component: {fileID: 8725295324105395442}
   - component: {fileID: 8725295324105395440}
-  - component: {fileID: 8725295324105395441}
   - component: {fileID: 8725295324105395454}
+  - component: {fileID: 2263241299816885999}
   m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
@@ -162,20 +162,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!64 &8725295324105395441
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8725295324105395444}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5076798556035486163, guid: 3e8baa6407f575f4985b5df579a725a3, type: 3}
 --- !u!114 &8725295324105395454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +176,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 8725295324536918349}
   radius: 1
+--- !u!65 &2263241299816885999
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725295324105395444}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.028, y: 0.0173, z: 0.029}
+  m_Center: {x: 9.313224e-10, y: 3.3251287e-16, z: 0}
 --- !u!1 &8725295324536918349
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,3 +236,4 @@ MonoBehaviour:
   moveSpeed: 1
   hammerRad: 75
   back: 0
+  nowhammeRad: 0
