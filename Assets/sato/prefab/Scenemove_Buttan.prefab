@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6991186609550347061}
   - component: {fileID: 2829279030067393620}
   - component: {fileID: 7606653512666076149}
+  - component: {fileID: 2675045813534978051}
   m_Layer: 5
   m_Name: Scenemove_Buttan
   m_TagString: Untagged
@@ -148,6 +149,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName:
   - scenename
+  clown: {fileID: 0}
+  mission: {fileID: 0}
+--- !u!114 &2675045813534978051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424417048222481970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ec9b9ea977ab44d89315be7162e0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_speed: 0
 --- !u!1 &6699729606093206795
 GameObject:
   m_ObjectHideFlags: 0
