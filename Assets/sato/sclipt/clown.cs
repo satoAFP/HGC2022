@@ -8,6 +8,8 @@ public class clown : MonoBehaviour
     public float max_Speed;
     [Header("‰ñ“]‘¬“x")]
     public float role_Speed;
+    [Header("true‚ÌŽžã")]
+    public bool Y_move;
 
     private Vector3 first_pos;          //ŽålŒö‰ŠúˆÊ’u
     private float move_speed = 0.0f;    //ã‰º‚ÌˆÚ“®—Ê
@@ -27,19 +29,31 @@ public class clown : MonoBehaviour
         frame_count++;
         if (frame_count >= 0 && frame_count < 30)
         {
-            move_speed += max_Speed;
+            if (Y_move)
+                move_speed += max_Speed;
+            else
+                move_speed -= max_Speed;
         }
         else if (frame_count >= 30 && frame_count < 60)
         {
-            move_speed -= max_Speed;
+            if (Y_move)
+                move_speed -= max_Speed;
+            else
+                move_speed += max_Speed;
         }
         else if (frame_count >= 60 && frame_count < 88)
         {
-            move_speed -= max_Speed;
+            if (Y_move)
+                move_speed -= max_Speed;
+            else
+                move_speed += max_Speed;
         }
-        else if (frame_count >= 88 && frame_count < 116)
+        else if (frame_count >= 88 && frame_count < 116) 
         {
-            move_speed += max_Speed;
+            if (Y_move)
+                move_speed += max_Speed;
+            else
+                move_speed -= max_Speed;
         }
         
         //ˆÚ“®—Ê‰ÁŽZ
@@ -47,7 +61,7 @@ public class clown : MonoBehaviour
         this.gameObject.transform.localEulerAngles += new Vector3(0.0f, role_Speed, 0.0f);
 
         //ã‰ºˆÚ“®‚ÌŒë·C³
-        if(frame_count>=115)
+        if (frame_count >= 115)
         {
             frame_count = 0;
             move_speed = 0.0f;
