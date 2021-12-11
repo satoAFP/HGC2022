@@ -210,6 +210,7 @@ public class Player : MonoBehaviour
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1) 
         {
+            Debug.Log("aaa");
             for (int i = 0; i < Max_Card - 1; i++) 
             {
                 Card_order[i] = Card_order[i + 1];
@@ -537,11 +538,12 @@ public class Player : MonoBehaviour
                     audio.PlayOneShot(se_action);
                     break;
             }
+            //アクションの内容消去
+            Card_order[0] = -1;
             //実行したアクションを最低数として設定
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().executed_Action(Card_order[0]);
 
-            //アクションの内容消去
-            Card_order[0] = -1;
+            
         }
 
         //アクション再選択
@@ -864,9 +866,15 @@ public class Player : MonoBehaviour
         //マルチ状態を戻すときに使うboolを取得
         if (GameObject.Find("BackButton").GetComponent<DeletAction>().multi_backflag == false)
         {
-            //0番目が最初のアクションなのでそれ未満にはならない
-            Card_order[0] = -1;
-            text_data[0] = "";   //カードテキストの中身消去
+            for (int i = 0; i < 10; i++)
+            {
+                if (Card_order[i] == -1)
+                {
+                    //0番目が最初のアクションなのでそれ未満にはならない
+                    Card_order[i - 1] = -1;
+                    text_data[i - 1] = "";   //カードテキストの中身消去
+                }
+            }
         }
     }
 
