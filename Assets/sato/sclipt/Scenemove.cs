@@ -83,4 +83,23 @@ public class Scenemove : MonoBehaviour
         if (Scene_num == 6)
             SceneManager.LoadScene("Title");
     }
+
+    public void PushRetryScene()
+    {
+        Clown_OK = false;
+        Mission_OK = false;
+
+        if (Scene_num == 1)
+            SceneManager.LoadScene("Stage1");
+        if (Scene_num == 2)
+            SceneManager.LoadScene("Stage2");
+        if (Scene_num == 3)
+            SceneManager.LoadScene("Stage3");
+        if (Scene_num == 4)
+            SceneManager.LoadScene("Stage4");
+        if (Scene_num == 5)
+            SceneManager.LoadScene("Stage5");
+        if (Scene_num == 6)
+            SceneManager.LoadScene("Stage6");
+    }
 }
