@@ -17,10 +17,13 @@ public class Hithmmer : MonoBehaviour
     //相手のリジッドを格納
     Rigidbody aiteRigid;
 
+    //めんどいからbool設定
+    private bool Hitflag;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        Hitflag = false;
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class Hithmmer : MonoBehaviour
         //PLと当たると動作
         if (collision.gameObject.tag == "Player")
         {
-            float butobi = 0.0f;
+           
 
             //左
             if(parent.GetComponent<movehammer>().Getnowrad()<0)
@@ -52,13 +55,18 @@ public class Hithmmer : MonoBehaviour
                 chikara = new Vector3(power[0], power[1], power[2]);
             }
 
-            //相手のrigidをゲットしちゃう
-            aiteRigid = collision.gameObject.GetComponent<Rigidbody>();
+            if (Hitflag == false)
+            {
+                //相手のrigidをゲットしちゃう
+                aiteRigid = collision.gameObject.GetComponent<Rigidbody>();
 
-            //ドッカーン
-            aiteRigid.AddForce(chikara, ForceMode.Impulse);
+                //ドッカーン
+                aiteRigid.AddForce(chikara, ForceMode.Impulse);
 
-            Debug.Log("hmmerHit!");
+                Debug.Log("hmmerHit!");
+
+                Hitflag = true;
+            }
         }
     }
 }
