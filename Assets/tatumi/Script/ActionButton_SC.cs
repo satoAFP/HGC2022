@@ -37,8 +37,11 @@ public class ActionButton_SC : MonoBehaviour
     public GameObject Button;
 
     //消去用受け取り口(要素11)
-    public GameObject[] multi_des = new GameObject[11];
+    private GameObject[] multi_des = new GameObject[11];
     private int multi_des_now = 0;
+
+    //アクション選択時の他オブジェ認識用変数
+    public int PL_action_num;
 
     // Start is called before the first frame update
     void Start()
@@ -137,6 +140,8 @@ public class ActionButton_SC : MonoBehaviour
             executed_action[num]++;
             action_num[num]--;
         }
+
+        PL_action_num = num;
     }
 
     //                    true  false
