@@ -538,10 +538,10 @@ public class Player : MonoBehaviour
                     audio.PlayOneShot(se_action);
                     break;
             }
-            //アクションの内容消去
-            Card_order[0] = -1;
             //実行したアクションを最低数として設定
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().executed_Action(Card_order[0]);
+            //アクションの内容消去
+            Card_order[0] = -1;
 
             
         }
