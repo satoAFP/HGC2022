@@ -190,7 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3055824704188140141}
-  radius: 1
+  power:
+  - 9
+  - 6
+  - 0
 --- !u!65 &6745576864620076492
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -248,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e39e15e85593c44b4d0c084fd0b85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: -1
+  moveSpeed: -2
   hammerRad: 90
   back: 0
-  nowhammeRad: 0
+  nowhammeRad: 25
