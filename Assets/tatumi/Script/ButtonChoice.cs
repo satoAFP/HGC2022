@@ -30,7 +30,7 @@ public class ButtonChoice : MonoBehaviour
         BackButton = GameObject.Find("BackButton"); //オブジェクトの名前から取得して変数に格納する
         script = BackButton.GetComponent<DeletAction>(); //OBJの中にあるScriptを取得して変数に格納する
 
-        ActionButton = GameObject.Find("ActionBotton "); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        ActionButton = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         scriptac = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
         //最初に出た位置を覚える（戻る処理に使う）
@@ -70,8 +70,9 @@ public class ButtonChoice : MonoBehaviour
                 GameObject child = transform.Find("image_move").gameObject;
 
                 //複製、動かす信号を発信
-                GameObject newObj = Instantiate(child, this.transform, false);
+                GameObject newObj = Instantiate(child, ActionButton.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
+                newObj.GetComponent<Image_move>().parent_firstx = first_x;
                 //------------------------------------------------------------------
 
 

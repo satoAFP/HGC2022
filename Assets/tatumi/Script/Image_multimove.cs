@@ -133,4 +133,5 @@ public class Image_multimove : MonoBehaviour
         Nomal_mode = true;
     }
     //---------------------------------------
+
 }
