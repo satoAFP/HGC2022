@@ -45,15 +45,20 @@ public class DeletAction : MonoBehaviour
         //消失中に戻るボタン押すやつ対処
         if (now != 0)
         {
-            //マルチか普通か判断しそれぞれのスクリプトへ返す
-            if (objs[now - 1].name.Contains(target) == true)
+            //まずそもそもオブジェが消されてないか確認
+            if (objs[now - 1] != null)
             {
-                objs[now - 1].GetComponent<Multi_Action_move>().Set_Active(true);
-            }
-            else
-            {
-                objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
-                multi_backflag = false;
+                //マルチか普通か判断しそれぞれのスクリプトへ返す
+                if (objs[now - 1].name.Contains(target) == true)
+                {
+                    if (objs[now - 1] != null)
+                        objs[now - 1].GetComponent<Multi_Action_move>().Set_Active(true);
+                }
+                else
+                {
+                    objs[now - 1].GetComponent<ButtonChoice>().Set_Active(false);
+                    multi_backflag = false;
+                }
             }
 
             //なんで必要か正直覚えてないけど大事なやーつ。

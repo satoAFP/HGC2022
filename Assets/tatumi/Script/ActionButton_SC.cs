@@ -40,6 +40,9 @@ public class ActionButton_SC : MonoBehaviour
     private GameObject[] multi_des = new GameObject[11];
     private int multi_des_now = 0;
 
+    //アクション選択時の他オブジェ認識用変数
+    public int PL_action_num;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,25 +116,32 @@ public class ActionButton_SC : MonoBehaviour
 
         if (num >= 4)
         {
-            if (multi_des.Length != 0)
-            {
-                if (multi_des[0].activeSelf == false)
+            
+                if (multi_des[0] != null)
                 {
-                    Destroy(multi_des[0]);
-
-                    for(int i=1;i!=11;i++)
+                    if (multi_des[0].activeSelf == false)
                     {
-                        multi_des[i - 1] = multi_des[i];
-                    }
+                        Destroy(multi_des[0]);
 
-                    multi_des_now--;
+                        for (int i = 1; i != 11; i++)
+                        {
+                            multi_des[i - 1] = multi_des[i];
+                        }
+
+                        multi_des_now--;
+                    }
                 }
-            }
+            
             
         }
 
-        executed_action[num] += 1;
-        action_num[num] -= 1;
+        if (num != -1)
+        {
+            executed_action[num]++;
+            action_num[num]--;
+        }
+
+        PL_action_num = num;
     }
 
     //                    true  false
@@ -147,9 +157,12 @@ public class ActionButton_SC : MonoBehaviour
         }
         else
         {
-            multi_des[multi_des_now] = new GameObject();
+            if (multi_des[0] != null)
+            {
+                multi_des[multi_des_now] = new GameObject();
 
-            multi_des_now--;
+                multi_des_now--;
+            }
             
         }
 
