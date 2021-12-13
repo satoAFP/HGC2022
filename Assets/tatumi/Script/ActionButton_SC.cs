@@ -37,7 +37,7 @@ public class ActionButton_SC : MonoBehaviour
     public GameObject Button;
 
     //Á‹—pó‚¯æ‚èŒû(—v‘f11)
-    public GameObject[] multi_des = new GameObject[11];
+    private GameObject[] multi_des = new GameObject[11];
     private int multi_des_now = 0;
 
     // Start is called before the first frame update
