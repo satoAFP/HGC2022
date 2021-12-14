@@ -52,7 +52,7 @@ public class Camera_Control2 : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            transform.Translate(-diff * Time.deltaTime * moveSpeed); Debug.Log(""+ -diff * Time.deltaTime * moveSpeed);
+            transform.Translate(-diff * Time.deltaTime * moveSpeed);
         }
         //else if (Input.GetMouseButton(1))
         //    CameraRotate(new Vector2(-diff.y, diff.x) * rotateSpeed);

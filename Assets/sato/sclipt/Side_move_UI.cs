@@ -12,7 +12,7 @@ public class Side_move_UI : MonoBehaviour
 
     private Vector3 mp;         //マウスのポジション
     private Vector3 mem_pos;    //このオブジェクトの初期位置記憶
-    private Vector3 pos;        //このオブジェクトのサイズ
+    private Vector3 pos;        //このオブジェクトの位置
     private Vector2 size;       //このオブジェクトのサイズ
 
     // Start is called before the first frame update
