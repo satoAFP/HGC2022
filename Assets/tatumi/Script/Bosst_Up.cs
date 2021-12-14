@@ -24,8 +24,8 @@ public class Bosst_Up : MonoBehaviour
     {
         
     }
-
-    void OnCollisionEnter(Collision collision)
+    
+    void OnTriggerEnter(Collider collision)
     {
         //PLÇ∆ìñÇΩÇÈÇ∆ìÆçÏ
         if (collision.gameObject.tag == "Player")
