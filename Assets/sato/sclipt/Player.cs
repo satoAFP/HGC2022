@@ -602,8 +602,8 @@ public class Player : MonoBehaviour
 
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
-            GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
-            //SceneManager.LoadScene("Result");
+            //GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+            SceneManager.LoadScene("Result");
         }
 
 
