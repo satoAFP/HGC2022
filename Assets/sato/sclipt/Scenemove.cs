@@ -36,10 +36,16 @@ public class Scenemove : MonoBehaviour
             if(Clown_OK==true)
             {
                 clown.gameObject.SetActive(true);
+
+                //‰¤Š¥‚ª—‚¿‚Ä‚­‚éˆ—
+
             }
             if (Mission_OK == true)
             {
                 mission.gameObject.SetActive(true);
+
+                //¯‚ª—‚¿‚Ä‚­‚éˆ—
+
             }
         }
 
