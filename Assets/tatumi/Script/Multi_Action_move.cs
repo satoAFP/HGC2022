@@ -8,8 +8,7 @@ public class Multi_Action_move : MonoBehaviour
     [Header("‡‘Ì”Ô†")]
     public int action_num;
 
-    [Header("•¡”‘ÎÛ”")]
-    public GameObject[] players;
+    private GameObject[] players;
 
     GameObject player; //QÆŒ³OBJ‚»‚Ì‚à‚Ì‚ª“ü‚é•Ï”
 

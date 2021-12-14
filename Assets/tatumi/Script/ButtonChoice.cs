@@ -13,6 +13,8 @@ public class ButtonChoice : MonoBehaviour
 
     ActionButton_SC scriptac; //参照元Scriptが入る変数
 
+    GameObject player; //参照元OBJそのものが入る変数
+
     //スッーと消えるよう変数（現在凍結）
     public bool vanish;
     private bool now_ani;
@@ -23,6 +25,10 @@ public class ButtonChoice : MonoBehaviour
     //現在の位置を取得
     private Vector3 pos;
     private float first_x;//初期位置
+
+    //複数人対応
+    private GameObject[] players;
+    private bool Ps_flag;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +46,21 @@ public class ButtonChoice : MonoBehaviour
         //スッーと消えるよう変数（現在凍結）
         vanish = true;
         now_ani = false;
+
+        //PL
+        player = GameObject.Find("Player"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        //複数取得
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        //複数対象処理のオンオフ
+        if (players.Length > 1)
+        {
+            Ps_flag = true;
+        }
+        else
+        {
+            Ps_flag = false;
+        }
     }
 
     // Update is called once per frame
@@ -92,10 +113,70 @@ public class ButtonChoice : MonoBehaviour
 
                 //消えた時初期位置に戻る
                 this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+                this.tag = "Untagged";
 
                 //バックボタンに登録
                 script.objs[script.now] = this.gameObject;
                 script.now++;
+
+                //入力処理
+                if ((first_x / 130) < 1)
+                {
+                    Debug.Log("OK");
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_jump();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_jump();
+                    }
+                }
+                else if ((first_x / 130) < 2)
+                {
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_squat();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_squat();
+                    }
+                }
+                else if ((first_x / 130) < 3)
+                {
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_stick();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_stick();
+                    }
+                }
+                else if ((first_x / 130) < 4)
+                {
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_run();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_run();
+                    }
+                }
 
                 //使用回数+1
                 scriptac.set_text((int)(first_x / 130), 1);
@@ -115,7 +196,7 @@ public class ButtonChoice : MonoBehaviour
 
                 else if (pos.x == first_x)
                 {
-                    Debug.Log(pos.x);
+                    
                     //現在の位置から移動
                     this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
 
