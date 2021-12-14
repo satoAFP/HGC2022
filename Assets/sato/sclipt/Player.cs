@@ -210,7 +210,6 @@ public class Player : MonoBehaviour
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1) 
         {
-            Debug.Log("aaa");
             for (int i = 0; i < Max_Card - 1; i++) 
             {
                 Card_order[i] = Card_order[i + 1];
@@ -603,7 +602,8 @@ public class Player : MonoBehaviour
 
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
-            SceneManager.LoadScene("Result");
+            GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+            //SceneManager.LoadScene("Result");
         }
 
 
