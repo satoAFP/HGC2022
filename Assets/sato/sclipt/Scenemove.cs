@@ -80,6 +80,7 @@ public class Scenemove : MonoBehaviour
             Scene_num = 6;
     }
 
+    //指定したシーンに移動
     public void PushScene() 
     {
         Clown_OK = false;
@@ -87,13 +88,14 @@ public class Scenemove : MonoBehaviour
         SceneManager.LoadScene(SceneName[0]);
     }
 
+    //ネクストステージボタン
     public void PushNextScene() 
     {
         Clown_OK = false;
         Mission_OK = false;
 
         if (Scene_num == 1) 
-            SceneManager.LoadScene("Stage2");
+            SceneManager.LoadScene("Stage"+2);
         if (Scene_num == 2)
             SceneManager.LoadScene("Stage3");
         if (Scene_num == 3)
@@ -106,6 +108,7 @@ public class Scenemove : MonoBehaviour
             SceneManager.LoadScene("Title");
     }
 
+    //リトライボタン
     public void PushRetryScene()
     {
         Clown_OK = false;
