@@ -10,6 +10,8 @@ public class ZoomCinemachineExtension : CinemachineExtension
 {
     [SerializeField] private Vector3 zome;
 
+    [SerializeField] private Vector3 stop_pos;
+
     private int _scrollDelta;
     private float _adjustAngle;
     
@@ -26,8 +28,10 @@ public class ZoomCinemachineExtension : CinemachineExtension
         //Å‰‚Ìˆø‚«‚©‚çŠñ‚è‚É‚È‚éƒJƒƒ‰‚Ìˆ—
         //ƒOƒŒƒSƒŠ[‚³‚ñŠ´Ó
         var transposer = avcam.GetCinemachineComponent<CinemachineTransposer>();
-        if ((transposer.m_FollowOffset.y >= 2.5))
-            transposer.m_FollowOffset -= zome;
+        if ((transposer.m_FollowOffset.z > stop_pos.z))
+            transposer.m_FollowOffset.z -= zome.z;
+        else if ((transposer.m_FollowOffset.y > stop_pos.y))
+            transposer.m_FollowOffset.y -= zome.y;
 
     }
 
