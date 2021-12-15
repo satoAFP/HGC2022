@@ -29,9 +29,14 @@ public class Scenemove : MonoBehaviour
             SceneManager.GetActiveScene().name != "StageSelect" &&
             SceneManager.GetActiveScene().name != "Result")
         {
+            //ミッションがクリアされているかを記憶
             if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
                 Clown_OK = true;
+            else
+                Clown_OK = false;
             if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
+                Mission_OK = true;
+            else
                 Mission_OK = true;
         }
 
@@ -94,8 +99,8 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
 
-        if (Scene_num == 1) 
-            SceneManager.LoadScene("Stage"+2);
+        if (Scene_num == 1)
+            SceneManager.LoadScene("Stage" + 2);
         if (Scene_num == 2)
             SceneManager.LoadScene("Stage3");
         if (Scene_num == 3)
