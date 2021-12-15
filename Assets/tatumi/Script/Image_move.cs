@@ -17,32 +17,39 @@ public class Image_move : MonoBehaviour
 
     //ここで信号受け渡し＆動きをする。正直関数でいいんじゃね？？？？
     public bool Move_on;
-    public float bye;
-    public float parent_firstx;
+    private float bye;
+    //0=-90.6f,1=-64.5,2=-38.5f,3=-12.5f//差26
+    public float parent_posx;
 
     // Start is called before the first frame update
     void Start()
     {
         PA = transform.parent.gameObject;
         tmp = PA.gameObject.transform.position;
-        pos = this.transform.position;
+        //pos = this.transform.position;
         time = 0;
 
-        this.transform.position = new Vector3(parent_firstx+pos.x, pos.y, pos.z);
+        this.transform.position = new Vector3(parent_posx,56.23f,-102.0f);
 
         //現在地からどれだけの移動幅か求める
-        MAX = 510.0f - (pos.x+parent_firstx);
+        MAX = parent_posx;
 
         //移動幅から移動量を求める
-        add = MAX / 1000 + (MAX / 10000);
+        add = (MAX / 1000 + (MAX / 100));
+
+        //挫折
+        bye = 1;
+
+       // Move_on = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //大きさ、位置を取得
-        pos = this.transform.position;
         sca = this.transform.localScale;
+
+       
 
         if (Move_on == true)
         {
@@ -50,13 +57,19 @@ public class Image_move : MonoBehaviour
             if (time < (25/bye))
             {
                 //x=10%,y=60%まで
-                this.transform.position = new Vector3(pos.x + add, pos.y + (6.0f*bye), pos.z);
+               this.transform.position = new Vector3((parent_posx-(add*(time/(bye*2)))),(56.23f+(-0.9966f*(time/(bye/2)))), -102.0f);
+                if (time < (25 / bye))
+                {
+                    pos = new Vector3((parent_posx - (add * (time / (bye * 2)))), (56.23f + (-0.9966f * (time / (bye / 2)))), -102.0f);
+                }
             }
             else if (time < (75/bye))
             {
                 //x=100%,y=100%まで
-                this.transform.position = new Vector3(pos.x + add * (16*bye), pos.y + (0.5f*bye), pos.z);
+                this.transform.position = new Vector3((pos.x - (add * ((time-24) / (bye / 1.5f)))), (pos.y + (-0.9966f * ((time-24) / (bye * 5.0f)))), pos.z);
             }
+
+            
 
             if (time < (75/bye))
             {

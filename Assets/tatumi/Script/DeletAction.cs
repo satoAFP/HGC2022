@@ -52,7 +52,10 @@ public class DeletAction : MonoBehaviour
                 if (objs[now - 1].name.Contains(target) == true)
                 {
                     if (objs[now - 1] != null)
+                    {
                         objs[now - 1].GetComponent<Multi_Action_move>().Set_Active(true);
+                        Debug.Log("thornHit(up)!");
+                    }
                 }
                 else
                 {

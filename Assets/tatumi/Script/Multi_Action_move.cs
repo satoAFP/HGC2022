@@ -91,7 +91,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<Player>().Push_highjump();
+                    //player.GetComponent<Player>().Push_highjump();
                     Set_Back();
                 }
                
@@ -108,7 +108,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<Player>().Push_wallkick();
+                   // player.GetComponent<Player>().Push_wallkick();
                     Set_Back();
                 }
                
@@ -125,7 +125,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<Player>().Push_longjump();
+                    //player.GetComponent<Player>().Push_longjump();
                     Set_Back();
                 }
                
@@ -142,7 +142,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<Player>().Push_sliding();
+                    //player.GetComponent<Player>().Push_sliding();
                     Set_Back();
                 }
               
@@ -161,12 +161,18 @@ public class Multi_Action_move : MonoBehaviour
         //Invoke(nameof(null_active), 1.15f);
         //Button.SetActive(false);
 
+        //バックにマルチ自身を登録
+        script.objs[script.now] = this.gameObject;
+        script.now++;
+
+        Debug.Log("thornHit(up)!");
+
         //消えた時初期位置に戻る
         this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
 
         //バックにマルチ自身を登録
-        script.objs[script.now] = this.gameObject;
-        script.now++;
+        //script.objs[script.now] = this.gameObject;
+        //script.now++;
 
         //実行したアクションを最低数として設定
         GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().set_text(action_num+4,1);
@@ -187,17 +193,17 @@ public class Multi_Action_move : MonoBehaviour
         now_ani = false;
 
         //初期状態へ---------------------------------------------------------------------------
-        this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+        this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
         this.transform.localScale = new Vector3(1, 1,1);
 
         //実行したアクションを最低数として設定
         GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().set_text(action_num + 4, -1);
-        //実行したアクションを削除予定に追加
+        //実行したアクションを削除予定分をなくす
         GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().multi_des_Check(this.gameObject, false);
 
         GetComponent<Image_multimove>().Move_on = false;
         GetComponent<Image_multimove>().time = 0;
-
+        Debug.Log("thornHit(up)!");
         Button.SetActive(a);
         //---------------------------------------------------------------------------------------
     }

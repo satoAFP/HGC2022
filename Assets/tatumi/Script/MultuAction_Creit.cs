@@ -37,7 +37,7 @@ public class MultuAction_Creit : MonoBehaviour
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
         //マルチ作成
-        multi_action(blocks1, 530.0f);
+        multi_action(blocks1, 3.85f);
 
         //左2位置にいるやつ全取得
         blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
@@ -60,7 +60,7 @@ public class MultuAction_Creit : MonoBehaviour
             blocks2 = new GameObject[1];
         }
 
-　　　　multi_action(blocks2, 660.0f);
+　　　　multi_action(blocks2, 29.7f);
 
     }
 
@@ -83,7 +83,9 @@ public class MultuAction_Creit : MonoBehaviour
                 //プレハブから直接召喚
                 GameObject obj = (GameObject)Resources.Load(multi_OK(a));
                 // プレハブを元に、インスタンスを生成、
-                Instantiate(obj, new Vector3(b, -127.0f, 0.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
+                Instantiate(obj, new Vector3(b, 83.19456f, -102.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
+
+               
 
             }
             else 
