@@ -15,47 +15,43 @@ public class movehammer : MonoBehaviour
     public bool back;
 
     //private•Ï”-----------------------------------------
-    private float nowhammeRad;
+    [Header("‰ŠúŠp“x[ŒÀ“x‚ð’´‚¦‚È‚¢‚æ‚¤‚É!]")]
+    public float nowhammeRad;
     private int z;
     private float x, y;
- 
+
     // Start is called before the first frame update
     void Start()
     {
         x = 0.0f;
         y = 0.0f;
         z = 0;
-        transform.Rotate(new Vector3(x, y, hammerRad));
-        nowhammeRad = 0;
+        transform.Rotate(new Vector3(x, y, nowhammeRad));
+        //nowhammeRad = 0;
 
-       
-       
-      
     }
 
     // Update is called once per frame
-    void Update()
-    { 
-        
-
-        if(back==true)
+    void FixedUpdate()
+    {
+        if (back == true)
         {
-            nowhammeRad = 1.0f;
+            nowhammeRad = 1.0f * moveSpeed;
         }
         else
         {
-            nowhammeRad = -1.0f;
+            nowhammeRad = -1.0f * moveSpeed;
         }
 
-        nowhammeRad = (int)nowhammeRad;
+        // nowhammeRad = (int)nowhammeRad;
 
         transform.Rotate(new Vector3(x, y, nowhammeRad));
 
-        z = (int) gameObject.transform.localEulerAngles.z;
+        z = (int)gameObject.transform.localEulerAngles.z;
 
-        if (360-hammerRad >= z && 350 - hammerRad <= z)
+        if (360 - hammerRad >= z && 350 - hammerRad <= z)
         {
-            if(back==true)
+            if (back == true)
             {
                 back = false;
             }
@@ -64,7 +60,7 @@ public class movehammer : MonoBehaviour
                 back = true;
             }
         }
-        else if (hammerRad <= z&&hammerRad+10>=z)
+        else if (hammerRad <= z && hammerRad + 10 >= z)
         {
             if (back == true)
             {
@@ -76,4 +72,10 @@ public class movehammer : MonoBehaviour
             }
         }
     }
+
+    public float Getnowrad()
+    {
+        return nowhammeRad;
+    }
+
 }
