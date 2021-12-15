@@ -1946,11 +1946,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4428356768960279019, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4428356768960279019, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4428356768960279019, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5603,11 +5603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135084413760994791, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8135084413760994791, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 8135084413760994791, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5641,5 +5641,13 @@ PrefabInstance:
       propertyPath: m_BoundingVolume
       value: 
       objectReference: {fileID: 280837584}
+    - target: {fileID: 8135084413760994811, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
+      propertyPath: zome.z
+      value: 0.0275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135084414504095995, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}

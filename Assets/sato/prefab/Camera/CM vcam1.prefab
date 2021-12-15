@@ -158,7 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35f83c52e299cb498382826f37eb90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zome: {x: 0, y: 0.0125, z: -0.02}
+  zome: {x: 0, y: 0.0125, z: 0.02}
+  stop_pos: {x: 0, y: 2.5, z: -4}
   avcam: {fileID: 8135084413760994790}
 --- !u!1 &8135084414504095993
 GameObject:
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 25, z: -40}
+  m_FollowOffset: {x: 0, y: 4.5, z: 30}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
