@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 4428356768424044611}
   - component: {fileID: 4428356768181562247}
   - component: {fileID: 98788500940316434}
+  - component: {fileID: 5178698531088441730}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -294,6 +295,23 @@ MonoBehaviour:
   Mission_img: {fileID: 0}
   Clown_OK: 0
   Mission_OK: 0
+--- !u!114 &5178698531088441730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428356768424044609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f887de9731de1d4ab4ca42a6fb18673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump_time: 70
+  jump_power: 6
+  jump_num: 3
+  anim: {fileID: 0}
+  goal_move: 0
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0

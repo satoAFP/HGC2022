@@ -18,6 +18,10 @@ public class Scenemove : MonoBehaviour
     static public bool Clown_OK = false;
     static public bool Mission_OK = false;
 
+    private int clown_time = 0;
+    private int mission_time = 0;
+
+
     void FixedUpdate() 
     {
         //ステージシーンの時
@@ -25,21 +29,44 @@ public class Scenemove : MonoBehaviour
             SceneManager.GetActiveScene().name != "StageSelect" &&
             SceneManager.GetActiveScene().name != "Result")
         {
+            //ミッションがクリアされているかを記憶
             if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
                 Clown_OK = true;
+            else
+                Clown_OK = false;
             if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
+                Mission_OK = true;
+            else
                 Mission_OK = true;
         }
 
         if (SceneManager.GetActiveScene().name == "Result")
         {
-            if(Clown_OK==true)
+            clown_time++;
+            mission_time++;
+            if (Clown_OK == true) 
             {
-                clown.gameObject.SetActive(true);
+                if (clown_time >= 90)
+                {
+                    clown.gameObject.SetActive(true);
+                    //王冠が落ちてくる処理
+                    if (clown.gameObject.GetComponent<RectTransform>().sizeDelta.x > 240.0f)
+                    {
+                        clown.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 21.0f);
+                    }
+                }
             }
             if (Mission_OK == true)
             {
-                mission.gameObject.SetActive(true);
+                if(mission_time >= 120)
+                {
+                    mission.gameObject.SetActive(true);
+                    //星が落ちてくる処理
+                    if (mission.gameObject.GetComponent<RectTransform>().sizeDelta.x > 240.0f)
+                    {
+                        mission.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 24.0f);
+                    }
+                }
             }
         }
 
@@ -58,6 +85,7 @@ public class Scenemove : MonoBehaviour
             Scene_num = 6;
     }
 
+    //指定したシーンに移動
     public void PushScene() 
     {
         Clown_OK = false;
@@ -65,13 +93,14 @@ public class Scenemove : MonoBehaviour
         SceneManager.LoadScene(SceneName[0]);
     }
 
+    //ネクストステージボタン
     public void PushNextScene() 
     {
         Clown_OK = false;
         Mission_OK = false;
 
-        if (Scene_num == 1) 
-            SceneManager.LoadScene("Stage2");
+        if (Scene_num == 1)
+            SceneManager.LoadScene("Stage" + 2);
         if (Scene_num == 2)
             SceneManager.LoadScene("Stage3");
         if (Scene_num == 3)
@@ -82,5 +111,25 @@ public class Scenemove : MonoBehaviour
             SceneManager.LoadScene("Stage6");
         if (Scene_num == 6)
             SceneManager.LoadScene("Title");
+    }
+
+    //リトライボタン
+    public void PushRetryScene()
+    {
+        Clown_OK = false;
+        Mission_OK = false;
+
+        if (Scene_num == 1)
+            SceneManager.LoadScene("Stage1");
+        if (Scene_num == 2)
+            SceneManager.LoadScene("Stage2");
+        if (Scene_num == 3)
+            SceneManager.LoadScene("Stage3");
+        if (Scene_num == 4)
+            SceneManager.LoadScene("Stage4");
+        if (Scene_num == 5)
+            SceneManager.LoadScene("Stage5");
+        if (Scene_num == 6)
+            SceneManager.LoadScene("Stage6");
     }
 }
