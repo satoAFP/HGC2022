@@ -83,6 +83,18 @@ public class Scenemove : MonoBehaviour
             Scene_num = 5;
         if (SceneManager.GetActiveScene().name == "Stage6")
             Scene_num = 6;
+        if (SceneManager.GetActiveScene().name == "Stage7")
+            Scene_num = 7;
+        if (SceneManager.GetActiveScene().name == "Stage8")
+            Scene_num = 8;
+        if (SceneManager.GetActiveScene().name == "Stage9")
+            Scene_num = 9;
+        if (SceneManager.GetActiveScene().name == "Stage10")
+            Scene_num = 10;
+        if (SceneManager.GetActiveScene().name == "Stage11")
+            Scene_num = 11;
+        if (SceneManager.GetActiveScene().name == "Stage12")
+            Scene_num = 12;
     }
 
     //éwíËÇµÇΩÉVÅ[ÉìÇ…à⁄ìÆ
@@ -110,6 +122,18 @@ public class Scenemove : MonoBehaviour
         if (Scene_num == 5)
             SceneManager.LoadScene("Stage6");
         if (Scene_num == 6)
+            SceneManager.LoadScene("Stage7");
+        if (Scene_num == 7)
+            SceneManager.LoadScene("Stage8");
+        if (Scene_num == 8)
+            SceneManager.LoadScene("Stage9");
+        if (Scene_num == 9)
+            SceneManager.LoadScene("Stage10");
+        if (Scene_num == 10)
+            SceneManager.LoadScene("Stage11");
+        if (Scene_num == 11)
+            SceneManager.LoadScene("Stage12");
+        if (Scene_num == 12)
             SceneManager.LoadScene("Title");
     }
 
@@ -131,5 +155,17 @@ public class Scenemove : MonoBehaviour
             SceneManager.LoadScene("Stage5");
         if (Scene_num == 6)
             SceneManager.LoadScene("Stage6");
+        if (Scene_num == 7)
+            SceneManager.LoadScene("Stage7");
+        if (Scene_num == 8)
+            SceneManager.LoadScene("Stage8");
+        if (Scene_num == 9)
+            SceneManager.LoadScene("Stage9");
+        if (Scene_num == 10)
+            SceneManager.LoadScene("Stage10");
+        if (Scene_num == 11)
+            SceneManager.LoadScene("Stage11");
+        if (Scene_num == 12)
+            SceneManager.LoadScene("Stage12");
     }
 }
