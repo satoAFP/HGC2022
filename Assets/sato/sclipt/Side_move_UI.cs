@@ -24,7 +24,7 @@ public class Side_move_UI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //マウスのポジション更新
         mp = Input.mousePosition;

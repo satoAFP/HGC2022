@@ -18,6 +18,10 @@ public class Scenemove : MonoBehaviour
     static public bool Clown_OK = false;
     static public bool Mission_OK = false;
 
+    private int clown_time = 0;
+    private int mission_time = 0;
+
+
     void FixedUpdate() 
     {
         //ステージシーンの時
@@ -33,19 +37,31 @@ public class Scenemove : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Result")
         {
-            if(Clown_OK==true)
+            clown_time++;
+            mission_time++;
+            if (Clown_OK == true) 
             {
-                clown.gameObject.SetActive(true);
-
-                //王冠が落ちてくる処理
-
+                if (clown_time >= 90)
+                {
+                    clown.gameObject.SetActive(true);
+                    //王冠が落ちてくる処理
+                    if (clown.gameObject.GetComponent<RectTransform>().sizeDelta.x > 240.0f)
+                    {
+                        clown.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 21.0f);
+                    }
+                }
             }
             if (Mission_OK == true)
             {
-                mission.gameObject.SetActive(true);
-
-                //星が落ちてくる処理
-
+                if(mission_time >= 120)
+                {
+                    mission.gameObject.SetActive(true);
+                    //星が落ちてくる処理
+                    if (mission.gameObject.GetComponent<RectTransform>().sizeDelta.x > 240.0f)
+                    {
+                        mission.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 24.0f);
+                    }
+                }
             }
         }
 

@@ -27,15 +27,18 @@ public class Slime_ResultMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (goal_move)
         {
+            //背景移動処理
             pos.x += move_speed;
             this.gameObject.GetComponent<RectTransform>().position = pos;
 
+            //位置が中心に来た時、リザルトへ移動
             if (this.gameObject.GetComponent<RectTransform>().localPosition.x > 0)  
             {
+                //リザルトシーンでないとき
                 if (SceneManager.GetActiveScene().name != "Result")
                 {
                     SceneManager.LoadScene("Result");
@@ -43,7 +46,7 @@ public class Slime_ResultMove : MonoBehaviour
             }
             if (pos.x > stop_pos) 
             {
-                Debug.Log("aaa");
+                //ストップする座標
                 pos = mem_pos;
                 goal_move = false;
             }
