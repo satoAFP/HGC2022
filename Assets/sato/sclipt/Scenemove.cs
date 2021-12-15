@@ -37,7 +37,7 @@ public class Scenemove : MonoBehaviour
             if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
                 Mission_OK = true;
             else
-                Mission_OK = true;
+                Mission_OK = false;
         }
 
         if (SceneManager.GetActiveScene().name == "Result")
@@ -100,7 +100,7 @@ public class Scenemove : MonoBehaviour
         Mission_OK = false;
 
         if (Scene_num == 1)
-            SceneManager.LoadScene("Stage" + 2);
+            SceneManager.LoadScene("Stage2");
         if (Scene_num == 2)
             SceneManager.LoadScene("Stage3");
         if (Scene_num == 3)
