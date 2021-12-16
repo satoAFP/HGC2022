@@ -178,6 +178,9 @@ public class Player : MonoBehaviour
         audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
         //スタートのカウント時のSE再生
         audio.PlayOneShot(se_start_count);
+
+
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
