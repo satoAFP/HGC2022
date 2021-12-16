@@ -36,7 +36,7 @@ public class ZoomCinemachineExtension : CinemachineExtension
     }
 
     // マウスホイール操作チェック
-    private void Update()
+    private void FixedUpdate()
     {
         // マウスホイールの移動量取得
         var delta = Input.mouseScrollDelta.y;
