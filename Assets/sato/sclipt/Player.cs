@@ -183,6 +183,11 @@ public class Player : MonoBehaviour
         //Select_Card_Manager‚ðŽæ“¾
         SCM = GameObject.Find("select_card_UI").GetComponent<Select_Card_Manager>();
 
+        for (int i = 0; i < Max_Card; i++)
+        {
+            SCM.Select[i].GetComponent<Image>().sprite = null;
+        }
+
         Application.targetFrameRate = 60;
     }
 
