@@ -4279,7 +4279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6001331910804079709, guid: 5de7e479afab21941bd7f1449d2dcbe1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 81
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6001331910804079709, guid: 5de7e479afab21941bd7f1449d2dcbe1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6271,8 +6271,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 280837584}
     - target: {fileID: 8135084413760994811, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
+      propertyPath: zome.y
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135084413760994811, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: zome.z
-      value: 0.04
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8135084414504095995, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_FollowOffset.x

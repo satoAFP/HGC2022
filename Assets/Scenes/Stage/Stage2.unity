@@ -4610,8 +4610,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1051311773}
     - target: {fileID: 8135084413760994811, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
+      propertyPath: zome.y
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135084413760994811, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: zome.z
-      value: 0.02
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 8135084414504095995, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_FollowOffset.z
