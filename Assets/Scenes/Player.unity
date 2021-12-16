@@ -1523,6 +1523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &658524792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1049123324961182999, guid: 8a56672b59565764d9b6dbd9fe40cfcc, type: 3}
+  m_PrefabInstance: {fileID: 1954339521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &667035731
 GameObject:
   m_ObjectHideFlags: 0
@@ -6100,6 +6105,10 @@ PrefabInstance:
       propertyPath: stop_deth_time
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: Select_text_obj
+      value: 
+      objectReference: {fileID: 658524792}
     - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: start_time_text
       value: 
