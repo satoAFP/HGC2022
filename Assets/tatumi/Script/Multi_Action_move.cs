@@ -25,6 +25,11 @@ public class Multi_Action_move : MonoBehaviour
 
     private bool now_ani,Ps_flag;
 
+    //エフェクト系
+    private GameObject effect;
+    Effect_move EF_script;
+
+
     // Player script; //参照元Scriptが入る変数
 
     // Start is called before the first frame update
@@ -62,6 +67,19 @@ public class Multi_Action_move : MonoBehaviour
 
         //アニメーション（泣）
         now_ani = false;
+
+        if (first_x > 5.0f)
+        {
+            //エフェクトは生成時は動く（前後どっちも）
+            effect = GameObject.Find("PS_Back_Right"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        }
+        else
+        {
+            //エフェクトは生成時は動く（どっちも）
+            effect = GameObject.Find("PS_Back_Left"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        }
+        //スクリプトゲット
+        EF_script=effect.GetComponent<Effect_move>();
     }
 
     // Update is called once per frame
@@ -157,6 +175,9 @@ public class Multi_Action_move : MonoBehaviour
         //アニメーション（泣）一応動き中に反応しないのも兼ねてる便利
         now_ani = true;
 
+        //エフェクトは止める
+        EF_script.SetActive(false);
+
         //アニメーション（泣）
         //Invoke(nameof(null_active), 1.15f);
         //Button.SetActive(false);
@@ -191,6 +212,9 @@ public class Multi_Action_move : MonoBehaviour
     {
         ////アニメーション（泣）と反応するように
         now_ani = false;
+
+        //また再開（爆発はなし）
+        EF_script.SetActive(true);
 
         //初期状態へ---------------------------------------------------------------------------
         this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
