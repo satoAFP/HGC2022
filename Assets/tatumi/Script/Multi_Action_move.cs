@@ -25,6 +25,11 @@ public class Multi_Action_move : MonoBehaviour
 
     private bool now_ani,Ps_flag;
 
+    //エフェクト系
+    private GameObject effect;
+    Effect_move EF_script;
+    private GameObject UIs;
+
     // Player script; //参照元Scriptが入る変数
 
     // Start is called before the first frame update
@@ -62,6 +67,25 @@ public class Multi_Action_move : MonoBehaviour
 
         //アニメーション（泣）
         now_ani = false;
+
+        //エフェクト親取得
+        UIs = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+
+
+        if (first_x > 5.0f)
+        {
+            //エフェクトは生成時は動く（前後どっちも）
+            effect = UIs.transform.Find("PS_Back_Right").gameObject;
+        }
+        else
+        {
+            //エフェクトは生成時は動く（どっちも）
+            effect = UIs.transform.Find("PS_Back_Left").gameObject;
+        }
+        //スクリプトゲット
+        EF_script=effect.GetComponent<Effect_move>();
+        //Back再生
+        EF_script.SetActive(true);
     }
 
     // Update is called once per frame
@@ -157,6 +181,9 @@ public class Multi_Action_move : MonoBehaviour
         //アニメーション（泣）一応動き中に反応しないのも兼ねてる便利
         now_ani = true;
 
+        //エフェクトは止める
+        EF_script.SetActive(false);
+
         //アニメーション（泣）
         //Invoke(nameof(null_active), 1.15f);
         //Button.SetActive(false);
@@ -164,11 +191,11 @@ public class Multi_Action_move : MonoBehaviour
         //バックにマルチ自身を登録
         script.objs[script.now] = this.gameObject;
         script.now++;
-
+       
         Debug.Log("thornHit(up)!");
 
         //消えた時初期位置に戻る
-        this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+        this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
 
         //バックにマルチ自身を登録
         //script.objs[script.now] = this.gameObject;
@@ -192,6 +219,9 @@ public class Multi_Action_move : MonoBehaviour
         ////アニメーション（泣）と反応するように
         now_ani = false;
 
+        //また再開（爆発はなし）
+        EF_script.SetActive(true);
+
         //初期状態へ---------------------------------------------------------------------------
         this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
         this.transform.localScale = new Vector3(1, 1,1);
@@ -206,5 +236,11 @@ public class Multi_Action_move : MonoBehaviour
         Debug.Log("thornHit(up)!");
         Button.SetActive(a);
         //---------------------------------------------------------------------------------------
+    }
+    //Eff消すよう
+    public void Eff_active()
+    {
+        //エフェクトは止める
+        EF_script.SetActive(false);
     }
 }

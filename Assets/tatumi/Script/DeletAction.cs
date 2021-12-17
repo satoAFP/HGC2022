@@ -68,12 +68,13 @@ public class DeletAction : MonoBehaviour
             int S = now;
            
 
-            for (int i = multi_now+1; i != 0; i--)
+            for (int i = multi_now+1; i != -1; i--)
             {
                 //マルチ作成してたなら二つ分の普通アクションを返す
                 if (S == timing[i])
                 {
                     //オブジェ自体削除
+                    multi_objs[i].GetComponent<Multi_Action_move>().Eff_active();
                     Destroy(multi_objs[i], .1f);
                     multi_now--;
                     all_multi_flag += 1;
