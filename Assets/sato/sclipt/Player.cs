@@ -186,13 +186,16 @@ public class Player : MonoBehaviour
         //Select_Card_Managerを取得
         SCM = Select_text_obj.GetComponent<Select_Card_Manager>();
 
-
+        
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
     void FixedUpdate() 
     {
+        GameObject.Find("Player").transform.localScale= new Vector3(50.0f, 50.0f, 50.0f);
+        Debug.Log("" + GameObject.Find("suraimu_model").transform.localScale);
+
         //スタート処理-------------------------------------------------
         //インスペクターで設定した秒数待ってスタート
         if (Movestop == true)
