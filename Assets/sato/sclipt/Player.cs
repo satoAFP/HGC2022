@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     public Text Select_text;
 
     [Header("表示用テキストオブジェクト")]
-    public GameObject Select_text_obj;
+    //public GameObject Select_text_obj;
 
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
         audio.PlayOneShot(se_start_count);
 
         //Select_Card_Managerを取得
-        SCM = Select_text_obj.GetComponent<Select_Card_Manager>();
+        SCM = this.gameObject.GetComponent<Select_Card_Manager>();
 
         for (int i = 0; i < Max_Card; i++)
         {

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4428356768181562247}
   - component: {fileID: 98788500940316434}
   - component: {fileID: 5178698531088441730}
+  - component: {fileID: 9150821259641370757}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -312,6 +313,33 @@ MonoBehaviour:
   jump_num: 3
   anim: {fileID: 0}
   goal_move: 0
+--- !u!114 &9150821259641370757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428356768424044609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ee7050a09b2b64dbcc289146dc50c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Card_img:
+  - {fileID: 21300000, guid: d8dd5ecc7ee80d046850aaa38303e280, type: 3}
+  - {fileID: 21300000, guid: f2052daa889d1f64195284b8ef217b29, type: 3}
+  - {fileID: 21300000, guid: 2da9c6779191d8b43b051fa3effbda30, type: 3}
+  - {fileID: 21300000, guid: 84f9fed6a453d114e8cbb0564cf0addf, type: 3}
+  - {fileID: 21300000, guid: e6434fb7e3194284e81822138e4ea405, type: 3}
+  - {fileID: 21300000, guid: f34787d28f52a2342a7c73a6551964ed, type: 3}
+  - {fileID: 21300000, guid: 71e4b6ac8f0c74d41a33f24f437df53f, type: 3}
+  - {fileID: 21300000, guid: 1f3c81d04dcfdd64fbc57674f8488fd8, type: 3}
 --- !u!1 &4428356768960279016
 GameObject:
   m_ObjectHideFlags: 0
