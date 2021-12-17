@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < Max_Card; i++)
         {
-            SCM.Select[i].GetComponent<Image>().sprite = null;
+            //SCM.Select[i].GetComponent<Image>().sprite = null;
         }
 
         Application.targetFrameRate = 60;
@@ -219,7 +219,6 @@ public class Player : MonoBehaviour
             //テキストに秒数を出力
             start_time_text.text = "" + start_text_time_count;
         }
-
 
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1) 
