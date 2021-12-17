@@ -237,4 +237,10 @@ public class Multi_Action_move : MonoBehaviour
         Button.SetActive(a);
         //---------------------------------------------------------------------------------------
     }
+    //Eff消すよう
+    public void Eff_active()
+    {
+        //エフェクトは止める
+        EF_script.SetActive(false);
+    }
 }
