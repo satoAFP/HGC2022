@@ -49,6 +49,9 @@ public class Player : MonoBehaviour
     [Header("選択されたアクション表示用テキスト")]
     public Text Select_text;
 
+    [Header("表示用テキストオブジェクト")]
+    public GameObject Select_text_obj;
+
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
 
@@ -116,6 +119,7 @@ public class Player : MonoBehaviour
     private int start_time_count = 0;   //スタート時、実際カウントする変数
     private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
     private AudioSource audio;          //使用するオーディオソース
+    private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
 
 
     //構造体-------------------------------------------------------------------
@@ -178,6 +182,12 @@ public class Player : MonoBehaviour
         audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
         //スタートのカウント時のSE再生
         audio.PlayOneShot(se_start_count);
+
+        //Select_Card_Managerを取得
+        SCM = Select_text_obj.GetComponent<Select_Card_Manager>();
+
+
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -206,51 +216,67 @@ public class Player : MonoBehaviour
             start_time_text.text = "" + start_text_time_count;
         }
 
-
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
-        if (Card_order[0] == -1) 
+        if (Card_order[0] == -1)
         {
-            for (int i = 0; i < Max_Card - 1; i++) 
+            Card_order[0] = Card_order[1];
+            text_data[0] = text_data[1];
+            SCM.Select[0].GetComponent<Image>().sprite = SCM.Select[1].GetComponent<Image>().sprite;
+            for (int i = 1; i < Max_Card - 1; i++) 
             {
                 Card_order[i] = Card_order[i + 1];
                 text_data[i] = text_data[i + 1];
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Select[i + 1].GetComponent<Image>().sprite;
             }
             //カードの一番最後のデータを初期化
             Card_order[Max_Card - 1] = -1;
             text_data[Max_Card - 1] = "";
+            SCM.Select[Max_Card - 1].GetComponent<Image>().sprite = null;
         }
 
         //選んだアクションをtext_dataに格納
         for (int i = 0; i < Max_Card; i++)  {
             if(Card_order[i] == (int)Card.JUMP) {
-                text_data[i] = "ジャンプ → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.JUMP];
             }
             if (Card_order[i] == (int)Card.SQUAT) {
-                text_data[i] = "しゃがみ → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.SQUAT];
             }
             if (Card_order[i] == (int)Card.STICK) {
-                text_data[i] = "ひっつき → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.STICK];
             }
             if (Card_order[i] == (int)Card.RUN) {
-                text_data[i] = "走り → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.RUN];
             }
             if (Card_order[i] == (int)Card.HIGHJUMP) {
-                text_data[i] = "ハイジャンプ → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.HIGHJUMP];
             }
             if (Card_order[i] == (int)Card.WALLKICK) {
-                text_data[i] = "壁キック → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.WALLKICK];
             }
             if (Card_order[i] == (int)Card.LONGJUMP) {
-                text_data[i] = "幅跳び → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.LONGJUMP];
             }
             if (Card_order[i] == (int)Card.SLIDING) {
-                text_data[i] = "スライディング → ";
+                text_data[i] = "          →";
+                SCM.Select[i].GetComponent<Image>().sprite = SCM.Card_img[(int)Card.SLIDING];
             }
+
+            if (Card_order[i]==-1)
+                SCM.Select[i].SetActive(false);
+            else
+                SCM.Select[i].SetActive(true);
+
         }
         //選択したアクション実際表示
-        Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3]
-                 + text_data[4] + text_data[5] + text_data[6] + text_data[7];
-
+        Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3] + text_data[4];
 
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
@@ -866,14 +892,21 @@ public class Player : MonoBehaviour
         //マルチ状態を戻すときに使うboolを取得
         if (GameObject.Find("BackButton").GetComponent<DeletAction>().multi_backflag == false)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Max_Card; i++)
             {
                 if (Card_order[i] == -1)
                 {
                     //0番目が最初のアクションなのでそれ未満にはならない
                     Card_order[i - 1] = -1;
                     text_data[i - 1] = "";   //カードテキストの中身消去
+                    SCM.Select[i - 1].GetComponent<Image>().sprite = null;
                 }
+            }
+            if (Card_order[Max_Card - 1] != -1)
+            {
+                Card_order[Max_Card - 1] = -1;
+                text_data[Max_Card - 1] = "";   //カードテキストの中身消去
+                SCM.Select[Max_Card - 1].GetComponent<Image>().sprite = null;
             }
         }
     }
