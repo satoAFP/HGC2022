@@ -32,7 +32,6 @@ public class MultuAction_Creit : MonoBehaviour
     void Update()
     {
        
-
         //左位置にいるやつ全取得
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
@@ -90,16 +89,18 @@ public class MultuAction_Creit : MonoBehaviour
                 {
 
                     //爆発エフェクトを検索（位置により変更）
-                    GameObject efe = AC_button.transform.Find("PS_front_Left").gameObject;
-
+                    GameObject efe = AC_button.transform.Find("PS_front_Right").gameObject;
+                    Debug.Log("thornHit(under)! SEFE");
                     efe.GetComponent<Effect_move>().SetActive(true);
+                    efe.GetComponent<Effect_move>().first_EF = true;
                 }
                 else
                 {
                     //爆発エフェクトを検索（位置により変更）
                     GameObject efe = AC_button.transform.Find("PS_front_Left").gameObject;
-
+                    Debug.Log("thornHit(under)! SEFE");
                     efe.GetComponent<Effect_move>().SetActive(true);
+                    efe.GetComponent<Effect_move>().first_EF = true;
                 }
             }
             else 

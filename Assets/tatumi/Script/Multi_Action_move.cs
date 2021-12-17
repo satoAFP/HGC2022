@@ -28,7 +28,7 @@ public class Multi_Action_move : MonoBehaviour
     //エフェクト系
     private GameObject effect;
     Effect_move EF_script;
-
+    private GameObject UIs;
 
     // Player script; //参照元Scriptが入る変数
 
@@ -68,18 +68,24 @@ public class Multi_Action_move : MonoBehaviour
         //アニメーション（泣）
         now_ani = false;
 
+        //エフェクト親取得
+        UIs = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+
+
         if (first_x > 5.0f)
         {
             //エフェクトは生成時は動く（前後どっちも）
-            effect = GameObject.Find("PS_Back_Right"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+            effect = UIs.transform.Find("PS_Back_Right").gameObject;
         }
         else
         {
             //エフェクトは生成時は動く（どっちも）
-            effect = GameObject.Find("PS_Back_Left"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+            effect = UIs.transform.Find("PS_Back_Left").gameObject;
         }
         //スクリプトゲット
         EF_script=effect.GetComponent<Effect_move>();
+        //Back再生
+        EF_script.SetActive(true);
     }
 
     // Update is called once per frame
@@ -185,11 +191,11 @@ public class Multi_Action_move : MonoBehaviour
         //バックにマルチ自身を登録
         script.objs[script.now] = this.gameObject;
         script.now++;
-
+       
         Debug.Log("thornHit(up)!");
 
         //消えた時初期位置に戻る
-        this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+        this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
 
         //バックにマルチ自身を登録
         //script.objs[script.now] = this.gameObject;
