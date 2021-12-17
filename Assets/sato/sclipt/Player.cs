@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     public Text Select_text;
 
     [Header("表示用テキストオブジェクト")]
-    //public GameObject Select_text_obj;
+    public GameObject Select_text_obj;
 
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
@@ -184,12 +184,8 @@ public class Player : MonoBehaviour
         audio.PlayOneShot(se_start_count);
 
         //Select_Card_Managerを取得
-        SCM = this.gameObject.GetComponent<Select_Card_Manager>();
+        SCM = Select_text_obj.GetComponent<Select_Card_Manager>();
 
-        for (int i = 0; i < Max_Card; i++)
-        {
-            //SCM.Select[i].GetComponent<Image>().sprite = null;
-        }
 
         Application.targetFrameRate = 60;
     }
@@ -221,9 +217,12 @@ public class Player : MonoBehaviour
         }
 
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
-        if (Card_order[0] == -1) 
+        if (Card_order[0] == -1)
         {
-            for (int i = 0; i < Max_Card - 1; i++) 
+            Card_order[0] = Card_order[1];
+            text_data[0] = text_data[1];
+            SCM.Select[0].GetComponent<Image>().sprite = SCM.Select[1].GetComponent<Image>().sprite;
+            for (int i = 1; i < Max_Card - 1; i++) 
             {
                 Card_order[i] = Card_order[i + 1];
                 text_data[i] = text_data[i + 1];
