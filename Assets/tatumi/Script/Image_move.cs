@@ -49,7 +49,7 @@ public class Image_move : MonoBehaviour
         //‘å‚«‚³AˆÊ’u‚ğæ“¾
         sca = this.transform.localScale;
 
-       
+        this.transform.position = new Vector3(parent_posx, 56.23f, -102.0f);
 
         if (Move_on == true)
         {
