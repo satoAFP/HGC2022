@@ -26,8 +26,8 @@ public class Multi_Action_move : MonoBehaviour
     private bool now_ani,Ps_flag;
 
     //エフェクト系
-    private GameObject effect;
-    Effect_move EF_script;
+    private GameObject effect,smoke;
+    Effect_move EF_script,SK_script;
     private GameObject UIs;
 
     // Player script; //参照元Scriptが入る変数
@@ -71,21 +71,23 @@ public class Multi_Action_move : MonoBehaviour
         //エフェクト親取得
         UIs = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
 
-
-        if (first_x > 5.0f)
-        {
-            //エフェクトは生成時は動く（前後どっちも）
-            effect = UIs.transform.Find("PS_Back_Right").gameObject;
-        }
-        else
-        {
-            //エフェクトは生成時は動く（どっちも）
-            effect = UIs.transform.Find("PS_Back_Left").gameObject;
-        }
+        //---------------------------------------------------------------------------------
+        //エフェクトは生成時は動く（前後どっちも）
+        effect = UIs.transform.Find("PS_Back_Left").gameObject;
+      
         //スクリプトゲット
         EF_script=effect.GetComponent<Effect_move>();
         //Back再生
         EF_script.SetActive(true);
+
+        //煙
+        smoke = UIs.transform.Find("PS_Smook_Left").gameObject;
+
+        //スクリプトゲット
+        SK_script = smoke.GetComponent<Effect_move>();
+        //煙再生
+        SK_script.now_onecard = false;
+        //--------------------------------------------------------------------------------
     }
 
     // Update is called once per frame
@@ -192,7 +194,7 @@ public class Multi_Action_move : MonoBehaviour
         script.objs[script.now] = this.gameObject;
         script.now++;
        
-        Debug.Log("thornHit(up)!");
+      
 
         //消えた時初期位置に戻る
         this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
@@ -205,6 +207,12 @@ public class Multi_Action_move : MonoBehaviour
         GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().set_text(action_num+4,1);
         //実行したアクションを削除予定に追加
         GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().multi_des_Check(this.gameObject, true);
+
+        //Back停止
+        EF_script.SetActive(false);
+        //煙停止
+        SK_script.SetActive(false);
+        SK_script.now_onecard = false;
     }
 
     //アニメーション（泣）
@@ -234,6 +242,13 @@ public class Multi_Action_move : MonoBehaviour
         GetComponent<Image_multimove>().Move_on = false;
         GetComponent<Image_multimove>().time = 0;
         Debug.Log("thornHit(up)!");
+
+        //Back再生
+        EF_script.SetActive(true);
+        //煙再生
+        SK_script.SetActive(true);
+        SK_script.now_onecard = false;
+
         Button.SetActive(a);
         //---------------------------------------------------------------------------------------
     }

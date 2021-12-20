@@ -97,7 +97,7 @@ public class ButtonChoice : MonoBehaviour
                 //入力処理
                 if ((-first_x / 26) < 1)
                 {
-                    Debug.Log("OK");
+                   
                     if (Ps_flag == true)
                     {
                         for (int i = 0; i != players.Length; i++)
@@ -215,25 +215,25 @@ public class ButtonChoice : MonoBehaviour
                 if (multi.Length == 0)
                 {
                     if (pos.x == first_x)
-                        this.gameObject.transform.position = new Vector3(29.7f, pos.y, pos.z);
-                    else
+                        this.gameObject.transform.position = new Vector3(3.85f, pos.y, pos.z);
+                    else if(pos.x == 3.85f)
+                    {
                         this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
 
+                        //煙エフェクトを検索（位置により変更）
+                        GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                        efe.GetComponent<Effect_move>().SetActive(false);
+                        efe.GetComponent<Effect_move>().first_EF = false;
+                        efe.GetComponent<Effect_move>().now_onecard = false;
+                    }
+                   
                 }
                 else if (multi.Length == 1)
                 {
-                    Vector3 multi_pos = multi[0].gameObject.transform.position;
-
-                    if (multi_pos.x == 3.85f)
-                        this.gameObject.transform.position = new Vector3(29.7f, pos.y, pos.z);
-                    else
-                        this.gameObject.transform.position = new Vector3(3.85f, pos.y, pos.z);
+                   this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 }
-                else if (multi.Length == 2)
-                {
-                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-                   
-                }
+              
 
                 //移動後の場所取得
                 pos = this.gameObject.transform.position;
@@ -243,8 +243,6 @@ public class ButtonChoice : MonoBehaviour
                 {
                     this.tag = "Multi_action1";
                 }
-                else if (pos.x == 29.7f)
-                    this.tag = "Multi_action2";
                 else
                     this.tag = "Untagged";
             }
@@ -254,6 +252,13 @@ public class ButtonChoice : MonoBehaviour
                 //初期位置へ（タグも再付与）
                 this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
+
+                //煙エフェクトを検索（位置により変更）
+                GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                efe.GetComponent<Effect_move>().SetActive(false);
+                efe.GetComponent<Effect_move>().first_EF = false;
+                efe.GetComponent<Effect_move>().now_onecard = false;
             }
             //他スクリプトより申請時
             else if (set == true)
