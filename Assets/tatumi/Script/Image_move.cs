@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Image_move : MonoBehaviour
 {
@@ -54,6 +55,12 @@ public class Image_move : MonoBehaviour
         if (Move_on == true)
         {
             time++;
+            //Fî•ñæ“¾
+            Image image = this.gameObject.GetComponent<Image>();
+
+            //”½‰f
+            image.color = new Color(255, 255, 255, 255);
+
             if (time < (25/bye))
             {
                 //x=10%,y=60%‚Ü‚Å
