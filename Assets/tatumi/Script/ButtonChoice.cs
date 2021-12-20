@@ -194,6 +194,19 @@ public class ButtonChoice : MonoBehaviour
 
                 //---------------------------------------------------------------------
 
+                //現在位置取得
+                pos = this.gameObject.transform.position;
+
+                if (pos.x == 3.85f)
+                {
+                    //煙エフェクトを検索（位置により変更）
+                    GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                    efe.GetComponent<Effect_move>().SetActive(false);
+                    efe.GetComponent<Effect_move>().first_EF = false;
+                    efe.GetComponent<Effect_move>().now_onecard = false;
+                }
+
                 //消えた時初期位置に戻る
                 this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
