@@ -400,9 +400,6 @@ public class Player : MonoBehaviour
                     //走りアニメーション移行
                     anim.SetBool("run", true);
 
-                    this.gameObject.GetComponent<BoxCollider>().size = new Vector3(0.02f, 0.02f, 0.02f);
-                    this.gameObject.transform.localScale = new Vector3(50.0f, 50.0f, 50.0f);
-
                     Action_check[(int)Card.RUN] = false;
                 }
 
@@ -593,9 +590,6 @@ public class Player : MonoBehaviour
             //走る状態解除
             run_power = 1.0f;
 
-            this.gameObject.GetComponent<BoxCollider>().size = new Vector3(1.0f, 1.0f, 1.0f);
-            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
             //動きを止める
             Movestop = true;
 
@@ -636,7 +630,11 @@ public class Player : MonoBehaviour
 
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
+            //ゴール後の処理
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
+
+            //アクションボタン非表示
+            GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
             //SceneManager.LoadScene("Result");
         }
 
