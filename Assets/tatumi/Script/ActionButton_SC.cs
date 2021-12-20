@@ -169,4 +169,9 @@ public class ActionButton_SC : MonoBehaviour
             multi_des_now = 0;
 
     }
+
+    public void Set_OffActive()
+    {
+        this.gameObject.SetActive(false);
+    }
 }

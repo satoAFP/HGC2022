@@ -186,13 +186,15 @@ public class Player : MonoBehaviour
         //Select_Card_Managerを取得
         SCM = Select_text_obj.GetComponent<Select_Card_Manager>();
 
-
+        
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
     void FixedUpdate() 
     {
+        Debug.Log("a " + GameObject.Find("suraimu_model").transform.localScale);
+
         //スタート処理-------------------------------------------------
         //インスペクターで設定した秒数待ってスタート
         if (Movestop == true)
@@ -298,7 +300,6 @@ public class Player : MonoBehaviour
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-
         //幅跳び、スライディングで使用する移動量の向き変更
         if (inputX == -1) {
             flont_push = new Vector3(-flontMove, push_power, 0.0f);
@@ -396,8 +397,11 @@ public class Player : MonoBehaviour
                     //倍率が変わる
                     run_power = runSpeed;
 
-                    //ジャンプアニメーション移行
+                    //走りアニメーション移行
                     anim.SetBool("run", true);
+
+                    this.gameObject.GetComponent<BoxCollider>().size = new Vector3(0.02f, 0.02f, 0.02f);
+                    this.gameObject.transform.localScale = new Vector3(50.0f, 50.0f, 50.0f);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -575,6 +579,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Select") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            GameObject.Find("suraimu_model").transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
@@ -587,6 +592,9 @@ public class Player : MonoBehaviour
 
             //走る状態解除
             run_power = 1.0f;
+
+            this.gameObject.GetComponent<BoxCollider>().size = new Vector3(1.0f, 1.0f, 1.0f);
+            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             //動きを止める
             Movestop = true;
