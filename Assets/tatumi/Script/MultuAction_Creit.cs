@@ -35,7 +35,7 @@ public class MultuAction_Creit : MonoBehaviour
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
         //ƒ}ƒ‹ƒ`ì¬
-        multi_action(blocks1, 3.85f);
+        multi_action(blocks1, 17.74148f);
 
        
 
