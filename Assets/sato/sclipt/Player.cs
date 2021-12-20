@@ -84,7 +84,9 @@ public class Player : MonoBehaviour
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
     [Header("ここから下は触らない--------------")]
-    public bool Movestop = true;
+    public bool Movestop = true;        //主人公が動くかどうか
+
+    public bool count_check = false;    //最初のカウントが終わるとき判定をとる
 
     [Header("王冠取得判定用")]
     public int clown_get = 0;
@@ -201,8 +203,9 @@ public class Player : MonoBehaviour
             if (start_time_count == start_time)
             {
                 start_time_text.gameObject.SetActive(false);
+                count_check = true; //pauseに判定を送る
                 Movestop = false;   //アクションループのメイン部分を動かす
-                Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+                Select_order = 0;   //アクションブロックに乗った時、最初に加算されてしまうから-1
                 select_time = false;//アクション開始するとカードを選択できない
             }
             //60フレーム毎に１秒減らす
