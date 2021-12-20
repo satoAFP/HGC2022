@@ -252,10 +252,13 @@ public class Multi_Action_move : MonoBehaviour
         Button.SetActive(a);
         //---------------------------------------------------------------------------------------
     }
-    //Eff消すよう
+    //Eff消すよう(Delet関連)
     public void Eff_active()
     {
         //エフェクトは止める
         EF_script.SetActive(false);
+        //煙再生
+        SK_script.SetActive(false);
+        SK_script.now_onecard = true;
     }
 }
