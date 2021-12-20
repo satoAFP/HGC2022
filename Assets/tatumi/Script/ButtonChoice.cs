@@ -102,16 +102,16 @@ public class ButtonChoice : MonoBehaviour
                     {
                         for (int i = 0; i != players.Length; i++)
                         {
-                           // players[i].GetComponent<Player>().Push_run();
+                            players[i].GetComponent<Player>().Push_run();
                         }
 
                     }
                     else
                     {
-                        //player.GetComponent<Player>().Push_run();
+                        player.GetComponent<Player>().Push_run();
                     }
 
-                   
+
                 }
                 else if (-(first_x / 26) < 2)
                 {
@@ -119,32 +119,32 @@ public class ButtonChoice : MonoBehaviour
                     {
                         for (int i = 0; i != players.Length; i++)
                         {
-                           // players[i].GetComponent<Player>().Push_stick();
+                            players[i].GetComponent<Player>().Push_stick();
                         }
                     }
                     else
                     {
-                        //player.GetComponent<Player>().Push_stick();
+                        player.GetComponent<Player>().Push_stick();
                     }
-                   
+
                 }
                 else if ((-first_x / 26) < 3)
                 {
                     if (Ps_flag == true)
                     {
-                       
+
 
                         for (int i = 0; i != players.Length; i++)
                         {
-                            //players[i].GetComponent<Player>().Push_squat();
+                            players[i].GetComponent<Player>().Push_squat();
                         }
                     }
                     else
                     {
-                       
-                        //player.GetComponent<Player>().Push_squat();
+
+                        player.GetComponent<Player>().Push_squat();
                     }
-                   
+
                 }
                 else if ((-first_x / 26) < 4)
                 {
@@ -152,13 +152,13 @@ public class ButtonChoice : MonoBehaviour
                     {
                         for (int i = 0; i != players.Length; i++)
                         {
-                            //players[i].GetComponent<Player>().Push_jump();
+                            players[i].GetComponent<Player>().Push_jump();
                         }
                     }
                     else
                     {
-                        //player.GetComponent<Player>().Push_jump();
-                       
+                        player.GetComponent<Player>().Push_jump();
+
                     }
                     
                 }

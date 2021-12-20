@@ -115,10 +115,10 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    //player.GetComponent<Player>().Push_highjump();
+                    player.GetComponent<Player>().Push_highjump();
                     Set_Back();
                 }
-               
+
             }
             else if (action_num == 1)
             {
@@ -132,10 +132,10 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                   // player.GetComponent<Player>().Push_wallkick();
+                    player.GetComponent<Player>().Push_wallkick();
                     Set_Back();
                 }
-               
+
             }
             else if (action_num == 2)
             {
@@ -149,7 +149,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    //player.GetComponent<Player>().Push_longjump();
+                    player.GetComponent<Player>().Push_longjump();
                     Set_Back();
                 }
                
@@ -166,7 +166,7 @@ public class Multi_Action_move : MonoBehaviour
                 }
                 else
                 {
-                    //player.GetComponent<Player>().Push_sliding();
+                    player.GetComponent<Player>().Push_sliding();
                     Set_Back();
                 }
               
