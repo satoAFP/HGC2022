@@ -166,11 +166,19 @@ public class MultuAction_Creit : MonoBehaviour
     {
         for (int i = 0; i != 3; i++)
         {
-            if(i==0)
-            yield return new WaitForSeconds(0.1f);
+            if (i == 0)
+                yield return new WaitForSeconds(0.1f);
             else
-            //対象の普通アクションを消す
-            a[i-1].GetComponent<ButtonChoice>().Set_Back();
+            {
+                //対象の普通アクションを消す
+                a[i - 1].GetComponent<ButtonChoice>().Set_Back();
+
+                //煙エフェクトを検索（位置により変更）
+                GameObject efe = AC_button.transform.Find("PS_Smook_Left").gameObject;
+
+                efe.GetComponent<Effect_move>().SetActive(false);
+                efe.GetComponent<Effect_move>().now_onecard = false;
+            }
 
         }
     }
