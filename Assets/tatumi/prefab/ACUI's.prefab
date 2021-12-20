@@ -1148,7 +1148,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1552,7 +1552,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 48
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 7306428390968155148}
   - component: {fileID: 7306428390968155149}
   - component: {fileID: 7306428390968155147}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: PS_front_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6712,7 +6712,7 @@ GameObject:
   - component: {fileID: 7306428391236726817}
   - component: {fileID: 7306428391236726818}
   - component: {fileID: 7306428391236726816}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: PS_front_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11589,7 +11589,7 @@ GameObject:
   - component: {fileID: 7306428391444823420}
   - component: {fileID: 7306428391444823421}
   - component: {fileID: 7306428391444823419}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: PS_Back_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16505,7 +16505,7 @@ GameObject:
   - component: {fileID: 7306428392494797810}
   - component: {fileID: 7306428392494797811}
   - component: {fileID: 7306428392494797809}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: PS_Back_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23074,7 +23074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: 110.6}
+  m_AnchoredPosition: {x: -67, y: 110.6}
   m_SizeDelta: {x: 1018, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7156228579000599807
