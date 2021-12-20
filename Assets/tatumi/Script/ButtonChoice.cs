@@ -228,7 +228,7 @@ public class ButtonChoice : MonoBehaviour
                 if (multi.Length == 0)
                 {
                     if (pos.x == first_x)
-                        this.gameObject.transform.position = new Vector3(17.74148f, pos.y, pos.z);
+                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
                     else if(pos.x > 0.0f)
                     {
                         this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
