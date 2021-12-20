@@ -23,7 +23,7 @@ public class ButtonChoice : MonoBehaviour
     public GameObject Button;
 
     //現在の位置を取得
-    private Vector3 pos;
+    public Vector3 pos;
     private float first_x;//初期位置
 
     //複数人対応
@@ -175,8 +175,8 @@ public class ButtonChoice : MonoBehaviour
                 GameObject newObj = Instantiate(child, this.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
 
-                //0=-90.6f,1=-64.5,2=-38.5f,3=-12.5f//差26
-                newObj.GetComponent<Image_move>().parent_posx = -90.5f+(26.0f*move_num);
+               
+                newObj.GetComponent<Image_move>().parent_posx = -85.5f+(28.0f*move_num);
                 //------------------------------------------------------------------
 
 
@@ -197,7 +197,7 @@ public class ButtonChoice : MonoBehaviour
                 //現在位置取得
                 pos = this.gameObject.transform.position;
 
-                if (pos.x == 3.85f)
+                if (pos.x > 0.0f)
                 {
                     //煙エフェクトを検索（位置により変更）
                     GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
@@ -228,8 +228,8 @@ public class ButtonChoice : MonoBehaviour
                 if (multi.Length == 0)
                 {
                     if (pos.x == first_x)
-                        this.gameObject.transform.position = new Vector3(3.85f, pos.y, pos.z);
-                    else if(pos.x == 3.85f)
+                        this.gameObject.transform.position = new Vector3(17.74148f, pos.y, pos.z);
+                    else if(pos.x > 0.0f)
                     {
                         this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
 
@@ -252,7 +252,7 @@ public class ButtonChoice : MonoBehaviour
                 pos = this.gameObject.transform.position;
 
                 //それぞれの場所でtag付与（マルチクリエイトへ）
-                if (pos.x == 3.85f)
+                if (pos.x == 17.74148f)
                 {
                     this.tag = "Multi_action1";
                 }
