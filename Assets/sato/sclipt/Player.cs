@@ -629,6 +629,8 @@ public class Player : MonoBehaviour
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
+
+            GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
             //SceneManager.LoadScene("Result");
         }
 
