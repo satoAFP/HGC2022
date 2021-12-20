@@ -131,8 +131,6 @@ public class ActionButton_SC : MonoBehaviour
                         multi_des_now--;
                     }
                 }
-            
-            
         }
 
         if (num != -1)
@@ -140,7 +138,7 @@ public class ActionButton_SC : MonoBehaviour
             executed_action[num]++;
             action_num[num]--;
         }
-
+        Debug.Log("thornHit(up)!");
         PL_action_num = num;
     }
 
@@ -159,9 +157,10 @@ public class ActionButton_SC : MonoBehaviour
         {
             if (multi_des[0] != null)
             {
-                multi_des[multi_des_now] = new GameObject();
+                multi_des[multi_des_now] = null;
 
                 multi_des_now--;
+              
             }
             
         }
@@ -169,5 +168,10 @@ public class ActionButton_SC : MonoBehaviour
         if (multi_des_now < 0)
             multi_des_now = 0;
 
+    }
+
+    public void Set_OffActive()
+    {
+        this.gameObject.SetActive(false);
     }
 }
