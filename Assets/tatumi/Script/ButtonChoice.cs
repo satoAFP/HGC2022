@@ -172,7 +172,7 @@ public class ButtonChoice : MonoBehaviour
                 GameObject child = transform.Find("image_move").gameObject;
 
                 //複製、動かす信号を発信
-                GameObject newObj = Instantiate(child, this.transform, false);
+                GameObject newObj = Instantiate(child, ActionButton.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
 
                
@@ -228,7 +228,7 @@ public class ButtonChoice : MonoBehaviour
                 if (multi.Length == 0)
                 {
                     if (pos.x == first_x)
-                        this.gameObject.transform.position = new Vector3(17.74148f, pos.y, pos.z);
+                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
                     else if(pos.x > 0.0f)
                     {
                         this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
@@ -252,7 +252,7 @@ public class ButtonChoice : MonoBehaviour
                 pos = this.gameObject.transform.position;
 
                 //それぞれの場所でtag付与（マルチクリエイトへ）
-                if (pos.x == 17.74148f)
+                if (pos.x > 0.0f)
                 {
                     this.tag = "Multi_action1";
                 }
