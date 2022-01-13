@@ -122,6 +122,7 @@ public class Player : MonoBehaviour
     private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
     private AudioSource audio;          //使用するオーディオソース
     private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
+    private int after_card_order = -1;  //使用した最新のカード情報記憶
 
 
     //構造体-------------------------------------------------------------------
@@ -515,6 +516,9 @@ public class Player : MonoBehaviour
             //一度乗ったアクションブロックは消す
             collision.gameObject.SetActive(false);
 
+            //今のカード処理内容記憶
+            after_card_order = Card_order[0];
+
             //次のアクションのフラグをtrueにする
             switch (Card_order[0]) {
                 case (int)Card.JUMP:
@@ -639,13 +643,15 @@ public class Player : MonoBehaviour
 
 
         //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") {
-            //倍率が変わる
-            run_power = runSpeed;
+        if (collision.gameObject.tag == "Acceleration") 
+        {
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN) 
+            {
+                //倍率が変わる
+                run_power = runSpeed;
+            }
         }
-
-
-        
 
     }
 
@@ -674,14 +680,18 @@ public class Player : MonoBehaviour
         //ジャンプブロックに触れた時
         if (collider.gameObject.tag == "Jumpblock")
         {
-            //ジャンプさせる処理
-            this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
-            //オブジェクト削除
-            Destroy(collider.gameObject);
+                //オブジェクト削除
+                Destroy(collider.gameObject);
 
-            //ジャンプアニメーション移行
-            anim.SetBool("jump", true);
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
         }
     }
 
