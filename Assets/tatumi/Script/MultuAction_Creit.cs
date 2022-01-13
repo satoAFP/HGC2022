@@ -15,8 +15,7 @@ public class MultuAction_Creit : MonoBehaviour
 
     //何があるか取得用配列（上限2）
     private GameObject[] blocks1 = new GameObject[2];
-    private GameObject[] blocks2 = new GameObject[2];
- 
+  
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +35,9 @@ public class MultuAction_Creit : MonoBehaviour
         blocks1 = GameObject.FindGameObjectsWithTag("Multi_action1");
 
         //マルチ作成
-        multi_action(blocks1, 3.85f);
+        multi_action(blocks1, 17.74148f);
 
-        //左2位置にいるやつ全取得
-        blocks2 = GameObject.FindGameObjectsWithTag("Multi_action2");
+       
 
         //オブジェクトの数が二つなら処理開始（カラー用）
         if (blocks1.Length >= 2)
@@ -50,17 +48,7 @@ public class MultuAction_Creit : MonoBehaviour
 
             blocks1 = new GameObject[1];
         }
-        if (blocks2.Length >= 2)
-            multi_oks[1] = multi_OK(blocks2);
-        //それ以外ならnull返す
-        else
-        {
-            multi_oks[1] = "null";
-            blocks2 = new GameObject[1];
-        }
-
-　　　　multi_action(blocks2, 29.7f);
-
+      
     }
 
     private void multi_action(GameObject[] a,float b)
@@ -84,24 +72,13 @@ public class MultuAction_Creit : MonoBehaviour
                 // プレハブを元に、インスタンスを生成、
                 Instantiate(obj, new Vector3(b, 83.19456f, -102.0f), Quaternion.Euler(0, 0, 0), AC_button.transform);
 
-                //位置により起動位置を変更
-                if (b > 5.0f)
-                {
-
-                    //爆発エフェクトを検索（位置により変更）
-                    GameObject efe = AC_button.transform.Find("PS_front_Right").gameObject;
-                    Debug.Log("thornHit(under)! SEFE");
-                    efe.GetComponent<Effect_move>().SetActive(true);
-                    efe.GetComponent<Effect_move>().first_EF = true;
-                }
-                else
-                {
-                    //爆発エフェクトを検索（位置により変更）
-                    GameObject efe = AC_button.transform.Find("PS_front_Left").gameObject;
-                    Debug.Log("thornHit(under)! SEFE");
-                    efe.GetComponent<Effect_move>().SetActive(true);
-                    efe.GetComponent<Effect_move>().first_EF = true;
-                }
+               
+                //爆発エフェクトを検索（位置により変更）
+                GameObject efe = AC_button.transform.Find("PS_front_Left").gameObject;
+               
+                efe.GetComponent<Effect_move>().SetActive(true);
+                efe.GetComponent<Effect_move>().first_EF = true;
+               
             }
             else 
             {
@@ -112,10 +89,15 @@ public class MultuAction_Creit : MonoBehaviour
             
         }
         //それ以下なら
-        else
+        else if(a.Length==1)
         {
-         
+            //煙エフェクトを検索（位置により変更）
+            GameObject efe = AC_button.transform.Find("PS_Smook_Left").gameObject;
+           
+            efe.GetComponent<Effect_move>().SetActive(true);
+            efe.GetComponent<Effect_move>().now_onecard = true;
         }
+       
     }
 
     private string multi_OK(GameObject[] a)
@@ -184,11 +166,19 @@ public class MultuAction_Creit : MonoBehaviour
     {
         for (int i = 0; i != 3; i++)
         {
-            if(i==0)
-            yield return new WaitForSeconds(0.1f);
+            if (i == 0)
+                yield return new WaitForSeconds(0.1f);
             else
-            //対象の普通アクションを消す
-            a[i-1].GetComponent<ButtonChoice>().Set_Back();
+            {
+                //対象の普通アクションを消す
+                a[i - 1].GetComponent<ButtonChoice>().Set_Back();
+
+                //煙エフェクトを検索（位置により変更）
+                GameObject efe = AC_button.transform.Find("PS_Smook_Left").gameObject;
+
+                efe.GetComponent<Effect_move>().SetActive(false);
+                efe.GetComponent<Effect_move>().now_onecard = false;
+            }
 
         }
     }
