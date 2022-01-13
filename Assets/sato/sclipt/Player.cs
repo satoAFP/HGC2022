@@ -84,7 +84,9 @@ public class Player : MonoBehaviour
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
     [Header("ここから下は触らない--------------")]
-    public bool Movestop = true;
+    public bool Movestop = true;        //主人公が動くかどうか
+
+    public bool count_check = false;    //最初のカウントが終わるとき判定をとる
 
     [Header("王冠取得判定用")]
     public int clown_get = 0;
@@ -120,6 +122,7 @@ public class Player : MonoBehaviour
     private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
     private AudioSource audio;          //使用するオーディオソース
     private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
+    private int after_card_order = -1;  //使用した最新のカード情報記憶
 
 
     //構造体-------------------------------------------------------------------
@@ -201,8 +204,9 @@ public class Player : MonoBehaviour
             if (start_time_count == start_time)
             {
                 start_time_text.gameObject.SetActive(false);
+                count_check = true; //pauseに判定を送る
                 Movestop = false;   //アクションループのメイン部分を動かす
-                Select_order = 0;  //アクションブロックに乗った時、最初に加算されてしまうから-1
+                Select_order = 0;   //アクションブロックに乗った時、最初に加算されてしまうから-1
                 select_time = false;//アクション開始するとカードを選択できない
             }
             //60フレーム毎に１秒減らす
@@ -512,6 +516,9 @@ public class Player : MonoBehaviour
             //一度乗ったアクションブロックは消す
             collision.gameObject.SetActive(false);
 
+            //今のカード処理内容記憶
+            after_card_order = Card_order[0];
+
             //次のアクションのフラグをtrueにする
             switch (Card_order[0]) {
                 case (int)Card.JUMP:
@@ -636,9 +643,14 @@ public class Player : MonoBehaviour
 
 
         //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") {
-            //倍率が変わる
-            run_power = runSpeed;
+        if (collision.gameObject.tag == "Acceleration") 
+        {
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN) 
+            {
+                //倍率が変わる
+                run_power = runSpeed;
+            }
         }
 
     }
@@ -658,10 +670,28 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
             clown_get++;
             Destroy(collider.gameObject);
+        }
+
+        //ジャンプブロックに触れた時
+        if (collider.gameObject.tag == "Jumpblock")
+        {
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+                //オブジェクト削除
+                Destroy(collider.gameObject);
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
         }
     }
 
