@@ -646,7 +646,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Acceleration") 
         {
             if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN) 
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
             {
                 //”{—¦‚ª•Ï‚í‚é
                 run_power = runSpeed;
@@ -681,7 +681,7 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "Jumpblock")
         {
             if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN)
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
             {
                 //ƒWƒƒƒ“ƒv‚³‚¹‚éˆ—
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
