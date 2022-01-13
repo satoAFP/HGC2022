@@ -644,6 +644,9 @@ public class Player : MonoBehaviour
             run_power = runSpeed;
         }
 
+
+        
+
     }
 
 
@@ -661,10 +664,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
             clown_get++;
             Destroy(collider.gameObject);
+        }
+
+        //ジャンプブロックに触れた時
+        if (collider.gameObject.tag == "Jumpblock")
+        {
+            //ジャンプさせる処理
+            this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+            //オブジェクト削除
+            Destroy(collider.gameObject);
+
+            //ジャンプアニメーション移行
+            anim.SetBool("jump", true);
         }
     }
 
