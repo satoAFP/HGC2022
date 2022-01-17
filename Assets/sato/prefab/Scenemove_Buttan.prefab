@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName:
   - scenename
+  stage_num: 20
   clown: {fileID: 0}
   mission: {fileID: 0}
 --- !u!114 &2675045813534978051
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 0
+  stop_pos: 0
 --- !u!1 &6699729606093206795
 GameObject:
   m_ObjectHideFlags: 0

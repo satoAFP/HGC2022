@@ -1070,6 +1070,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SE_manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4160750643599472293, guid: b10389ccab8daab4081d80a7b7e953d9, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160750643599472293, guid: b10389ccab8daab4081d80a7b7e953d9, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bc96491da39cf534a86ea8f00caf2bb2, type: 3}
     - target: {fileID: 4706177968844810074, guid: b10389ccab8daab4081d80a7b7e953d9, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1665,6 +1673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: []
+  stage_num: 0
   clown: {fileID: 0}
   mission: {fileID: 0}
 --- !u!4 &840648001
@@ -2041,6 +2050,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: se_card
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: se_action
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: se_start_count
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4428356768424044608, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_RootOrder
       value: 1
