@@ -31,7 +31,7 @@ public class DeletAction : MonoBehaviour
         now = 0;
         all_multi_flag = 0;
        // multi_now = 1;
-        multi_backflag = false;
+        multi_backflag = true;
     }
 
     // Update is called once per frame
