@@ -657,14 +657,21 @@ public class Player : MonoBehaviour
         //ジャンプブロックに触れた時
         if (collision.gameObject.tag == "Jumpblock")
         {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
+            //オブジェクト削除
+            Destroy(collision.gameObject);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.STICK || 
+                after_card_order == (int)Card.RUN || after_card_order == -1)
             {
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
-                //オブジェクト削除
-                Destroy(collision.gameObject);
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+            else if (after_card_order == (int)Card.SQUAT)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
 
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);

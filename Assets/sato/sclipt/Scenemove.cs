@@ -97,7 +97,7 @@ public class Scenemove : MonoBehaviour
         for (int i = 1; i <= stage_num - 1; i++) 
         {
             if (Scene_num == i)
-                SceneManager.LoadScene("Stage" + i + 1);
+                SceneManager.LoadScene("Stage" + (i + 1));
         }
 
         if (Scene_num == stage_num)
@@ -116,5 +116,10 @@ public class Scenemove : MonoBehaviour
                 SceneManager.LoadScene("Stage" + i);
         }
 
+    }
+
+    public void PushNowScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
