@@ -648,6 +648,7 @@ public class Player : MonoBehaviour
             if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
                 after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
             {
+                Debug.Log("aaaa"+ after_card_order);
                 //”{—¦‚ª•Ï‚í‚é
                 run_power = runSpeed;
             }
