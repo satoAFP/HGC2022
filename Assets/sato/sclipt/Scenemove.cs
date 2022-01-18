@@ -68,7 +68,7 @@ public class Scenemove : MonoBehaviour
                     }
                     if(clown.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
                     {
-                        GameObject a = Instantiate(clown_cracker, this.transform.position, Quaternion.identity);
+                        GameObject a = Instantiate(clown_cracker, GameObject.Find("cracker").transform.position, Quaternion.identity);
                         a.transform.parent = GameObject.Find("cracker").transform;
                     }
                 }
@@ -83,9 +83,9 @@ public class Scenemove : MonoBehaviour
                     {
                         mission.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 24.0f);
                     }
-                    if (clown.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
+                    if (mission.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
                     {
-                        GameObject b = Instantiate(mission_cracker, this.transform.position, Quaternion.identity);
+                        GameObject b = Instantiate(mission_cracker, GameObject.Find("cracker2").transform.position, Quaternion.identity);
                         b.transform.parent = GameObject.Find("cracker2").transform;
                     }
                 }
