@@ -16,6 +16,11 @@ public class Scenemove : MonoBehaviour
     [Header("ミッション")]
     public GameObject mission;
 
+    [Header("王冠紙吹雪")]
+    public GameObject clown_cracker;
+    [Header("ミッション紙吹雪")]
+    public GameObject mission_cracker;
+
     static public int Scene_num = 0;
 
     static public bool Clown_OK = false;
@@ -24,6 +29,10 @@ public class Scenemove : MonoBehaviour
     private int clown_time = 0;
     private int mission_time = 0;
 
+    void Start()
+    {
+        
+    }
 
     void FixedUpdate() 
     {
@@ -57,6 +66,11 @@ public class Scenemove : MonoBehaviour
                     {
                         clown.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 21.0f);
                     }
+                    if(clown.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
+                    {
+                        GameObject a = Instantiate(clown_cracker, this.transform.position, Quaternion.identity);
+                        a.transform.parent = GameObject.Find("cracker").transform;
+                    }
                 }
             }
             if (Mission_OK == true)
@@ -68,6 +82,11 @@ public class Scenemove : MonoBehaviour
                     if (mission.gameObject.GetComponent<RectTransform>().sizeDelta.x > 240.0f)
                     {
                         mission.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 24.0f);
+                    }
+                    if (clown.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
+                    {
+                        GameObject b = Instantiate(mission_cracker, this.transform.position, Quaternion.identity);
+                        b.transform.parent = GameObject.Find("cracker2").transform;
                     }
                 }
             }
