@@ -642,18 +642,6 @@ public class Player : MonoBehaviour
         }
 
 
-        //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") 
-        {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
-            {
-                Debug.Log("aaaa"+ after_card_order);
-                //倍率が変わる
-                run_power = runSpeed;
-            }
-        }
-
 
         //ジャンプブロックに触れた時
         if (collision.gameObject.tag == "Jumpblock")
@@ -700,6 +688,19 @@ public class Player : MonoBehaviour
         {
             clown_get++;
             Destroy(collider.gameObject);
+        }
+
+        //加速床の処理
+        if (collider.gameObject.tag == "Acceleration")
+        {
+            //オブジェクト削除
+            Destroy(collider.gameObject);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
+            {
+                //倍率が変わる
+                run_power = runSpeed;
+            }
         }
 
     }
