@@ -182,7 +182,7 @@ public class HelpText : MonoBehaviour
         }
         else if (Helpmode == 4)
         {
-            if (nowtext > Endchar[3])
+            if (nowtext < Endchar[3])
                 nowtext = Endchar[3];
 
             if (nowtext > Endchar[Helpmode] - 1)
