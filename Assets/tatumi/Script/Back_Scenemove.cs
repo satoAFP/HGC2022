@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//いらないscript?
 public class Back_Scenemove : MonoBehaviour
 {
    
@@ -18,7 +19,7 @@ public class Back_Scenemove : MonoBehaviour
         ActionButton = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         script = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
-        Back_Stage = script.NowStage;
+       // Back_Stage = script.NowStage;
     }
 
 
