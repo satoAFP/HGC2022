@@ -653,6 +653,23 @@ public class Player : MonoBehaviour
             }
         }
 
+
+        //ジャンプブロックに触れた時
+        if (collision.gameObject.tag == "Jumpblock")
+        {
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+                //オブジェクト削除
+                Destroy(collision.gameObject);
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+        }
     }
 
 
@@ -677,22 +694,6 @@ public class Player : MonoBehaviour
             Destroy(collider.gameObject);
         }
 
-        //ジャンプブロックに触れた時
-        if (collider.gameObject.tag == "Jumpblock")
-        {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
-            {
-                //ジャンプさせる処理
-                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-
-                //オブジェクト削除
-                Destroy(collider.gameObject);
-
-                //ジャンプアニメーション移行
-                anim.SetBool("jump", true);
-            }
-        }
     }
 
 
