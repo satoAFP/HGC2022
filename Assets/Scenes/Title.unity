@@ -747,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 07871ad91cab0bd4e95c310635e84c9b, type: 3}
     - target: {fileID: 7606653512666076149, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: SceneName.Array.data[0]
-      value: StageSelect
+      value: HelpStage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
@@ -1676,6 +1676,8 @@ MonoBehaviour:
   stage_num: 0
   clown: {fileID: 0}
   mission: {fileID: 0}
+  clown_cracker: {fileID: 0}
+  mission_cracker: {fileID: 0}
 --- !u!4 &840648001
 Transform:
   m_ObjectHideFlags: 0
