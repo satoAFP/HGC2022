@@ -678,6 +678,9 @@ public class Player : MonoBehaviour
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
 
+                //ギミック使用時初期化
+                after_card_order = -1;
+
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);
             }

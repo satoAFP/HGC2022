@@ -34,13 +34,22 @@ public class Cracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        power.x -= (origin_power.x / move_time);
-        power.y -= (origin_power.y / move_time);
-        this.gameObject.GetComponent<RectTransform>().position += power;
+        
 
-        if (power.y <= 0) 
+        if (power.y >= 0) 
         {
-            Destroy(this.gameObject);
+            power.x -= (origin_power.x / move_time);
+            power.y -= 2 * (origin_power.y / move_time);
+            this.gameObject.GetComponent<RectTransform>().position += power;
+        }
+        else
+        {
+            power.y -= 0.05f;
+            this.gameObject.GetComponent<RectTransform>().position += power;
+            if (this.gameObject.GetComponent<RectTransform>().position.y <= -280)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }
