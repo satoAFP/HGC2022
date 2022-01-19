@@ -77,6 +77,9 @@ public class Player : MonoBehaviour
     [Header("アクション時のSE")]
     public AudioClip se_action;
 
+    [Header("王冠取得時のSE")]
+    public AudioClip se_clown;
+
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
 
@@ -705,6 +708,9 @@ public class Player : MonoBehaviour
         //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
+            //SE流す
+            audio.PlayOneShot(se_clown);
+
             clown_get++;
             Destroy(collider.gameObject);
         }
