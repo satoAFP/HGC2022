@@ -94,6 +94,9 @@ public class Player : MonoBehaviour
     [Header("ミッション判定用")]
     public int[] Use_Card_Amount;
 
+    [Header("幅跳び引っかかる問題")]
+    public bool Longjump_check = false;
+
 
     //private変数--------------------------------------------------------------
     private Vector3 push;               //加算したいベクトル量
@@ -284,7 +287,8 @@ public class Player : MonoBehaviour
 
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+            Around_collision[1].GetComponent<Around_collider>().wall_check == true ||
+            Around_collision[2].GetComponent<Around_collider>().wall_check == true) {
             around_collision_check = true;
 
             //左右それぞれ壁に触れているときの見た目を調整
@@ -296,8 +300,18 @@ public class Player : MonoBehaviour
                 sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
+
+            //幅跳び選択時、ジャンプブロックに引っかかる問題解決
+            if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+            {
+                if (after_card_order == (int)Card.LONGJUMP)
+                {
+                    Longjump_check = true;
+                }
+            }
         }
-        else {
+        else 
+        {
             around_collision_check = false;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -638,33 +652,34 @@ public class Player : MonoBehaviour
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
 
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
-            //SceneManager.LoadScene("Result");
         }
 
-
-        //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") 
-        {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
-            {
-                //倍率が変わる
-                run_power = runSpeed;
-            }
-        }
 
 
         //ジャンプブロックに触れた時
         if (collision.gameObject.tag == "Jumpblock")
         {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
+            //オブジェクト削除
+            Destroy(collision.gameObject);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.STICK || 
+                after_card_order == (int)Card.RUN || after_card_order == -1)
             {
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
-                //オブジェクト削除
-                Destroy(collision.gameObject);
+                //ギミック使用時初期化
+                after_card_order = -1;
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+            else if (after_card_order == (int)Card.SQUAT)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
+
+                //ギミック使用時初期化
+                after_card_order = -1;
 
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);
@@ -692,6 +707,22 @@ public class Player : MonoBehaviour
         {
             clown_get++;
             Destroy(collider.gameObject);
+        }
+
+        //加速床の処理
+        if (collider.gameObject.tag == "Acceleration")
+        {
+            //オブジェクト削除
+            Destroy(collider.gameObject);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
+            {
+                //倍率が変わる
+                run_power = runSpeed;
+
+                //ギミック使用時初期化
+                after_card_order = -1;
+            }
         }
 
     }

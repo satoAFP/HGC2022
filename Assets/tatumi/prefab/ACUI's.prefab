@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1116,8 +1116,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName:
   - StageSelect
+  stage_num: 0
   clown: {fileID: 0}
   mission: {fileID: 0}
+  clown_cracker: {fileID: 0}
+  mission_cracker: {fileID: 0}
 --- !u!1 &2674099071589392094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1412,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2985,7 +2988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -28227,6 +28230,18 @@ MonoBehaviour:
   - {fileID: 4841163913374055748}
   - {fileID: 4841163912071740447}
   Button: {fileID: 4841163912594594805}
+  multi_des:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   PL_action_num: 0
 --- !u!114 &7443540127438506264
 MonoBehaviour:
@@ -28729,7 +28744,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -28753,7 +28768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1308512304243664338}
         m_TargetAssemblyTypeName: Scenemove, Assembly-CSharp
-        m_MethodName: PushRetryScene
+        m_MethodName: PushNowScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28776,8 +28791,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: []
+  stage_num: 0
   clown: {fileID: 0}
   mission: {fileID: 0}
+  clown_cracker: {fileID: 0}
+  mission_cracker: {fileID: 0}
 --- !u!1 &9133722272440255316
 GameObject:
   m_ObjectHideFlags: 0
@@ -28838,7 +28856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
