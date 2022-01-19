@@ -10,10 +10,15 @@ public class Side_move_UI : MonoBehaviour
     [Header("横に動くポジション")]
     public float stop_pos;
 
+    [Header("カーソル合わせた時のSE")]
+    public AudioClip pic;
+
     private Vector3 mp;         //マウスのポジション
     private Vector3 mem_pos;    //このオブジェクトの初期位置記憶
     private Vector3 pos;        //このオブジェクトの位置
     private Vector2 size;       //このオブジェクトのサイズ
+    private AudioSource audio;  //使用するオーディオソース
+    private bool first = true;  //一回しか処理をしない
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +26,8 @@ public class Side_move_UI : MonoBehaviour
         mem_pos = this.gameObject.GetComponent<RectTransform>().position;
         pos = this.gameObject.GetComponent<RectTransform>().position;
         size = this.gameObject.GetComponent<RectTransform>().sizeDelta;
+
+        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +43,12 @@ public class Side_move_UI : MonoBehaviour
             {
                 pos.x -= move_speed;
                 this.gameObject.GetComponent<RectTransform>().position = pos;
+
+                if (first)
+                {
+                    audio.PlayOneShot(pic);
+                    first = false;
+                }
             }
         }
         else
@@ -45,6 +58,7 @@ public class Side_move_UI : MonoBehaviour
                 pos.x += move_speed;
                 this.gameObject.GetComponent<RectTransform>().position = pos;
             }
+            first = true;
         }
 
         

@@ -642,6 +642,10 @@ PrefabInstance:
       value: -125.98993
       objectReference: {fileID: 0}
     - target: {fileID: 2675045813534978051, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
+      propertyPath: pic
+      value: 
+      objectReference: {fileID: 8300000, guid: f5f7d4c42993f784397701c2661fb6cd, type: 3}
+    - target: {fileID: 2675045813534978051, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: stop_pos
       value: 900
       objectReference: {fileID: 0}
@@ -745,6 +749,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 07871ad91cab0bd4e95c310635e84c9b, type: 3}
+    - target: {fileID: 7606653512666076149, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
+      propertyPath: pic
+      value: 
+      objectReference: {fileID: 8300000, guid: d47619fbf9b89834f9fc407bd8bd1df8, type: 3}
     - target: {fileID: 7606653512666076149, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: SceneName.Array.data[0]
       value: StageSelect
@@ -1072,7 +1080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160750643599472293, guid: b10389ccab8daab4081d80a7b7e953d9, type: 3}
       propertyPath: m_Volume
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4160750643599472293, guid: b10389ccab8daab4081d80a7b7e953d9, type: 3}
       propertyPath: m_audioClip
@@ -1383,6 +1391,10 @@ PrefabInstance:
       value: -143.85907
       objectReference: {fileID: 0}
     - target: {fileID: 2675045813534978051, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
+      propertyPath: pic
+      value: 
+      objectReference: {fileID: 8300000, guid: f5f7d4c42993f784397701c2661fb6cd, type: 3}
+    - target: {fileID: 2675045813534978051, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: stop_pos
       value: 950
       objectReference: {fileID: 0}
@@ -1486,6 +1498,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 07871ad91cab0bd4e95c310635e84c9b, type: 3}
+    - target: {fileID: 7606653512666076149, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
+      propertyPath: pic
+      value: 
+      objectReference: {fileID: 8300000, guid: d47619fbf9b89834f9fc407bd8bd1df8, type: 3}
     - target: {fileID: 7606653512666076149, guid: 5f34ccd7967e025479c4e8e68019cc3b, type: 3}
       propertyPath: SceneName.Array.data[0]
       value: StageSelect
@@ -1676,6 +1692,9 @@ MonoBehaviour:
   stage_num: 0
   clown: {fileID: 0}
   mission: {fileID: 0}
+  clown_cracker: {fileID: 0}
+  mission_cracker: {fileID: 0}
+  pic: {fileID: 0}
 --- !u!4 &840648001
 Transform:
   m_ObjectHideFlags: 0
