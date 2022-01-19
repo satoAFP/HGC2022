@@ -3558,6 +3558,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6016483112066176924, guid: 9ed72361b24263147837de4cce35389b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6016483112066176925, guid: 9ed72361b24263147837de4cce35389b, type: 3}
       propertyPath: m_Name
       value: Acceleration_block
