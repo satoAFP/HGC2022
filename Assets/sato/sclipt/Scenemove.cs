@@ -112,7 +112,7 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
         SceneManager.LoadScene(SceneName[0]);
-        audio.PlayOneShot(pic);
+        audio.PlayOneShot(pic);Debug.Log("aaa");
     }
 
     //ネクストステージボタン
