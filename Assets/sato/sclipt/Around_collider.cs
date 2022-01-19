@@ -7,24 +7,43 @@ public class Around_collider : MonoBehaviour
     public bool wall_check = false;          //éÂêlåˆÇÃé¸ÇËÇ≈îªíËéÊÇÈóp
 
     // Start is called before the first frame update
-    void Start() {
+    void Start() 
+    {
         
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update() 
+    {
 
+        
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
     }
 
     private void OnTriggerStay(Collider collider) {
-        if (collider.tag == "Wall") {
+        if (collider.tag == "Wall")
+        {
             wall_check = true;
+        }
+        if (collider.tag == "Jumpblock")
+        {
+            wall_check = true;
+
+            if (GameObject.Find("Player").GetComponent<Player>().Longjump_check == true)
+            {
+                Destroy(collider.gameObject);
+            }
         }
     }
 
     private void OnTriggerExit(Collider collider) {
-        if (collider.tag == "Wall") {
+        if (collider.tag == "Wall") 
+        {
             wall_check = false;
+            GameObject.Find("Player").GetComponent<Player>().Longjump_check = false;
         }
     }
 }
