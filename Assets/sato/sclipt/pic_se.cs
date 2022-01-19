@@ -36,9 +36,11 @@ public class pic_se : MonoBehaviour
     {
         //マウスのポジション更新
         mp = Input.mousePosition;
-        //Debug.Log("" + mp);
 
-        if (mp.x > 100 && mp.x < 320 && mp.y > 50 && mp.y < 130) 
+        //音のなる座標
+        if (mp.x > 100 && mp.x < 320 && mp.y > 50 && mp.y < 130 ||
+            mp.x > 400 && mp.x < 620 && mp.y > 50 && mp.y < 130 ||
+            mp.x > 700 && mp.x < 920 && mp.y > 50 && mp.y < 130) 
         {
             if (first)
             {
@@ -51,14 +53,5 @@ public class pic_se : MonoBehaviour
             first = true;
         }
 
-        if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
-            (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
-        {
-            //Debug.Log("" + this.gameObject.GetComponent<RectTransform>().position);
-        }
-        else
-        {
-            
-        }
     }
 }

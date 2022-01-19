@@ -46,7 +46,8 @@ public class Side_move_UI : MonoBehaviour
 
                 if (first)
                 {
-                    audio.PlayOneShot(pic);//Debug.Log("" + this.gameObject.GetComponent<RectTransform>().position+mp);
+                    audio.PlayOneShot(pic);
+                    Debug.Log("" + this.gameObject.GetComponent<RectTransform>().position+mp);
                     first = false;
                 }
             }
