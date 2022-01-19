@@ -21,7 +21,7 @@ public class Scenemove : MonoBehaviour
     [Header("ミッション紙吹雪")]
     public GameObject mission_cracker;
 
-    [Header("カーソル合わせた時のSE")]
+    [Header("クリック時のSE")]
     public AudioClip pic;
 
     static public int Scene_num = 0;
@@ -58,7 +58,7 @@ public class Scenemove : MonoBehaviour
             else
                 Mission_OK = false;
         }
-
+        
         if (SceneManager.GetActiveScene().name == "Result")
         {
             clown_time++;
