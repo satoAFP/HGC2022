@@ -77,6 +77,9 @@ public class Player : MonoBehaviour
     [Header("アクション時のSE")]
     public AudioClip se_action;
 
+    [Header("王冠取得時のSE")]
+    public AudioClip se_clown;
+
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
 
@@ -288,15 +291,18 @@ public class Player : MonoBehaviour
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
             Around_collision[1].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[2].GetComponent<Around_collider>().wall_check == true) {
-            around_collision_check = true;
-
+            Around_collision[2].GetComponent<Around_collider>().wall_check == true) 
+        {
             //左右それぞれ壁に触れているときの見た目を調整
-            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
             }
-            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
@@ -589,7 +595,8 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
-            
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //アクション再選択
@@ -645,6 +652,9 @@ public class Player : MonoBehaviour
 
             //走る状態解除
             run_power = 1.0f;
+
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //ゴール処理　リザルトに飛ぶ
@@ -705,6 +715,9 @@ public class Player : MonoBehaviour
         //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
+            //SE流す
+            audio.PlayOneShot(se_clown);
+
             clown_get++;
             Destroy(collider.gameObject);
         }
