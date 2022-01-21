@@ -380,6 +380,9 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.SQUAT] == true) {
                     //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
+                    //しゃがみ処理終了
+                    Action_check[(int)Card.SQUAT] = false;
                 }
 
 
@@ -421,7 +424,7 @@ public class Player : MonoBehaviour
                     run_power = runSpeed;
 
                     //ジャンプアニメーション移行
-                    anim.SetBool("run", true);
+                    //anim.SetBool("run", true);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -685,6 +688,9 @@ public class Player : MonoBehaviour
             }
             else if (after_card_order == (int)Card.SQUAT)
             {
+                //元のサイズに変更
+                this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
 
