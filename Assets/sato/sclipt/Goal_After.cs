@@ -44,7 +44,14 @@ public class Goal_After : MonoBehaviour
                 jump_num--;
                 if (jump_num == 0) 
                 {
-                    GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+                    if (SceneManager.GetActiveScene().name == "HelpStage")
+                    {
+                        SceneManager.LoadScene("Title");
+                    }
+                    else
+                    {
+                        GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+                    }
                 }
 
                 //ƒWƒƒƒ“ƒv‚³‚¹‚éˆ—
