@@ -227,7 +227,7 @@ public class ButtonChoice : MonoBehaviour
 
                 if (multi.Length == 0)
                 {
-                    if (pos.x == first_x)
+                    if (pos.x >= first_x-1.0f&&pos.x<=first_x+1.0f)
                         this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
                     else if(pos.x > 0.0f)
                     {
