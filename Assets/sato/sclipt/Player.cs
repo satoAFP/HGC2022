@@ -55,6 +55,15 @@ public class Player : MonoBehaviour
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
 
+    [Header("落下判定とってからの死ぬまでの時間")]
+    public int fall_deth_time;
+
+    [Header("死亡エフェクト")]
+    public GameObject Deth_efect;
+
+    [Header("死亡エフェクトが出た時消す主人公スキン")]
+    public GameObject Delete_skin;
+
     [Header("ゲームが始まるカウントを表示するテキスト")]
     public Text start_time_text;
 
@@ -129,6 +138,7 @@ public class Player : MonoBehaviour
     private AudioSource audio;          //使用するオーディオソース
     private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
     private int after_card_order = -1;  //使用した最新のカード情報記憶
+    private bool fall_deth_flag = false;//落下で死亡時trueになる
 
 
     //構造体-------------------------------------------------------------------
@@ -349,6 +359,16 @@ public class Player : MonoBehaviour
             if (stop_check == this.gameObject.transform.position)
             {
                 stop_time_count++;
+
+                if (stop_deth_time - (stop_deth_time / 2) == stop_time_count) 
+                {
+                    //死亡時のエフェクト
+                    Deth_efect.SetActive(true);
+                    Delete_skin.SetActive(false);Debug.Log("aaa");
+
+                    //SE流す
+                    audio.PlayOneShot(se_action);
+                }
                 if (stop_deth_time == stop_time_count)
                 {
                     stop_time_count = 0;
@@ -500,6 +520,28 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        //落下死亡判定時のエフェクト
+        if (fall_deth_flag)
+        {
+            stop_time_count++;
+
+            if (fall_deth_time - 50 == stop_time_count)
+            {
+                //死亡時のエフェクト
+                Deth_efect.SetActive(true);
+                Delete_skin.SetActive(false);
+                
+                //SE流す
+                audio.PlayOneShot(se_action);
+            }
+            if (fall_deth_time == stop_time_count)
+            {
+                stop_time_count = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
     }
     
 
@@ -746,10 +788,12 @@ public class Player : MonoBehaviour
 
     }
 
-
+    //死亡処理
     private void OnTriggerExit(Collider collider) {
         if (collider.gameObject.tag == "safe_zone") {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            fall_deth_flag = true;
+            
         }
     }
 
