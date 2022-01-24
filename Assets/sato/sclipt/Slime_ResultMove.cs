@@ -38,17 +38,18 @@ public class Slime_ResultMove : MonoBehaviour
     {
         if (goal_move)
         {
+            Debug.Log("aaa");
             //背景移動処理
             pos.x += move_speed;
             this.gameObject.GetComponent<RectTransform>().position = pos;
-
-            if (first)
-            {
-                //SE流す
-                audio.PlayOneShot(pic);
-                first = false;
-            }
-
+            Debug.Log("bbb");
+            //if (first)
+            //{
+            //    //SE流す
+            //    audio.PlayOneShot(pic);
+            //    first = false;
+            //}
+            Debug.Log("ccc");
             //位置が中心に来た時、リザルトへ移動
             if (this.gameObject.GetComponent<RectTransform>().localPosition.x > 0)  
             {
@@ -64,6 +65,7 @@ public class Slime_ResultMove : MonoBehaviour
                 pos = mem_pos;
                 goal_move = false;
             }
+            Debug.Log("ddd");
         }
     }
 }
