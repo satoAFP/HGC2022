@@ -706,6 +706,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Goal") {
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
 
+            Destroy(collision.gameObject);
+
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
         }
 
