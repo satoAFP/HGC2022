@@ -196,6 +196,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() 
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+        }
+        else
+        {
+            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
         //スタート処理-------------------------------------------------
         //インスペクターで設定した秒数待ってスタート
         if (Movestop == true)
@@ -360,6 +368,9 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.SQUAT] == true) {
                     //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
+                    //しゃがみ状態解除
+                    Action_check[(int)Card.SQUAT] = false;
                 }
 
 
@@ -507,6 +518,9 @@ public class Player : MonoBehaviour
             //着地判定
             anim.SetBool("jump", false);
 
+            //着地時、初期化
+            after_card_order = -1;
+
         }
 
 
@@ -575,7 +589,6 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
-            
         }
 
         //アクション再選択
@@ -619,9 +632,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "action_delete") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-            //しゃがみ状態解除
-            Action_check[(int)Card.SQUAT] = false;
 
             //くっつき状態解除
             Action_check[(int)Card.STICK] = false;
@@ -676,18 +686,19 @@ public class Player : MonoBehaviour
             clown_get++;
             Destroy(collider.gameObject);
         }
-
+        Debug.Log("a" + push);
         //ジャンプブロックに触れた時
         if (collider.gameObject.tag == "Jumpblock")
         {
+            Debug.Log("c" + push);
             if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
+                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
             {
-                //ジャンプさせる処理
-                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-
                 //オブジェクト削除
                 Destroy(collider.gameObject);
+
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
 
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);
