@@ -77,6 +77,9 @@ public class Player : MonoBehaviour
     [Header("アクション時のSE")]
     public AudioClip se_action;
 
+    [Header("王冠取得時のSE")]
+    public AudioClip se_clown;
+
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
 
@@ -93,6 +96,9 @@ public class Player : MonoBehaviour
 
     [Header("ミッション判定用")]
     public int[] Use_Card_Amount;
+
+    [Header("幅跳び引っかかる問題")]
+    public bool Longjump_check = false;
 
 
     //private変数--------------------------------------------------------------
@@ -196,14 +202,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() 
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
-        }
-        else
-        {
-            this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
         //スタート処理-------------------------------------------------
         //インスペクターで設定した秒数待ってスタート
         if (Movestop == true)
@@ -292,20 +290,34 @@ public class Player : MonoBehaviour
 
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
-            around_collision_check = true;
-
+            Around_collision[1].GetComponent<Around_collider>().wall_check == true ||
+            Around_collision[2].GetComponent<Around_collider>().wall_check == true) 
+        {
             //左右それぞれ壁に触れているときの見た目を調整
-            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
             }
-            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
+
+            //幅跳び選択時、ジャンプブロックに引っかかる問題解決
+            if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+            {
+                if (after_card_order == (int)Card.LONGJUMP)
+                {
+                    Longjump_check = true;
+                }
+            }
         }
-        else {
+        else 
+        {
             around_collision_check = false;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -369,7 +381,7 @@ public class Player : MonoBehaviour
                     //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
 
-                    //しゃがみ状態解除
+                    //しゃがみ処理終了
                     Action_check[(int)Card.SQUAT] = false;
                 }
 
@@ -412,7 +424,7 @@ public class Player : MonoBehaviour
                     run_power = runSpeed;
 
                     //ジャンプアニメーション移行
-                    anim.SetBool("run", true);
+                    //anim.SetBool("run", true);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -518,9 +530,6 @@ public class Player : MonoBehaviour
             //着地判定
             anim.SetBool("jump", false);
 
-            //着地時、初期化
-            after_card_order = -1;
-
         }
 
 
@@ -589,6 +598,8 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //アクション再選択
@@ -633,6 +644,9 @@ public class Player : MonoBehaviour
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+            //しゃがみ状態解除
+            Action_check[(int)Card.SQUAT] = false;
+
             //くっつき状態解除
             Action_check[(int)Card.STICK] = false;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
@@ -641,6 +655,9 @@ public class Player : MonoBehaviour
 
             //走る状態解除
             run_power = 1.0f;
+
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //ゴール処理　リザルトに飛ぶ
@@ -648,21 +665,42 @@ public class Player : MonoBehaviour
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
 
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
-            //SceneManager.LoadScene("Result");
         }
 
 
-        //加速床の処理
-        if (collision.gameObject.tag == "Acceleration") 
+
+        //ジャンプブロックに触れた時
+        if (collision.gameObject.tag == "Jumpblock")
         {
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
-                after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1) 
+            //オブジェクト削除
+            Destroy(collision.gameObject);
+            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.STICK || 
+                after_card_order == (int)Card.RUN || after_card_order == -1)
             {
-                //倍率が変わる
-                run_power = runSpeed;
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
+
+                //ギミック使用時初期化
+                after_card_order = -1;
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+            else if (after_card_order == (int)Card.SQUAT)
+            {
+                //元のサイズに変更
+                this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
+
+                //ギミック使用時初期化
+                after_card_order = -1;
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
             }
         }
-
     }
 
 
@@ -683,27 +721,29 @@ public class Player : MonoBehaviour
         //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
+            //SE流す
+            audio.PlayOneShot(se_clown);
+
             clown_get++;
             Destroy(collider.gameObject);
         }
-        Debug.Log("a" + push);
-        //ジャンプブロックに触れた時
-        if (collider.gameObject.tag == "Jumpblock")
+
+        //加速床の処理
+        if (collider.gameObject.tag == "Acceleration")
         {
-            Debug.Log("c" + push);
+            //オブジェクト削除
+            Destroy(collider.gameObject);
             if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.SQUAT ||
                 after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
             {
-                //オブジェクト削除
-                Destroy(collider.gameObject);
+                //倍率が変わる
+                run_power = runSpeed;
 
-                //ジャンプさせる処理
-                this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
-
-                //ジャンプアニメーション移行
-                anim.SetBool("jump", true);
+                //ギミック使用時初期化
+                after_card_order = -1;
             }
         }
+
     }
 
 

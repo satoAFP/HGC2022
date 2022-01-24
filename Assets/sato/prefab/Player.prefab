@@ -44,7 +44,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: -0.6, y: 0, z: 0}
+  m_Center: {x: -1, y: 0, z: 0}
 --- !u!114 &4428356767687535610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,10 +271,13 @@ MonoBehaviour:
   sura_model: {fileID: 7397928891541518496}
   se_card: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
   se_action: {fileID: 8300000, guid: 33a04f6d902b240448bba95bbc54b1ba, type: 3}
+  se_clown: {fileID: 8300000, guid: 82c9239221e103645a273e66a123e08e, type: 3}
   se_start_count: {fileID: 8300000, guid: 75aced91e12237f49b1b9e834149065a, type: 3}
   Movestop: 1
+  count_check: 0
   clown_get: 0
   Use_Card_Amount: 0000000000000000000000000000000000000000000000000000000000000000
+  Longjump_check: 0
 --- !u!114 &98788500940316434
 MonoBehaviour:
   m_ObjectHideFlags: 0
