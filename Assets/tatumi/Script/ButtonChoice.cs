@@ -23,12 +23,15 @@ public class ButtonChoice : MonoBehaviour
     public GameObject Button;
 
     //現在の位置を取得
-    private Vector3 pos;
+    public Vector3 pos;
     private float first_x;//初期位置
 
     //複数人対応
     private GameObject[] players;
     private bool Ps_flag;
+
+    //スライムに吸い込まれる番号（位置）
+    private int move_num;
 
     // Start is called before the first frame update
     void Start()
@@ -61,13 +64,22 @@ public class ButtonChoice : MonoBehaviour
         {
             Ps_flag = false;
         }
+
+        if ((-first_x / 26) < 1)
+            move_num = 3;
+        else if ((-first_x / 26) < 2)
+            move_num = 2;
+        else if ((-first_x / 26) < 3)
+            move_num = 1;
+        else if ((-first_x / 26) < 1)
+            move_num = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-       
+        pos = this.gameObject.transform.position;
+
     }
 
     public void PushButton(bool set)
@@ -79,21 +91,92 @@ public class ButtonChoice : MonoBehaviour
             //左クリ
             if (Input.GetMouseButtonDown(0))
             {
-               
+
                 //now_ani = true;
+
+                //入力処理
+                if ((-first_x / 26) < 1)
+                {
+                   
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_run();
+                        }
+
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_run();
+                    }
+
+
+                }
+                else if (-(first_x / 26) < 2)
+                {
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_stick();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_stick();
+                    }
+
+                }
+                else if ((-first_x / 26) < 3)
+                {
+                    if (Ps_flag == true)
+                    {
+
+
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_squat();
+                        }
+                    }
+                    else
+                    {
+
+                        player.GetComponent<Player>().Push_squat();
+                    }
+
+                }
+                else if ((-first_x / 26) < 4)
+                {
+                    if (Ps_flag == true)
+                    {
+                        for (int i = 0; i != players.Length; i++)
+                        {
+                            players[i].GetComponent<Player>().Push_jump();
+                        }
+                    }
+                    else
+                    {
+                        player.GetComponent<Player>().Push_jump();
+
+                    }
+                    
+                }
 
                 //自身の子供から複製対象選択＆動かす-------------------------------
 
                 //子供数取得なお使わん
                 //int n = this.transform.parent.childCount;
 
-               //image_moveを取得（自身の子供が一番早い）
+                //image_moveを取得（自身の子供が一番早い）
                 GameObject child = transform.Find("image_move").gameObject;
 
                 //複製、動かす信号を発信
                 GameObject newObj = Instantiate(child, ActionButton.transform, false);
                 newObj.GetComponent<Image_move>().Move_on = true;
-                newObj.GetComponent<Image_move>().parent_firstx = first_x;
+
+               
+                newObj.GetComponent<Image_move>().parent_posx = -85.5f+(28.0f*move_num);
                 //------------------------------------------------------------------
 
 
@@ -111,75 +194,29 @@ public class ButtonChoice : MonoBehaviour
 
                 //---------------------------------------------------------------------
 
+                //現在位置取得
+                pos = this.gameObject.transform.position;
+
+                if (pos.x > 0.0f)
+                {
+                    //煙エフェクトを検索（位置により変更）
+                    GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                    efe.GetComponent<Effect_move>().SetActive(false);
+                    efe.GetComponent<Effect_move>().first_EF = false;
+                    efe.GetComponent<Effect_move>().now_onecard = false;
+                }
+
                 //消えた時初期位置に戻る
-                this.gameObject.transform.position = new Vector3(first_x, -127.0f, pos.z);
+                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
 
                 //バックボタンに登録
                 script.objs[script.now] = this.gameObject;
                 script.now++;
 
-                //入力処理
-                if ((first_x / 130) < 1)
-                {
-                    Debug.Log("OK");
-                    if (Ps_flag == true)
-                    {
-                        for (int i = 0; i != players.Length; i++)
-                        {
-                            players[i].GetComponent<Player>().Push_jump();
-                        }
-                    }
-                    else
-                    {
-                        player.GetComponent<Player>().Push_jump();
-                    }
-                }
-                else if ((first_x / 130) < 2)
-                {
-                    if (Ps_flag == true)
-                    {
-                        for (int i = 0; i != players.Length; i++)
-                        {
-                            players[i].GetComponent<Player>().Push_squat();
-                        }
-                    }
-                    else
-                    {
-                        player.GetComponent<Player>().Push_squat();
-                    }
-                }
-                else if ((first_x / 130) < 3)
-                {
-                    if (Ps_flag == true)
-                    {
-                        for (int i = 0; i != players.Length; i++)
-                        {
-                            players[i].GetComponent<Player>().Push_stick();
-                        }
-                    }
-                    else
-                    {
-                        player.GetComponent<Player>().Push_stick();
-                    }
-                }
-                else if ((first_x / 130) < 4)
-                {
-                    if (Ps_flag == true)
-                    {
-                        for (int i = 0; i != players.Length; i++)
-                        {
-                            players[i].GetComponent<Player>().Push_run();
-                        }
-                    }
-                    else
-                    {
-                        player.GetComponent<Player>().Push_run();
-                    }
-                }
-
                 //使用回数+1
-                scriptac.set_text((int)(first_x / 130), 1);
+                scriptac.set_text(move_num, 1);
             }
             //右クリ
             else if (Input.GetMouseButtonDown(1)&&set==false)
@@ -188,55 +225,37 @@ public class ButtonChoice : MonoBehaviour
                 pos = this.gameObject.transform.position;
                 GameObject[] multi = GameObject.FindGameObjectsWithTag("Multis");
 
-                if (pos.x >= 660)
-                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-                else if (pos.x >= 530)
-                    //次へ
-                    this.gameObject.transform.position = new Vector3(pos.x + 130.0f, pos.y, pos.z);
-
-                else if (pos.x == first_x)
-                {
-                    
-                    //現在の位置から移動
-                    this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
-
-                }
-                else
-                {
-                   
-                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-                }
-
                 if (multi.Length == 0)
                 {
-                    this.gameObject.transform.position = new Vector3(660.0f, pos.y, pos.z);
+                    if (pos.x == first_x)
+                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
+                    else if(pos.x > 0.0f)
+                    {
+                        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+
+                        //煙エフェクトを検索（位置により変更）
+                        GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                        efe.GetComponent<Effect_move>().SetActive(false);
+                        efe.GetComponent<Effect_move>().first_EF = false;
+                        efe.GetComponent<Effect_move>().now_onecard = false;
+                    }
                    
                 }
                 else if (multi.Length == 1)
                 {
-                    Vector3 multi_pos = multi[0].gameObject.transform.position;
-
-                    if (multi_pos.x == 530.0f)
-                        this.gameObject.transform.position = new Vector3(660.0f, pos.y, pos.z);
-                    else
-                        this.gameObject.transform.position = new Vector3(530.0f, pos.y, pos.z);
+                   this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
                 }
-                else if (multi.Length == 2)
-                {
-                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-                   
-                }
+              
 
                 //移動後の場所取得
                 pos = this.gameObject.transform.position;
 
                 //それぞれの場所でtag付与（マルチクリエイトへ）
-                if (pos.x == 530.0f)
+                if (pos.x > 0.0f)
                 {
                     this.tag = "Multi_action1";
                 }
-                else if (pos.x == 660.0f)
-                    this.tag = "Multi_action2";
                 else
                     this.tag = "Untagged";
             }
@@ -244,8 +263,15 @@ public class ButtonChoice : MonoBehaviour
             else if (Input.GetMouseButtonDown(2))
             {
                 //初期位置へ（タグも再付与）
-                this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
+
+                //煙エフェクトを検索（位置により変更）
+                GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                efe.GetComponent<Effect_move>().SetActive(false);
+                efe.GetComponent<Effect_move>().first_EF = false;
+                efe.GetComponent<Effect_move>().now_onecard = false;
             }
             //他スクリプトより申請時
             else if (set == true)
@@ -255,15 +281,15 @@ public class ButtonChoice : MonoBehaviour
                 script.objs[script.now] = this.gameObject;
                 script.now++;
                
-                this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
-                scriptac.set_text((int)(first_x / 130), 1);
+                scriptac.set_text(move_num, 1);
             }
 
             else if (set == false)
             {
                 //バックで戻されたとき、数を戻す
-                scriptac.set_text((int)(first_x / 130), -1);
+                scriptac.set_text(move_num, -1);
 
             }
 
@@ -287,7 +313,7 @@ public class ButtonChoice : MonoBehaviour
     //初期位置に戻らす
     public void Set_Back()
     {
-        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+        this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
         this.tag = "Untagged";
     }
 
