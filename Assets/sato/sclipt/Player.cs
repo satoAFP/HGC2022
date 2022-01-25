@@ -52,6 +52,9 @@ public class Player : MonoBehaviour
     [Header("表示用テキストオブジェクト")]
     public GameObject Select_text_obj;
 
+    [Header("壁で止まって爆散するまでの時間")]
+    public int stop_efect_time;
+
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
 
@@ -360,16 +363,16 @@ public class Player : MonoBehaviour
             {
                 stop_time_count++;
 
-                if (stop_deth_time - (stop_deth_time / 2) == stop_time_count) 
+                if (stop_efect_time == stop_time_count) 
                 {
                     //死亡時のエフェクト
                     Deth_efect.SetActive(true);
-                    Delete_skin.SetActive(false);Debug.Log("aaa");
+                    Delete_skin.SetActive(false);
 
                     //SE流す
                     audio.PlayOneShot(se_action);
                 }
-                if (stop_deth_time == stop_time_count)
+                if (stop_efect_time + stop_deth_time == stop_time_count) 
                 {
                     stop_time_count = 0;
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
