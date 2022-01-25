@@ -8,10 +8,21 @@ public class Scenemove : MonoBehaviour
     [Header("移動したいシーン名入力")]
     public string[] SceneName;
 
+    [Header("ステージの数")]
+    public int stage_num;
+
     [Header("王冠")]
     public GameObject clown;
     [Header("ミッション")]
     public GameObject mission;
+
+    [Header("王冠紙吹雪")]
+    public GameObject clown_cracker;
+    [Header("ミッション紙吹雪")]
+    public GameObject mission_cracker;
+
+    [Header("クリック時のSE")]
+    public AudioClip pic;
 
     static public int Scene_num = 0;
 
@@ -21,6 +32,14 @@ public class Scenemove : MonoBehaviour
     private int clown_time = 0;
     private int mission_time = 0;
 
+    private AudioSource audio;  //使用するオーディオソース
+    private bool first = true;  //一回しか処理をしない
+
+    void Start()
+    {
+
+        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
+    }
 
     void FixedUpdate() 
     {
@@ -39,7 +58,7 @@ public class Scenemove : MonoBehaviour
             else
                 Mission_OK = false;
         }
-
+        
         if (SceneManager.GetActiveScene().name == "Result")
         {
             clown_time++;
@@ -54,6 +73,11 @@ public class Scenemove : MonoBehaviour
                     {
                         clown.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 21.0f);
                     }
+                    if(clown.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
+                    {
+                        GameObject a = Instantiate(clown_cracker, GameObject.Find("cracker").transform.position, Quaternion.identity);
+                        a.transform.parent = GameObject.Find("cracker").transform;
+                    }
                 }
             }
             if (Mission_OK == true)
@@ -66,35 +90,20 @@ public class Scenemove : MonoBehaviour
                     {
                         mission.gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(24.0f, 24.0f);
                     }
+                    if (mission.gameObject.GetComponent<RectTransform>().sizeDelta.x == 264.0f)
+                    {
+                        GameObject b = Instantiate(mission_cracker, GameObject.Find("cracker2").transform.position, Quaternion.identity);
+                        b.transform.parent = GameObject.Find("cracker2").transform;
+                    }
                 }
             }
         }
 
-        //ステージの遷移
-        if (SceneManager.GetActiveScene().name == "Stage1")
-            Scene_num = 1;
-        if (SceneManager.GetActiveScene().name == "Stage2")
-            Scene_num = 2;
-        if (SceneManager.GetActiveScene().name == "Stage3")
-            Scene_num = 3;
-        if (SceneManager.GetActiveScene().name == "Stage4")
-            Scene_num = 4;
-        if (SceneManager.GetActiveScene().name == "Stage5")
-            Scene_num = 5;
-        if (SceneManager.GetActiveScene().name == "Stage6")
-            Scene_num = 6;
-        if (SceneManager.GetActiveScene().name == "Stage7")
-            Scene_num = 7;
-        if (SceneManager.GetActiveScene().name == "Stage8")
-            Scene_num = 8;
-        if (SceneManager.GetActiveScene().name == "Stage9")
-            Scene_num = 9;
-        if (SceneManager.GetActiveScene().name == "Stage10")
-            Scene_num = 10;
-        if (SceneManager.GetActiveScene().name == "Stage11")
-            Scene_num = 11;
-        if (SceneManager.GetActiveScene().name == "Stage12")
-            Scene_num = 12;
+        for (int i = 1; i <= stage_num; i++)
+        {
+            if (SceneManager.GetActiveScene().name == "Stage" + i) 
+                Scene_num = i;
+        }
     }
 
     //指定したシーンに移動
@@ -103,6 +112,7 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
         SceneManager.LoadScene(SceneName[0]);
+        audio.PlayOneShot(pic);
     }
 
     //ネクストステージボタン
@@ -111,30 +121,15 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
 
-        if (Scene_num == 1)
-            SceneManager.LoadScene("Stage2");
-        if (Scene_num == 2)
-            SceneManager.LoadScene("Stage3");
-        if (Scene_num == 3)
-            SceneManager.LoadScene("Stage4");
-        if (Scene_num == 4)
-            SceneManager.LoadScene("Stage5");
-        if (Scene_num == 5)
-            SceneManager.LoadScene("Stage6");
-        if (Scene_num == 6)
-            SceneManager.LoadScene("Stage7");
-        if (Scene_num == 7)
-            SceneManager.LoadScene("Stage8");
-        if (Scene_num == 8)
-            SceneManager.LoadScene("Stage9");
-        if (Scene_num == 9)
-            SceneManager.LoadScene("Stage10");
-        if (Scene_num == 10)
-            SceneManager.LoadScene("Stage11");
-        if (Scene_num == 11)
-            SceneManager.LoadScene("Stage12");
-        if (Scene_num == 12)
+        for (int i = 1; i <= stage_num - 1; i++) 
+        {
+            if (Scene_num == i)
+                SceneManager.LoadScene("Stage" + (i + 1));
+        }
+
+        if (Scene_num == stage_num)
             SceneManager.LoadScene("Title");
+        audio.PlayOneShot(pic);
     }
 
     //リトライボタン
@@ -143,29 +138,17 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
 
-        if (Scene_num == 1)
-            SceneManager.LoadScene("Stage1");
-        if (Scene_num == 2)
-            SceneManager.LoadScene("Stage2");
-        if (Scene_num == 3)
-            SceneManager.LoadScene("Stage3");
-        if (Scene_num == 4)
-            SceneManager.LoadScene("Stage4");
-        if (Scene_num == 5)
-            SceneManager.LoadScene("Stage5");
-        if (Scene_num == 6)
-            SceneManager.LoadScene("Stage6");
-        if (Scene_num == 7)
-            SceneManager.LoadScene("Stage7");
-        if (Scene_num == 8)
-            SceneManager.LoadScene("Stage8");
-        if (Scene_num == 9)
-            SceneManager.LoadScene("Stage9");
-        if (Scene_num == 10)
-            SceneManager.LoadScene("Stage10");
-        if (Scene_num == 11)
-            SceneManager.LoadScene("Stage11");
-        if (Scene_num == 12)
-            SceneManager.LoadScene("Stage12");
+        for (int i = 1; i <= stage_num; i++)
+        {
+            if (Scene_num == i)
+                SceneManager.LoadScene("Stage" + i);
+        }
+        audio.PlayOneShot(pic);
+    }
+
+    public void PushNowScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        audio.PlayOneShot(pic);
     }
 }

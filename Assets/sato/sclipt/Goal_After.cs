@@ -44,9 +44,16 @@ public class Goal_After : MonoBehaviour
                 jump_num--;
                 if (jump_num == 0) 
                 {
-                    GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+                    if (SceneManager.GetActiveScene().name == "HelpStage")
+                    {
+                        SceneManager.LoadScene("Title");
+                    }
+                    else
+                    {
+                        GameObject.Find("slime_img").GetComponent<Slime_ResultMove>().goal_move = true;
+                    }
                 }
-
+                GameObject.Find("CM vcam1").GetComponent<ZoomCinemachineExtension>().goal_camera_move = false;
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, jump_power, 0.0f), ForceMode.Impulse);
                 //ジャンプアニメーション移行
@@ -57,6 +64,7 @@ public class Goal_After : MonoBehaviour
             //主人公回転処理
             if (this.gameObject.transform.localEulerAngles.y <= 180)
             {
+                GameObject.Find("CM vcam1").GetComponent<ZoomCinemachineExtension>().goal_camera_move = true;
                 this.gameObject.transform.localEulerAngles += new Vector3(0.0f, 2.5f, 0.0f);
             }
         }
