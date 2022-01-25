@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8135084413760994809}
   - component: {fileID: 8135084413760994811}
   m_Layer: 0
-  m_Name: CM vcam1
+  m_Name: CM_vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,6 +160,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zome: {x: 0, y: 0.0125, z: 0.02}
   stop_pos: {x: 0, y: 2.5, z: -4}
+  goal_camera_move_powe_x: 0.003
+  goal_camera_move_powe_y: 0.002
+  goal_camera_move: 0
   avcam: {fileID: 8135084413760994790}
 --- !u!1 &8135084414504095993
 GameObject:
@@ -218,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.5, z: 30}
+  m_FollowOffset: {x: 0, y: 2.4875019, z: -4.000493}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
