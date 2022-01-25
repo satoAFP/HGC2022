@@ -8,12 +8,24 @@ using UnityEngine;
 
 public class ZoomCinemachineExtension : CinemachineExtension
 {
+    [Header("最初のズーム移動時のベクトル量")]
     [SerializeField] private Vector3 zome;
 
+    [Header("最初のズーム移動時の止まる座標")]
     [SerializeField] private Vector3 stop_pos;
+
+    [Header("ゴール時のカメラX移動の力")]
+    public float goal_camera_move_powe_x;
+
+    [Header("ゴール時のカメラY移動の力")]
+    public float goal_camera_move_powe_y;
+
+    [Header("この下いじらない")]
+    public bool goal_camera_move = false;
 
     private int _scrollDelta;
     private float _adjustAngle;
+    private bool first_move = true;
     
     public CinemachineVirtualCamera avcam;
 
@@ -28,10 +40,27 @@ public class ZoomCinemachineExtension : CinemachineExtension
         //最初の引きから寄りになるカメラの処理
         //グレゴリーさん感謝
         var transposer = avcam.GetCinemachineComponent<CinemachineTransposer>();
-        if ((transposer.m_FollowOffset.z > stop_pos.z))
-            transposer.m_FollowOffset.z -= zome.z;
-        else if ((transposer.m_FollowOffset.y > stop_pos.y))
-            transposer.m_FollowOffset.y -= zome.y;
+        if (first_move)
+        {
+            if ((transposer.m_FollowOffset.z > stop_pos.z))
+                transposer.m_FollowOffset.z -= zome.z;
+            else if ((transposer.m_FollowOffset.y > stop_pos.y))
+            {
+                transposer.m_FollowOffset.y -= zome.y;
+            }
+            else
+            {
+                first_move = false;
+            }
+        }
+
+        if (goal_camera_move)
+        {
+            transposer.m_FollowOffset.z -= goal_camera_move_powe_x;
+            transposer.m_FollowOffset.y += goal_camera_move_powe_y;
+            //else if ((transposer.m_FollowOffset.y > stop_pos.y))
+            //    transposer.m_FollowOffset.y -= zome.y;
+        }
 
     }
 

@@ -41,7 +41,7 @@ public class Slime_ResultMove : MonoBehaviour
             //”wŒiˆÚ“®ˆ—
             pos.x += move_speed;
             this.gameObject.GetComponent<RectTransform>().position = pos;
-            
+
             //if (first)
             //{
             //    //SE—¬‚·
