@@ -1450,6 +1450,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Safe_zone
       objectReference: {fileID: 0}
+    - target: {fileID: 6895600663929719161, guid: 5ba607e5d1eabd64f8d21aa2fd47f6da, type: 3}
+      propertyPath: m_Size.y
+      value: 0.86282825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895600663929719161, guid: 5ba607e5d1eabd64f8d21aa2fd47f6da, type: 3}
+      propertyPath: m_Center.y
+      value: 0.06858587
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ba607e5d1eabd64f8d21aa2fd47f6da, type: 3}
 --- !u!4 &489067361 stripped
@@ -1791,6 +1799,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 848483707}
     m_Modifications:
+    - target: {fileID: 2679546609263968971, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774036429683224347, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4239639619653680163, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
       propertyPath: m_Name
       value: Mission_UI
@@ -1878,6 +1894,10 @@ PrefabInstance:
     - target: {fileID: 4239639619653680167, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821702397840726594, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 013c00ef5571a2644b1c3cafe13df1d6, type: 3}
