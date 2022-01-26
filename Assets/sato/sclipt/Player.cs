@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
     [Header("ゴール時のクラッカーエフェクト")]
     public GameObject goal_cracker;
 
+    [Header("王冠エフェクト時の星エフェクト")]
+    public GameObject clown_star;
 
     [Header("スライムのアニメーション")]
     [Header("アニメーション管理変数---------------------------------------------------")]
@@ -781,6 +783,9 @@ public class Player : MonoBehaviour
             //SE流す
             audio.PlayOneShot(se_clown);
 
+            //王冠取得時のエフェクト
+            clown_star.SetActive(true);
+
             clown_get++;
             Destroy(collider.gameObject);
         }
@@ -802,7 +807,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
     //死亡処理
     private void OnTriggerExit(Collider collider) {
         if (collider.gameObject.tag == "safe_zone") {
