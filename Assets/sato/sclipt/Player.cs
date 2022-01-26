@@ -719,6 +719,7 @@ public class Player : MonoBehaviour
 
             //ミッションUI非表示
             GameObject.Find("Mission_UI").SetActive(false);
+            GameObject.Find("select_card_UI").SetActive(false);
 
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
         }
