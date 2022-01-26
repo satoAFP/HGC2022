@@ -35,7 +35,7 @@ public class Mouse_pos : MonoBehaviour
             Vector3 localPos = Child_Transform.localPosition;
             localPos.x = -580.0f + mousePos.x + M_x;    // ローカル座標を基準にした、x座標を1に変更
             localPos.y = -320.0f + mousePos.y + M_y;    // ローカル座標を基準にした、y座標を1に変更
-            localPos.z = 750.0f;    // ローカル座標を基準にした、z座標を1に変更
+            localPos.z = 59.0f;    // ローカル座標を基準にした、z座標を1に変更
             Child_Transform.localPosition = localPos; // ローカル座標での座標を設定
 
             //newObj.transform.position = new Vector3(-580.0f + mousePos.x + M_x, -320.0f + mousePos.y + M_y, 60.0f);
