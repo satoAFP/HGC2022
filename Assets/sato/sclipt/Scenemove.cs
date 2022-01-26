@@ -21,6 +21,9 @@ public class Scenemove : MonoBehaviour
     [Header("ミッション紙吹雪")]
     public GameObject mission_cracker;
 
+    [Header("クリック時のSE")]
+    public AudioClip pic;
+
     static public int Scene_num = 0;
 
     static public bool Clown_OK = false;
@@ -29,9 +32,13 @@ public class Scenemove : MonoBehaviour
     private int clown_time = 0;
     private int mission_time = 0;
 
+    private AudioSource audio;  //使用するオーディオソース
+    private bool first = true;  //一回しか処理をしない
+
     void Start()
     {
-        
+
+        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
     }
 
     void FixedUpdate() 
@@ -51,7 +58,7 @@ public class Scenemove : MonoBehaviour
             else
                 Mission_OK = false;
         }
-
+        
         if (SceneManager.GetActiveScene().name == "Result")
         {
             clown_time++;
@@ -105,6 +112,7 @@ public class Scenemove : MonoBehaviour
         Clown_OK = false;
         Mission_OK = false;
         SceneManager.LoadScene(SceneName[0]);
+        audio.PlayOneShot(pic);
     }
 
     //ネクストステージボタン
@@ -121,6 +129,7 @@ public class Scenemove : MonoBehaviour
 
         if (Scene_num == stage_num)
             SceneManager.LoadScene("Title");
+        audio.PlayOneShot(pic);
     }
 
     //リトライボタン
@@ -134,11 +143,12 @@ public class Scenemove : MonoBehaviour
             if (Scene_num == i)
                 SceneManager.LoadScene("Stage" + i);
         }
-
+        audio.PlayOneShot(pic);
     }
 
     public void PushNowScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        audio.PlayOneShot(pic);
     }
 }

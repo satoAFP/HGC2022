@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Side_move_UI : MonoBehaviour
+public class pic_se : MonoBehaviour
 {
     [Header("横に動く速度")]
     public float move_speed;
@@ -23,6 +23,7 @@ public class Side_move_UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.GetComponent<RectTransform>().position -= new Vector3(30.6f, 1, 87.9f);
         mem_pos = this.gameObject.GetComponent<RectTransform>().position;
         pos = this.gameObject.GetComponent<RectTransform>().position;
         size = this.gameObject.GetComponent<RectTransform>().sizeDelta;
@@ -31,38 +32,26 @@ public class Side_move_UI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //マウスのポジション更新
         mp = Input.mousePosition;
 
-        if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
-            (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
+        //音のなる座標
+        if (mp.x > 100 && mp.x < 320 && mp.y > 50 && mp.y < 130 ||
+            mp.x > 400 && mp.x < 620 && mp.y > 50 && mp.y < 130 ||
+            mp.x > 700 && mp.x < 920 && mp.y > 50 && mp.y < 130) 
         {
-            if (this.gameObject.GetComponent<RectTransform>().position.x > stop_pos)
+            if (first)
             {
-                pos.x -= move_speed;
-                this.gameObject.GetComponent<RectTransform>().position = pos;
-
-                if (first)
-                {
-                    audio.PlayOneShot(pic);
-                    Debug.Log("" + this.gameObject.GetComponent<RectTransform>().position+mp);
-                    first = false;
-                }
+                audio.PlayOneShot(pic);
+                first = false;
             }
         }
         else
         {
-            if (this.gameObject.GetComponent<RectTransform>().position.x < mem_pos.x) 
-            {
-                pos.x += move_speed;
-                this.gameObject.GetComponent<RectTransform>().position = pos;
-            }
             first = true;
         }
 
-        
-        
     }
 }

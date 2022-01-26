@@ -52,8 +52,20 @@ public class Player : MonoBehaviour
     [Header("表示用テキストオブジェクト")]
     public GameObject Select_text_obj;
 
+    [Header("壁で止まって爆散するまでの時間")]
+    public int stop_efect_time;
+
     [Header("壁で止まって死ぬまでの時間")]
     public int stop_deth_time;
+
+    [Header("落下判定とってからの死ぬまでの時間")]
+    public int fall_deth_time;
+
+    [Header("死亡エフェクト")]
+    public GameObject Deth_efect;
+
+    [Header("死亡エフェクトが出た時消す主人公スキン")]
+    public GameObject Delete_skin;
 
     [Header("ゲームが始まるカウントを表示するテキスト")]
     public Text start_time_text;
@@ -61,21 +73,27 @@ public class Player : MonoBehaviour
     [Header("ゲームが始まるカウントの秒数")]
     public int start_time;
 
+    [Header("ゴール時のクラッカーエフェクト")]
+    public GameObject goal_cracker;
 
-    //アニメーション管理変数---------------------------------------------------
+
     [Header("スライムのアニメーション")]
+    [Header("アニメーション管理変数---------------------------------------------------")]
     public Animator anim;
 
     [Header("ヒストリーのスライムのモデル")]
     public GameObject sura_model;
 
 
-    //サウンド管理変数---------------------------------------------------------
     [Header("カード選択時のSE")]
+    [Header("サウンド管理変数---------------------------------------------------------")]
     public AudioClip se_card;
 
     [Header("アクション時のSE")]
     public AudioClip se_action;
+
+    [Header("王冠取得時のSE")]
+    public AudioClip se_clown;
 
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
@@ -83,7 +101,7 @@ public class Player : MonoBehaviour
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
-    [Header("ここから下は触らない--------------")]
+    [Header("ここから下は触らない-----------------------------------")]
     public bool Movestop = true;        //主人公が動くかどうか
 
     public bool count_check = false;    //最初のカウントが終わるとき判定をとる
@@ -126,6 +144,7 @@ public class Player : MonoBehaviour
     private AudioSource audio;          //使用するオーディオソース
     private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
     private int after_card_order = -1;  //使用した最新のカード情報記憶
+    private bool fall_deth_flag = false;//落下で死亡時trueになる
 
 
     //構造体-------------------------------------------------------------------
@@ -288,15 +307,18 @@ public class Player : MonoBehaviour
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
             Around_collision[1].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[2].GetComponent<Around_collider>().wall_check == true) {
-            around_collision_check = true;
-
+            Around_collision[2].GetComponent<Around_collider>().wall_check == true) 
+        {
             //左右それぞれ壁に触れているときの見た目を調整
-            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
             }
-            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) {
+            if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
+            {
+                around_collision_check = true;
                 sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
@@ -343,7 +365,17 @@ public class Player : MonoBehaviour
             if (stop_check == this.gameObject.transform.position)
             {
                 stop_time_count++;
-                if (stop_deth_time == stop_time_count)
+
+                if (stop_efect_time == stop_time_count) 
+                {
+                    //死亡時のエフェクト
+                    Deth_efect.SetActive(true);
+                    Delete_skin.SetActive(false);
+
+                    //SE流す
+                    audio.PlayOneShot(se_action);
+                }
+                if (stop_efect_time + stop_deth_time == stop_time_count) 
                 {
                     stop_time_count = 0;
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -374,6 +406,9 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.SQUAT] == true) {
                     //y軸のサイズ変更
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
+                    //しゃがみ処理終了
+                    Action_check[(int)Card.SQUAT] = false;
                 }
 
 
@@ -415,7 +450,7 @@ public class Player : MonoBehaviour
                     run_power = runSpeed;
 
                     //ジャンプアニメーション移行
-                    anim.SetBool("run", true);
+                    //anim.SetBool("run", true);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -491,6 +526,28 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        //落下死亡判定時のエフェクト
+        if (fall_deth_flag)
+        {
+            stop_time_count++;
+
+            if (fall_deth_time - 50 == stop_time_count)
+            {
+                //死亡時のエフェクト
+                Deth_efect.SetActive(true);
+                Delete_skin.SetActive(false);
+                
+                //SE流す
+                audio.PlayOneShot(se_action);
+            }
+            if (fall_deth_time == stop_time_count)
+            {
+                stop_time_count = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
     }
     
 
@@ -589,7 +646,8 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
-            
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //アクション再選択
@@ -645,11 +703,23 @@ public class Player : MonoBehaviour
 
             //走る状態解除
             run_power = 1.0f;
+
+            //幅跳びのバグ修正関連
+            Longjump_check = false;
         }
 
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
+
+            Destroy(collision.gameObject);
+
+            //ゴール時のエフェクト
+            goal_cracker.SetActive(true);
+
+            //ミッションUI非表示
+            GameObject.Find("Mission_UI").SetActive(false);
+            GameObject.Find("select_card_UI").SetActive(false);
 
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
         }
@@ -675,6 +745,9 @@ public class Player : MonoBehaviour
             }
             else if (after_card_order == (int)Card.SQUAT)
             {
+                //元のサイズに変更
+                this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
 
@@ -705,6 +778,9 @@ public class Player : MonoBehaviour
         //王冠取得時
         if (collider.gameObject.tag == "clown")
         {
+            //SE流す
+            audio.PlayOneShot(se_clown);
+
             clown_get++;
             Destroy(collider.gameObject);
         }
@@ -727,10 +803,12 @@ public class Player : MonoBehaviour
 
     }
 
-
+    //死亡処理
     private void OnTriggerExit(Collider collider) {
         if (collider.gameObject.tag == "safe_zone") {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            fall_deth_flag = true;
+            
         }
     }
 
