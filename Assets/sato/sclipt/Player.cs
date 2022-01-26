@@ -73,17 +73,20 @@ public class Player : MonoBehaviour
     [Header("ゲームが始まるカウントの秒数")]
     public int start_time;
 
+    [Header("ゴール時のクラッカーエフェクト")]
+    public GameObject goal_cracker;
 
-    //アニメーション管理変数---------------------------------------------------
+
     [Header("スライムのアニメーション")]
+    [Header("アニメーション管理変数---------------------------------------------------")]
     public Animator anim;
 
     [Header("ヒストリーのスライムのモデル")]
     public GameObject sura_model;
 
 
-    //サウンド管理変数---------------------------------------------------------
     [Header("カード選択時のSE")]
+    [Header("サウンド管理変数---------------------------------------------------------")]
     public AudioClip se_card;
 
     [Header("アクション時のSE")]
@@ -98,7 +101,7 @@ public class Player : MonoBehaviour
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
-    [Header("ここから下は触らない--------------")]
+    [Header("ここから下は触らない-----------------------------------")]
     public bool Movestop = true;        //主人公が動くかどうか
 
     public bool count_check = false;    //最初のカウントが終わるとき判定をとる
@@ -710,6 +713,12 @@ public class Player : MonoBehaviour
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
 
             Destroy(collision.gameObject);
+
+            //ゴール時のエフェクト
+            goal_cracker.SetActive(true);
+
+            //ミッションUI非表示
+            GameObject.Find("Mission_UI").SetActive(false);
 
             GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().Set_OffActive();
         }
