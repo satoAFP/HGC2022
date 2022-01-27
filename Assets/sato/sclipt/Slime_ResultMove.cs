@@ -23,6 +23,7 @@ public class Slime_ResultMove : MonoBehaviour
 
     private AudioSource audio;  //使用するオーディオソース
     private bool first = true;  //一回しか処理をしない
+    private bool feed_end = false;//フェード終了判定
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +64,18 @@ public class Slime_ResultMove : MonoBehaviour
                 //ストップする座標
                 pos = mem_pos;
                 goal_move = false;
+            }
+        }
+        else
+        {
+            //リザルトシーンの時かつ、フェードが終わった時、ボタンを押せるようになる
+            if (SceneManager.GetActiveScene().name == "Result")
+            {
+                if (!feed_end)
+                {
+                    GameObject.Find("feed_not_tap").SetActive(false);
+                    feed_end = true;
+                }
             }
         }
     }
