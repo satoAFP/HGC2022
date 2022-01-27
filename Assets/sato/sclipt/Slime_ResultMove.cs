@@ -65,5 +65,13 @@ public class Slime_ResultMove : MonoBehaviour
                 goal_move = false;
             }
         }
+        else
+        {
+            //リザルトシーンの時かつ、フェードが終わった時、ボタンを押せるようになる
+            if (SceneManager.GetActiveScene().name == "Result")
+            {
+                GameObject.Find("feed_not_tap").SetActive(false);
+            }
+        }
     }
 }
