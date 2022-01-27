@@ -308,8 +308,7 @@ public class Player : MonoBehaviour
 
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[1].GetComponent<Around_collider>().wall_check == true ||
-            Around_collision[2].GetComponent<Around_collider>().wall_check == true) 
+            Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
         {
             //左右それぞれ壁に触れているときの見た目を調整
             if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
@@ -324,7 +323,16 @@ public class Player : MonoBehaviour
                 sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
+        }
+        else 
+        {
+            around_collision_check = false;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        }
 
+
+        if(Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+        {
             //幅跳び選択時、ジャンプブロックに引っかかる問題解決
             if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
             {
@@ -333,11 +341,6 @@ public class Player : MonoBehaviour
                     Longjump_check = true;
                 }
             }
-        }
-        else 
-        {
-            around_collision_check = false;
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
 
 
@@ -427,8 +430,10 @@ public class Player : MonoBehaviour
                 }
                 if (all_stick == true) 
                 {
+                    Debug.Log("aaa");
                     if (around_collision_check == true)
                     {
+                        Debug.Log("bbb");
                         //Y軸が動かないよう固定
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                         //スライムの調整
@@ -437,6 +442,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("ccc");
                         //壁がなくなると元の状態に戻す
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                         sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
@@ -783,11 +789,12 @@ public class Player : MonoBehaviour
             //SE流す
             audio.PlayOneShot(se_clown);
 
+            clown_get++;
+            Destroy(collider.gameObject);
+
             //王冠取得時のエフェクト
             clown_star.SetActive(true);
 
-            clown_get++;
-            Destroy(collider.gameObject);
         }
 
         //加速床の処理
