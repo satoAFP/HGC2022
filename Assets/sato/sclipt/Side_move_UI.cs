@@ -60,8 +60,34 @@ public class Side_move_UI : MonoBehaviour
             }
             first = true;
         }
+    }
 
-        
-        
+    public void push_side_move()
+    {
+        Debug.Log("aaa");
+        if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
+            (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
+        {
+            if (this.gameObject.GetComponent<RectTransform>().position.x > stop_pos)
+            {
+                pos.x -= move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
+
+                if (first)
+                {
+                    audio.PlayOneShot(pic);
+                    first = false;
+                }
+            }
+        }
+        else
+        {
+            if (this.gameObject.GetComponent<RectTransform>().position.x < mem_pos.x)
+            {
+                pos.x += move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
+            }
+            first = true;
+        }
     }
 }
