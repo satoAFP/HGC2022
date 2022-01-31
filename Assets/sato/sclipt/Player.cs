@@ -739,8 +739,7 @@ public class Player : MonoBehaviour
         {
             //オブジェクト削除
             Destroy(collision.gameObject);
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.STICK || 
-                after_card_order == (int)Card.RUN || after_card_order == -1)
+            if (after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
             {
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
@@ -751,13 +750,24 @@ public class Player : MonoBehaviour
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);
             }
-            else if (after_card_order == (int)Card.SQUAT)
+            else if (after_card_order == (int)Card.SQUAT) 
             {
                 //元のサイズに変更
                 this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
+
+                //ギミック使用時初期化
+                after_card_order = -1;
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+            else if (after_card_order == (int)Card.JUMP)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * 0.5f, ForceMode.Impulse);
 
                 //ギミック使用時初期化
                 after_card_order = -1;
