@@ -330,16 +330,13 @@ public class Player : MonoBehaviour
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-
-        if(Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+        //幅跳び選択時、ジャンプブロックに引っかかる問題解決
+        if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
         {
-            //幅跳び選択時、ジャンプブロックに引っかかる問題解決
-            if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+            if (after_card_order == (int)Card.LONGJUMP || after_card_order == (int)Card.SLIDING) 
             {
-                if (after_card_order == (int)Card.LONGJUMP)
-                {
-                    Longjump_check = true;
-                }
+                Debug.Log("bbb");
+                Longjump_check = true;
             }
         }
 
@@ -655,7 +652,7 @@ public class Player : MonoBehaviour
             Card_order[0] = -1;
 
             //幅跳びのバグ修正関連
-            Longjump_check = false;
+            //Longjump_check = false;
         }
 
         //アクション再選択
