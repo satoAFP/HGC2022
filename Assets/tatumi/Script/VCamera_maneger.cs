@@ -20,19 +20,19 @@ public class VCamera_maneger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+       
     }
 
     public void CameraChange(int a)
     {
-        for(int i=0;i!=MAXCamera;i++)
+        for (int i = 0; i != MAXCamera; i++)
         {
             Cameras[i].Priority = 10;
         }
 
-        if (MAXCamera < a||0>a)
+        if (MAXCamera < a || 0 > a)
             ;
         else
-        Cameras[a].Priority = 11;
+            Cameras[a].Priority = 11;
     }
 }
