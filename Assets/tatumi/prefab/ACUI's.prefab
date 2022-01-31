@@ -1121,6 +1121,7 @@ MonoBehaviour:
   mission: {fileID: 0}
   clown_cracker: {fileID: 0}
   mission_cracker: {fileID: 0}
+  pic: {fileID: 0}
 --- !u!1 &2674099071589392094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,6 +2829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 2674099073483808842}
   pos: {x: 0, y: 0, z: 0}
@@ -27861,6 +27864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163912071740447}
   pos: {x: 0, y: 0, z: 0}
@@ -28091,6 +28096,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163912197227988}
   pos: {x: 0, y: 0, z: 0}
@@ -28427,6 +28434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163913374055748}
   pos: {x: 0, y: 0, z: 0}
@@ -28798,6 +28807,7 @@ MonoBehaviour:
   mission: {fileID: 0}
   clown_cracker: {fileID: 0}
   mission_cracker: {fileID: 0}
+  pic: {fileID: 0}
 --- !u!1 &9133722272440255316
 GameObject:
   m_ObjectHideFlags: 0

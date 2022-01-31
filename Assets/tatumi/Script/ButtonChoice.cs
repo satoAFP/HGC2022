@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class ButtonChoice : MonoBehaviour
 {
-    GameObject BackButton; //参照元OBJそのものが入る変数
+    public GameObject BackButton; //参照元OBJそのものが入る変数
 
     DeletAction script; //参照元Scriptが入る変数
 
-    GameObject ActionButton; //参照元OBJそのものが入る変数
+    public GameObject ActionButton; //参照元OBJそのものが入る変数
 
     ActionButton_SC scriptac; //参照元Scriptが入る変数
 
