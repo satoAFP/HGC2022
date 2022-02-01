@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
             //テキストに秒数を出力
             start_time_text.text = "" + start_text_time_count;
         }
-        
+        Debug.Log("bbb " +Longjump_check) ;
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1)
         {
@@ -314,13 +314,13 @@ public class Player : MonoBehaviour
             if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
             {
                 around_collision_check = true;
-                sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
+                sura_angle = new Vector3(45.0f, 0.0f, -90.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
             }
             if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
             {
                 around_collision_check = true;
-                sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
+                sura_angle = new Vector3(-45.0f, 0.0f, 90.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
         }
@@ -425,19 +425,17 @@ public class Player : MonoBehaviour
                 }
                 if (all_stick == true) 
                 {
-                    Debug.Log("aaa");
                     if (around_collision_check == true)
                     {
-                        Debug.Log("bbb");
                         //Y軸が動かないよう固定
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                         //スライムの調整
+                        //sura_model.transform.Rotate(sura_angle);
                         sura_model.transform.localEulerAngles = sura_angle;
                         sura_model.transform.localPosition = sura_pos;
                     }
                     else
                     {
-                        Debug.Log("ccc");
                         //壁がなくなると元の状態に戻す
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                         sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
