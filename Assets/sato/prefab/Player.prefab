@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: -1, y: 0, z: 0}
+  m_Size: {x: 0.6, y: 0.2, z: 0.2}
+  m_Center: {x: -0.8, y: 0, z: 0}
 --- !u!114 &4428356767687535610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
+  delete_arrow: 0
 --- !u!1 &4428356767929339356
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
+  delete_arrow: 0
 --- !u!1 &4428356768424044609
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +274,8 @@ MonoBehaviour:
   Delete_skin: {fileID: 7397928891541518496}
   start_time_text: {fileID: 0}
   start_time: 120
+  goal_cracker: {fileID: 0}
+  clown_star: {fileID: 0}
   anim: {fileID: 0}
   sura_model: {fileID: 7397928891541518496}
   se_card: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
@@ -478,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
+  delete_arrow: 0
 --- !u!1 &4428356769617381688
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall_check: 0
+  delete_arrow: 0
 --- !u!95 &2057303449074120462
 Animator:
   serializedVersion: 3

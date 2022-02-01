@@ -6,6 +6,8 @@ public class Around_collider : MonoBehaviour
 {
     public bool wall_check = false;          //主人公の周りで判定取る用
 
+    public bool delete_arrow = false;          //主人公の周りで判定取る用
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -21,6 +23,16 @@ public class Around_collider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        if (collider.tag == "Jumpblock")
+        {
+            wall_check = true;
+
+            if (GameObject.Find("Player").GetComponent<Player>().Longjump_check == true)
+            {
+                Debug.Log("aaa");
+                Destroy(collider.gameObject);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider collider) {
@@ -34,6 +46,7 @@ public class Around_collider : MonoBehaviour
 
             if (GameObject.Find("Player").GetComponent<Player>().Longjump_check == true)
             {
+                Debug.Log("aaa");
                 Destroy(collider.gameObject);
             }
         }
