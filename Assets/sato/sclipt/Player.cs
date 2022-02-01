@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
             //テキストに秒数を出力
             start_time_text.text = "" + start_text_time_count;
         }
-
+        
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1)
         {
@@ -335,11 +335,9 @@ public class Player : MonoBehaviour
         {
             if (after_card_order == (int)Card.LONGJUMP || after_card_order == (int)Card.SLIDING) 
             {
-                Debug.Log("bbb");
                 Longjump_check = true;
             }
         }
-
 
         //幅跳び、スライディングで使用する移動量の向き変更
         if (inputX == -1) {
@@ -652,7 +650,7 @@ public class Player : MonoBehaviour
             Card_order[0] = -1;
 
             //幅跳びのバグ修正関連
-            //Longjump_check = false;
+            Longjump_check = false;
         }
 
         //アクション再選択

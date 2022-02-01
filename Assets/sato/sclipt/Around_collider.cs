@@ -46,7 +46,6 @@ public class Around_collider : MonoBehaviour
 
             if (GameObject.Find("Player").GetComponent<Player>().Longjump_check == true)
             {
-                Debug.Log("aaa");
                 Destroy(collider.gameObject);
             }
         }
