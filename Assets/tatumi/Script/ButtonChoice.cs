@@ -33,6 +33,11 @@ public class ButtonChoice : MonoBehaviour
     //スライムに吸い込まれる番号（位置）
     private int move_num;
 
+    //SEオブジェクト取得
+    public AudioClip sound1;
+    private GameObject SE_Maneger;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +78,11 @@ public class ButtonChoice : MonoBehaviour
             move_num = 1;
         else if ((-first_x / 26) < 1)
             move_num = 0;
+
+
+        SE_Maneger = GameObject.Find("SE_manager"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+        audioSource = SE_Maneger.GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -227,21 +237,27 @@ public class ButtonChoice : MonoBehaviour
 
                 if (multi.Length == 0)
                 {
-                    if (pos.x >= first_x-1.0f&&pos.x<=first_x+1.0f)
-                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
-                    else if(pos.x > 0.0f)
+                    if (pos.x >= first_x - 1.0f && pos.x <= first_x + 1.0f)
                     {
-                        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-
-                        //煙エフェクトを検索（位置により変更）
-                        GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
-
-                        efe.GetComponent<Effect_move>().SetActive(false);
-                        efe.GetComponent<Effect_move>().first_EF = false;
-                        efe.GetComponent<Effect_move>().now_onecard = false;
+                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
+                        audioSource.PlayOneShot(sound1);
                     }
-                   
                 }
+                else if (pos.x > 0.0f)
+                {
+                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+
+                    //煙エフェクトを検索（位置により変更）
+                    GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                    efe.GetComponent<Effect_move>().SetActive(false);
+                    efe.GetComponent<Effect_move>().first_EF = false;
+                    efe.GetComponent<Effect_move>().now_onecard = false;
+
+                    audioSource.PlayOneShot(sound1);
+                }
+                   
+                
                 else if (multi.Length == 1)
                 {
                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
@@ -272,6 +288,8 @@ public class ButtonChoice : MonoBehaviour
                 efe.GetComponent<Effect_move>().SetActive(false);
                 efe.GetComponent<Effect_move>().first_EF = false;
                 efe.GetComponent<Effect_move>().now_onecard = false;
+
+                audioSource.PlayOneShot(sound1);
             }
             //他スクリプトより申請時
             else if (set == true)
