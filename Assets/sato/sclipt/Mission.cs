@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Mission : MonoBehaviour
 {
@@ -61,56 +62,61 @@ public class Mission : MonoBehaviour
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
 
-        //ミッションのアクションカード設定
-        if (ClearCard == (int)Card.JUMP)
+        //ステージでのみ取得
+        if (SceneManager.GetActiveScene().name != "Title" &&
+            SceneManager.GetActiveScene().name != "StageSelect" &&
+            SceneManager.GetActiveScene().name != "Result")
         {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.JUMP];
-            mission_action = "ジャンプを";
-        }
-        if (ClearCard == (int)Card.SQUAT)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SQUAT];
-            mission_action = "しゃがみを";
-        }
-        if (ClearCard == (int)Card.STICK)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.STICK];
-            mission_action = "ひっつきを";
-        }
-        if (ClearCard == (int)Card.RUN)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.RUN];
-            mission_action = "走るを";
-        }
-        if (ClearCard == (int)Card.HIGHJUMP)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.HIGHJUMP];
-            mission_action = "ハイジャンプを";
-        }
-        if (ClearCard == (int)Card.WALLKICK)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.WALLKICK];
-            mission_action = "壁キックを";
-        }
-        if (ClearCard == (int)Card.LONGJUMP)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.LONGJUMP];
-            mission_action = "幅跳びを";
-        }
-        if (ClearCard == (int)Card.SLIDING)
-        {
-            Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SLIDING];
-            mission_action = "スライディングを";
-        }
+            //ミッションのアクションカード設定
+            if (ClearCard == (int)Card.JUMP)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.JUMP];
+                mission_action = "ジャンプを";
+            }
+            if (ClearCard == (int)Card.SQUAT)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SQUAT];
+                mission_action = "しゃがみを";
+            }
+            if (ClearCard == (int)Card.STICK)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.STICK];
+                mission_action = "ひっつきを";
+            }
+            if (ClearCard == (int)Card.RUN)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.RUN];
+                mission_action = "走るを";
+            }
+            if (ClearCard == (int)Card.HIGHJUMP)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.HIGHJUMP];
+                mission_action = "ハイジャンプを";
+            }
+            if (ClearCard == (int)Card.WALLKICK)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.WALLKICK];
+                mission_action = "壁キックを";
+            }
+            if (ClearCard == (int)Card.LONGJUMP)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.LONGJUMP];
+                mission_action = "幅跳びを";
+            }
+            if (ClearCard == (int)Card.SLIDING)
+            {
+                Mission_Use_Card_Clear = Use_Card_Clear[(int)Card.SLIDING];
+                mission_action = "スライディングを";
+            }
 
-        if (Minssion_Num == 0)
-            mission_substance = "回以内の使用でクリア";
-        if (Minssion_Num == 1)
-            mission_substance = "回以上の使用でクリア";
+            if (Minssion_Num == 0)
+                mission_substance = "回以内の使用でクリア";
+            if (Minssion_Num == 1)
+                mission_substance = "回以上の使用でクリア";
 
-        //ミッション内容作成
-        Mission_substance_text.text = "" + mission_action + "" + Mission_Use_Card_Clear + "" + mission_substance;
-
+            //ミッション内容作成
+            Mission_substance_text.text = "" + mission_action + "" + Mission_Use_Card_Clear + "" + mission_substance;
+        }
         
     }
 

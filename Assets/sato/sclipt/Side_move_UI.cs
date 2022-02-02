@@ -39,6 +39,7 @@ public class Side_move_UI : MonoBehaviour
         if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
             (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
         {
+            Debug.Log("aaa");
             if (this.gameObject.GetComponent<RectTransform>().position.x > stop_pos)
             {
                 pos.x -= move_speed;
@@ -47,7 +48,6 @@ public class Side_move_UI : MonoBehaviour
                 if (first)
                 {
                     audio.PlayOneShot(pic);
-                    Debug.Log("" + this.gameObject.GetComponent<RectTransform>().position+mp);
                     first = false;
                 }
             }
@@ -61,8 +61,33 @@ public class Side_move_UI : MonoBehaviour
             }
             first = true;
         }
+    }
 
-        
-        
+    public void push_side_move()
+    {
+        if ((mp.x >= pos.x - (size.x / 2)) && (mp.x <= pos.x + (size.x / 2)) &&
+            (mp.y >= pos.y - (size.y / 2)) && (mp.y <= pos.y + (size.y / 2)))
+        {
+            if (this.gameObject.GetComponent<RectTransform>().position.x > stop_pos)
+            {
+                pos.x -= move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
+
+                if (first)
+                {
+                    audio.PlayOneShot(pic);
+                    first = false;
+                }
+            }
+        }
+        else
+        {
+            if (this.gameObject.GetComponent<RectTransform>().position.x < mem_pos.x)
+            {
+                pos.x += move_speed;
+                this.gameObject.GetComponent<RectTransform>().position = pos;
+            }
+            first = true;
+        }
     }
 }
