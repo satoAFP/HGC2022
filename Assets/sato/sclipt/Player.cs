@@ -100,6 +100,9 @@ public class Player : MonoBehaviour
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
 
+    [Header("最初のスタートカウント終了時のSE")]
+    public AudioClip se_start_count_end;
+
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
@@ -232,9 +235,10 @@ public class Player : MonoBehaviour
                 Movestop = false;   //アクションループのメイン部分を動かす
                 Select_order = 0;   //アクションブロックに乗った時、最初に加算されてしまうから-1
                 select_time = false;//アクション開始するとカードを選択できない
+                audio.PlayOneShot(se_start_count_end);
             }
             //60フレーム毎に１秒減らす
-            if ((start_time_count % 60) == 0)
+            if ((start_time_count % 60) == 0 && start_time_count <= 120) 
             {
                 start_text_time_count--;
                 //スタートのカウント時のSE再生
@@ -243,7 +247,8 @@ public class Player : MonoBehaviour
             //テキストに秒数を出力
             start_time_text.text = "" + start_text_time_count;
         }
-        Debug.Log("bbb " +Longjump_check) ;
+
+
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1)
         {
