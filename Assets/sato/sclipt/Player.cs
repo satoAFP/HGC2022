@@ -562,20 +562,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Move_direction") {
             switch(collision.gameObject.GetComponent<Direction>().direction) {
                 case 1://ç∂
-                    inputX = -1;
-                    inputZ = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, -90, 0));
+
                     break;
                 case 2://âE
-                    inputX = 1;
-                    inputZ = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, 90, 0));
                     break;
-                case 3://ëO
-                    inputZ = 1;
-                    inputX = 0;
-                    break;
-                case 4://å„
-                    inputZ = -1;
-                    inputX = 0;
+                case 3://å„
+                    this.gameObject.transform.Rotate(new Vector3(0, 180, 0));
                     break;
             }
         }
