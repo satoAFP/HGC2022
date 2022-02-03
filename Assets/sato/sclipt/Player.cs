@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     [Header("王冠エフェクト時の星エフェクト")]
     public GameObject clown_star;
 
+    [Header("All_cameraを入れる")]
+    public GameObject All_camera_set;
+
     [Header("スライムのアニメーション")]
     [Header("アニメーション管理変数---------------------------------------------------")]
     public Animator anim;
@@ -150,6 +153,7 @@ public class Player : MonoBehaviour
     private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
     private int after_card_order = -1;  //使用した最新のカード情報記憶
     private bool fall_deth_flag = false;//落下で死亡時trueになる
+    private int camera_num = 0;         //何番カメラ使用か決定用
 
 
     //構造体-------------------------------------------------------------------
@@ -560,22 +564,28 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision) {
         //自動移動設定時、このオブジェクトに触れると、指定方向に移動する
         if (collision.gameObject.tag == "Move_direction") {
+
+            if (camera_num == -1)
+                camera_num = 3;
+
             switch(collision.gameObject.GetComponent<Direction>().direction) {
                 case 1://左
-                    inputX = -1;
-                    inputZ = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, -90, 0));
+                    All_camera_set.transform.Rotate(new Vector3(0, 90, 0));
+                    //カメラの向き変更
+                    camera_num--; 
+                    if (camera_num == -1)
+                        camera_num = 3;
+                    GameObject.Find("VCameraManeger").GetComponent<VCamera_maneger>().CameraChange(camera_num);
                     break;
                 case 2://右
-                    inputX = 1;
-                    inputZ = 0;
-                    break;
-                case 3://前
-                    inputZ = 1;
-                    inputX = 0;
-                    break;
-                case 4://後
-                    inputZ = -1;
-                    inputX = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, 90, 0));
+                    All_camera_set.transform.Rotate(new Vector3(0, -90, 0));
+                    //カメラの向き変更
+                    if (camera_num == 4)
+                        camera_num = 0;
+                    camera_num++;
+                    GameObject.Find("VCameraManeger").GetComponent<VCamera_maneger>().CameraChange(camera_num);
                     break;
             }
         }
