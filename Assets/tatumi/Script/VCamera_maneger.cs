@@ -33,6 +33,6 @@ public class VCamera_maneger : MonoBehaviour
         if (MAXCamera < a || 0 > a)
             ;
         else
-            Cameras[a].Priority = 11;
+            Cameras[a].Priority = 13;
     }
 }
