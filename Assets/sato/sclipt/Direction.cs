@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Direction : MonoBehaviour
 {
-    [Header("左1　右2　後3")]
+    [Header("左1　右2")]
     public int direction;
 }
