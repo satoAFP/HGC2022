@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     [Header("王冠エフェクト時の星エフェクト")]
     public GameObject clown_star;
 
+    [Header("All_cameraを入れる")]
+    public GameObject All_camera_set;
+
     [Header("スライムのアニメーション")]
     [Header("アニメーション管理変数---------------------------------------------------")]
     public Animator anim;
@@ -568,7 +571,7 @@ public class Player : MonoBehaviour
             switch(collision.gameObject.GetComponent<Direction>().direction) {
                 case 1://左
                     this.gameObject.transform.Rotate(new Vector3(0, -90, 0));
-
+                    All_camera_set.transform.Rotate(new Vector3(0, 90, 0));
                     //カメラの向き変更
                     camera_num--; 
                     if (camera_num == -1)
@@ -577,7 +580,7 @@ public class Player : MonoBehaviour
                     break;
                 case 2://右
                     this.gameObject.transform.Rotate(new Vector3(0, 90, 0));
-
+                    All_camera_set.transform.Rotate(new Vector3(0, -90, 0));
                     //カメラの向き変更
                     if (camera_num == 4)
                         camera_num = 0;
