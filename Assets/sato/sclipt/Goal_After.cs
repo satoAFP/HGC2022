@@ -18,16 +18,22 @@ public class Goal_After : MonoBehaviour
     [Header("スライムのアニメーション")]
     public Animator anim;
 
+    [Header("ゴール後のBGM")]
+    public GameObject goal_BGM;
+
+
     [Header("ここから下はいじらない")]
     public bool goal_move = false;              //ゴール時のアクション再生
 
 
-    private int count = 0;
+    private int count = 0;                      //カウント
+
+    private GameObject play_BGM;                //ゲームをプレイ中のBGM
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        play_BGM = GameObject.Find("BGM");
     }
 
     // Update is called once per frame
@@ -35,6 +41,10 @@ public class Goal_After : MonoBehaviour
     {
         if(goal_move)
         {
+            //BGMの切り替え
+            play_BGM.SetActive(false);
+            goal_BGM.SetActive(true);
+
             this.gameObject.GetComponent<Player>().enabled = false;
 
             count++;
