@@ -2291,6 +2291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6842767206648822374, guid: 34c949a95eb6d624eace3cda24f1d844, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cd5afaccf9938445a81f83c70aca50c, type: 3}
     - target: {fileID: 6842767206648822375, guid: 34c949a95eb6d624eace3cda24f1d844, type: 3}
       propertyPath: m_Name
       value: BGM
@@ -5055,17 +5059,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3912756336649767948, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4841163912594594804, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
       propertyPath: multi_des.Array.data[0]
       value: 
       objectReference: {fileID: 1089760319}
     - target: {fileID: 5667141633934460291, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5828178499967176055, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305431202457786339, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8572386666150231538, guid: 6b81420b17a5f3e4ab843ee835f51677, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
