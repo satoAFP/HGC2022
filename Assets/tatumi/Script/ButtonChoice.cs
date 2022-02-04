@@ -242,22 +242,20 @@ public class ButtonChoice : MonoBehaviour
                         this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
                         audioSource.PlayOneShot(sound1);
                     }
+                    else if (pos.x > 0.0f)
+                    {
+                        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+
+                        //煙エフェクトを検索（位置により変更）
+                        GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+
+                        efe.GetComponent<Effect_move>().SetActive(false);
+                        efe.GetComponent<Effect_move>().first_EF = false;
+                        efe.GetComponent<Effect_move>().now_onecard = false;
+
+                        audioSource.PlayOneShot(sound1);
+                    }
                 }
-                else if (pos.x > 0.0f)
-                {
-                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-
-                    //煙エフェクトを検索（位置により変更）
-                    GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
-
-                    efe.GetComponent<Effect_move>().SetActive(false);
-                    efe.GetComponent<Effect_move>().first_EF = false;
-                    efe.GetComponent<Effect_move>().now_onecard = false;
-
-                    audioSource.PlayOneShot(sound1);
-                }
-                   
-                
                 else if (multi.Length == 1)
                 {
                    this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
