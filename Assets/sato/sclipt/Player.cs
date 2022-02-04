@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
-    [Header("ここから下は触らない-----------------------------------")]
+    [Header("ここから下は触らない------------------------------------------------------")]
     public bool Movestop = true;        //主人公が動くかどうか
 
     public bool count_check = false;    //最初のカウントが終わるとき判定をとる
@@ -124,35 +124,36 @@ public class Player : MonoBehaviour
 
 
     //private変数--------------------------------------------------------------
-    private Vector3 push;               //加算したいベクトル量
-    private float inputX = 0;           //X軸の移動ベクトル
-    private float inputZ = 1;           //Z軸の移動ベクトル
-    private int Select_order = 0;       //ボタンを押された順番を記憶
-    private bool[] Action_check;        //アクションを一回しか使えないよう管理
-    private int[] Card_order;           //カードを選択した順番を記憶
-    private bool wall_stick = false;    //壁にくっつける状態
+    private Vector3 push;                   //加算したいベクトル量
+    private float inputX = 0;               //X軸の移動ベクトル
+    private float inputZ = 1;               //Z軸の移動ベクトル
+    private int Select_order = 0;           //ボタンを押された順番を記憶
+    private bool[] Action_check;            //アクションを一回しか使えないよう管理
+    private int[] Card_order;               //カードを選択した順番を記憶
+    private bool wall_stick = false;        //壁にくっつける状態
     private bool around_collision_check = false;//プレイヤーの周りの当たり判定に壁があるとtrueになる
-    private Vector3 sura_angle;         //壁にくっついている時のスライムの角度調整
-    private Vector3 sura_pos;           //壁にくっついている時のスライムの位置調整
-    private bool all_stick = false;     //壁くっつき状態をアクションリセットまで続行
-    private Vector3 squrt_check;        //しゃがむときの主人公位置変更
-    private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
-    private bool walljump_check = false;//壁ジャンプかどうか判断
-    private float run_power = 1;        //移動速度代入
-    private Vector3 flont_push;         //移動方向へより力を加える(幅跳びで使用)
-    private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
-    private string[] text_data;         //アクション内容格納変数
-    private bool select_time = true;    //開始ボタンを押すと、カード選択できない
-    private bool safe_flag = true;      //死亡判定用フラグ
-    private Vector3 stop_check;         //フレーム毎に主人公の座標取得
-    private int stop_time_count = 0;    //主人公のストップ時、実際カウントする変数
-    private int start_time_count = 0;   //スタート時、実際カウントする変数
-    private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
-    private AudioSource audio;          //使用するオーディオソース
-    private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
-    private int after_card_order = -1;  //使用した最新のカード情報記憶
-    private bool fall_deth_flag = false;//落下で死亡時trueになる
-    private int camera_num = 0;         //何番カメラ使用か決定用
+    private Vector3 sura_angle;             //壁にくっついている時のスライムの角度調整
+    private Vector3 sura_pos;               //壁にくっついている時のスライムの位置調整
+    private bool all_stick = false;         //壁くっつき状態をアクションリセットまで続行
+    private Vector3 squrt_check;            //しゃがむときの主人公位置変更
+    private float walljump = 0.0f;          //壁ジャンプするときのジャンプ力
+    private bool walljump_check = false;    //壁ジャンプかどうか判断
+    private float run_power = 1;            //移動速度代入
+    private Vector3 flont_push;             //移動方向へより力を加える(幅跳びで使用)
+    private Vector3 flont_sliding;          //移動方向へより力を加える(スライディングで使用)
+    private string[] text_data;             //アクション内容格納変数
+    private bool select_time = true;        //開始ボタンを押すと、カード選択できない
+    private bool safe_flag = true;          //死亡判定用フラグ
+    private Vector3 stop_check;             //フレーム毎に主人公の座標取得
+    private int stop_time_count = 0;        //主人公のストップ時、実際カウントする変数
+    private int start_time_count = 0;       //スタート時、実際カウントする変数
+    private int start_text_time_count = 3;  //実際にテキストに秒数を入れる変数
+    private AudioSource audio;              //使用するオーディオソース
+    private Select_Card_Manager SCM;        //Select_Card_Manager格納スクリプト
+    private int after_card_order = -1;      //使用した最新のカード情報記憶
+    private bool fall_deth_flag = false;    //落下で死亡時trueになる
+    private int camera_num = 0;             //何番カメラ使用か決定用
+    private bool first_ground_check = false;//最初地面に着いた時の判定
 
 
     //構造体-------------------------------------------------------------------
@@ -379,7 +380,7 @@ public class Player : MonoBehaviour
                     //死亡時のエフェクト
                     Deth_efect.SetActive(true);
                     Delete_skin.SetActive(false);
-
+                    
                     //SE流す
                     audio.PlayOneShot(se_action);
                 }
@@ -592,7 +593,9 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground") {
             //着地判定
             anim.SetBool("jump", false);
-
+            if (first_ground_check)
+                audio.PlayOneShot(se_action);
+            first_ground_check = true;
         }
 
 
