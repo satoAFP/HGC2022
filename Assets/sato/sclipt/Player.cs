@@ -103,6 +103,8 @@ public class Player : MonoBehaviour
     [Header("最初のスタートカウント終了時のSE")]
     public AudioClip se_start_count_end;
 
+    [Header("ゴール時のSE")]
+    public AudioClip se_goal;
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
@@ -724,6 +726,9 @@ public class Player : MonoBehaviour
         //ゴール処理　リザルトに飛ぶ
         if (collision.gameObject.tag == "Goal") {
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
+
+            //ゴール時のSE
+            audio.PlayOneShot(se_goal);
 
             Destroy(collision.gameObject);
 
