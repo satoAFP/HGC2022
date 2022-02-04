@@ -283,6 +283,7 @@ MonoBehaviour:
   se_clown: {fileID: 8300000, guid: 82c9239221e103645a273e66a123e08e, type: 3}
   se_start_count: {fileID: 8300000, guid: 75aced91e12237f49b1b9e834149065a, type: 3}
   se_start_count_end: {fileID: 8300000, guid: cd8dbe8d7ec23df48abface1dc6b6a6b, type: 3}
+  se_goal: {fileID: 8300000, guid: 6de615ef46e508a48bb3b50e69b39e00, type: 3}
   Movestop: 1
   count_check: 0
   clown_get: 0
@@ -325,6 +326,7 @@ MonoBehaviour:
   jump_power: 6
   jump_num: 3
   anim: {fileID: 0}
+  goal_BGM: {fileID: 0}
   goal_move: 0
 --- !u!1 &4428356768960279016
 GameObject:
