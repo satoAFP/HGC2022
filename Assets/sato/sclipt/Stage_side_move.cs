@@ -13,14 +13,19 @@ public class Stage_side_move : MonoBehaviour
     [Header("ページ数")]
     public int page_amount;
 
+    [Header("ページをめくるときの音")]
+    public AudioClip se_page;
+
     private bool right_flag = false;        //右ボタン押したときtrue
     private bool left_flag = false;         //左ボタン押したときtrue
     private int move_pos = 0;               //ステージ選択の移動先
+    private AudioSource audio;              //使用するオーディオソース
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //ステージ内にあるSE_manager格納
+        audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class Stage_side_move : MonoBehaviour
         {
             right_flag = true;
             move_pos -= canvas_size;
+            audio.PlayOneShot(se_page);
         }
     }
     public void PushLeft()
@@ -66,6 +72,7 @@ public class Stage_side_move : MonoBehaviour
         {
             left_flag = true;
             move_pos += canvas_size;
+            audio.PlayOneShot(se_page);
         }
     }
 
