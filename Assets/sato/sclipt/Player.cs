@@ -458,9 +458,9 @@ public class Player : MonoBehaviour
 
                     //倍率が変わる
                     run_power = runSpeed;
-
+                    
                     //ジャンプアニメーション移行
-                    //anim.SetBool("run", true);
+                    anim.SetBool("run", true);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -664,6 +664,9 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
+            //走りアニメーション終了
+            anim.SetBool("run", false);
+
             //幅跳びのバグ修正関連
             Longjump_check = false;
         }
@@ -672,6 +675,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Select") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            
 
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
@@ -709,6 +714,9 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "action_delete") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            //走りアニメーション終了
+            anim.SetBool("run", false);
 
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
