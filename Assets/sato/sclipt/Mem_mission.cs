@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Mem_mission : MonoBehaviour
 {
+    static public bool[] stage_clown_mem = new bool[20];
+    static public bool[] stage_star_mem = new bool[20];
+
     // Start is called before the first frame update
     void Start()
     {
