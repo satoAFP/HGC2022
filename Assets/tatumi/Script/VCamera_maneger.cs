@@ -7,7 +7,7 @@ public class VCamera_maneger : MonoBehaviour
 {
     //0=front,1=right,2=left,3=Back,4ˆÈ~=all
     public int MAXCamera;
-    [Header("ƒJƒƒ‰‘ÎÛ 0=front,1=right,2=left,3=Back,4ˆÈ~=all")]
+    [Header("ƒJƒƒ‰‘ÎÛ 0=back,1=right,2=front,3=left,4ˆÈ~=all")]
     public CinemachineVirtualCamera[] Cameras;
     private int nowCamera = 10;
 
@@ -33,6 +33,6 @@ public class VCamera_maneger : MonoBehaviour
         if (MAXCamera < a || 0 > a)
             ;
         else
-            Cameras[a].Priority = 11;
+            Cameras[a].Priority = 13;
     }
 }
