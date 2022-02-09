@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     [Header("王冠エフェクト時の星エフェクト")]
     public GameObject clown_star;
 
+    [Header("アクション時のエフェクト")]
+    public eff_Action action_effect;
+
     [Header("スライムのアニメーション")]
     [Header("アニメーション管理変数---------------------------------------------------")]
     public Animator anim;
@@ -661,6 +664,9 @@ public class Player : MonoBehaviour
 
             //走りアニメーション終了
             anim.SetBool("run", false);
+
+            //アクション時のエフェクト作成
+            action_effect.Copied();
 
             //幅跳びのバグ修正関連
             Longjump_check = false;
