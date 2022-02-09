@@ -29,8 +29,6 @@ public class Scenemove : MonoBehaviour
 
     static public int Scene_num = 0;
 
-    static public string before_Scene_name = "";
-
     static public bool Clown_OK = false;
     static public bool Mission_OK = false;
 
@@ -43,11 +41,6 @@ public class Scenemove : MonoBehaviour
     void Start()
     {
         audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
-    }
-
-    public string get_Scene_name()
-    {
-        return before_Scene_name;
     }
 
     void FixedUpdate() 
@@ -117,6 +110,9 @@ public class Scenemove : MonoBehaviour
 
             }
         }
+
+        if (SceneManager.GetActiveScene().name == "Result")
+            Mem_Mission.merge();
     }
 
     //指定したシーンに移動
@@ -127,7 +123,6 @@ public class Scenemove : MonoBehaviour
         SceneManager.LoadScene(SceneName[0]);
         audio.PlayOneShot(pic);
 
-        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     //ネクストステージボタン
@@ -146,7 +141,6 @@ public class Scenemove : MonoBehaviour
             SceneManager.LoadScene("Title");
         audio.PlayOneShot(pic);
 
-        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     //リトライボタン
@@ -162,7 +156,6 @@ public class Scenemove : MonoBehaviour
         }
         audio.PlayOneShot(pic);
 
-        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     public void PushNowScene()
@@ -170,6 +163,5 @@ public class Scenemove : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         audio.PlayOneShot(pic);
 
-        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 }
