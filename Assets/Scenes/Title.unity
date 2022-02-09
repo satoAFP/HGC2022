@@ -1788,6 +1788,7 @@ MonoBehaviour:
   mission: {fileID: 0}
   clown_cracker: {fileID: 0}
   mission_cracker: {fileID: 0}
+  Mem_Mission: {fileID: 0}
   pic: {fileID: 0}
 --- !u!4 &840648001
 Transform:
@@ -2404,6 +2405,10 @@ PrefabInstance:
     - target: {fileID: 7917725674731610650, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 194.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548113028424917793, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}

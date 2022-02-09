@@ -8,14 +8,16 @@ public class Mem_mission : MonoBehaviour
     public GameObject[] set_clown;
     public GameObject[] set_star;
 
+    [Header("Scene_managerを入れる")]
     public Scenemove Scenemove;
 
+    //実際クリアしているかの判定をとる
     public static bool[] stage_clown_mem = new bool[20];
     public static bool[] stage_star_mem = new bool[20];
 
     //リザルトから帰ってきたか確認
-    private bool[] check_clown_mem = new bool[20];
-    private bool[] check_star_mem = new bool[20];
+    public static bool[] check_clown_mem = new bool[20];
+    public static bool[] check_star_mem = new bool[20];
 
     public void get_clown(bool a,int b)
     {
@@ -32,8 +34,11 @@ public class Mem_mission : MonoBehaviour
     {
         if (Scenemove.get_Scene_name() == "Result") 
         {
-            check_clown_mem = stage_clown_mem;
-            check_star_mem = stage_star_mem;
+            for (int i = 0; i < 20; i++)
+            {
+                check_clown_mem[i] = stage_clown_mem[i];
+                check_star_mem[i] = stage_star_mem[i];
+            }
         }
 
         for (int i=0;i<20;i++)
