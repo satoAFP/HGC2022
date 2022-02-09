@@ -100,10 +100,15 @@ public class Player : MonoBehaviour
     [Header("最初のスタートカウント時のSE")]
     public AudioClip se_start_count;
 
+    [Header("最初のスタートカウント終了時のSE")]
+    public AudioClip se_start_count_end;
+
+    [Header("ゴール時のSE")]
+    public AudioClip se_goal;
 
     //他オブジェクトでも使用
     [Header("主人公を止める用")]
-    [Header("ここから下は触らない-----------------------------------")]
+    [Header("ここから下は触らない------------------------------------------------------")]
     public bool Movestop = true;        //主人公が動くかどうか
 
     public bool count_check = false;    //最初のカウントが終わるとき判定をとる
@@ -119,34 +124,36 @@ public class Player : MonoBehaviour
 
 
     //private変数--------------------------------------------------------------
-    private Vector3 push;               //加算したいベクトル量
-    private float inputX = 0;           //X軸の移動ベクトル
-    private float inputZ = 1;           //Z軸の移動ベクトル
-    private int Select_order = 0;       //ボタンを押された順番を記憶
-    private bool[] Action_check;        //アクションを一回しか使えないよう管理
-    private int[] Card_order;           //カードを選択した順番を記憶
-    private bool wall_stick = false;    //壁にくっつける状態
+    private Vector3 push;                   //加算したいベクトル量
+    private float inputX = 0;               //X軸の移動ベクトル
+    private float inputZ = 1;               //Z軸の移動ベクトル
+    private int Select_order = 0;           //ボタンを押された順番を記憶
+    private bool[] Action_check;            //アクションを一回しか使えないよう管理
+    private int[] Card_order;               //カードを選択した順番を記憶
+    private bool wall_stick = false;        //壁にくっつける状態
     private bool around_collision_check = false;//プレイヤーの周りの当たり判定に壁があるとtrueになる
-    private Vector3 sura_angle;         //壁にくっついている時のスライムの角度調整
-    private Vector3 sura_pos;           //壁にくっついている時のスライムの位置調整
-    private bool all_stick = false;     //壁くっつき状態をアクションリセットまで続行
-    private Vector3 squrt_check;        //しゃがむときの主人公位置変更
-    private float walljump = 0.0f;      //壁ジャンプするときのジャンプ力
-    private bool walljump_check = false;//壁ジャンプかどうか判断
-    private float run_power = 1;        //移動速度代入
-    private Vector3 flont_push;         //移動方向へより力を加える(幅跳びで使用)
-    private Vector3 flont_sliding;      //移動方向へより力を加える(スライディングで使用)
-    private string[] text_data;         //アクション内容格納変数
-    private bool select_time = true;    //開始ボタンを押すと、カード選択できない
-    private bool safe_flag = true;      //死亡判定用フラグ
-    private Vector3 stop_check;         //フレーム毎に主人公の座標取得
-    private int stop_time_count = 0;    //主人公のストップ時、実際カウントする変数
-    private int start_time_count = 0;   //スタート時、実際カウントする変数
-    private int start_text_time_count = 3;   //実際にテキストに秒数を入れる変数
-    private AudioSource audio;          //使用するオーディオソース
-    private Select_Card_Manager SCM;    //Select_Card_Manager格納スクリプト
-    private int after_card_order = -1;  //使用した最新のカード情報記憶
-    private bool fall_deth_flag = false;//落下で死亡時trueになる
+    private Vector3 sura_angle;             //壁にくっついている時のスライムの角度調整
+    private Vector3 sura_pos;               //壁にくっついている時のスライムの位置調整
+    private bool all_stick = false;         //壁くっつき状態をアクションリセットまで続行
+    private Vector3 squrt_check;            //しゃがむときの主人公位置変更
+    private float walljump = 0.0f;          //壁ジャンプするときのジャンプ力
+    private bool walljump_check = false;    //壁ジャンプかどうか判断
+    private float run_power = 1;            //移動速度代入
+    private Vector3 flont_push;             //移動方向へより力を加える(幅跳びで使用)
+    private Vector3 flont_sliding;          //移動方向へより力を加える(スライディングで使用)
+    private string[] text_data;             //アクション内容格納変数
+    private bool select_time = true;        //開始ボタンを押すと、カード選択できない
+    private bool safe_flag = true;          //死亡判定用フラグ
+    private Vector3 stop_check;             //フレーム毎に主人公の座標取得
+    private int stop_time_count = 0;        //主人公のストップ時、実際カウントする変数
+    private int start_time_count = 0;       //スタート時、実際カウントする変数
+    private int start_text_time_count = 3;  //実際にテキストに秒数を入れる変数
+    private AudioSource audio;              //使用するオーディオソース
+    private Select_Card_Manager SCM;        //Select_Card_Manager格納スクリプト
+    private int after_card_order = -1;      //使用した最新のカード情報記憶
+    private bool fall_deth_flag = false;    //落下で死亡時trueになる
+    private int camera_num = 0;             //何番カメラ使用か決定用
+    private bool first_ground_check = false;//最初地面に着いた時の判定
 
 
     //構造体-------------------------------------------------------------------
@@ -232,9 +239,10 @@ public class Player : MonoBehaviour
                 Movestop = false;   //アクションループのメイン部分を動かす
                 Select_order = 0;   //アクションブロックに乗った時、最初に加算されてしまうから-1
                 select_time = false;//アクション開始するとカードを選択できない
+                audio.PlayOneShot(se_start_count_end);
             }
             //60フレーム毎に１秒減らす
-            if ((start_time_count % 60) == 0)
+            if ((start_time_count % 60) == 0 && start_time_count <= 120) 
             {
                 start_text_time_count--;
                 //スタートのカウント時のSE再生
@@ -314,13 +322,13 @@ public class Player : MonoBehaviour
             if (Around_collision[0].GetComponent<Around_collider>().wall_check == true) 
             {
                 around_collision_check = true;
-                sura_angle = new Vector3(90.0f, 90.0f, 0.0f);
+                sura_angle = new Vector3(45.0f, 0.0f, -90.0f);
                 sura_pos = new Vector3(-0.5f, 0.0f, 0.0f);
             }
             if (Around_collision[1].GetComponent<Around_collider>().wall_check == true) 
             {
                 around_collision_check = true;
-                sura_angle = new Vector3(-90.0f, 90.0f, 0.0f);
+                sura_angle = new Vector3(-45.0f, 0.0f, 90.0f);
                 sura_pos = new Vector3(0.5f, 0.0f, 0.0f);
             }
         }
@@ -330,19 +338,14 @@ public class Player : MonoBehaviour
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-
-        if(Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+        //幅跳び選択時、ジャンプブロックに引っかかる問題解決
+        if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
         {
-            //幅跳び選択時、ジャンプブロックに引っかかる問題解決
-            if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
+            if (after_card_order == (int)Card.LONGJUMP || after_card_order == (int)Card.SLIDING) 
             {
-                if (after_card_order == (int)Card.LONGJUMP)
-                {
-                    Longjump_check = true;
-                }
+                Longjump_check = true;
             }
         }
-
 
         //幅跳び、スライディングで使用する移動量の向き変更
         if (inputX == -1) {
@@ -376,7 +379,7 @@ public class Player : MonoBehaviour
                     //死亡時のエフェクト
                     Deth_efect.SetActive(true);
                     Delete_skin.SetActive(false);
-
+                    
                     //SE流す
                     audio.PlayOneShot(se_action);
                 }
@@ -421,28 +424,20 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.STICK] == true) {
                     //くっつき状態維持
                     all_stick = true;
-
-                    //前に壁がある処理
-                    //if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
-                    //    wall_stick = true;
-                    //else
-                    //    wall_stick = false;
                 }
                 if (all_stick == true) 
                 {
-                    Debug.Log("aaa");
                     if (around_collision_check == true)
                     {
-                        Debug.Log("bbb");
                         //Y軸が動かないよう固定
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                         //スライムの調整
+                        //sura_model.transform.Rotate(sura_angle);
                         sura_model.transform.localEulerAngles = sura_angle;
                         sura_model.transform.localPosition = sura_pos;
                     }
                     else
                     {
-                        Debug.Log("ccc");
                         //壁がなくなると元の状態に戻す
                         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                         sura_model.transform.localEulerAngles = new Vector3(0.0f, 45.0f, 0.0f);
@@ -456,7 +451,7 @@ public class Player : MonoBehaviour
 
                     //倍率が変わる
                     run_power = runSpeed;
-
+                    
                     //ジャンプアニメーション移行
                     //anim.SetBool("run", true);
 
@@ -530,6 +525,8 @@ public class Player : MonoBehaviour
 
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
 
+                    //anim.SetTrigger("nobi");
+
                     Action_check[(int)Card.SLIDING] = false;
                 }
             }
@@ -562,22 +559,28 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision) {
         //自動移動設定時、このオブジェクトに触れると、指定方向に移動する
         if (collision.gameObject.tag == "Move_direction") {
+
+            if (camera_num == -1)
+                camera_num = 3;
+
             switch(collision.gameObject.GetComponent<Direction>().direction) {
                 case 1://左
-                    inputX = -1;
-                    inputZ = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, -90, 0));
+
+                    //カメラの向き変更
+                    camera_num--; 
+                    if (camera_num == -1)
+                        camera_num = 3;
+                    GameObject.Find("VCameraManeger").GetComponent<VCamera_maneger>().CameraChange(camera_num);
                     break;
                 case 2://右
-                    inputX = 1;
-                    inputZ = 0;
-                    break;
-                case 3://前
-                    inputZ = 1;
-                    inputX = 0;
-                    break;
-                case 4://後
-                    inputZ = -1;
-                    inputX = 0;
+                    this.gameObject.transform.Rotate(new Vector3(0, 90, 0));
+
+                    //カメラの向き変更
+                    if (camera_num == 4)
+                        camera_num = 0;
+                    camera_num++;
+                    GameObject.Find("VCameraManeger").GetComponent<VCamera_maneger>().CameraChange(camera_num);
                     break;
             }
         }
@@ -585,7 +588,9 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground") {
             //着地判定
             anim.SetBool("jump", false);
-
+            if (first_ground_check)
+                audio.PlayOneShot(se_action);
+            first_ground_check = true;
         }
 
 
@@ -654,6 +659,9 @@ public class Player : MonoBehaviour
             //アクションの内容消去
             Card_order[0] = -1;
 
+            //走りアニメーション終了
+            anim.SetBool("run", false);
+
             //幅跳びのバグ修正関連
             Longjump_check = false;
         }
@@ -662,6 +670,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Select") {
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            
 
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
@@ -700,6 +710,9 @@ public class Player : MonoBehaviour
             //元のサイズに戻す
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+            //走りアニメーション終了
+            anim.SetBool("run", false);
+
             //しゃがみ状態解除
             Action_check[(int)Card.SQUAT] = false;
 
@@ -720,6 +733,9 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Goal") {
             this.gameObject.GetComponent<Goal_After>().goal_move = true;
 
+            //ゴール時のSE
+            audio.PlayOneShot(se_goal);
+
             Destroy(collision.gameObject);
 
             //ゴール時のエフェクト
@@ -739,8 +755,7 @@ public class Player : MonoBehaviour
         {
             //オブジェクト削除
             Destroy(collision.gameObject);
-            if (after_card_order == (int)Card.JUMP || after_card_order == (int)Card.STICK || 
-                after_card_order == (int)Card.RUN || after_card_order == -1)
+            if (after_card_order == (int)Card.STICK || after_card_order == (int)Card.RUN || after_card_order == -1)
             {
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push, ForceMode.Impulse);
@@ -751,13 +766,24 @@ public class Player : MonoBehaviour
                 //ジャンプアニメーション移行
                 anim.SetBool("jump", true);
             }
-            else if (after_card_order == (int)Card.SQUAT)
+            else if (after_card_order == (int)Card.SQUAT) 
             {
                 //元のサイズに変更
                 this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 
                 //ジャンプさせる処理
                 this.GetComponent<Rigidbody>().AddForce(push * 1.6f, ForceMode.Impulse);
+
+                //ギミック使用時初期化
+                after_card_order = -1;
+
+                //ジャンプアニメーション移行
+                anim.SetBool("jump", true);
+            }
+            else if (after_card_order == (int)Card.JUMP)
+            {
+                //ジャンプさせる処理
+                this.GetComponent<Rigidbody>().AddForce(push * 0.5f, ForceMode.Impulse);
 
                 //ギミック使用時初期化
                 after_card_order = -1;

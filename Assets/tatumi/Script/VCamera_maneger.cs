@@ -7,7 +7,7 @@ public class VCamera_maneger : MonoBehaviour
 {
     //0=front,1=right,2=left,3=Back,4ˆÈ~=all
     public int MAXCamera;
-    [Header("ƒJƒƒ‰‘ÎÛ 0=front,1=right,2=left,3=Back,4ˆÈ~=all")]
+    [Header("ƒJƒƒ‰‘ÎÛ 0=back,1=right,2=front,3=left,4ˆÈ~=all")]
     public CinemachineVirtualCamera[] Cameras;
     private int nowCamera = 10;
 
@@ -20,19 +20,19 @@ public class VCamera_maneger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+       
     }
 
     public void CameraChange(int a)
     {
-        for(int i=0;i!=MAXCamera;i++)
+        for (int i = 0; i != MAXCamera; i++)
         {
             Cameras[i].Priority = 10;
         }
 
-        if (MAXCamera < a||0>a)
+        if (MAXCamera < a || 0 > a)
             ;
         else
-        Cameras[a].Priority = 11;
+            Cameras[a].Priority = 13;
     }
 }

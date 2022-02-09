@@ -1121,7 +1121,8 @@ MonoBehaviour:
   mission: {fileID: 0}
   clown_cracker: {fileID: 0}
   mission_cracker: {fileID: 0}
-  pic: {fileID: 8300000, guid: d47619fbf9b89834f9fc407bd8bd1df8, type: 3}
+  Mem_Mission: {fileID: 1331041613447079240, guid: 24c153fcf99c0134a99889e3397f2b3c, type: 3}
+  pic: {fileID: 0}
 --- !u!1 &2674099071589392094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,9 +2830,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 2674099073483808842}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
 --- !u!95 &2674099073483808840
 Animator:
   serializedVersion: 3
@@ -27862,9 +27866,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163912071740447}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
 --- !u!114 &2674099073539867155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28092,9 +28099,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163912197227988}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
 --- !u!1 &4841163912594594805
 GameObject:
   m_ObjectHideFlags: 0
@@ -28428,9 +28438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0b38308649ea4f9a3871e12fe85fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackButton: {fileID: 2674099071992416069}
+  ActionButton: {fileID: 4841163912594594805}
   vanish: 1
   Button: {fileID: 4841163913374055748}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 8300000, guid: 8a8805eafcdce81488f72f9d19ecbe57, type: 3}
 --- !u!114 &2674099072224486564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28799,7 +28812,8 @@ MonoBehaviour:
   mission: {fileID: 0}
   clown_cracker: {fileID: 0}
   mission_cracker: {fileID: 0}
-  pic: {fileID: 8300000, guid: d47619fbf9b89834f9fc407bd8bd1df8, type: 3}
+  Mem_Mission: {fileID: 0}
+  pic: {fileID: 0}
 --- !u!1 &9133722272440255316
 GameObject:
   m_ObjectHideFlags: 0
@@ -29036,7 +29050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232944486455755792, guid: 345371de53c8fb745af2bd7f7c72efc8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -700
+      value: -1700
       objectReference: {fileID: 0}
     - target: {fileID: 2232944486455755792, guid: 345371de53c8fb745af2bd7f7c72efc8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29122,7 +29136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3799841337494008791, guid: 13a9a8cbb57b0e7419dd23a82efe00f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -700
+      value: -1700
       objectReference: {fileID: 0}
     - target: {fileID: 3799841337494008791, guid: 13a9a8cbb57b0e7419dd23a82efe00f9, type: 3}
       propertyPath: m_LocalPosition.y
