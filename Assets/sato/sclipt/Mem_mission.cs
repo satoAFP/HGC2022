@@ -34,8 +34,11 @@ public class Mem_mission : MonoBehaviour
     {
         if (Scenemove.get_Scene_name() == "Result") 
         {
-            check_clown_mem = stage_clown_mem;
-            check_star_mem = stage_star_mem;
+            for (int i = 0; i < 20; i++)
+            {
+                check_clown_mem[i] = stage_clown_mem[i];
+                check_star_mem[i] = stage_star_mem[i];
+            }
         }
 
         for (int i=0;i<20;i++)
