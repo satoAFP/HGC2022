@@ -24,6 +24,8 @@ public class eff_Action : MonoBehaviour
 
             eff_Action script = copied.gameObject.GetComponent<eff_Action>();
 
+        copied.gameObject.transform.position = this.gameObject.transform.position;
+
             Destroy(script);
             Destroy(copied,1.0f);
         
