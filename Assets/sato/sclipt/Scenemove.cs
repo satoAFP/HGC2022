@@ -21,10 +21,15 @@ public class Scenemove : MonoBehaviour
     [Header("ミッション紙吹雪")]
     public GameObject mission_cracker;
 
+    [Header("clear_manager入れる")]
+    public Mem_mission Mem_Mission;
+
     [Header("クリック時のSE")]
     public AudioClip pic;
 
     static public int Scene_num = 0;
+
+    static public string before_Scene_name = "";
 
     static public bool Clown_OK = false;
     static public bool Mission_OK = false;
@@ -37,8 +42,12 @@ public class Scenemove : MonoBehaviour
 
     void Start()
     {
-
         audio = GameObject.Find("SE_manager").GetComponent<AudioSource>();
+    }
+
+    public string get_Scene_name()
+    {
+        return before_Scene_name;
     }
 
     void FixedUpdate() 
@@ -101,8 +110,12 @@ public class Scenemove : MonoBehaviour
 
         for (int i = 1; i <= stage_num; i++)
         {
-            if (SceneManager.GetActiveScene().name == "Stage" + i) 
+            if (SceneManager.GetActiveScene().name == "Stage" + i)
+            {
+                //自身の現在のステージ記憶
                 Scene_num = i;
+
+            }
         }
     }
 
@@ -113,6 +126,8 @@ public class Scenemove : MonoBehaviour
         Mission_OK = false;
         SceneManager.LoadScene(SceneName[0]);
         audio.PlayOneShot(pic);
+
+        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     //ネクストステージボタン
@@ -130,6 +145,8 @@ public class Scenemove : MonoBehaviour
         if (Scene_num == stage_num)
             SceneManager.LoadScene("Title");
         audio.PlayOneShot(pic);
+
+        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     //リトライボタン
@@ -144,11 +161,15 @@ public class Scenemove : MonoBehaviour
                 SceneManager.LoadScene("Stage" + i);
         }
         audio.PlayOneShot(pic);
+
+        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 
     public void PushNowScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         audio.PlayOneShot(pic);
+
+        before_Scene_name = SceneManager.GetActiveScene().name;
     }
 }
