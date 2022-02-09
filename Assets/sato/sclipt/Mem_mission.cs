@@ -8,9 +8,6 @@ public class Mem_mission : MonoBehaviour
     public GameObject[] set_clown;
     public GameObject[] set_star;
 
-    [Header("Scene_manager‚ğ“ü‚ê‚é")]
-    public Scenemove Scenemove;
-
     //ÀÛƒNƒŠƒA‚µ‚Ä‚¢‚é‚©‚Ì”»’è‚ğ‚Æ‚é
     public static bool[] stage_clown_mem = new bool[20];
     public static bool[] stage_star_mem = new bool[20];
@@ -29,18 +26,18 @@ public class Mem_mission : MonoBehaviour
         stage_star_mem[b] = a;
     }
 
+    public void merge()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            check_clown_mem[i] = stage_clown_mem[i];
+            check_star_mem[i] = stage_star_mem[i];
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        if (Scenemove.get_Scene_name() == "Result") 
-        {
-            for (int i = 0; i < 20; i++)
-            {
-                check_clown_mem[i] = stage_clown_mem[i];
-                check_star_mem[i] = stage_star_mem[i];
-            }
-        }
-
         for (int i=0;i<20;i++)
         {
             if (check_clown_mem[i])
