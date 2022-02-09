@@ -79,7 +79,7 @@ public class DeletAction : MonoBehaviour
                     multi_now--;
                     all_multi_flag += 1;
 
-                    multi_backflag = true;
+                    multi_backflag = false;
                   
 
                     //“ñ’i–ß‚µ
@@ -97,7 +97,7 @@ public class DeletAction : MonoBehaviour
             if(all_multi_flag>=2)
             {
                 now--;
-                multi_backflag = true;
+                multi_backflag = false;
                
                 //‚È‚ñ‚©0‚É“ü‚Á‚Ä‚à‚â‚ë‚¤‚Æ‚·‚é‚Ì‚Å‚»‚êˆÈŠO‚Å–ß‚·ˆ—B
                 if (now != 0)
