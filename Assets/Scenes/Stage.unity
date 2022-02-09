@@ -57867,6 +57867,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ce63c99dcdef14bbf9351c178d9d64, type: 3}
+--- !u!1 &881626443452371267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 881626442350645521, guid: 33ce63c99dcdef14bbf9351c178d9d64, type: 3}
+  m_PrefabInstance: {fileID: 881626443452371266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881626443452371268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881626443452371267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf459f65a378367499b435008a21fbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &895485061499983566
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -64360,6 +64377,7 @@ MonoBehaviour:
   vanish: 1
   Button: {fileID: 4881504840001233060}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 0}
 --- !u!224 &2705991386436033188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65059,6 +65077,7 @@ MonoBehaviour:
   vanish: 1
   Button: {fileID: 4881504839041996852}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 0}
 --- !u!114 &2705991386937517385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65430,6 +65449,7 @@ MonoBehaviour:
   vanish: 1
   Button: {fileID: 2705991387088829866}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 0}
 --- !u!114 &2705991387131361628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65489,6 +65509,7 @@ MonoBehaviour:
   vanish: 1
   Button: {fileID: 4881504839235789311}
   pos: {x: 0, y: 0, z: 0}
+  sound1: {fileID: 0}
 --- !u!222 &2705991387252498377
 CanvasRenderer:
   m_ObjectHideFlags: 0
