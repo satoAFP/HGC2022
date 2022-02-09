@@ -32,6 +32,9 @@ public class Mission : MonoBehaviour
     [Header("ミッションクリア画像")]
     public GameObject Mission_img;
 
+    [Header("clear_manager入れる")]
+    public Mem_mission Mem_Mission;
+
     [Header("ここから下いじらない-----------")]
     public bool Clown_OK = false;
     public bool Mission_OK = false;
@@ -125,19 +128,37 @@ public class Mission : MonoBehaviour
     {
         clown_get = this.gameObject.GetComponent<Player>().clown_get;
         use_Card_Amount = this.gameObject.GetComponent<Player>().Use_Card_Amount;
-
+        bool a = true;
         //王冠取得
         if (clown_get >= Clown_Clear) 
         {
             //クリアテキスト表示
             Clown_img.gameObject.SetActive(true);
             Clown_OK = true;
+
+            //ステージセレクトで王冠表示用
+            for (int i = 1; i <= 20; i++)
+            {
+                if (SceneManager.GetActiveScene().name == "Stage" + i)
+                {
+                    Mem_Mission.get_clown(a, i - 1);
+                }
+            }
         }
         else
         {
             //クリアテキスト表示
             Clown_img.gameObject.SetActive(false);
             Clown_OK = false;
+            bool b = false;
+            //ステージセレクトで王冠非表示用
+            for (int i = 1; i <= 20; i++)
+            {
+                if (SceneManager.GetActiveScene().name == "Stage" + i)
+                {
+                    Mem_Mission.get_clown(b, i - 1);
+                }
+            }
         }
 
         //ミッション用カード使用回数制限
@@ -148,11 +169,29 @@ public class Mission : MonoBehaviour
                 //クリアテキスト表示
                 Mission_img.gameObject.SetActive(true);
                 Mission_OK = true;
+
+                //ステージセレクトで王冠表示用
+                for (int i = 1; i <= 20; i++)
+                {
+                    if (SceneManager.GetActiveScene().name == "Stage" + i)
+                    {
+                        Mem_Mission.get_star(true, i - 1);
+                    }
+                }
             }
             else
             {
                 Mission_img.gameObject.SetActive(false);
                 Mission_OK = false;
+
+                //ステージセレクトで王冠非表示用
+                for (int i = 1; i <= 20; i++)
+                {
+                    if (SceneManager.GetActiveScene().name == "Stage" + i)
+                    {
+                        Mem_Mission.get_star(false, i - 1);
+                    }
+                }
             }
         }
         if(Minssion_Num == 1)
@@ -162,11 +201,29 @@ public class Mission : MonoBehaviour
                 //クリアテキスト表示
                 Mission_img.gameObject.SetActive(true);
                 Mission_OK = true;
+
+                //ステージセレクトで王冠表示用
+                for (int i = 1; i <= 20; i++)
+                {
+                    if (SceneManager.GetActiveScene().name == "Stage" + i)
+                    {
+                        Mem_Mission.get_star(true, i - 1);
+                    }
+                }
             }
             else
             {
                 Mission_img.gameObject.SetActive(false);
                 Mission_OK = false;
+
+                //ステージセレクトで王冠非表示用
+                for (int i = 1; i <= 20; i++)
+                {
+                    if (SceneManager.GetActiveScene().name == "Stage" + i)
+                    {
+                        Mem_Mission.get_star(false, i - 1);
+                    }
+                }
             }
         }
     }

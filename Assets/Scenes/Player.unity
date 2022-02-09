@@ -2654,6 +2654,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: baund  1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 959d40a82ef4dae4b9f8480c2d93159f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 959d40a82ef4dae4b9f8480c2d93159f, type: 3}
 --- !u!1 &1004422500 stripped
@@ -7316,7 +7320,7 @@ PrefabInstance:
     - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 515252265}
+      objectReference: {fileID: 205650024}
     - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: se_card
       value: 
@@ -7344,7 +7348,7 @@ PrefabInstance:
     - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: sura_model
       value: 
-      objectReference: {fileID: 515252264}
+      objectReference: {fileID: 205650022}
     - target: {fileID: 4428356768181562247, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: Delete_skin
       value: 
@@ -7507,7 +7511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7397928891541518496, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9150821259641370757, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: Select.Array.data[0]

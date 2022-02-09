@@ -252,7 +252,6 @@ public class Player : MonoBehaviour
             start_time_text.text = "" + start_text_time_count;
         }
 
-
         //Card_orderの一番目にデータが入ってないとき順番を一つずらす
         if (Card_order[0] == -1)
         {
@@ -425,12 +424,6 @@ public class Player : MonoBehaviour
                 if (Action_check[(int)Card.STICK] == true) {
                     //くっつき状態維持
                     all_stick = true;
-
-                    //前に壁がある処理
-                    //if (Around_collision[2].GetComponent<Around_collider>().wall_check == true)
-                    //    wall_stick = true;
-                    //else
-                    //    wall_stick = false;
                 }
                 if (all_stick == true) 
                 {
@@ -460,7 +453,7 @@ public class Player : MonoBehaviour
                     run_power = runSpeed;
                     
                     //ジャンプアニメーション移行
-                    anim.SetBool("run", true);
+                    //anim.SetBool("run", true);
 
                     Action_check[(int)Card.RUN] = false;
                 }
@@ -531,6 +524,8 @@ public class Player : MonoBehaviour
                     this.GetComponent<Rigidbody>().AddForce(flont_sliding, ForceMode.Impulse);
 
                     this.gameObject.transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+
+                    //anim.SetTrigger("nobi");
 
                     Action_check[(int)Card.SLIDING] = false;
                 }
