@@ -96,7 +96,7 @@ public class DeletAction : MonoBehaviour
             //“¯Žžì¬‚È‚ç
             if(all_multi_flag>=2)
             {
-                now--;
+                now--;//
                 multi_backflag = false;
                
                 //‚È‚ñ‚©0‚É“ü‚Á‚Ä‚à‚â‚ë‚¤‚Æ‚·‚é‚Ì‚Å‚»‚êˆÈŠO‚Å–ß‚·ˆ—B
