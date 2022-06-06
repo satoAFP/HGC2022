@@ -43,6 +43,8 @@ public class ActionButton_SC : MonoBehaviour
     //アクション選択時の他オブジェ認識用変数
     public int PL_action_num;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,8 @@ public class ActionButton_SC : MonoBehaviour
         player = GameObject.Find("Player"); //オブジェクトの名前から取得して変数に格納する
         script = player.GetComponent<Player>(); //OBJの中にあるScriptを取得して変数に格納する
 
+        anim.SetBool("check", true);
+        StartCoroutine(animstart());
     }
 
     // Update is called once per frame
@@ -173,5 +177,18 @@ public class ActionButton_SC : MonoBehaviour
     public void Set_OffActive()
     {
         this.gameObject.SetActive(false);
+    }
+
+    IEnumerator animstart()
+    {
+        for(int i=0;i!=2;i++)
+        {
+            if (i == 0)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+                anim.SetBool("check", false);
+        }
     }
 }
