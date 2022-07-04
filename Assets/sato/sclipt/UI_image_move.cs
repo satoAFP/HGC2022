@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class UI_image_move : MonoBehaviour
 {
-    [SerializeField] private bool MoveCheck = true;
+    [SerializeField] private bool MoveCheck;
+    [SerializeField] private int MoveFrame;
+    [SerializeField] private float MovePower;
 
 
     private Vector3 UseSize = new Vector3(0, 0, 0);
+    private bool move = true;
+    private float defolt_size = 1;
+    private int count = 0;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +28,23 @@ public class UI_image_move : MonoBehaviour
     {
         if (MoveCheck)
         {
-            UseSize.x += 0.01f;
-            UseSize.y += 0.01f;
+            count++;
+            if (count % MoveFrame == 0 && move) 
+                move = false;
+            else if(count % MoveFrame == 0 && !move)
+                move = true;
+
+
+            if (move)
+            {
+                UseSize.x += MovePower;
+                UseSize.y += MovePower;
+            }
+            else 
+            {
+                UseSize.x -= MovePower;
+                UseSize.y -= MovePower;
+            }
 
             gameObject.GetComponent<RectTransform>().localScale = UseSize;
         }
