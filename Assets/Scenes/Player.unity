@@ -5910,8 +5910,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveCheck: 1
-  MoveFrame: 30
-  MovePower: 0.005
+  MoveFrame: 10
+  MovePower: 0.02
+  StopTime: 30
 --- !u!114 &1964302438
 MonoBehaviour:
   m_ObjectHideFlags: 0
