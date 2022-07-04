@@ -31,6 +31,7 @@ public class ButtonChoice : MonoBehaviour
     private bool Ps_flag;
 
     //スライムに吸い込まれる番号（位置）
+    [SerializeField]
     private int move_num;
 
     //SEオブジェクト取得
@@ -38,13 +39,15 @@ public class ButtonChoice : MonoBehaviour
     private GameObject SE_Maneger;
     AudioSource audioSource;
 
+    Animator myanim;
+
     // Start is called before the first frame update
     void Start()
     {
         BackButton = GameObject.Find("BackButton"); //オブジェクトの名前から取得して変数に格納する
         script = BackButton.GetComponent<DeletAction>(); //OBJの中にあるScriptを取得して変数に格納する
 
-        ActionButton = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
+      
         scriptac = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
         //最初に出た位置を覚える（戻る処理に使う）
@@ -70,19 +73,10 @@ public class ButtonChoice : MonoBehaviour
             Ps_flag = false;
         }
 
-        if ((-first_x / 26) < 1)
-            move_num = 3;
-        else if ((-first_x / 26) < 2)
-            move_num = 2;
-        else if ((-first_x / 26) < 3)
-            move_num = 1;
-        else if ((-first_x / 26) < 1)
-            move_num = 0;
-
-
         SE_Maneger = GameObject.Find("SE_manager"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         audioSource = SE_Maneger.GetComponent<AudioSource>();
 
+         myanim= this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -105,7 +99,7 @@ public class ButtonChoice : MonoBehaviour
                 //now_ani = true;
 
                 //入力処理
-                if ((-first_x / 26) < 1)
+                if (move_num==3)
                 {
                    
                     if (Ps_flag == true)
@@ -123,7 +117,7 @@ public class ButtonChoice : MonoBehaviour
 
 
                 }
-                else if (-(first_x / 26) < 2)
+                else if (move_num==2)
                 {
                     if (Ps_flag == true)
                     {
@@ -138,7 +132,7 @@ public class ButtonChoice : MonoBehaviour
                     }
 
                 }
-                else if ((-first_x / 26) < 3)
+                else if (move_num==1)
                 {
                     if (Ps_flag == true)
                     {
@@ -156,7 +150,7 @@ public class ButtonChoice : MonoBehaviour
                     }
 
                 }
-                else if ((-first_x / 26) < 4)
+                else if (move_num==0)
                 {
                     if (Ps_flag == true)
                     {
@@ -186,7 +180,8 @@ public class ButtonChoice : MonoBehaviour
                 newObj.GetComponent<Image_move>().Move_on = true;
 
                
-                newObj.GetComponent<Image_move>().parent_posx = -85.5f+(28.0f*move_num);
+                newObj.GetComponent<Image_move>().parent_pos =pos;
+                Debug.Log(pos);
                 //------------------------------------------------------------------
 
 
@@ -218,7 +213,7 @@ public class ButtonChoice : MonoBehaviour
                 }
 
                 //消えた時初期位置に戻る
-                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
+                //this.gameObject.transform.position = new Vector3(first_x, -365.0f, pos.z);
                 this.tag = "Untagged";
 
                 //バックボタンに登録
@@ -228,67 +223,67 @@ public class ButtonChoice : MonoBehaviour
                 //使用回数+1
                 scriptac.set_text(move_num, 1);
             }
-            //右クリ
-            else if (Input.GetMouseButtonDown(1)&&set==false)
-            {
-                //現在位置取得
-                pos = this.gameObject.transform.position;
-                GameObject[] multi = GameObject.FindGameObjectsWithTag("Multis");
+            ////右クリ
+            //else if (Input.GetMouseButtonDown(1)&&set==false)
+            //{
+            //    //現在位置取得
+            //    pos = this.gameObject.transform.position;
+            //    GameObject[] multi = GameObject.FindGameObjectsWithTag("Multis");
 
-                if (multi.Length == 0)
-                {
-                    if (pos.x >= first_x - 1.0f && pos.x <= first_x + 1.0f)
-                    {
-                        this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
-                        audioSource.PlayOneShot(sound1);
-                    }
-                    else if (pos.x > 0.0f)
-                    {
-                        this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+            //    if (multi.Length == 0)
+            //    {
+            //        if (pos.x >= first_x - 1.0f && pos.x <= first_x + 1.0f)
+            //        {
+            //            this.gameObject.transform.position = new Vector3(17.7f, pos.y, pos.z);
+            //            audioSource.PlayOneShot(sound1);
+            //        }
+            //        else if (pos.x > 0.0f)
+            //        {
+            //            this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
 
-                        //煙エフェクトを検索（位置により変更）
-                        GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+            //            //煙エフェクトを検索（位置により変更）
+            //            GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
 
-                        efe.GetComponent<Effect_move>().SetActive(false);
-                        efe.GetComponent<Effect_move>().first_EF = false;
-                        efe.GetComponent<Effect_move>().now_onecard = false;
+            //            efe.GetComponent<Effect_move>().SetActive(false);
+            //            efe.GetComponent<Effect_move>().first_EF = false;
+            //            efe.GetComponent<Effect_move>().now_onecard = false;
 
-                        audioSource.PlayOneShot(sound1);
-                    }
-                }
-                else if (multi.Length == 1)
-                {
-                   this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
-                }
+            //            audioSource.PlayOneShot(sound1);
+            //        }
+            //    }
+            //    else if (multi.Length == 1)
+            //    {
+            //       this.gameObject.transform.position = new Vector3(first_x, pos.y, pos.z);
+            //    }
               
 
-                //移動後の場所取得
-                pos = this.gameObject.transform.position;
+            //    //移動後の場所取得
+            //    pos = this.gameObject.transform.position;
 
-                //それぞれの場所でtag付与（マルチクリエイトへ）
-                if (pos.x > 0.0f)
-                {
-                    this.tag = "Multi_action1";
-                }
-                else
-                    this.tag = "Untagged";
-            }
-            //真ん中クリ
-            else if (Input.GetMouseButtonDown(2))
-            {
-                //初期位置へ（タグも再付与）
-                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
-                this.tag = "Untagged";
+            //    //それぞれの場所でtag付与（マルチクリエイトへ）
+            //    if (pos.x > 0.0f)
+            //    {
+            //        this.tag = "Multi_action1";
+            //    }
+            //    else
+            //        this.tag = "Untagged";
+            //}
+            ////真ん中クリ
+            //else if (Input.GetMouseButtonDown(2))
+            //{
+            //    //初期位置へ（タグも再付与）
+            //    this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
+            //    this.tag = "Untagged";
 
-                //煙エフェクトを検索（位置により変更）
-                GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
+            //    //煙エフェクトを検索（位置により変更）
+            //    GameObject efe = ActionButton.transform.Find("PS_Smook_Left").gameObject;
 
-                efe.GetComponent<Effect_move>().SetActive(false);
-                efe.GetComponent<Effect_move>().first_EF = false;
-                efe.GetComponent<Effect_move>().now_onecard = false;
+            //    efe.GetComponent<Effect_move>().SetActive(false);
+            //    efe.GetComponent<Effect_move>().first_EF = false;
+            //    efe.GetComponent<Effect_move>().now_onecard = false;
 
-                audioSource.PlayOneShot(sound1);
-            }
+            //    audioSource.PlayOneShot(sound1);
+            //}
             //他スクリプトより申請時
             else if (set == true)
             {
@@ -297,7 +292,7 @@ public class ButtonChoice : MonoBehaviour
                 script.objs[script.now] = this.gameObject;
                 script.now++;
                
-                this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
+                //this.gameObject.transform.position = new Vector3(first_x, 83.19456f, pos.z);
                 this.tag = "Untagged";
                 scriptac.set_text(move_num, 1);
             }
@@ -333,4 +328,8 @@ public class ButtonChoice : MonoBehaviour
         this.tag = "Untagged";
     }
 
+    public void Choiceing(bool a)
+    {
+        myanim.SetBool("choiceing", a);
+    }
 }

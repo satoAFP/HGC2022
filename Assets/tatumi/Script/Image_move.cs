@@ -20,7 +20,7 @@ public class Image_move : MonoBehaviour
     public bool Move_on;
     private float bye;
     //0=-90.6f,1=-64.5,2=-38.5f,3=-12.5f//·26
-    public float parent_posx;
+    public Vector3 parent_pos;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +30,15 @@ public class Image_move : MonoBehaviour
         //pos = this.transform.position;
         time = 0;
 
-        this.transform.position = new Vector3(parent_posx,56.23f,-102.0f);
+       
+        parent_pos.x += 10.0f;
+
+        this.transform.position = parent_pos;
+
+        Debug.Log(this.transform.position);
 
         //Œ»İ’n‚©‚ç‚Ç‚ê‚¾‚¯‚ÌˆÚ“®•‚©‹‚ß‚é
-        MAX = parent_posx;
+        MAX = parent_pos.x;
 
         //ˆÚ“®•‚©‚çˆÚ“®—Ê‚ğ‹‚ß‚é
         add = (MAX / 1000 + (MAX / 100));
@@ -50,8 +55,6 @@ public class Image_move : MonoBehaviour
         //‘å‚«‚³AˆÊ’u‚ğæ“¾
         sca = this.transform.localScale;
 
-        this.transform.position = new Vector3(parent_posx, 56.23f, -102.0f);
-
         if (Move_on == true)
         {
             time++;
@@ -64,10 +67,10 @@ public class Image_move : MonoBehaviour
             if (time < (25/bye))
             {
                 //x=10%,y=60%‚Ü‚Å
-               this.transform.position = new Vector3((parent_posx-(add*(time/(bye*2)))),(56.23f+(-0.9966f*(time/(bye/2)))), -102.0f);
+                this.transform.position = new Vector3((parent_pos.x-(add*(time/(bye*2)))),-(56.23f+(-0.9966f*(time/(bye/2)))), 0.0f);
                 if (time < (25 / bye))
                 {
-                    pos = new Vector3((parent_posx - (add * (time / (bye * 2)))), (56.23f + (-0.9966f * (time / (bye / 2)))), -102.0f);
+                    pos = new Vector3((parent_pos.x - (add * (time / (bye * 2)))),- (56.23f + (-0.9966f * (time / (bye / 2)))), -0.0f);
                 }
             }
             else if (time < (75/bye))
