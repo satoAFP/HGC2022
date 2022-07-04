@@ -597,80 +597,7 @@ public class Player : MonoBehaviour
         }
 
 
-        //アクションを選択した順番に実行される
-        if (collision.gameObject.tag == "Action") 
-        {
-            //一度乗ったアクションブロックは消す
-            collision.gameObject.SetActive(false);
-
-            //今のカード処理内容記憶
-            after_card_order = Card_order[0];
-
-            //次のアクションのフラグをtrueにする
-            switch (Card_order[0]) {
-                case (int)Card.JUMP:
-                    Action_check[(int)Card.JUMP] = true;
-                    Use_Card_Amount[(int)Card.JUMP]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.SQUAT:
-                    Action_check[(int)Card.SQUAT] = true;
-                    Use_Card_Amount[(int)Card.SQUAT]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.STICK:
-                    Action_check[(int)Card.STICK] = true;
-                    Use_Card_Amount[(int)Card.STICK]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.RUN:
-                    Action_check[(int)Card.RUN] = true;
-                    Use_Card_Amount[(int)Card.RUN]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.HIGHJUMP:
-                    Action_check[(int)Card.HIGHJUMP] = true;
-                    Use_Card_Amount[(int)Card.HIGHJUMP]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.WALLKICK:
-                    Action_check[(int)Card.WALLKICK] = true;
-                    Use_Card_Amount[(int)Card.WALLKICK]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.LONGJUMP:
-                    Action_check[(int)Card.LONGJUMP] = true;
-                    Use_Card_Amount[(int)Card.LONGJUMP]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-                case (int)Card.SLIDING:
-                    Action_check[(int)Card.SLIDING] = true;
-                    Use_Card_Amount[(int)Card.SLIDING]++;
-                    //アクション時のSE再生
-                    audio.PlayOneShot(se_action);
-                    break;
-            }
-            //実行したアクションを最低数として設定
-            GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().executed_Action(Card_order[0]);
-            //アクションの内容消去
-            Card_order[0] = -1;
-
-            //走りアニメーション終了
-            anim.SetBool("run", false);
-
-            //アクション時のエフェクト作成
-            action_effect.Copied();
-
-            //幅跳びのバグ修正関連
-            Longjump_check = false;
-        }
+        
 
         //アクション再選択
         if (collision.gameObject.tag == "Select") {
@@ -809,6 +736,109 @@ public class Player : MonoBehaviour
             }
             //着地判定
             anim.SetBool("jump", false);
+        }
+
+
+        //アクションを選択した順番に実行される
+        if (collision.gameObject.tag == "Action")
+        {
+            //一度乗ったアクションブロックは消す
+            //collision.gameObject.SetActive(false);
+
+            bool first = false;
+
+            //今のカード処理内容記憶
+            after_card_order = Card_order[0];
+
+            //死んでいないとき
+            if (!fall_deth_flag)
+            {
+                //次のアクションのフラグをtrueにする
+                switch (Card_order[0])
+                {
+                    case (int)Card.JUMP:
+                        Action_check[(int)Card.JUMP] = true;
+                        Use_Card_Amount[(int)Card.JUMP]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.SQUAT:
+                        Action_check[(int)Card.SQUAT] = true;
+                        Use_Card_Amount[(int)Card.SQUAT]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.STICK:
+                        Action_check[(int)Card.STICK] = true;
+                        Use_Card_Amount[(int)Card.STICK]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.RUN:
+                        Action_check[(int)Card.RUN] = true;
+                        Use_Card_Amount[(int)Card.RUN]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.HIGHJUMP:
+                        Action_check[(int)Card.HIGHJUMP] = true;
+                        Use_Card_Amount[(int)Card.HIGHJUMP]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.WALLKICK:
+                        Action_check[(int)Card.WALLKICK] = true;
+                        Use_Card_Amount[(int)Card.WALLKICK]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.LONGJUMP:
+                        Action_check[(int)Card.LONGJUMP] = true;
+                        Use_Card_Amount[(int)Card.LONGJUMP]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                    case (int)Card.SLIDING:
+                        Action_check[(int)Card.SLIDING] = true;
+                        Use_Card_Amount[(int)Card.SLIDING]++;
+                        collision.gameObject.SetActive(false);
+                        first = true;
+                        //アクション時のSE再生
+                        audio.PlayOneShot(se_action);
+                        break;
+                }
+            }
+
+            if (first)
+            {
+                //実行したアクションを最低数として設定
+                GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().executed_Action(Card_order[0]);
+                //アクションの内容消去
+                Card_order[0] = -1;
+
+                //走りアニメーション終了
+                anim.SetBool("run", false);
+
+                //アクション時のエフェクト作成
+                action_effect.Copied();
+
+                //幅跳びのバグ修正関連
+                Longjump_check = false;
+            }
         }
     }
 
