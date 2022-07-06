@@ -4,11 +4,11 @@ using UnityEngine;
 
 using UnityEngine.UI;  // 追加しましょう
 
+//現在は凍結（ノルマ要素が別に分かれたため）
 public class Result : MonoBehaviour
 {
 
     GameObject ActionButton; //参照元OBJそのものが入る変数
-
     ActionButton_SC script; //参照元Scriptが入る変数
 
     [Header("表示txt指定")]
@@ -28,7 +28,7 @@ public class Result : MonoBehaviour
         ActionButton = GameObject.Find("ActionBotton"); //ActionButtonをオブジェクトの名前から取得して変数に格納する
         script = ActionButton.GetComponent<ActionButton_SC>(); //OBJの中にあるScriptを取得して変数に格納する
 
-      //  stage = script.NowStage;
+     
     }
 
     // 更新
@@ -40,9 +40,7 @@ public class Result : MonoBehaviour
         //ステージ
         Text stage_text = stage_object.GetComponent<Text>();
 
-        //if (stage == "Stage-2")
-        //    stage_text.text = "coming soon...";
-
+      
         // テキストの表示を入れ替える
         score_text.text = "Score:" + score_num;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//針（凍結）
 public class HitThorn : MonoBehaviour
 {
     [Header("強さ")]
@@ -31,10 +32,10 @@ public class HitThorn : MonoBehaviour
         //PLと当たると動作
         if (collision.gameObject.tag == "Player")
         {
-
+            //リトライさせる
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-            Debug.Log("thornHit(up)!");
+           
         }
     }
 }

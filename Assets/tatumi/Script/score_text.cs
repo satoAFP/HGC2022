@@ -26,7 +26,7 @@ public class score_text : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //アクションボタン自身とそれぞれのtext連携用
+        //アクションボタン自身とそれぞれのtext連携用（使用回数表示）
         score = script.get_score(score_number);
         this.targetText = this.GetComponent<Text>(); 
         this.targetText.text = score.ToString(); 

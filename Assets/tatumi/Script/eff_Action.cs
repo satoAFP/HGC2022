@@ -19,15 +19,19 @@ public class eff_Action : MonoBehaviour
 
     public void Copied()
     {
-        
-            GameObject copied = Object.Instantiate(this.gameObject) as GameObject;
+        //複製
+        GameObject copied = Object.Instantiate(this.gameObject) as GameObject;
 
-            eff_Action script = copied.gameObject.GetComponent<eff_Action>();
+        //スクリプトも
+        eff_Action script = copied.gameObject.GetComponent<eff_Action>();
 
+
+        //移動させる
         copied.gameObject.transform.position = this.gameObject.transform.position;
 
-            Destroy(script);
-            Destroy(copied,1.0f);
-        
+        //本体はエラー起こすため少し遅らせて削除
+        Destroy(script);
+        Destroy(copied, 1.0f);
+
     }
 }

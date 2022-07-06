@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//いらないscript?
+//現在別スクリプトが管理（使われてない）
 public class Back_Scenemove : MonoBehaviour
 {
    

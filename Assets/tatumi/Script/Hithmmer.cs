@@ -17,7 +17,7 @@ public class Hithmmer : MonoBehaviour
     //相手のリジッドを格納
     Rigidbody aiteRigid;
 
-    //めんどいからbool設定
+    //めんどいからbool設定(前にしか進まないので一度だけでいい)
     private bool Hitflag;
 
     // Start is called before the first frame update
@@ -37,8 +37,6 @@ public class Hithmmer : MonoBehaviour
         //PLと当たると動作
         if (collision.gameObject.tag == "Player")
         {
-           
-
             //左
             if(parent.GetComponent<movehammer>().Getnowrad()<0)
             {
@@ -63,7 +61,7 @@ public class Hithmmer : MonoBehaviour
                 //ドッカーン
                 aiteRigid.AddForce(chikara, ForceMode.Impulse);
 
-                Debug.Log("hmmerHit!");
+               
 
                 Hitflag = true;
             }

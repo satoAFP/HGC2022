@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//「戻る」処理
 public class DeletAction : MonoBehaviour
 {
     [Header("覚える通常限度数")]
@@ -12,6 +13,7 @@ public class DeletAction : MonoBehaviour
     //オブジェ格納用変数
     public GameObject[] multi_objs;
 
+    //デバック用＆取得用
     [Header("触らない")]
     public int now,multi_now=1;
 
@@ -28,9 +30,9 @@ public class DeletAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //初期化
         now = 0;
         all_multi_flag = 0;
-       // multi_now = 1;
         multi_backflag = true;
     }
 
@@ -40,6 +42,9 @@ public class DeletAction : MonoBehaviour
 
     }
 
+    //「戻す」ボタンを押したときの処理。
+    //覚えた直前の行動を戻す。
+    //合体アクションの場合、行動キャンセル＆カードを画面に再表示→カードを分解の2回に分ける
     public void PushButton()
     {
         //消失中に戻るボタン押すやつ対処
@@ -54,7 +59,7 @@ public class DeletAction : MonoBehaviour
                     if (objs[now - 1] != null)
                     {
                         objs[now - 1].GetComponent<Multi_Action_move>().Set_Active(true);
-                        Debug.Log("thornHit(up)!");
+                        
                     }
                 }
                 else
@@ -64,10 +69,10 @@ public class DeletAction : MonoBehaviour
                 }
             }
 
-            //なんで必要か正直覚えてないけど大事なやーつ。
+            //なんで必要か正直覚えてないけど大事なやーつ。(消すと何故かバグる)
             int S = now;
            
-
+            //マルチを全検索、処理
             for (int i = multi_now+1; i != -1; i--)
             {
                 //マルチ作成してたなら二つ分の普通アクションを返す
@@ -82,7 +87,7 @@ public class DeletAction : MonoBehaviour
                     multi_backflag = false;
                   
 
-                    //二段戻し
+                    //二段戻し(通常カードの)
                     now--;
                     if (now != 0)
                     {
@@ -96,7 +101,7 @@ public class DeletAction : MonoBehaviour
             //同時作成なら
             if(all_multi_flag>=2)
             {
-                now--;//
+                now--;
                 multi_backflag = false;
                
                 //なんか0に入ってもやろうとするのでそれ以外で戻す処理。

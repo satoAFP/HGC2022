@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//七色変化でUI強調(現在使わないため凍結)
 public class Colar : MonoBehaviour
 {
-    //ゲーミング色用変数群なお配列使えの模様-------------
+    const int MAX_COLOR = 255;
+
+    //ゲーミング色用変数群-------------
     private int a, b, c;
     private bool A, B, C;
     private int time,time2;
-    //---------------------------------------------------
+    //--------------------------------
 
     //マルチ作成可能か判断用
     private bool OK = false;
@@ -42,7 +45,7 @@ public class Colar : MonoBehaviour
         //初期化
         OK = false;
 
-        //最初からやるとバグるんでちょい待ち
+        //最初からやるとバグるんでちょい待ちからの処理
         if (time2 > 10)
         {
             //マルチ作成可能かマルチクリエイトから情報持ってくる
@@ -63,11 +66,13 @@ public class Colar : MonoBehaviour
         if (OK == true)
         {
             time++;
+
+            //折り返しflag設定
             if (a < 1)
             {
                 A = true;
             }
-            else if (a > 255)
+            else if (a > MAX_COLOR)
             {
                 A = false;
             }
@@ -75,7 +80,7 @@ public class Colar : MonoBehaviour
             {
                 B = true;
             }
-            else if (b > 255)
+            else if (b > MAX_COLOR)
             {
                 B = false;
             }
@@ -83,11 +88,12 @@ public class Colar : MonoBehaviour
             {
                 C = true;
             }
-            else if (c > 255)
+            else if (c > MAX_COLOR)
             {
                 C = false;
             }
 
+            //設定に従い増減
             if (A == true)
                 a++;
             else
@@ -105,12 +111,12 @@ public class Colar : MonoBehaviour
 
             //色をそれぞれのカラーに割り振る。
             ColorBlock cb = button.colors;
-            cb.normalColor = new Color32((byte)a, (byte)b, (byte)c, 255);
+            cb.normalColor = new Color32((byte)a, (byte)b, (byte)c, MAX_COLOR);
             if (time == 40)
-                cb.highlightedColor = new Color32(255, 255, 0, 255);
+                cb.highlightedColor = new Color32(MAX_COLOR, MAX_COLOR, 0, MAX_COLOR);
             else if (time == 60)
             {
-                cb.highlightedColor = new Color32(255, 255, 255, 255);
+                cb.highlightedColor = new Color32(MAX_COLOR, MAX_COLOR, MAX_COLOR, MAX_COLOR);
                 time = 0;
             }
             button.colors = cb;
@@ -119,7 +125,7 @@ public class Colar : MonoBehaviour
         {
             //なんもないときは初期色へ
             ColorBlock cb = button.colors;
-            cb.normalColor = new Color32(255, 255, 255, 255);
+            cb.normalColor = new Color32(MAX_COLOR, MAX_COLOR, MAX_COLOR, MAX_COLOR);
             button.colors = cb;
         }
 

@@ -5,14 +5,21 @@ using UnityEngine.UI;
 
 public class Image_multimove : MonoBehaviour
 {
-    //移動に必要。ついでにカーソル合わせ時の上下移動も兼ねてる
+    //移動に必要。ついでにカーソル合わせ時の上下移動も兼ねてる(multiはAnim無)
+    //親
     private GameObject PA;
+    //Debug用で自身の値確認用
     public Vector3 pos, sca;
+
+    //描画関連
+    //移動幅用
     private float MAX, add;
+    //カーソル判定用
     public bool Nomal_mode;
+    //現在の透明度
     private float image_alp;
 
-    //信号受け取り。だからかんｓ（以下略
+    //信号受け取り。
     public int time;
     public bool Move_on;
     private float bye;
@@ -35,7 +42,7 @@ public class Image_multimove : MonoBehaviour
         //移動幅から移動量を求める
         add = (MAX / 10000 + (MAX / 1000));
 
-        //挫折
+        //一応速さ変更用のもの。現在は凍結
         bye = 1;
 
         Move_on = false;
@@ -50,13 +57,17 @@ public class Image_multimove : MonoBehaviour
         if (Move_on == true)
         {
             time++;
+            //最初のみ反映
+            if (time == 1)
+            {
+                //色情報取得
+                Image image = this.gameObject.GetComponent<Image>();
 
-            //色情報取得
-            Image image = PA.GetComponent<Image>();
+                //反映(視覚化)
+                image.color = new Color(255, 255, 255, 255);
+            }
 
-            //反映
-            image.color = new Color(255, 255, 255, 0);
-
+            //移動処理---------------------------------------------------------------------------------------------------------------------------------------
             if (time < (25 / bye))
             {
                 //x=10%,y=60%まで
@@ -71,8 +82,10 @@ public class Image_multimove : MonoBehaviour
                 //x=100%,y=100%まで
                 this.transform.position = new Vector3((pos.x - (add * ((time - 24) / (bye * 1.5f)))), (pos.y + (-0.9966f * ((time - 24) / (bye * 40.0f)))), pos.z);
             }
+            //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+            //大きさ処理
             if (time < (75 / bye))
             {
                 //大きさを常一定に減らす
@@ -81,8 +94,9 @@ public class Image_multimove : MonoBehaviour
 
             if (time == (75/bye))
             {
+                //戻すパターンもあるため非表示
                 this.gameObject.SetActive(false);
-                //Destroy(this.gameObject);
+               
             }
         }
         //上下移動

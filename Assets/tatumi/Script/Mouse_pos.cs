@@ -20,13 +20,17 @@ public class Mouse_pos : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //マウスの位置取得------------------------------------------
             Vector3 mousePos = Input.mousePosition;
 
             float M_x, M_y;
 
+            //画面反映
             M_x = (mousePos.x / 7.5f);
             M_y = (mousePos.y / 8.7f);
+            //-------------------------------------------------------
 
+            //Effctを複製
             GameObject newObj = Instantiate(this.gameObject, AC_Button.transform, true);
 
             Transform Child_Transform = newObj.transform;
@@ -38,14 +42,14 @@ public class Mouse_pos : MonoBehaviour
             localPos.z = 59.0f;    // ローカル座標を基準にした、z座標を1に変更
             Child_Transform.localPosition = localPos; // ローカル座標での座標を設定
 
-            //newObj.transform.position = new Vector3(-580.0f + mousePos.x + M_x, -320.0f + mousePos.y + M_y, 60.0f);
-
+           
+            //Scipt反映
             SC_Child = newObj.gameObject.GetComponent<Mouse_pos>();
 
+            //自身消去
             Destroy(SC_Child);
 
-            //this.gameObject.transform.position = new Vector3(-580.0f+mousePos.x+M_x, -320.0f+mousePos.y+M_y, 60.0f);
-
+            //時間経過で複製対象消す
             StartCoroutine(Set_Active(newObj));
         }
     }

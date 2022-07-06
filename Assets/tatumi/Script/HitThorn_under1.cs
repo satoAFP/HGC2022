@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//針（凍結）
 public class HitThorn_under1 : MonoBehaviour
 {
     [Header("強さ")]
@@ -34,21 +35,17 @@ public class HitThorn_under1 : MonoBehaviour
             //PLの現在のアクション内容取得
             int pl_num = GameObject.Find("ActionBotton").GetComponent<ActionButton_SC>().PL_action_num;
 
-            Debug.Log(pl_num);
-
             //何もせず
             if (pl_num == -1||pl_num==0)
             {
-              
-
-                Debug.Log("thornHit(under)! SEFE");
+                ;
             }
             //ジャンプ系統以外
             else
             {
+                //リトライ
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-                Debug.Log("thornHit(under)! OUT");
             }
         }
     }
