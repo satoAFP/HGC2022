@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bosst_Up : MonoBehaviour
 {
+    //吹っ飛ばす力
     [Header("強さ")]
     public float power;
 
@@ -36,10 +37,9 @@ public class Bosst_Up : MonoBehaviour
             //相手のrigidをゲットしちゃう
             aiteRigid = collision.gameObject.GetComponent<Rigidbody>();
 
-            //ドッカーン
+            //ドッカーン(飛ばす)
             aiteRigid.AddForce(chikara, ForceMode.Impulse);
 
-            Debug.Log("hmmerHit!");
         }
     }
 }

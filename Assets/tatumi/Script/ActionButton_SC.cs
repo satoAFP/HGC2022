@@ -4,40 +4,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-
-
+//アクションボタン全体の管理
 public class ActionButton_SC : MonoBehaviour
 {
-    //[Header("このシーン以外は表示しない")]
-    //[Header("特定しか存在しない-------------------------")]
-    //public string SceneName;
+    //固定値
+    private const int MAX_CARD_RESERVE = 11;
+    private const int MAX_CARD_TYPE = 8;
+    private const int CARD_MULTI_BOLDER = 4;
 
+    //プレイヤー自身を入れる枠(必ずあるため設定なし)
     GameObject player; //参照元OBJそのものが入る変数
-
     Player script; //参照元OBJそのものが入る変数
 
-    //回数表示用変数
-    private int[] action_num=new int[8];
-    private int[] executed_action = new int[8];
-
-    //[Header("触らない")]
-    //public string NowStage;
-
-    [Header("子の要素数")]
-    [Header("複数枚表示---------------------------------")]
-    public int Child_num;
-
-    [Header("複製数指定")]
-    public int[] Duplicate;
-
-    [Header("複製Obj指定")]
-    public GameObject[] childGameObjects;
+    //回数表示用変数---------------------------------------
+    //現在の予約アクション
+    private int[] action_num=new int[MAX_CARD_TYPE];
+    //実行済みアクション
+    private int[] executed_action = new int[MAX_CARD_TYPE];
+    //-----------------------------------------------------
 
     [Header("非表示対象オブジェクト")]
     public GameObject Button;
 
-    //消去用受け取り口(要素11)
-    public GameObject[] multi_des = new GameObject[11];
+    //予約Card消去用受け取り口(要素11)
+    public GameObject[] multi_des = new GameObject[MAX_CARD_RESERVE];
+    //現在の消去待ちの順番
     private int multi_des_now = 0;
 
     //アクション選択時の他オブジェ認識用変数
@@ -46,39 +37,18 @@ public class ActionButton_SC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //複製処理（現在いらない子）----------------------------------------------------------------------------
-        for (int i = 0; i != Child_num; i++)
+       
+        //選択回数初期化
+        for (int i = 0; i != MAX_CARD_TYPE; i++)
         {
-            for (int k = 0; k != Duplicate[i]; k++)
-            {
-                GameObject newObj = Instantiate(childGameObjects[i], this.transform, false);
-            }
-        }
-
-        //for (int i = 0; i != 8; i++)
-        //{
-
-        //    //action_numtexts[i]=Instantiate(action_numtext, this.transform, false);
-        //    //action_numtexts[i].transform.position = new Vector3(19.0f + (i * 130.0f), 117.0f, 0.0f);
-        //}
-        //-----------------------------------------------------------------------------------------------------
-
-        //選んだ数出力（管理）の初期化-------------------------------------------------------------------------
-        for (int i = 0; i != 8; i++)
-        {
-
-            //action_num[i] = Duplicate[i];
+            //初期化
             executed_action[i] = 0;
-
-            //action_numtexts[i].text = action_num[i].ToString();
         }
-        //------------------------------------------------------------------------------------------------------
-
-
-        //player関連
+     
+        //player関連----------------------------------------------------------------------
         player = GameObject.Find("Player"); //オブジェクトの名前から取得して変数に格納する
         script = player.GetComponent<Player>(); //OBJの中にあるScriptを取得して変数に格納する
-
+        //--------------------------------------------------------------------------------
     }
 
     // Update is called once per frame
@@ -87,19 +57,8 @@ public class ActionButton_SC : MonoBehaviour
        
     }
 
-    //関数で選んだ数を増減
-    public void set_text(int a, int b)
-    {
-        if ((action_num[a] + b) >= executed_action[a])
-            action_num[a] += b;
-    }
-    //現在の数(取得用)
-    public int get_score(int a)
-    {
-        return action_num[a] + executed_action[a];
-    }
-
-    //実行したアクションを最低数として読み込む
+  
+    //Action_Cardのintでのtype分け
     /*
         JUMP,0
         SQUAT,1
@@ -110,51 +69,75 @@ public class ActionButton_SC : MonoBehaviour
         LONGJUMP,6
         SLIDING,7
     */
-    public void executed_Action(int num)
+
+   
+    //関数で選んだ数を増減
+    public void set_text(int Action_Card, int add)
     {
-       // GameObject[] multi = this.transform.FindGameObjectsWithTag("Multis");
+        //選択回数の数の増減(+,-対応)
+        if ((action_num[Action_Card] + add) >= executed_action[Action_Card])
+            action_num[Action_Card] += add;
+    }
 
-        if (num >= 4)
+    //現在の数(取得用)
+    public int get_score(int Action_Card)
+    {
+        return action_num[Action_Card] + executed_action[Action_Card];
+    }
+
+
+    //実行したアクションを最低数として読み込む
+    public void executed_Action(int Action_Card)
+    {
+        //合体カードか否か
+        if (Action_Card >= CARD_MULTI_BOLDER)
         {
-            
-                if (multi_des[0] != null)
+            //エラー回避
+            if (multi_des[0] != null)
+            {
+                //使用した場合記録のみ残し、本体削除
+                if (multi_des[0].activeSelf == false)
                 {
-                    if (multi_des[0].activeSelf == false)
+                    Destroy(multi_des[0]);
+
+                    //削除のため記録の整理
+                    for (int i = 1; i != MAX_CARD_RESERVE; i++)
                     {
-                        Destroy(multi_des[0]);
-
-                        for (int i = 1; i != 11; i++)
-                        {
-                            multi_des[i - 1] = multi_des[i];
-                        }
-
-                        multi_des_now--;
+                        multi_des[i - 1] = multi_des[i];
                     }
+
+                    multi_des_now--;
                 }
+            }
         }
 
-        if (num != -1)
+        //通常アクションの場合（エラー回避含め）
+        if (Action_Card != -1)
         {
-            executed_action[num]++;
-            action_num[num]--;
+            executed_action[Action_Card]++;
+            action_num[Action_Card]--;
         }
-        Debug.Log("thornHit(up)!");
-        PL_action_num = num;
+       
+        //現在の選択アクション
+        PL_action_num = Action_Card;
     }
 
     //                    true  false
-    //マルチの消去待ち列　追加と削除はフラグで判定
-    public void multi_des_Check(GameObject i,bool a)
+    //マルチの消去待ち列　追加と削除はflagで判定
+    public void multi_des_Check(GameObject multi_obj,bool flag)
     {
-        if(a==true)
+        //追加
+        if(flag==true)
         {
            
-            multi_des[multi_des_now] = i;
+            multi_des[multi_des_now] = multi_obj;
 
             multi_des_now++;
         }
+        //削除
         else
         {
+            //エラー回避
             if (multi_des[0] != null)
             {
                 multi_des[multi_des_now] = null;
@@ -165,11 +148,13 @@ public class ActionButton_SC : MonoBehaviour
             
         }
 
+        //一応数が-領域にいかないよう保護
         if (multi_des_now < 0)
             multi_des_now = 0;
 
     }
 
+    //自身を非表示
     public void Set_OffActive()
     {
         this.gameObject.SetActive(false);
