@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
 
         }
         //選択したアクション実際表示
-        Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3] + text_data[4];
+        Select_text.text = "" + text_data[0] + text_data[1] + text_data[2] + text_data[3];
 
         //壁に触れるとaround_collision_check = trueにする
         if (Around_collision[0].GetComponent<Around_collider>().wall_check == true ||
