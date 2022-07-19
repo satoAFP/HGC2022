@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4428356768424044609, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4428356768960279016, guid: 7bebf3e2f9c102d4c8ca00bf92fa29f6, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1950,6 +1954,10 @@ PrefabInstance:
     - target: {fileID: 8297475537782911579, guid: f22324973e054a64fb74a2d3245dd0e2, type: 3}
       propertyPath: m_Name
       value: Camera_Collider
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297475537782911579, guid: f22324973e054a64fb74a2d3245dd0e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8297475537782911580, guid: f22324973e054a64fb74a2d3245dd0e2, type: 3}
       propertyPath: m_Size.y
@@ -3985,6 +3993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CM vcam1
       objectReference: {fileID: 0}
+    - target: {fileID: 8135084413760994789, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8135084413760994790, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_Follow
       value: 
@@ -4047,11 +4059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135084414504095995, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.499992
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8135084414504095995, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -4.045113
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eed7dd2a3ebc72459051cdb885fccdd, type: 3}
