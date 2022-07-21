@@ -1,0 +1,367 @@
+/* * { 
+	margin: 0;
+	padding: 0;
+	line-height: 180%;
+	font-size: 14px;
+	font-family:'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}  */
+
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+html {
+	height: 100%;
+}
+
+body, body#index {
+	margin-top: 0;
+	padding-top: 0;
+	color: #4d4d4d;
+	font-size: 100%;
+	background: #f6f6f6;
+	line-height: 180%;
+	font-size: 14px;
+	font-family:'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+	height: 100%;
+}
+
+strong {
+	font-weight: bold;
+}
+
+div#slide {
+	width: 900px;
+	height: 300px;
+}
+
+div#header {
+	padding-top: 1em;
+}
+
+div#wrapper {
+	/* height: 100%; */
+	/* min-height: 100%; */
+	padding: 2em 0;
+	background: #f6f6f6;
+}
+
+body > div#wrapper {
+	height: auto;
+}
+
+div#inner {
+	width: 900px;
+	margin: 0em auto;
+	padding: 1.5em 2.5em;
+	border-radius: 20px;
+	background: #fff;
+}
+
+#titlelogo {
+	float: left;
+}
+
+hr {
+	color: #dddddd;
+	background-color: #dddddd;
+	border: #dddddd;
+	width: 100%;
+	margin: 0;
+	height: 1px;
+}
+
+p, ul, ol, blockquote, pre, code {
+	margin: 1em 0;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+ul, ol {
+	margin-left: 2em;
+}
+
+sup {
+	vertical-align: baseline;
+	position: relative;
+	top: -0.75ex;
+}
+
+blockquote {
+	margin-left: 4em;
+}
+
+h1 {
+	font-size: 180%;
+	margin-top: 0;
+	margin-bottom: 1.5em;
+	font-weight:bold;
+}
+
+#titlelogo h1 {
+	font-size: 100%;
+	background-image: url(images/title.png);
+	background-position: left center;
+	background-repeat: no-repeat;
+	height: 40px;
+	width: 300px;
+}
+
+#titlelogo h1 a {
+	color: #000;
+	text-decoration: none;
+	font-size: 100%;
+	vertical-align: middle;
+	padding-left: 300px;
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+h2 {
+	font-size: 150%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-weight:bold;
+}
+
+h3 {
+	font-size: 130%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-weight:bold;
+}
+
+h4 {
+	font-size: 110%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-weight:bold;
+}
+
+h5 {
+	font-size: 100%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-weight:bold;
+}
+
+h5 {
+	font-size: 100%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px #444 solid;
+}
+
+table.adsense {
+	border: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th, td {
+	padding: 0.25em 0.75em;
+	border: 1px #444 solid;
+}
+
+table.adsense th, table.adsense td {
+	border: 0;
+}
+
+th {
+	background: #eee;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#topicpath {
+	margin: 0.5em 0;
+}
+
+#headermenu {
+	margin-top: 0px;
+	float: right;
+}
+
+#headermenu > ul {
+}
+
+#headermenu > ul > li {
+	list-style-type: none;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+#headermenu > ul > li > a {
+	color: #000;
+	text-decoration: none;
+	padding: 8px;
+	line-height: 100%;
+	display: inline-block;
+	border-radius: 6px;
+	*display: inline;
+	*zoom: 1;
+}
+#headermenu > ul > li.parent > a { border-radius: 6px 6px 0 0; }
+
+#headermenu > ul > li > a:hover {
+	color: #ffffff;
+	background: #888888;
+}
+
+.news-entry {
+	margin-bottom: 3em;
+}
+
+
+/* CSS for pulldown menu v1.3 */
+/* Copyright(C) ASH (http://ash.jp/) */
+ul.menu { position: relative; }
+ul.menu li { position: relative; }
+ul.menu a { position: relative; }
+ul.menu ul { position: relative; display: none; list-style: none; margin: 0; padding: 0; z-index: 100; }
+ul.menu > li li { clear: left; width: 100%; }
+ul.menu > li li { position: relative; display: inline-block; font-size: 14px; line-height: 32px; white-space: nowrap; float: left; color: #000000; background: #eeeeee; border: none; margin: 0; padding: 0; }
+ul.menu > li li a { display: block; text-decoration: none; font-size: 14px; line-height: 32px; color: #000000; background: #eeeeee; margin: 0; padding: 0px 10px; }
+ul.menu > li li a { background: #eeeeee; }
+ul.menu li li.active a { background: #dddddd; }
+ul.menu > li li a:hover { color: #ffffff; background: #aaaaaa; }
+ul.menu > li:hover > a { color: #000000; background: #eeeeee; border-radius: 0 0 6px 6px; }
+ul.menu li:hover > ul { display: inline-block; position: absolute; top: 100%; }
+ul.menu li:not(.last):hover > ul { left: 0; }
+ul.menu li.last:hover > ul { right: 0; }
+ul.menu > li > a:hover { color: #ffffff; background: #333366; }
+ul.menu li li:hover ul { top: 0px; left: 100%; }
+ul.menu > li.active { background: #f4f4f4; border-radius: 6px; }
+
+#content {
+	margin-top: 1em;
+}
+
+#body-1c {
+	margin: 0;
+}
+
+#body-2c {
+	margin-top: 2em;
+}
+
+#body-2c-left {
+	margin-right: 12px;
+	width: 576px;
+	float: left;
+}
+
+#body-2c-right {
+	margin-left: 12px;
+	width: 300px;
+	float: left;
+}
+
+#news dt {
+	clear: left;
+	float: left;
+	width: 7.2em;
+}
+#news dd {
+	margin-left: 7.2em;;
+}
+
+#news dt, #news dd {
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+}
+
+#footer {
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+#toc {
+	display: inline-block;
+	margin: 1em;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #C0C0C0;
+	padding: 1em;
+}
+
+#toc h2 {
+	margin: 0;
+	font-size: 120%;
+}
+
+#toc li, #toc a {
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 150%;
+}
+
+ul.submenu {
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 2em;
+	padding: 0.75em;
+	background: #f6f6f6;
+	border-radius: 6px;
+}
+
+ul.submenu li {
+	color: #000;
+	margin: 0;
+	margin-right: 0.5em;
+	padding: 0.25em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	display: inline;
+	border-radius: 6px;
+}
+
+ul.submenu li a {
+	color: #000;
+}
+
+ul.submenu li.self {
+	border: 1px solid #ccc;
+	background: #fff;
+}
+
+/* -------------- */
+/* micro clearfix */
+/* -------------- */
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+  

@@ -1,0 +1,1089 @@
+@charset "utf-8";
+
+/*
+Theme Name: Marylou
+Theme URI: http://minimalwp.com
+Description: ミニマルでシンプルな公式サイトタイプのWordPressテーマです。トップページに大きなスライドショーを配置しました。とびきりの写真やイラストでオリジナリティ溢れるトップページにしてください。ロゴ、メニュー、スライドショー、背景、トップページウィジット、サイドバーウィジットが、管理画面から簡単にカスタマイズできますので、HTMLの知識が無くてもオリジナルサイトが作れます。面倒な設定もありません。
+Version: 1.0
+Author: Minimal WP
+Author URI: http://minimalwp.com
+*/
+
+
+/* ************************************************ 
+*	リセット
+* ************************************************ */	
+
+*{margin:0;padding:0;}
+
+
+/* ************************************************ 
+*	基本設定
+* ************************************************ */	
+
+body{
+font: 14px 'fgflop',"メイリオ","Meiryo",arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","游ゴシック", YuGothic,Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+color:#333;
+line-height:180%;
+background: #fff;
+font-weight: normal!important;
+}
+
+
+/* リンク */
+
+a{
+color:#999;
+text-decoration:none;
+}
+a:hover{
+color:#666;
+}
+a:active, a:focus {
+outline: 0;
+}
+
+
+/* 画像 */
+
+img{
+border:0;
+padding:0px;
+margin:0px
+}
+
+img.aligncenter {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+img.alignright {
+padding:4px;
+margin: 0 0 10px 20px;
+display: inline;
+}
+
+img.alignleft {
+padding: 4px;
+margin: 0 20px 10px 0;
+display: inline;
+}
+
+
+/* フロート */
+
+.alignright {
+float: right;
+}
+
+.alignleft {
+float: left;
+}
+
+.right{
+float: right;
+}
+
+.left{
+float: left;
+}
+
+.clear{
+clear:both;
+}
+
+
+/* インデント */
+
+.indent{
+margin-left:10px;
+margin-right:10px;
+}
+
+/* リスト */
+
+ol{
+margin: 0 0 0 5px;
+padding: 0 0 0 0;
+list-style: decimal;
+}
+ul{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+list-style: disc;
+}
+li{
+margin: 0 0 0 15px;
+padding: 0 0 0 0;
+}
+li a{
+color:#999;
+}
+li a:hover{
+color:#666;
+}
+
+
+/* ************************************************ 
+*	全体Wrapper
+* ************************************************ */	
+
+#wrapper{
+margin: 0 auto;
+padding: 0 30px;
+width: 910px;
+height:100%;
+background:#fff;
+}
+
+
+/* ************************************************ 
+*	ヘッダー
+* ************************************************ */	
+
+#header{
+height: 130px;
+width:910px;
+}
+
+#header h1 {
+padding: 30px 0 0px 0px;
+font-size: 12px;
+color: #666666;
+font-weight: normal;
+}
+
+.logo {
+float: left;
+margin: 0px 0px 0px 0px;
+padding:0px 0px 0px 0px;
+}
+
+.contact {
+float: right;
+position:relative
+top: 0px;
+right: 0px
+}
+
+
+/* ************************************************ 
+*	トップナビゲーション
+* ************************************************ */	
+
+ul#topnav{
+margin: 10px 0px 15px 0;
+float:right;
+}
+
+ul#topnav li{
+font-size: 16px;
+font-weight: normal;
+float:left;
+list-style:none;
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin: 0px 0px 0px 20px;
+padding: 7px 2px 0px 2px;
+color: #332828;
+letter-spacing: 0.1em;
+}
+
+ul#topnav li a{
+color:#332828;
+text-decoration:none;
+padding: 5px 5px 5px 5px;
+}
+
+ul#topnav li a:hover{
+color:#867888;
+text-decoration:none;
+background: #eee;
+padding: 5px 5px 5px 5px;
+border-radius: 3px;         /* CSS3 */
+-moz-border-radius: 3px;    /* Firefox */
+-webkit-border-radius: 3px; /* Safari,Chrome */
+}
+
+ul#topnav .current_page_item a {
+color:#867888;
+background: #f5f5f5;
+text-decoration:none;
+padding: 5px 5px 5px 5px;
+border-radius: 3px;         /* CSS3 */
+-moz-border-radius: 3px;    /* Firefox */
+-webkit-border-radius: 3px; /* Safari,Chrome */
+}
+ul#topnav .current-menu-item a {
+color:#867888;
+background: #f5f5f5;
+text-decoration:none;
+padding: 5px 5px 5px 5px;
+border-radius: 3px;         /* CSS3 */
+-moz-border-radius: 3px;    /* Firefox */
+-webkit-border-radius: 3px; /* Safari,Chrome */
+}
+
+
+/* ************************************************ 
+*	スライド
+* ************************************************ */	
+
+#slide{
+width:910px;
+height:450px;
+margin:0 0 0 0;
+padding:0 0 0 0;
+overflow: hidden;
+}
+
+.slide_shadow{
+width:910px;
+height:470px;
+margin:0 0 0 0;
+padding:0 0 0 0;
+background: url(images/main_bg.png) no-repeat;
+}
+
+
+/* ************************************************ 
+*	メイン（本文）コンテンツ
+* ************************************************ */	
+
+#main-wrap {
+width: 910px;
+margin: 20px 0;
+display: inline;
+}
+
+/* 1カラムレイアウト */
+
+#main {
+width: 910px;
+padding: 0px 0px 0px 0px;
+margin:0px 0px 40px 0px;
+display: inline;
+}
+
+
+/* 2カラムレイアウト */
+
+#main-single {
+float: left;
+width: 618px;
+padding: 0px 0px 0px 0px;
+margin:0px 0px 40px 0px;
+display: inline;
+}
+
+/* ギャラリーページレイアウト */	
+
+div.entry {
+width: 940px;
+margin-right: 0px;
+margin-left: 0px;
+_zoom: 1;   
+overflow: hidden;
+}
+
+div.entry div {
+width: 283px;
+height:350px;
+margin-left: 0px;
+margin-right: 30px;
+margin-bottom: 10px;
+margin-top:20px;
+padding:0px;
+float: left;
+}
+
+/* TOP 2段組みブロック */
+
+#top-2dan {
+width: 910px;
+margin: 0 auto 0px auto;
+}
+.first-block {
+float: left;
+width: 596px;
+margin-right: 30px;
+}
+.last-block {
+float:left;
+margin-right: 0;
+}
+
+
+/* TOPリスト表示 */
+
+.toplist ul{
+margin: 5px 0 0 0;
+padding: 0px 0 0px 0px;
+}
+.toplist li{
+font-size:14px;
+margin: 0px 0px 5px 0px;
+padding: 2px 0px 2px 0px;
+list-style: none;
+border-bottom: 1px dotted #dedede;
+}
+.toplist li a{
+color:#666;
+background: url(images/list.png) no-repeat 0 50%;
+padding-left: 15px;
+}
+.toplist li a:hover{
+background-position: 3px 50%;
+color:#999;
+}
+
+
+/* ブログ記事部分 */	
+
+p {padding: 10px 0px 10px 0px;
+}
+
+p a{color:#999;text-decoration:none;}
+p a:hover{color:#666;background:#eee;}
+p a:active, a:focus {outline: 0;}
+
+#date {
+font-family:arial,sans-serif;
+font-size:9px;
+font-weight:normal;
+text-align: right;
+padding: 0px 0px 0px 0px;
+color:#999;
+letter-spacing: 0.1em;
+}
+
+.pagetitle {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin-bottom: 0px;
+padding: 0px 0px 0px 0px;
+line-height: 40px;
+font-size: 14px;
+font-weight: normal;
+color: #BBB;
+letter-spacing: 0.1em;
+}
+
+.blog-title {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+font-size: 18px;
+background: url() no-repeat ;
+font-weight: normal;
+padding: 20px 0px 20px 0px;
+margin: 5px 10px 0px 0px;
+border-bottom: 1px solid #ccc;
+color: #332828;
+}
+
+.blog-title a{color:#333;text-decoration:none;}
+.blog-title a:hover{color:#666;}
+
+.subtitle {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+font-weight: normal;
+font-size: 18px;
+border-bottom:1px dotted #ccc;
+padding: 0px 10px 0px 10px;
+margin-top: 20px;
+margin-left: 0px;
+margin-right: 0px;
+margin-bottom: 10px;
+letter-spacing: 0.1em;
+color: #666;
+}
+
+blockquote{
+color:#666;
+border:1px dotted #ccc;
+margin:10px 0 10px 0;
+padding:10px 20px;
+}
+
+#blog-foot {
+font-size:75%;
+text-align: right;
+margin:50px 0 0 0;
+padding: 2px 5px 2px 2px;
+font-weight:normal;
+color:#999;
+background:#f7f7f7;
+border-bottom:0px dotted #ccc;
+}
+
+#next {
+font-size:85%;
+text-align: center;
+padding-top: 30px;
+padding-bottom: 30px;
+}
+
+
+/* 関連記事 */
+
+.similar-head {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin: 0px 0px 0px 0px;
+padding: 0 10px 0 0px;
+line-height: 30px;
+font-size: 14px;
+font-weight: normal;
+color: #999;
+letter-spacing: 0.05em;
+background: url() no-repeat;
+border-bottom:1px solid #ccc;
+}
+
+.similar ul{
+margin: 0px 0 0px 0;
+padding: 0px 0 0px 0px;
+}
+.similar li{
+font-size:12px;
+margin: 0px 0px 0px 0px;
+padding: 2px 0px 2px 0px;
+list-style: none;
+border-bottom: 1px dotted #dedede;
+}
+.similar li a{
+color:#999;
+background: url(images/list.png) no-repeat 0 50%;
+padding-left: 15px;
+}
+.similar li a:hover{
+background-position: 3px 50%;
+color:#666;
+}
+
+/* コメント欄 */
+
+.comment-head {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin: 0px 0px 0px 0px;
+padding: 0 10px 0 0px;
+line-height: 30px;
+font-size: 14px;
+font-weight: normal;
+color: #999;
+letter-spacing: 0.05em;
+background: url() no-repeat;
+border-bottom:1px solid #ccc;
+}
+
+.commentlist li{
+list-style: none;
+font-size:90%;
+color:#888;
+}
+
+.commentlist {
+margin: 0 0 50px 0;
+padding: 0 0 0 0;
+}
+
+
+/* ************************************************ 
+*	ウィジット
+* ************************************************ */	
+
+.widgettitle {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin-bottom: 0px;
+padding: 0px 0px 0px 0px;
+line-height: 40px;
+font-size: 14px;
+font-weight: normal;
+color: #BBB;
+letter-spacing: 0.1em;
+}
+
+#main .widgettitle {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin-bottom: 0px;
+padding: 0px 0px 0px 0px;
+line-height: 40px;
+font-size: 14px;
+font-weight: normal;
+color: #BBB;
+letter-spacing: 0.1em;
+}
+
+.textwidget{
+font-size:14px;
+color:#777;
+line-height:160%;
+margin: 0px 0 30px 0 ;
+padding: 0px 10px 0px 10px;
+}
+
+#main .textwidget{
+font-size:14px;
+color:#444444;
+line-height:180%;
+margin: 0px 0 30px 0 ;
+padding: 0px 0px 0px 0px;
+}
+
+#topbox{
+font-size:14px;
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+}
+
+#topbox ul{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+floate:left;
+}
+
+#topbox li{
+floate:left;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+list-style: none;
+}
+
+#topbox li a{
+color:#444444;
+list-style: none;
+background: url() no-repeat;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+}
+
+#topbox li a:hover{
+color:#eeeeee;
+}
+
+#topbox h2{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-bottom: 0px dotted #fff;
+}
+
+#topbox h3{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-top: 0px dotted #fff;
+border-bottom: 0px dotted #fff;
+}
+
+#topbox h4{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-bottom: 0px dotted #fff;
+}
+
+
+#sidebox{
+margin: 0 0 0 0 ;
+margin: 0 0 0 0 ;
+}
+
+#sidebox ul{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+floate:left;
+}
+
+#sidebox li{
+floate:left;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+list-style: none;
+}
+
+#sidebox li a{
+color:#666;
+list-style: none;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+}
+
+#sidebox li a:hover{
+color:#999;
+}
+
+#sidebox h2{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-bottom: 0px dotted #222;
+}
+
+#sidebox h3{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-top: 0px dotted #222;
+border-bottom: 0px dotted #222;
+}
+
+#sidebox h4{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border-bottom: 0px dotted #222;
+}
+
+
+/* ************************************************ 
+*	サイドバー
+* ************************************************ */	
+
+#sidebar {
+float: right;
+width: 265px;
+margin:45px 0px 40px 0px;
+padding: 5px 0px 0px 0px;
+background:#fff;
+}
+
+#sidebar p{
+margin-bottom: 25px;
+}
+
+#sidebar h2 {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin: 0px 0px 10px 0px;
+padding: 0 10px 10px 10px;
+font-size: 16px;
+font-weight: normal;
+color: #222;
+letter-spacing: 0.1em;
+background: url() no-repeat;
+border-bottom:0px solid #ccc;
+}
+
+#sidebar h3 {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+margin: 0px 0px 0px 0px;
+padding: 0 10px 0 0px;
+line-height: 30px;
+font-size: 14px;
+font-weight: normal;
+color: #999;
+border-bottom:0px solid #ccc;
+}
+
+#sidebar ul{
+margin-left: 5px;
+padding: 0px 0 20px 0;
+}
+
+#sidebar li{
+font-size:14px;
+margin: 0 10px 10px 5px;
+list-style: none;
+border-bottom: 0px dotted #ccc;
+}
+
+#sidebar li a{
+background: url(images/list.png) no-repeat 0 50%;
+display: block;
+padding-left:15px;
+}
+
+#sidebar li a:hover{
+background-position: 3px 50%;
+}
+
+
+
+/* ************************************************ 
+*	フッターエリア
+* ************************************************ */	
+
+#footer{
+clear:both;
+padding: 0px auto;
+margin: 50px auto 0px auto;
+background: # url() repeat;
+border-top:0px #ccc solid;
+}
+
+#sociallink {
+text-align:center;
+position: relative;
+margin: 0px auto 10px auto;
+padding: 30px 0 0px 0px;
+}
+
+#copyright {
+text-align:center;
+position: relative;
+margin: 0px 0 0px 0;
+padding: 0 0 30px 0px;
+color:#999;
+font-size:10px;
+}
+
+.footer-line {
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+border: 0;
+height: 1px;
+background: #ccc;
+background-image: -webkit-linear-gradient(left, #f5f5f5, #ccc, #f5f5f5);
+background-image:    -moz-linear-gradient(left, #f5f5f5, #ccc, #f5f5f5);
+background-image:     -ms-linear-gradient(left, #f5f5f5, #ccc, #f5f5f5);
+background-image:      -o-linear-gradient(left, #f5f5f5, #ccc, #f5f5f5);
+}
+
+
+/* ************************************************ 
+*	検索フォーム
+* ************************************************ */
+
+.search {
+margin-bottom:20px;
+}
+.search fieldset {
+width:263px;
+height: 30px; 
+background: #ffffff;
+border: 1px solid #eee;
+}
+.search input {
+width:220px;
+border: none; 
+background: none; 
+padding: 9px 10px; 
+color: #444444; 
+font: 12px arial, sans-serif; 
+text-transform: uppercase; 
+vertical-align: middle;
+}
+.search button {
+width: 15px; 
+height: 15px; 
+background: url(images/search.png) no-repeat; 
+cursor: pointer; 
+border: none; 
+vertical-align: middle;
+}
+
+
+/* ************************************************ 
+*	文字サイズ
+* ************************************************ */
+
+.moji100px {font-size: 100px;line-height: 170%;}
+.moji90px {font-size: 90px;line-height: 170%;}
+.moji80px {font-size: 80px;line-height: 170%;}
+.moji70px {font-size: 70px;line-height: 170%;}
+.moji60px {font-size: 60px;line-height: 170%;}
+.moji50px {font-size: 50px;line-height: 170%;}
+.moji40px {font-size: 40px;line-height: 170%;}
+.moji30px {font-size: 30px;line-height: 170%;}
+.moji29px {font-size: 29px;line-height: 170%;}
+.moji28px {font-size: 28px;line-height: 170%;}
+.moji27px {font-size: 27px;line-height: 170%;}
+.moji26px {font-size: 26px;line-height: 170%;}
+.moji25px {font-size: 25px;line-height: 170%;}
+.moji24px {font-size: 24px;line-height: 170%;}
+.moji23px {font-size: 23px;line-height: 170%;}
+.moji22px {font-size: 22px;line-height: 170%;}
+.moji21px {font-size: 21px;line-height: 170%;}
+.moji20px {font-size: 20px;line-height: 170%;}
+.moji19px {font-size: 19px;line-height: 170%;}
+.moji18px {font-size: 18px;line-height: 170%;}
+.moji17px {font-size: 17px;line-height: 170%;}
+.moji16px {font-size: 16px;line-height: 170%;}
+.moji15px {font-size: 15px;line-height: 170%;}
+.moji14px {font-size: 14px;line-height: 170%;}
+.moji13px {font-size: 13px;line-height: 170%;}
+.moji12px {font-size: 12px;line-height: 170%;}
+.moji11px {font-size: 11px;line-height: 170%;}
+.moji10px {font-size: 10px;line-height: 150%;}
+.moji9px {font-size: 9px;line-height: 370%;}
+
+.mincho {
+font-family:'fgflop','Arial','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo',YuGothic,'游ゴシック','Palatino','Osaka','ＭＳ Ｐゴシック','MS PGothic','verdana','Helvetica;
+}
+
+.bold {
+font-weight: normal!important;
+}
+
+.italic {
+font-style: italic; 
+}
+
+
+/* ************************************************ 
+*	テーブル
+* ************************************************ */
+
+table {
+border: 0px;
+border-collapse: collapse;
+border-spacing: 0;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px;
+}
+
+table tr{
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+}
+
+table td{
+text-align: left;
+vertical-align: top;
+line-height: 170%;
+text-align: justify;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+border-left: 0px dotted #CCCCCC;
+}
+
+
+/* プラン表風 */
+
+table#plan {
+width: 100%;
+margin:10px 0px 0px 0px;
+padding:0 0px;
+border: 1px #999 solid;
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+table#plan th {
+background-color:#ddd;
+padding: 10px;
+font-size: 13px;
+border: 1px #999 solid;
+border-width: 0 0 1px 1px;
+font-weight: bold;
+text-align: center;
+white-space: nowrap; 
+vertical-align: middle;
+}
+
+table#plan td {
+font-size: 13px;
+padding: 10px;
+border: 1px #999 solid;
+border-width: 0 0 1px 1px;
+text-align: center;
+white-space: normal;
+vertical-align: middle;
+}
+
+
+/* フローチャート風 */
+
+table#flow {
+width: 100%;
+margin:0 0px 0 0px;
+padding:0 0px 0 0px;
+border: 0px #CCC solid;
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+table#flow th {
+font-size: 13px;
+padding: 10px 0px;
+border: 0px #CCC solid;
+border-bottom: 1px #CCC solid;
+font-weight: bold;
+text-align: left;
+white-space: normal;
+vertical-align: middle;
+}
+
+table#flow td {
+font-size: 13px;
+padding: 10px;
+border-bottom: 1px #CCC solid;
+text-align: left;
+white-space: normal;
+vertical-align: middle;
+}
+
+
+/* コンタクトフォーム用 */
+
+table#contact {
+width: 100%;
+color:#444;
+margin:10px 0px 0px 0px;
+padding:0 0px;
+font-size: 14px;
+border: 0px #CCC solid;
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+table#contact th {
+padding: 10px;
+font-weight: bold;
+line-height: 120%;
+text-align: left;
+white-space: nowrap; 
+}
+
+table#contact td {
+font-size: 13px;
+padding: 10px;
+text-align: left;
+white-space: normal;
+vertical-align: middle;
+}
+
+
+/* ************************************************ 
+*	ライン
+* ************************************************ */
+.line-dotted {
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+border-bottom:1px dotted #CCC;
+}
+
+.line-solid {
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+border-bottom:1px solid #CCC;
+}
+
+.line-footmenu {
+margin: 0px 0px 5px 0px;
+padding: 0px 0px 3px 0px;
+border-bottom:1px dotted #CCC;
+}
+
+/* ************************************************ 
+*	画像装飾
+* ************************************************ */
+
+.pict_right {
+margin:0px 0px 10px 20px; 
+padding: 2px 2px 2px 2px; 
+float: right;
+border:1px solid #DCDCDC;
+}
+
+.pict_left {
+margin:0px 10px 10px 0px; 
+padding: 2px 2px 2px 2px; 
+float: left;
+border:1px solid #DCDCDC;
+}
+
+.pict1px{
+margin:0px 0px 5px 0px; 
+padding: 2px 2px 2px 2px; 
+border:1px solid #CCC;
+}
+
+.pict_shadow{
+border:1px solid #ccc;
+background:#fff;
+margin: 0px auto;
+padding: 5px 5px 5px 5px;
+border-radius:1px; /* CSS3 */
+ -webkit-border-radius:1px; /* Firefox */
+ -moz-border-radius:1px; /* Safari,Chrome */
+box-shadow:2px 2px 3px #C0C0C0;
+}
+
+
+/* ************************************************ 
+*	角丸
+* ************************************************ */
+
+.border-radius{
+border-radius:5px; /* CSS3 */
+ -webkit-border-radius:5px; /* Firefox */
+ -moz-border-radius:5px; /* Safari,Chrome */
+}
+
+
+/* ************************************************ 
+*	ボックスシャドウ・テキストシャドウ
+* ************************************************ */
+
+.box-shadow{
+box-shadow:2px 2px 3px #ccc; /* CSS3 */
+ -webkit-box-shadow:2px 2px 3px #ccc; /* Safari,Chrome */
+ -moz-box-shadow:2px 2px 3px #ccc; /* Firefox */
+}
+
+.box-shadow2{
+box-shadow:1px 2px 5px #ccc; /* CSS3 */
+ -webkit-box-shadow:1px 2px 5px #ccc; /* Safari,Chrome */
+ -moz-box-shadow:1px 2px 5px #ccc; /* Firefox */
+}
+
+.text-shadow{
+text-shadow:1px 1px 3px #DEDEDE; /* CSS3 */
+ -webkit-text-shadow:1px 1px 3px #DEDEDE; /* Safari,Chrome */
+ -moz-text-shadow:1px 1px 3px #DEDEDE; /* Firefox */
+}
+
+
+/* ************************************************ 
+*	CSS3ボタン
+* ************************************************ */
+
+.bt-more a {
+float:left;
+display: block;
+color: #333;
+font-size: 10px;
+font-weight: normal;
+text-align: center;
+text-decoration: none;
+text-shadow: 0px -1px 0px #fff;
+width: 50px;
+border: 1px solid #ccc;
+border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+background-color: #eee;
+background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddd),color-stop(.75, #eee),color-stop(1, #ddd));
+background: -moz-linear-gradient(#ddd, #eee 75%, #ddd);
+padding: 0px 0px;
+margin: 10px 0px 0px 0px;
+}
+
+.bt-more a:hover {
+background-color: #fff;
+background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eee),color-stop(.75, #fff),color-stop(1, #eee));
+background: -moz-linear-gradient(#eee, #fff 75%, #eee);
+}
+
+.bt-more a:active {
+background-color: #999;
+background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #999),color-stop(.75, #ccc),color-stop(1, #999));
+background: -moz-linear-gradient(#999, #ccc 75%, #999);
+}
+
+
+
+/* ============================================= */
+/* ie6 safe settings                             */
+
+/* add display:inline to floated elements */
+.contact,
+ul#topnav li,
+#main,
+#main p.withImage img,
+.alignright,
+.alignleft,
+.box,
+#sidebar,
+#footer #logo {display:inline;}
+
+/* add zoom:1 to overflow:hidden */
+#footer .inner {zoom:1;}
+
+/* add zoom:1 to pos:relative elements */
+.contact {zoom:1;}
+
+/* add overflow:visible to (submit) buttons */
+input, button {overflow:visible;}

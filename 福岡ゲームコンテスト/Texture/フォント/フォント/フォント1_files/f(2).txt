@@ -1,0 +1,13 @@
+(function(){/* 
+ 
+ Copyright The Closure Library Authors. 
+ SPDX-License-Identifier: Apache-2.0 
+*/ 
+var e="function"===typeof Symbol&&"symbol"===typeof Symbol()?Symbol(void 0):void 0;var f=Object,h=f.freeze,k=[];Object.isFrozen(k)||(e?k[e]|=1:void 0!==k.g?k.g|=1:Object.defineProperties(k,{g:{value:1,configurable:!0,writable:!0,enumerable:!1}}));h.call(f,k);/* 
+ 
+ SPDX-License-Identifier: Apache-2.0 
+*/ 
+function l(a,b,c){a.addEventListener&&a.addEventListener(b,c,!1)};function m(a,b,c){if(Array.isArray(b))for(var d=0;d<b.length;d++)m(a,String(b[d]),c);else null!=b&&c.push(a+(""===b?"":"="+encodeURIComponent(String(b))))};function n(a,b){a.google_image_requests||(a.google_image_requests=[]);var c=a.document;c=void 0===c?document:c;c=c.createElement("img");c.src=b;a.google_image_requests.push(c)};function p(){var a=document.currentScript;return(a=void 0===a?null:a)&&"22"===a.getAttribute("data-jc")?a:document.querySelector('[data-jc="22"]')};var q=document,r=window;function t(){var a=u["gws-id"],b=u["qem-id"];this.l=u.url;this.m=a;this.o=b;this.g=!1;a=v(q.hidden)?{h:"hidden",i:"visibilitychange"}:v(q.mozHidden)?{h:"mozHidden",i:"mozvisibilitychange"}:v(q.msHidden)?{h:"msHidden",i:"msvisibilitychange"}:v(q.webkitHidden)?{h:"webkitHidden",i:"webkitvisibilitychange"}:{h:"hidden",i:"visibilitychange"};this.h=a.h;this.i=a.i;this.j=-1;q[this.h]&&w(this,2);x(this);z(this)} 
+function x(a){l(q,a.i,function(){if(q[a.h])a.g&&(a.g=!1,a.j=Date.now(),w(a,0));else{if(-1!==a.j){var b=Date.now()-a.j;0<b&&(a.j=-1,w(a,1,b))}w(a,3)}})}function z(a){l(r,"click",function(b){a.handleClick(b)})}t.prototype.handleClick=function(){var a=this;this.g=!0;r.setTimeout(function(){a.g=!1},5E3)}; 
+function w(a,b,c){c=void 0===c?0:c;var d={gqid:a.m,qqid:a.o};0===b&&(d["return"]=0);1===b&&(d["return"]=1,d.timeDelta=c);2===b&&(d.bgload=1);3===b&&(d.fg=1);b=[];for(var y in d)m(y,d[y],b);n(r,a.l+"&label=window_focus&"+b.join("&"));var g=void 0===g?.01:g;if(!(Math.random()>g)){a=p();g="https://pagead2.googlesyndication.com/pagead/gen_204?id=jca&jc=22&version="+(a&&a.getAttribute("data-jc-version")||"unknown")+"&sample="+g;a=window;if(d=a.navigator)d=a.navigator.userAgent,d=/Chrome/.test(d)&&!/Edge/.test(d)? 
+!0:!1;d&&a.navigator.sendBeacon?a.navigator.sendBeacon(g):n(a,g)}}function v(a){return"undefined"!==typeof a};var A=p();if(null==A)throw Error("JSC not found 22");for(var u={},B=A.attributes,C=B.length-1;0<=C;C--){var D=B[C].name;0===D.indexOf("data-jcp-")&&(u[D.substring(9)]=B[C].value)}window.window_focus_for_click=new t;}).call(this);

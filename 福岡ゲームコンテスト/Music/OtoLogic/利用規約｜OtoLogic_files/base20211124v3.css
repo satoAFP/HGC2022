@@ -1,0 +1,2427 @@
+@charset "UTF-8";
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+ベース
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+/* スクロールバーカスタム　デスクトップサイズのみ
+（ホントはUA判別なりで完全に切り替えたほうが、フォントとかも含めて細かい見栄えがいいんだけど、まだ様子見で）*/
+@media (min-width: 821px) { 
+html {scrollbar-width: thin;/* firefox用のスクロールバー*/}
+
+/* firefox以外のスクロールバー*/
+::-webkit-scrollbar {    width: 10px;}
+::-webkit-scrollbar-track {    background-color: #ebebeb;}
+::-webkit-scrollbar-thumb {    background-color: #c3c3c3;    border-radius: 10px;}
+::-webkit-scrollbar-thumb:hover{    background: #a9a9a9;}
+
+ }/* スクロールバーカスタム */
+
+html {}
+
+body {	margin:0;	padding:0;	line-height:1.6;	letter-spacing:0px;	font-size:15px;	color:#333;	background:#141414;
+	font-family:'Subset','Kosugi Maru','Noto Sans JP',sans-serif; } 
+
+
+span.orikaesi {	line-height: 1;
+   display: inline-block;
+}
+
+
+#loading { 
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: #fdfdfd; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  transition: all 0.6s; 
+  z-index: 99;
+} 
+
+
+.loaded { 
+  opacity: 0;
+  visibility: hidden;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'Subset';
+  src: url('../fonts/Noto_Sans_JP/NotoSansJP-subset-eisu.otf') format('opentype');
+}
+
+h1,h2,h3,h4,h5,h6 {	margin:0;	padding:0;	letter-spacing:2px;	font-weight:normal;	color:#1a1a1a;}
+
+br {	letter-spacing:normal;}
+
+img {		transition: opacity 0.3s ease;}
+
+img:hover { opacity: 0.7;	transition: opacity 0.1s ease;}
+
+.hover-yuukou a.gazou:after,
+.hover-yuukou a.gazou:before {	display:none;}/* なんか適当だけど画像の下線アニメを消す*/
+
+
+a {	color:#2880F1;	text-decoration:none;/* ここでまとめてnone*/
+	transition: all 0.2s ease;
+}
+
+.hover-yuukou a:hover {	text-decoration:none;/* リンクは基本、ホバー時下線あり。消したい場合は個別の要素で　追記：だったけど下線アニメ導入で基本none　個別noneは消去したけど、消し忘れがあったらごめん（動作には影響ない） */}
+
+dl,ol,ul {	margin:0;	padding:0;}
+
+li {}
+
+
+
+
+
+/*------------------------------------------------------------
+大枠
+------------------------------------------------------------*/
+
+header {	width:1000px;	height: 55px;	margin-right: auto;	margin-left: auto;}
+
+#header-bg {	width:100%;	height:55px;	min-width:1000px;	background:#141414;}
+
+footer {	font-family: 'Noto Sans JP',sans-serif;	width:1000px;	margin-right: auto;	margin-left: auto;	font-size:14px;}
+
+footer a {	color:#aaaaaa;}
+
+.hover-yuukou footer a:hover {	color:#fdfdfd;}
+
+#footer-bg {	clear:both;	width:100%;	padding-bottom: 10px;	min-width:1000px;	background:#141414;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------
+未定分
+------------------------------------------------------------*/
+/* 細かい */
+.logo {   width:100%;   height:55px; margin: 0px;   clear:left;   float:left;	text-align: center;	line-height: 52px;}
+
+.logo a {	color:#fdfdfd;	letter-spacing:3px;	font-size:36px;	font-family: 'Poiret One';	transition: font-size 0s ease,color 0.2s ease;	/*box-shadow: 0px -3px 30px #141414;*/}
+
+.hover-yuukou .logo a:hover {	color:#33ccff;}
+
+header a span {	color:#AAA9E7;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------
+フッター
+------------------------------------------------------------*/
+
+.fmenu {	padding: 20px 0px 20px 0px;	text-align:center;}
+
+.fmenu a {	margin-left:20px;	margin-right:20px;}
+
+/*----------------------*/
+
+.copyright {	text-align:center;	font-size:13px;	padding-top:10px;	margin-bottom:30px;}
+
+.copyright p {	margin-bottom: 8px;	color:#fdfdfd;}
+
+/* -------下線アニメ------- */
+.hover-yuukou footer a:after,
+.hover-yuukou footer a:before {	transition: all 0.2s;}
+
+.hover-yuukou footer a {	position: relative;}
+
+.hover-yuukou footer a:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #fdfdfd;	height: 1px;}
+
+.hover-yuukou footer a:hover:after {	width: 100%;}
+
+.hover-yuukou footer a:hover:after,
+.hover-yuukou footer a:hover:before {	transition: all 0.3s;}
+
+
+/*------------------------------------------------------------
+ページトップ　【改善案】クラスとIDが一緒の名前ってどうなのさ
+------------------------------------------------------------*/
+.page-top {	z-index: 6;	position: fixed;	bottom: 0%;	left: 52%;	margin-left: 400px;	color:white;	background:#a5a5a5;	font-size: 15px;	font-weight:bold;
+		padding: 18px 18px 0px 18px;	display: none;	border-radius: 8px 8px 0px 0px;	background-color:rgba(165,165,165,0.8);}
+
+#page-top a {	transition: padding 0.3s ease;}
+
+.hover-yuukou #page-top a:hover {	background:#a5a5a5;	color: white;	padding-bottom:6px;}
+
+
+.topyazirusi {  box-sizing: border-box;  display: inline-block;  position: relative;  width: 27px;  height: 27px;
+  border-style: solid;  border-width: 3px 3px 0 0;  border-color:#000000b5;    transform: rotate(315deg);
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+コンテンツ
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+#contents {	overflow: hidden;	width:1000px;	margin-right: auto;	margin-left: auto;	padding-top: 21px;}
+
+#contents-bg {	width:100%;	min-width:1000px;	min-height:850px;	background: #fdfdfd;
+		transition: background 0.3s ease;/* ドロワー用*/
+}
+
+.left {	float:left;	width:250px;	margin: 0px 0px 20px 0px;}
+
+#right {	float:right;	width:730px;	margin: 0px 10px 50px 10px;}
+
+/*----------------------*/
+
+#bread {		letter-spacing:1px;	font-size:14px;	margin-bottom: 8px;	padding-left: 10px;}
+
+#bread div {	display: inline-block;	_display: inline;}
+
+
+/* -------下線アニメ(下のhonbunも同時指定)------- */
+.hover-yuukou #bread a:after,
+.hover-yuukou #bread a:before,
+
+.hover-yuukou .honbun a:after,
+.hover-yuukou .honbun a:before {	transition: all 0.2s;}
+
+
+.hover-yuukou #bread a,
+
+.hover-yuukou .honbun a {	position: relative;}
+
+
+.hover-yuukou #bread a:after,
+
+.hover-yuukou .honbun a:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #2880F1;	height: 1px;}
+
+
+.hover-yuukou #bread a:hover:after,
+
+.hover-yuukou .honbun a:hover:after {	width: 100%;}
+
+
+.hover-yuukou #bread a:hover:after,
+.hover-yuukou #bread a:hover:before,
+
+.hover-yuukou .honbun a:hover:after,
+.hover-yuukou .honbun a:hover:before {	transition: all 0.3s;}
+
+/* -------下線アニメ------- */
+.hover-yuukou #mitei a:after,
+.hover-yuukou #mitei a:before {	transition: all 0.2s;}
+
+.hover-yuukou #mitei a {	position: relative;}
+
+.hover-yuukou #mitei a:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #2880F1;	height: 1px;}
+
+.hover-yuukou #mitei a:hover:after {	width: 100%;}
+
+.hover-yuukou #mitei a:hover:after,
+.hover-yuukou #mitei a:hover:before {	transition: all 0.3s;}
+
+/*----------------------*/
+
+.page-title{	height: 40px;	width:680px;	padding: 5px 15px 6px 15px;	margin-right: auto;	margin-left: auto;	margin-bottom: 20px;	background-color: #e9e9e9;	border-radius:14px}
+
+.page-title h2 {/*------これのせいでモバイル表示の幅や回り込みがおかしくなるんだが、必要？	float:left;------*/	width: 550px;	height: 40px;	line-height: 40px;	font-size:23px;	color:#141414;}
+
+.honbun {	font-family: 'Noto Sans JP',sans-serif;	width:606px;	    margin-right: auto;    margin-left: auto;	color:#5e5e5e;}
+
+.honbun p {	margin: 0px 0px 10px 0px;}
+
+.honbun p.tyuusyaku {	width: fit-content;	font-size: 13px;    padding: 2px 16px;    margin-top: -10px;    background-color: #f1f1f1;    border-radius: 8px;}
+
+/*------本文FAQ------*/
+.faq .honbun {	width:610px;}
+
+.faq .honbun p{	margin: 0px 0px 10px 8px;}
+
+.faq .honbun p.tyuusyaku {   margin-top: -7px;}
+
+.faq .honbun p.tyuusyaku2 {    padding: 9px 95px;    margin-bottom: 20px;    border:solid 4px #b3b3b3;    border-radius: 25px;}
+
+/*------本文などライセンス------*/
+.licen {text-align: center;}
+
+.licen h3 {	text-align: center;}
+
+.licen .honbun {	width:610px;}
+
+.honbun p.hidariyose { text-align: left;}
+
+.licen .honbun p{	margin: 0px 0px 10px 8px;}
+
+.licen .honbun p.tyuusyaku {   margin-top: -5px;	margin-left: auto;	margin-right: auto;}
+
+.licen .honbun p.tyuusyaku2 {	width: 300px;	margin-left: auto;	margin-right: auto;    padding: 9px 35px;    margin-bottom: 20px;   border:solid 4px #b3b3b3;    border-radius: 25px;}
+
+.licen .honbun p.tyuusyaku2 span {font-size:16px;}
+
+.licen .honbun p.tyuusyaku3 {	text-align: left;	margin-left: auto;	margin-right: auto;    padding: 15px 35px 15px 59px;    margin-bottom: 20px;	line-height: 30px;   border:solid 4px #b3b3b3;    border-radius: 25px;}
+
+.licen .honbun p.accordion_head.hanbai2 {	margin-left: auto;	margin-right:	auto;font-size:	14px;margin-bottom: 0px;}
+
+em {	font-size: 17px;	font-weight: bold;    font-style: normal;}
+
+sup {	font-size: 10px;}
+
+/*----------------------*/
+
+#main h3 {	color:#272727;	width:656px;	margin-right: auto;	margin-left: auto;	margin-bottom: 14px;	margin-top: 25px;	padding-left: 11px;	font-size:20px;	border-bottom: 1px solid #b7b7b7;}
+
+#main h4 {	margin: 12px 0px 8px 43px;	font-size:18px;	border-left:0px solid #999999;}
+
+#main .licen h4 {	margin: 12px 0px 8px 0px;	padding-left: 0px;	padding-right: 8px;	font-size:18px;	border-left:0px solid #999999;}
+
+/*----------------------*/
+
+
+
+
+/*------------------------------------------------------------
+更新履歴とかfree-index内での調整
+------------------------------------------------------------*/
+
+.information{	width:580px;	margin-right: auto;	margin-left: 120px;    margin-bottom: 50px;	color:#5e5e5e;	font-family: 'Noto Sans JP',sans-serif;}
+
+.information dt {	float: left;	margin: 0px 15px 12px 0px;	font-style: italic;}
+
+.information dd {	margin: 0px 0px 12px 0px;}
+
+.honbun.freeindex {    margin-left: 110px;
+    text-align: left;
+}
+
+#main h3.freeindex {
+    margin-left: 80px;
+}
+
+/* -------下線アニメ------- */
+
+.hover-yuukou .freeindex a:after,
+.hover-yuukou .freeindex a:before {	transition: all 0.2s;}
+
+
+.hover-yuukou .freeindex a {	position: relative;}
+
+
+.hover-yuukou .freeindex a:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #2880F1;	height: 1px;}
+
+
+.hover-yuukou .freeindex a:hover:after {	width: 100%;}
+
+
+.hover-yuukou .freeindex a:hover:after,
+.hover-yuukou .freeindex a:hover:before {	transition: all 0.3s;}
+
+
+
+/*------------------------------------------------------------
+素材
+------------------------------------------------------------*/
+
+
+.sozai {	width:640px;	margin-right: auto;	margin-left: auto;	margin-bottom: 0px;	padding-top: 0px;}
+
+#main .sozai h3 {/* 基本は#main h3で。変更点のみここに記載。*/	width:640px;	margin-bottom: 3px;	margin-top: 2px;	padding: 1px 0px 1px 5px;	font-size:17px; border: none}
+
+/*----------------------*/
+
+.mainblock {	overflow: hidden;	width:585px;	margin-right: auto;	margin-left: auto;}
+
+.mainblock table {	float:left;	width: 440px;	margin: 0px;	margin-top: -3px;	border-collapse: collapse;   border:none;	letter-spacing: 0px;}
+
+.mainblock table th {	width:63px;	padding: 2px 0px 0px 0px;	color:#5e5e5e;	font-size:11px;	font-weight:normal;	text-align: left;}
+
+.mainblock table td {	font-family: 'Noto Sans JP',sans-serif;	padding: 2px 0px 0px 0px;	color:#5e5e5e;	font-size:14px;}
+
+/*----------------------*/
+
+.accordion_head {	font-family: 'Noto Sans JP',sans-serif;	float: left;	font-size:13px;	cursor:pointer;	margin: 0px 0px 0px 258px;	line-height: normal;}
+
+.accordion_head a span {    display: inline-block;	transition: transform .4s ease;}
+
+.accordion_head.active a span {	transition: transform .4s ease;	transform: rotateZ( -180deg );}
+
+@-moz-document url-prefix() {
+
+.accordion_head {line-height: 19px;}
+
+}
+
+/*----------------------*/
+
+.accordion {	clear:both;	    display: none;	overflow:hidden;/* これいる？*/}
+
+.accordion table {/* 基本はmainblock table、変更点のみ。*/	 width: 100%;}
+
+.accordion table p {	margin: 5px 0px 5px 0px;	padding: 0px;}
+
+.accordion table tr {	border-bottom:1px dashed #d1d1d1;}
+
+.accordion .comment {	border:0px;}
+
+.accordion .comment p span {	font-family: 'Subset','Kosugi Maru','Noto Sans JP',sans-serif;	margin:0px;	padding-top: 5px;	font-size:11px;}
+
+.ac_oya {	border-bottom: 1px dashed #d1d1d1;	    padding-bottom: 3px;
+    border-bottom:0px;/*DLmarketサーバー障害対策*/
+}
+
+/*----------------------*/
+
+.download {	font-family: 'Noto Sans JP',sans-serif;	float:right;	height: 55px;	line-height: 55px;	width:86px;	margin-top: 1px;	padding-bottom: 1px;	text-align: center;	border: 1px solid #cdcdcd;	border-radius: 15px;}
+
+.download a  {	font-size: 16px;}
+
+.download.ogg  {	margin-bottom: -15px;}
+
+/* -------下線アニメ(download　accordion_head　有償ライセンス確認文　カートを見る　を同時指定)------- */
+/* -------20180804　a[href*="musicisvfr"]をaに変更（カートに入れるボタンにも下線を引くため）------- */
+.hover-yuukou .download a:after,
+.hover-yuukou .download a:before,
+
+.hover-yuukou .accordion_head a:after,
+.hover-yuukou .accordion_head a:before,
+
+.hover-yuukou .accordion a:after,
+.hover-yuukou .accordion a:before,
+
+.hover-yuukou .accordion a.kaatowomiru:after,
+.hover-yuukou .accordion a.kaatowomiru:before {	transition: all 0.2s;}
+
+/*--*/
+
+.hover-yuukou .download a,
+
+.hover-yuukou .accordion_head a,
+
+.hover-yuukou .accordion a,
+
+.hover-yuukou .accordion a.kaatowomiru  {	position: relative;}
+
+/*--*/
+
+.hover-yuukou .download a:after,
+
+.hover-yuukou .accordion_head a:after,
+
+.hover-yuukou .accordion a:after,
+
+.hover-yuukou .accordion a.kaatowomiru:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #2880F1;	height: 1px;}
+
+/*--*/
+
+.hover-yuukou .download a:hover:after,
+
+.hover-yuukou .accordion_head a:hover:after,
+
+.hover-yuukou .accordion a:hover:after,
+
+.hover-yuukou .accordion a.kaatowomiru:hover:after {	width: 100%;}
+
+/*--*/
+
+.hover-yuukou .download a:hover:after,
+.hover-yuukou .download a:hover:before,
+
+.hover-yuukou .accordion_head a:hover:after,
+.hover-yuukou .accordion_head a:hover:before,
+
+.hover-yuukou .accordion a:hover:after,
+.hover-yuukou .accordion a:hover:before,
+
+.hover-yuukou .accordion a.kaatowomiru:hover:after,
+.hover-yuukou .accordion a.kaatowomiru:hover:before{	transition: all 0.3s;}
+
+
+
+
+/*------------------------------------------------------------
+広告
+------------------------------------------------------------*/
+
+
+.gad-r-t {	width:728px;	height:280px;	padding: 0;	margin-bottom: 17px;}
+
+.gad-r-t2 {	width:728px;	height:90px;	padding: 0;	margin: 19px 0px;}
+
+.gad-r-m {	width:468px;	height:280px;	margin: 20px 0px 20px 0px;	margin-left: auto;	margin-right: auto;    padding: 0px;}
+
+.gad-r-b {	width:640px;	height:auto;	margin: 0;	margin: 20px 0px 5px 49px;}
+
+/*------------------------------------------------------------
+ページャー　暫定なので要改良
+------------------------------------------------------------*/
+.pager-top {   margin-bottom:-3px;	margin-top: -5px;   margin-right: auto;   margin-left: auto;    width:640px;   height:30px;    font-size: 16px;   text-align: right; }
+
+.pager-bottom {   margin: 20px 0px 0px 0px;    width:250px;   height:30px;   margin-right: auto;   margin-left: auto;    font-size: 19px;   text-align: center;
+	padding:16px 16px 0px 16px; 	border-top: solid 1px #dfdfdf;}
+
+.pagenum {   margin: 0px 1px 0px 1px;   padding: 3px 12px 5px 12px;   border-radius: 20px; color:#0066cc;
+			transition: all 0.6s ease;}
+
+.pagenum.letter {   margin:0px;   padding: 3px 5px 3px 5px;}
+
+.pagenum-current {   margin: 0px 1px 0px 1px;   padding: 3px 12px 5px 12px;  border-radius: 20px;    background:#797979;    color:#FFFFFF;}
+
+
+
+
+.pager-bottom .pagenum {   margin: 0px 2px 0px 2px;   padding: 3px 13px 6px 12px;  border-radius: 20px; color:#0066cc;}
+.pager-bottom .pagenum-current {   margin: 0px 2px 0px 2px;   padding: 3px 13px 6px 12px;}
+
+
+
+.pager-bottom-prev {    float:left;     margin: 14px 0px 0px 220px;   padding: 5px 10px 5px 10px;    font-size: 20px;   text-align: left;    border-radius: 20px; color:#0066cc;}
+
+.pager-bottom-next {     float:right;     margin: 14px 220px 0px 0px;   padding: 5px 10px 5px 10px;    font-size: 20px;   text-align: right;   border-radius: 20px; color:#0066cc;}
+
+.pagenum:hover {    background:#797979;     color:#fdfdfd;
+			transition: all 0.3s ease;/* マウスオン時のスピード */}
+
+.pagenum-current:hover {    color:#fdfdfd; cursor: default;}
+
+.pager-bottom-prev:hover {    background:#797979; color:#fdfdfd;}
+
+.pager-bottom-next:hover {    background:#797979; color:#fdfdfd;}
+
+/*------------------------------------------------------------
+注意書き
+------------------------------------------------------------*/
+
+.caution {color: #5e5e5e;    border:solid 1px #d1d1d1;    width:380px;   margin: 0px 0px 0px 100px;    padding: 10px;  border-radius: 15px;}
+
+.caution p {   margin: 0px 0px 8px 0px;    padding: 0px 0px 0px 40px;}
+
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+サブメニュー
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------
+アイコンのデザイン
+------------------------------------------------------------*/
+
+
+.toggle_menu_1 span {font-size: 15px;	margin: 0px 5px 0px 9px;}
+/* 【改善案】 もうちょいシックリくる(細みな)アイコンセット見つけたい。*/
+
+
+/*------------------------------------------------------------
+全般定義
+------------------------------------------------------------*/
+
+
+.side-menu {	letter-spacing:0px;}
+
+.side-menu ul, li {	padding: 0;	margin: 0px;}
+
+.side-menu .open {	display: block;} 
+
+.side-menu .close {	display: none;} 
+
+
+/*------------------------------------------------------------
+ac_menu_top　（トグルメニュー１だけ独自）
+------------------------------------------------------------*/
+
+
+.ac_menu_top {	width: 248px;	margin-bottom: 0px;/* サイト内検索でマージン調整 */	list-style: none;}
+
+.toggle_menu_1 {	height: 58px;	padding: 0px 0px 0px 10px;	color: #282828;	font-size: 18px;	line-height: 57px;	letter-spacing:6px;
+				cursor: pointer;	  border-radius: 30px;	border:1px solid #9b9b9b;
+				transition: all 0.5s ease;} 
+
+.toggle_menu_1.active {	border-radius: 30px 30px 0px 0px;	box-shadow: none;} 
+
+
+
+.hover-yuukou .toggle_menu_1:hover {	background-color: #dddddd;
+					transition: background-color 0.3s ease, border-radius 0.3s ease;/* マウスオン時のスピード とクリック時の形状変化*/} 
+
+
+/*------------------------------------------------------------
+ac_menu（トグルメニュー１の基本は上で、変更点のみ）
+------------------------------------------------------------*/
+
+
+.ac_menu {	width: 250px;	margin-bottom: 14px;	list-style: none;}
+
+.ac_menu .toggle_menu_1 {	color: #fff;	background-color: #282828;	border:0px;} 
+
+.ac_menu .toggle_menu_1.active {} 
+
+.hover-yuukou .ac_menu .toggle_menu_1:hover {	background-color: #969696;} 
+
+
+/*------------------------------------------------------------
+トグルメニュー２（active付加無し）と３（有り）
+------------------------------------------------------------*/
+
+
+.toggle_menu_2 , .toggle_menu_3 {	color: #0066cc;	font-size: 15px;	line-height: 2.9;	border-bottom: 1px solid #dfdfdf;	  list-style: none;}
+toggle_menu_4 {	color: #0066cc;	font-size: 15px;	line-height: 2.9;	  list-style: none;}
+
+/*----------------------*/
+
+.ad_tm3 {	/* 第2階層全般 */padding:0px 0px 0px 45px;	display: block;	color: #2880F1;
+		transition: all 0.3s ease;}
+.ad_tm4 {	/* 第2階層全般 */padding:0px 0px 0px 66px;	display: block;	color: #2880F1;
+		transition: all 0.3s ease;}
+
+
+
+.hover-yuukou .ad_tm3:hover {	color:#333;	background-color: #eee;
+			transition: all 0.3s ease;}
+.hover-yuukou .ad_tm4:hover {	color:#333;	background-color: #eee;
+			transition: all 0.3s ease;}
+
+.hover-yuukou .toggle_menu_3 .ad_tm3:hover {	padding-left: 49px;}
+.hover-yuukou .toggle_menu_3 .ad_tm4:hover {	padding-left: 66px;}
+
+.ad_tm3 span {	margin-right: 3px;}
+.ad_tm4 span {	margin-right: 3px;}
+
+/*----------------------*/
+
+.toggle_menu_3.active div.ad_tm3 {	/* 開いたトグルメニュー３ */	padding-left: 49px;	color: #333;
+					transition: all 0.3s ease;}
+.toggle_menu_4.active div.ad_tm4 {	/* 開いたトグルメニュー４ */	padding-left: 66px;	color: #333;
+					transition: all 0.3s ease;}
+
+.hover-yuukou .toggle_menu_3.active div.ad_tm3:hover {	padding-left: 49px;	background-color: #eee;}
+.hover-yuukou .toggle_menu_4.active div.ad_tm4:hover {	padding-left: 66px;	background-color: #eee;}
+
+/*----------------------*/
+
+nav li.toggle_menu_3 {	/* 第3階層全般 (フォントサイズ等はトグルメニュー2やトグルメニュー3で定義済み) */ }
+nav li.toggle_menu_4 {	/* 第3階層全般 (フォントサイズ等はトグルメニュー2やトグルメニュー3で定義済み) */ }
+
+nav li .tm3_trigger{	cursor: pointer; 	display: block;}
+nav li .tm4_trigger{	cursor: pointer; 	display: block;}
+
+nav li.toggle_menu_3 a{padding: 0px 0px 0px 66px;	color: #2880F1;	display: block;
+		transition: all 0.3s ease;}
+nav li.toggle_menu_4 a{padding: 0px 0px 0px 84px;	color: #2880F1;	display: block;
+		transition: all 0.3s ease;}
+
+.hover-yuukou nav li.toggle_menu_3 a:hover {	color:#333;	background-color: #eee;}
+.hover-yuukou nav li.toggle_menu_4 a:hover {	color:#333;	background-color: #eee;}
+
+nav li.toggle_menu_3 a span {	margin-right: 3px;}
+nav li.toggle_menu_4 a span {	margin-right: 3px;}
+
+nav li.toggle_menu_3 li {	margin-top:1px;	  list-style: none;}
+nav li.toggle_menu_4 li {	margin-top:1px;	  list-style: none;}
+
+
+/*------------------------------------------------------------
+カレント表示
+------------------------------------------------------------*/
+
+nav li.current .ad_tm3 {/* 第2階層 */		color:#333;	background-color: #eee;	border-left:0px solid #141414;}
+nav li.current .ad_tm4 {/* 第2階層 */		color:#333;	background-color: #eee;	border-left:0px solid #141414;}
+
+
+nav li.toggle_menu_3 .current a {/* 第3階層 */	color:#333;	background-color: #eee;	border-left: 0px solid #141414;}
+nav li.toggle_menu_4 .current a {/* 第3階層 */	color:#333;	background-color: #eee;	border-left: 0px solid #141414;}
+
+
+/*------------------------------------------------------------
+サイト内検索
+------------------------------------------------------------*/
+
+.gadsc{	height: auto;    min-height: 69px;	margin: 0px 0px -3px -14px;
+padding: 0px;
+width: 279px;}
+
+
+form.gsc-search-box {
+    margin-left: 10px !important;
+    width: 230px !important;
+}
+
+
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {border-radius: 7px !important;	    height: 100% !important;
+    cursor: pointer;			transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+
+.gsc-search-button-v2:hover {
+    background-color: #969696 !important;	    border-color: #969696 !important;	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+table.gsc-search-box td {
+    height: 38px;
+    padding: 0;
+}
+/*---アイフォン調整jsと連動---*/
+.iPhone table.gsc-search-box td {    height: auto;}
+
+
+.gsc-input-box {
+    height: 38px !important;
+    padding: 0 !important;
+	min-width: 147px !important;
+    width: 95%;
+    border-radius: 1px !important;
+}
+
+/*#cse-search-box {	width: 252px;	margin-top: 0px;	margin-right: 0px;}
+
+#cse-search-box table.gsc-search-box td.gsc-input {	padding: 0 !important;}
+
+#cse-search-box input[type="text"] {	float: left;	height: 31px;	width: 181px;	margin-left: 6px;	padding: 0 !important;	font-size:14px;}
+
+#cse-search-box input[type="submit"] {	float: right;	height: 33px;	width: 40px;	margin-left: 0 !important;	margin-right: 10px;
+					background-color: #333333;	border: 1px solid #333333;	color: #FFFFFF;}*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+フッターメニュー（フリー素材）
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+.fmenu_free {	width:640px;	margin-right: auto;	margin-left: auto;	padding: 20px 0px 20px 0px;
+		text-align:center;	border-bottom:1px solid #7A7A7A;}
+
+.fmenu_free a {	margin:0px 20px 0px 20px;}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+アイコンフォント
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?e5t37');
+	src:url('../fonts/icomoon.eot?#iefixe5t37') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?e5t37') format('woff'),
+		url('../fonts/icomoon.ttf?e5t37') format('truetype'),
+		url('../fonts/icomoon.svg?e5t37#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-music178:before {
+	content: "\e001";
+}
+.icon-musical60:before {
+	content: "\e002";
+}
+.icon-wifi37:before {
+	content: "\e003";
+}
+.icon-play:before {
+	content: "\e052";
+}
+.icon-folder:before {
+	content: "\e059";
+}
+.icon-inbox:before {
+	content: "\e122";
+}
+.icon-checkmark:before {
+	content: "\e6fe";
+}
+.icon-googleplus:before {
+	content: "\e764";
+}
+.icon-facebook:before {
+	content: "\e769";
+}
+.icon-twitter:before {
+	content: "\e76d";
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+グーグルwebフォント
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* cyrillic */
+@font-face {
+  font-family: 'Poiret One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poiret One'), local('PoiretOne-Regular'), url(https://fonts.gstatic.com/s/poiretone/v4/cKr_e199f0xMkxMkRbEJXyEAvth_LlrfE80CYdSH47w.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poiret One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poiret One'), local('PoiretOne-Regular'), url(https://fonts.gstatic.com/s/poiretone/v4/3Annd_XP-99FcGbOpm6fVCEAvth_LlrfE80CYdSH47w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poiret One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poiret One'), local('PoiretOne-Regular'), url(https://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8fk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+
+.wf-notosansjapanese { font-family: "Noto Sans Japanese"; }
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+有料販売
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*------------------------------------------------------------
+素材
+------------------------------------------------------------*/
+
+
+.accordion .comment.siyoukizai {    border-bottom: 1px dashed #d1d1d1;}
+
+.accordion .comment p span {	margin:0px;	padding-top: 5px;	font-size:11px;}/*なんでパラメーターが重複してるの？320列当たり*/
+
+/*----------------------*/
+
+
+
+/*----------------------*/
+
+.accordion_head.pdinfo  {
+    clear: both;
+    text-align: left;	font-size:13px;	cursor:pointer;	
+    margin: 5px 0px 3px 0px;/*DLmarketのカートページだったが、PD曲の注意表記に転用*/
+    }
+
+/*----------------------*/
+
+.accordion table.pdinfo {
+    border-bottom: 0px;
+}
+
+.accordion table.pdinfo tr {
+    border-bottom: 0px;
+}
+
+
+.accordion table.pdinfo th {
+    float: left;
+    width: 100%;
+    padding: 2px 0px 0px 0px;
+    color: #5e5e5e;
+    font-size: 14px;
+}
+
+.accordion table.pdinfo td {
+    float: right;
+    width: 100%;	
+}
+
+
+.accordion table.pdinfo td a.kaatowomiru {
+    float: right;
+    margin-top: -25px;
+}
+
+
+.accordion table p {
+    margin: 0;
+}
+
+.mainblock table tr.comment td {
+    padding: 5px 0px 3px 0px;
+}
+
+.accordion table.pdinfo img {	transition: opacity 0.2s ease;}
+.accordion table.pdinfo img:hover {	transition: opacity 0.2s ease;	opacity:0.70;}
+
+
+/*------------------------------------------------------------
+説明文
+------------------------------------------------------------*/
+
+.accordion_head.hanbai2  {
+      height: 22px;
+    width: fit-content;
+    margin: 4px 0px 10px 54px;
+    line-height: normal;
+    letter-spacing: 0px;
+    font-size: 15px;
+    float: none;}
+
+/*----------------------*/
+
+.on-co-setumei {	width: 90%; margin-left:20px;}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+以下プレーヤー
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+.sm2-bar-ui {
+ box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.5);
+ position: relative;
+ display: inline-block;
+ width: 100%;
+ font-weight: normal;
+ /* prevent background border bleed */
+ -webkit-background-clip: padding-box;
+ background-clip: padding-box;
+ /* because indeed, fonts do look pretty "fat" otherwise in this case. */
+ -moz-osx-font-smoothing: grayscale;
+ -webkit-font-smoothing: antialiased;
+ /* http://files.christophzillgens.com/webkit-font-smoothing.html */
+ /* font-smoothing: subpixel-antialiased; */
+ /* general font niceness? */
+ font-smoothing: antialiased;
+ text-rendering: optimizeLegibility;
+ /*min-width: 20em; */
+ max-width: 30em;
+ /* take out overflow if you want an absolutely-positioned playlist dropdown. */
+ border-radius: 5px;
+ overflow: hidden;
+}
+
+.sm2-bar-ui ul {
+ line-height: 1em;
+}
+.sm2-bar-ui.full-width {
+ max-width: 585px;
+ z-index: 5;
+}
+
+.sm2-bar-ui.playlist-open .bd {
+ border-bottom-left-radius: 0px;
+ border-bottom-right-radius: 0px;
+ border-bottom-color: transparent;
+}
+
+.sm2-bar-ui .bd {
+ position: relative;
+ /*
+ transition: background 0.2s ease-in-out;
+ */
+}
+
+.sm2-bar-ui.no-volume .sm2-volume {
+ /* mobile devices (android + iOS) ignore attempts to set volume. */
+ display: none;
+}
+
+.sm2-bar-ui .bd {
+ display: table;
+ border-bottom: none;
+}
+
+.sm2-bar-ui .sm2-playlist-wrapper {
+ border-top: 1px solid rgb(227, 227, 227);
+}
+
+.sm2-bar-ui,
+.sm2-bar-ui .bd a {
+ color: #141414;
+}
+
+.sm2-bar-ui .bd a {
+ text-decoration: none;
+}
+
+.hover-yuukou .sm2-bar-ui .bd .sm2-button-element:hover {
+ background-color: rgba(0,0,0,0.06);/* サイドメニューのホバー色に合わせて透明度を0.1から変更 */
+ background-image: url(../images/player/black-10.png);
+ background-image: none, none;
+}
+
+/*クリックした時の暗転　一旦なくしてみる
+.sm2-bar-ui .bd .sm2-button-element:active {
+ background-color: rgba(0,0,0,0.25);
+ background-image: url(../images/player/black-25.png);
+ background-image: none, none;
+}
+ */
+
+.sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:active .sm2-inline-button,
+.sm2-bar-ui .bd .active .sm2-inline-button/*,
+.sm2-bar-ui.playlist-open .sm2-menu a */{
+ -ms-transform: scale(0.9);
+ -webkit-transform: scale(0.9);
+ -webkit-transform-origin: 50% 50%;
+ /* firefox doesn't scale quite right. */
+ transform: scale(0.9);
+ transform-origin: 50% 50%;
+ /* firefox doesn't scale quite right. */
+ -moz-transform: none;
+}
+
+.sm2-bar-ui .bd .active {
+ background-color: rgba(0,0,0,0.1);
+ background-image: url(../images/player/black-10.png);
+ background-image: none, none;
+}
+
+.sm2-bar-ui {
+ /* base font size */
+ font-size: 15px;
+ text-shadow: none;
+}
+
+.sm2-bar-ui .sm2-inline-element {
+ position: relative;
+ display: inline-block;
+ vertical-align: middle;
+ padding: 0px;
+ overflow: hidden;
+}
+
+.sm2-bar-ui .sm2-inline-element,
+.sm2-bar-ui .sm2-button-element .sm2-button-bd {
+ position: relative;
+ /**
+  * .sm2-button-bd exists because of a Firefox bug from 2000
+  * re: nested relative / absolute elements inside table cells.
+  * https://bugzilla.mozilla.org/show_bug.cgi?id=63895
+  */
+}
+
+.sm2-bar-ui .sm2-inline-element,
+.sm2-bar-ui .sm2-button-element .sm2-button-bd {
+ /**
+  * if you play with UI width/height, these are the important ones.
+  * NOTE: match these values if you want square UI buttons.
+  */
+ min-width: 2.8em;
+ min-height: 2.8em;
+}
+
+.sm2-bar-ui .sm2-inline-button {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ width: 100%;
+ height: 100%;
+}
+
+.sm2-bar-ui .sm2-inline-status {
+ line-height: 100%;
+ /* how much to allow before truncating song artist / title with ellipsis */
+ display: inline-block;
+ min-width: 200px;
+ max-width: 20em;
+ /* a little more spacing */
+ padding-left: 0.75em;
+ padding-right: 0.75em;
+}
+
+.sm2-bar-ui .sm2-inline-element {
+ /* extra-small em scales up nicely, vs. 1px which gets fat */
+ border-right: 0.075em dotted #666; /* legacy */
+ border-right: 0.075em solid rgba(0,0,0,0.1);
+}
+
+.sm2-bar-ui .sm2-inline-element.noborder {
+ border-right: none;
+}
+
+.sm2-bar-ui .sm2-inline-element:first-of-type {
+ border-top-left-radius: 3px;
+ border-bottom-left-radius: 3px;
+ overflow: hidden;
+}
+
+.sm2-bar-ui .sm2-inline-element:last-of-type {
+ border-right: none;
+ border-top-right-radius: 3px;
+ border-bottom-right-radius: 3px;
+}
+
+.sm2-bar-ui .sm2-inline-status a:hover {
+ background-color: transparent;
+ text-decoration: underline;
+}
+
+.sm2-inline-time,
+.sm2-inline-duration {
+ display: table-cell;
+ width: 1%;
+ font-size: 75%;
+ line-height: 0.9em;
+ min-width: 2em; /* if you have sounds > 10:00 in length, make this bigger. */
+ vertical-align: middle;
+}
+
+.sm2-bar-ui .sm2-playlist {
+ display:none;
+ position: relative;
+ height: 1.45em;
+}
+
+.sm2-bar-ui .sm2-playlist ul {
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ width: 100%;
+ list-style-type: none;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+
+.sm2-bar-ui p,
+.sm2-bar-ui .sm2-playlist ul,
+.sm2-bar-ui .sm2-playlist ul li {
+ margin: 0px;
+ padding: 0px;
+}
+
+.sm2-bar-ui .sm2-playlist ul li {
+ position: relative;
+}
+
+.sm2-bar-ui .sm2-playlist ul li,
+.sm2-bar-ui .sm2-playlist ul li a {
+ position: relative;
+ display: block;
+ /* prevent clipping of characters like "g" */
+ height: 1.5em;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ text-align: center;
+}
+
+.sm2-row {
+ display: table-row;
+}
+
+.sm2-progress-bd {
+ /* spacing between progress track/ball and time (position) */
+ padding: 0px 0.8em;
+}
+
+.sm2-progress .sm2-progress-track,
+.sm2-progress .sm2-progress-ball,
+.sm2-progress .sm2-progress-bar {
+ position: relative;
+ width: 100%;
+ height: 0.65em;
+ border-radius: 0.65em;
+}
+
+.sm2-progress .sm2-progress-bar {
+ /* element which follows the progres "ball" as it moves */
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ width: 0px;
+ background-color: #141414;
+ background-image: url(../images/player/black-33.png);/* 【改善】決定色に差し替え */
+ background-image: none, none;
+}
+
+.volume-shade,
+.playing .sm2-progress .sm2-progress-track,
+.paused .sm2-progress .sm2-progress-track {
+ cursor: pointer;
+}
+
+.playing .sm2-progress .sm2-progress-ball {
+ cursor: -moz-grab;
+ cursor: -webkit-grab;
+ cursor: grab;
+}
+
+.sm2-progress .sm2-progress-ball {
+ display:none;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ width: 1em;
+ height: 1em;
+ margin: -0.2em 0px 0px -0.5em;
+ width: 14px;
+ height: 14px;
+ margin: -2px 0px 0px -7px;
+ width: 0.9333em;
+ height: 0.9333em;
+ margin: -0.175em 0px 0px -0.466em;
+ background-color: #fff;
+ padding: 0px;
+/*
+ z-index: 1;
+*/
+ -webkit-transition: -webkit-transform 0.15s ease-in-out;
+ transition: transform 0.15s ease-in-out;
+}
+
+/*
+.sm2-bar-ui.dark-text .sm2-progress .sm2-progress-ball {
+ background-color: #000;
+}
+*/
+
+.sm2-progress .sm2-progress-track {
+ background-color: #dadada;
+ background-image: url(../images/player/black-33.png); /* 【改善】決定色に差し替えlegacy */
+ background-image: none, none; /* modern browsers */
+}
+
+/* scrollbar rules have to be separate, browsers not supporting this syntax will skip them when combined. */
+
+/*スクロールバーカスタムの邪魔なので一時変更
+.sm2-playlist-wrapper ul::-webkit-scrollbar-track {
+ background-color: rgba(0,0,0,0.4);
+}
+*/
+.sm2-playlist-wrapper ul::-webkit-scrollbar-track {
+ background-color: rgba(0,0,0,0);
+}
+
+.playing.grabbing .sm2-progress .sm2-progress-track,
+.playing.grabbing .sm2-progress .sm2-progress-ball {
+ cursor: -moz-grabbing;
+ cursor: -webkit-grabbing;
+ cursor: grabbing;
+}
+
+.sm2-bar-ui.grabbing .sm2-progress .sm2-progress-ball {
+ -webkit-transform: scale(1.15);
+ transform: scale(1.15);
+}
+
+.sm2-inline-button {
+ background-position: 50% 50%;
+ background-repeat: no-repeat;
+ /* hide inner text */
+ line-height: 10em;
+ /**
+  * image-rendering seems to apply mostly to Firefox in this case. Use with caution.
+  * https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering#Browser_compatibility
+  */
+ image-rendering: -moz-crisp-edges;
+ image-rendering: -webkit-optimize-contrast;
+ image-rendering: crisp-edges;
+ -ms-interpolation-mode: nearest-neighbor;
+ -ms-interpolation-mode: bicubic;
+}
+
+.play-pause,
+.play-pause:hover,
+.paused .play-pause:hover {
+ background-image: url(../images/player/icomoon/entypo-25px-ffffff/PNG/play.png);
+ background-image: none, url(../images/player/icomoon/entypo-25px-ffffff/SVG/play.svg);
+ background-size: 67.5%;
+ background-position: 40% 53%;
+}
+
+.playing .play-pause {
+ background-image: url(../images/player/icomoon/entypo-25px-ffffff/PNG/pause.png);
+ background-image: none, url(../images/player/icomoon/entypo-25px-ffffff/SVG/pause.svg);
+ background-size: 57.6%;
+ background-position: 50% 53%;
+}
+
+.sm2-volume-control {
+ background-image: url(../images/player/icomoon/entypo-25px-ffffff/PNG/volume.png);
+ background-image: none, url(../images/player/icomoon/entypo-25px-ffffff/SVG/volume.svg);
+}
+
+.sm2-volume-control,
+.sm2-volume-shade {
+ background-position: 42% 50%;
+ background-size: 56%;
+}
+
+.volume-shade {
+ filter: alpha(opacity=33); /* <= IE 8 */
+ opacity: 0.33;
+/* -webkit-filter: invert(1);*/
+ background-image: url(../images/player/icomoon/entypo-25px-000000/PNG/volume.png);
+ background-image: none, url(../images/player/icomoon/entypo-25px-000000/SVG/volume.svg);
+}
+
+.menu {
+ background-image: url(../images/player/icomoon/entypo-25px-ffffff/PNG/list2.png);
+ background-image: none, url(../images/player/icomoon/entypo-25px-ffffff/SVG/list2.svg);
+ background-size: 58%;
+ background-position: 54% 51%;
+}
+
+.sm2-progress-ball .icon-overlay {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ top: 0px;
+ left: 0px;
+ background: none, url(../images/player/icomoon/free-25px-000000/SVG/spinner.svg);
+ background-size: 72%;
+ background-position: 50%;
+ background-repeat: no-repeat;
+ display: none; 
+}
+
+.playing.buffering .sm2-progress-ball .icon-overlay {
+ display: block;
+ -webkit-animation: spin 0.6s linear infinite;
+ animation: spin 0.6s linear infinite;
+}
+
+@-webkit-keyframes spin {
+ 0% {
+  -webkit-transform: rotate(0deg);
+ }
+ 100% {
+  -webkit-transform: rotate(360deg);
+ }
+}
+
+@-moz-keyframes spin {
+ 0% {
+  transform: rotate(0deg);
+ }
+ 100% {
+  transform: rotate(360deg);
+ }
+}
+
+@keyframes spin {
+ 0% {
+  transform: rotate(0deg);
+ }
+ 100% {
+  transform: rotate(360deg);
+ }
+}
+
+.sm2-element ul {
+ font-size: 100%;
+ list-style-type: none;
+}
+
+.sm2-element ul,
+.sm2-element ul li {
+ margin: 0px;
+ padding: 0px;
+}
+
+.bd.sm2-playlist-drawer {
+ /* optional: absolute positioning */
+ /* position: absolute; */
+ z-index: 3;
+ border-radius: 0px;
+ width: 100%;
+ height: 0px;
+ border: none;
+ background-image: none;
+ display: block;
+ overflow: hidden;
+ transition: height 0.2s ease-in-out;
+}
+
+.sm2-bar-ui.bottom .bd.sm2-playlist-drawer {
+ position: absolute;
+}
+
+.sm2-bar-ui.bottom .sm2-playlist-wrapper {
+ padding-bottom: 0px;
+}
+
+.sm2-bar-ui.bottom .bd.sm2-playlist-drawer {
+ /* show playlist on top */
+ bottom: 2.8em;
+}
+
+.sm2-bar-ui .bd.sm2-playlist-drawer {
+ /*opacity: 0.5;*/
+ /* redraw fix for Chrome, background color doesn't always draw when playlist drawer open. */
+ /*transform: translateZ(0);*/
+}
+
+/* experimental, may not perform well. */
+/*
+.sm2-bar-ui .bd.sm2-playlist-drawer a {
+ -webkit-filter: blur(5px);
+}
+*/
+
+.sm2-bar-ui.playlist-open .bd.sm2-playlist-drawer {
+ /*opacity: 1;*/
+}
+
+.sm2-bar-ui.playlist-open .bd.sm2-playlist-drawer a {
+ -webkit-filter: none; /* blur(0px) was still blurred on retina displays, as of 07/2014 */
+}
+
+.sm2-bar-ui.bottom.playlist-open .bd.sm2-playlist-drawer .sm2-playlist-wrapper {
+ /* extra padding when open */
+ padding-bottom: 0.5em;
+ box-shadow: none;
+}
+
+.sm2-bar-ui .bd.sm2-playlist-drawer {
+ transition: all 0.3s ease-in-out;
+ transition-property: transform, height, opacity, background-color, -webkit-filter;
+}
+
+ /*これがあるとリスト内のtransitionが効かない
+.sm2-bar-ui .bd.sm2-playlist-drawer a {
+ transition: -webkit-filter 0.2s ease-in-out;
+}
+*/
+
+.sm2-bar-ui .bd.sm2-playlist-drawer .sm2-inline-texture {
+ /* negative offset for height of top bar, so background is seamless. */
+ background-position: 0px -2.8em;
+}
+
+.sm2-box-shadow {
+ display: none;
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ width: 100%;
+ height: 100%;
+ box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.sm2-playlist-wrapper {
+ position: relative;
+ padding: 0.5em 0.5em 0.5em 0.25em;
+ background-image: none, none;
+}
+
+.sm2-playlist-wrapper ul {
+ max-height: 210px;
+ overflow: auto;
+}
+
+.sm2-playlist-wrapper ul li {
+ border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.sm2-playlist-wrapper ul li a {
+ display: block;
+ padding: 0.7em 0.25em 0.7em 0.75em;
+ /*margin-right: 0.5em;*/
+ font-size: 90%;
+ vertical-align: middle;
+}
+
+.sm2-playlist-wrapper ul li a.sm2-exclude {
+ display: inline-block;
+}
+
+.hover-yuukou .sm2-playlist-wrapper ul li:hover a {
+ background-color: rgba(0,0,0,0.06);/* サイドメニューのホバー色に合わせてrgba(227, 227, 227, 1)から変更 */
+ background-image: url(../images/player/black-20.png);/* 【改善】決定色に差し替え */
+ background-image: none, none;
+}
+
+.sm2-playlist-wrapper ul li.selected a {
+ border-left: 4px solid rgb(20, 20, 20);
+ background-image: none, none;
+}
+
+.sm2-bar-ui .disabled {
+ filter: alpha(opacity=33); /* <= IE 8 */
+ opacity: 0.33;
+}
+
+.sm2-bar-ui .bd .sm2-button-element.disabled:hover {
+ background-color: transparent;
+}
+
+.sm2-bar-ui .active,
+/*.sm2-bar-ui.playlist-open .sm2-menu,*/
+.sm2-bar-ui.playlist-open .sm2-menu:hover {
+ /* depressed / "on" state */
+ box-shadow: inset 0px 0px 2px rgba(0,0,0,0.1);
+ background-image: none;
+}
+
+.firefox-fix {
+ /**
+  * This exists because of a Firefox bug from 2000
+  * re: nested relative / absolute elements inside table cells.
+  * https://bugzilla.mozilla.org/show_bug.cgi?id=63895
+  */
+ position: relative;
+ display: inline-block;
+ width: 100%;
+ height: 100%;
+}
+
+/* --- full width stuff --- */
+
+.sm2-bar-ui .sm2-inline-element {
+ display: table-cell;
+}
+
+.sm2-bar-ui .sm2-inline-element {
+ /* collapse */
+ width: 1%;
+}
+
+.sm2-bar-ui .sm2-inline-status {
+ /* full width */
+ width: 100%;
+ min-width: 100%;
+ max-width: 100%;
+}
+
+.sm2-bar-ui > .bd {
+ width: 100%;
+}
+
+.sm2-bar-ui .sm2-playlist-drawer {
+ /* re-hide playlist */
+ display: block;
+ overflow: hidden;
+}
+
+
+.sm2-bar-ui  b {
+   font-weight: normal;
+}
+
+
+
+
+/*------------------------------------------------------------
+自作　プレイヤーのホバー
+------------------------------------------------------------*/
+
+.sm2-bar-ui .bd .sm2-button-element {
+	transition: background-color 0.2s ease;
+}
+
+.sm2-bar-ui .bd .sm2-button-element:hover {
+	transition: background-color 0.2s ease;
+}
+
+
+.sm2-bar-ui .bd .sm2-button-element:active {
+	transition: background-color 0s ease;
+}
+
+
+.sm2-playlist-wrapper ul li a {
+	transition: background-color border-left 0.2s ease;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+レスポンシブ
+
+----------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------
+準備
+------------------------------------------------------------*/
+
+#drw-menu {	z-index: 2;	position:fixed;	display:none;}
+#drw-menu a{display:none;}/* こっちのnoneも付けとかないとバグる時がある?*/
+#drw-menu2 {	z-index: 2;	position:fixed;	display:none;}
+#drw-menu2 a{display:none;}/* こっちのnoneも付けとかないとバグる時がある?*/
+
+
+
+
+.jscrdeyareyo{display:none}
+
+#simple-menu{padding:5px 10px; display:block;	color:#fdfdfd;	line-height: 1.8;}
+
+
+
+/*------------------------------------------------------------
+タブレット
+------------------------------------------------------------*/
+@media (min-width: 501px) and (max-width: 820px) {
+
+
+body {} 
+
+header {	width:750px;}
+
+#header-bg {	min-width:750px;}
+
+footer {	width:750px;}
+
+#footer-bg {min-width:750px;}
+
+
+.logo {   clear:none;   float:none; margin-left: auto; margin-right: auto;}
+
+.logo a {box-shadow:none;}
+
+
+#contents {width:750px;}
+
+#contents-bg {min-width:750px;	min-height:750px;}
+
+.left {
+/*
+width:0px;	margin: 0px;
+これは必要？*/
+    display: none;
+margin: 15px 0px 0px 15px;/*現在ドロワー幅を280px・レフトを250pxにしているので、左右に15pxずつ余白が来るよう調節。topの余白は関係ないので適当でいい*/
+}
+
+#slideout-idsitei-menu .left {display: block;}
+
+#right {	float:right;	width:730px;	margin: 0px 10px 20px 10px;}
+
+
+
+
+
+.ad_tm3 {	padding:3px 0px 3px 45px;}
+
+nav li.toggle_menu_3 a{padding: 3px 0px 3px 84px;}
+
+
+
+
+
+
+
+
+
+
+
+#drw-menu {display:inline;	z-index: 6;	position: fixed;	margin-top:7px;	margin-left:10px;	color:white;	background:#a5a5a5;	font-size: 15px;	font-weight:bold;
+	border-radius: 10px;	background-color:rgba(165,165,165,0.8);}
+
+
+#drw-menu a{
+    padding: 5px 10px;
+    display: block;
+    cursor: pointer;
+    color: #fdfdfd;
+    line-height: 1.8;
+	transition: all 0s ease;
+
+
+    height: 30px;
+    width: 20px;
+    background-image: url(../images/player/icomoon-ori/entypo-25px-ffffff/PNG/list2.png);
+    background-image: none, url(../images/player/icomoon-ori/entypo-25px-ffffff/SVG/list2.svg);
+    background-size: 90%;
+    background-position: 54% 51%;
+    background-repeat: no-repeat;
+
+
+
+}
+
+
+#drw-menu2 {right:0;
+position: fixed;	margin:0;	color:white;	font-size: 25px;
+	border-radius: 10px;}
+
+
+#drw-menu2 	span{
+    padding: 0px 8px;
+    display: block;
+    cursor: pointer;
+    color: #fdfdfd;
+	transition: all 0s ease;
+}
+
+
+#page-top { display:none;}/* pc以外、「トップへ戻る」ボタンはいらないと判断 */
+
+
+
+     					 }/* タブ表示 */
+
+
+/*------------------------------------------------------------
+スマホ
+------------------------------------------------------------*/
+@media (max-width: 500px) {
+
+
+.jscrdeyareyo{display:inline;}
+
+.jqk{display:none;}
+
+.otoiawase{display:none;}
+
+
+
+body {	-webkit-text-size-adjust: 100%;/*クロームバグ*/
+    line-height: 1.5;
+	} 
+
+em {    font-size: 15px;}
+
+
+#contents {padding-top: 20px;}
+
+
+.gad-r-t {  width: auto;	height: auto;	margin-bottom: 20px; margin-left:auto;margin-right:auto;}
+
+.gad-r-m {  width: auto;	height: auto;	margin-bottom: 20px; margin-left:auto;margin-right:auto;}
+
+.gad-r-b {  width: auto; height:auto; margin-left:auto;margin-right:auto;}
+
+
+#bread {	padding-left: 5px;}
+
+
+	
+.page-title{    width: 100%;    border-bottom: none;    margin: 0;    padding: 0;    height: auto;    background: none;}
+
+.page-title h2 {	  font-size: 20px;	width: auto;	height: auto;	border-bottom: 0px solid #898989;	margin: 0px 4px 23px 4px;	padding: 9px 12px 10px 12px;
+	background-color: #e9e9e9;	border-radius: 14px;	line-height: 25px;}
+	
+
+#main h3 {	width:auto;	font-size: 19px;	    padding: 0px 0px 2px 0px;
+    margin: 32px 10px 17px 10px;}
+
+#main h4 {	margin: 0px 0px 10px 12px;	font-size: 17px;}
+
+#main .licen h4 {    font-size: 17px;}
+
+.honbun {	width: auto;	margin: 0px 0px 25px 0px;	padding: 0px 20px 0px 20px;	font-size: 15px;}
+
+.honbun p {	max-height: 100%;/*クロームバグ*/}
+
+.honbun p.tyuusyaku {    font-size: 14px;}
+
+
+.faq .honbun {    width: auto;}
+
+.faq .honbun p.tyuusyaku2 { 	font-size: 97%;   padding: 12px 10px 12px 10px;     border: solid 3px #b3b3b3;    border-radius: 15px;
+}
+
+
+.licen .honbun {    width: auto;}
+
+.licen .honbun p {    margin: 0px 0px 10px 0px;}
+
+.licen .honbun p.tyuusyaku2 {    width: auto;	border: solid 3px #b3b3b3;	border-radius: 15px;}
+
+.licen .honbun p.tyuusyaku3 {	line-height: 1.6;   padding: 12px 10px 12px 10px;	border: solid 3px #b3b3b3;	border-radius: 15px;		font-size: 97%;/* なんかアンドロイドの特定のクロームだけフォントサイズが変になるので（自動補正？）これでうまくいくか試してみる*/}
+
+.sozai {	width: auto;	margin: 8px 20px; border-top: 1px solid #dfdfdf;}
+
+#main .sozai h3 {	width: 100%;	margin-left: auto;	padding: 5px 0px 2px 0px;	font-size: 16px; border:none;}
+
+.mainblock table {	width: 100%;}
+
+.mainblock table th {padding-right:5px;	  font-size: 11px;}
+
+.mainblock table td {font-size: 14px;}
+
+.mainblock {	width: 100%;}
+
+.accordion_head {	margin: 6px 0px 6px 0px;	font-size: 14px;}
+
+.accordion_head a span {	height: 21px;;
+}
+
+.ac_oya {
+    border-bottom: none;
+}
+
+.download {		height: auto;		line-height: normal;	padding: 0px 3px 2px 0px;	  border-radius: 10px;}
+
+.download a {	font-size: 15px;}
+
+.download.ogg  {	margin-bottom: 0px;}
+
+.pager-top {	width: auto;	padding-right: 10px;   font-size: 14px;}
+
+.pager-bottom { font-size: 16px;}
+
+.pagenum-current {    padding: 3px 10px 5px 10px;}
+
+.caution {	width: auto;	margin-left: 10px;	margin-right: 10px;}
+.caution p {padding: 0px 10px 0px 10px; }
+
+
+.information {	width: auto;	margin-left: auto;	padding: 0px 10px 0px 10px; 	font-size: 14px;		max-height: 100%;/*クロームバグ*/}
+
+
+
+
+
+
+        header {	width:320px;	height: 54px;}
+
+#header-bg {height:54px;	min-width:0px;}
+
+
+
+
+
+footer {	width:320px;}
+
+#footer-bg {min-width:0px;}
+
+.fmenu {
+    padding: 10px 0px 0px 0px;
+}
+
+.fmenu_free {	width:320px;	margin-right: auto;	margin-left: auto;	padding: 15px 0px 15px 0px;
+		text-align:center;	border-bottom:1px solid #7A7A7A;}
+
+.fmenu a {	margin-left:10px;	margin-right:10px;	line-height: 3;}
+
+
+.logo {   clear:none;   float:none; margin-left: auto; margin-right: auto;}
+
+.logo a {box-shadow:none;}
+
+
+#contents {width:100%;}
+
+#contents-bg {min-width:0px;	min-height:550px;}
+
+.left {
+/*
+width:0px;	margin: 0px;
+これは必要？*/
+	display: none;
+	margin: 15px 0px 0px 15px;/*現在ドロワー幅を280px・レフトを250pxにしているので、左右に15pxずつ余白が来るよう調節。topの余白は関係ないので適当でいい*/
+}
+
+#slideout-idsitei-menu .left {display: block;}
+
+
+#right {	float:none;	width:auto;	margin: 0px 0px 50px 0px;}
+
+
+
+
+.ad_tm3 {	padding:3px 0px 3px 45px;}
+
+nav li.toggle_menu_3 a{padding: 3px 0px 3px 66px;}
+
+nav li.toggle_menu_4 a {padding: 0px 0px 0px 84px;
+}
+
+
+
+#header-menu a {	  font-size: 16px;}
+
+
+
+
+
+
+.toggle_menu_1 {	  border-radius: 25px;
+    height: 49px;
+    line-height: 49px;
+}
+
+.toggle_menu_1.active {
+    border-radius: 25px 25px 0px 0px;}
+
+
+
+
+#drw-menu {display:inline;	z-index: 6;	position: fixed;	margin-top:6px;	margin-left:5px;	color:white;	background:#a5a5a5;	font-size: 15px;	font-weight:bold;
+	border-radius: 10px;	background-color:rgba(119, 119, 119, 0.81);}
+
+
+#drw-menu a{
+    padding: 5px 10px;
+    display: block;
+    cursor: pointer;
+    color: #fdfdfd;
+    line-height: 1.8;
+	transition: all 0s ease;
+
+
+    height: 30px;
+    width: 20px;
+    background-image: url(../images/player/icomoon-ori/entypo-25px-ffffff/PNG/list2.png);
+    background-image: none, url(../images/player/icomoon-ori/entypo-25px-ffffff/SVG/list2.svg);
+    background-size: 90%;
+    background-position: 54% 51%;
+    background-repeat: no-repeat;
+
+
+}
+
+#drw-menu2 {right:0;
+position: fixed;	margin:0;	color:white;	font-size: 25px;
+	border-radius: 10px;
+}
+
+
+#drw-menu2 	span{
+    padding: 0px 8px;
+    display: block;
+    cursor: pointer;
+    color: #fdfdfd;
+	transition: all 0s ease;
+}
+
+
+#page-top { display:none;}/* pc以外、「トップへ戻る」ボタンはいらないと判断 */
+
+
+
+.accordion_head.hanbai2  {		max-height: 100%;/*クロームバグ*/
+      width: auto;
+    height: auto;
+    margin: 0px 0px 13px 0px;
+    padding: 0px 20px 0px 20px;}
+
+
+.sm2-playlist-wrapper ul li a {
+    font-size: 13px;
+}
+
+.honbun.freeindex {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+   /* なんでこんなものを入れた？ padding-right: 2%; */
+    margin-bottom: 10px;
+}
+
+.information.freeindex dt {	font-style: normal;
+    float: initial;
+    margin: 0px 30px 0px 0px;
+}
+
+.information.freeindex dd {    margin: 0px 0px 8px 0px;
+    border-bottom: solid 1px #dbdbdb;
+    padding-bottom: 7px;
+}
+
+.information.freeindex {    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-bottom: 60px;
+    }
+
+
+
+
+#main h3.freeindex {
+    margin-left: 15px;
+}
+
+
+
+
+     					 }/* スマホ表示 */
+
+
+
+
+
+
+
+/*------------------------------------------------------------
+PC表示のみ
+（webフォントのズレ修正）
+全サイズでwebフォント使うようになったからこれは消してかなきゃだよね
+------------------------------------------------------------*/
+@media (min-width: 821px) {
+
+
+#header-menu a {
+    line-height: 48px !important;
+}
+
+.page-title h2 {
+    line-height: 39px !important;
+}
+
+#main h3 {
+    padding-bottom: 2px;
+}
+
+.sozai h3 {
+    padding: 0px 0px 3px 5px !important;
+}
+
+
+.download {
+}
+
+.mainblock table th {
+    padding: 1px 0px 1px 0px !important;
+}
+
+.mainblock table td {
+    padding: 0px 0px 2px 0px !important;
+}
+
+.accordion_head.pdinfo {
+    margin: 5px 0px 5px 0px !important;
+}
+
+
+.accordion_head.sozaiinfo,
+.accordion_head.pdinfo {	height: 19px !important;	margin-bottom: 2px;}
+
+.accordion_head.sozaiinfo a span,
+.accordion_head.pdinfo a span {	    font-size: 12px;	height: 18px !important;}
+
+_:lang(x)::-moz-placeholder, .accordion_head.sozaiinfo a span,
+.accordion_head.pdinfo a span {	height: 20px !important;}
+
+
+     					 }/* PC表示 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------
+slideout
+------------------------------------------------------------*/
+
+
+html,
+body {
+  margin: 0;}
+
+
+body,
+.panel {
+  background-color: #fff;
+}
+
+
+
+
+.panel {
+  min-height: 100%;
+}
+
+
+/**
+ * Slideout module styles
+ */
+body {
+ width: 100%;
+ height: 100%;
+}
+
+.slideout-menu {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ width: 280px;
+ min-height: 100vh;
+ overflow-y: auto;
+ -webkit-overflow-scrolling: touch;
+ z-index: 0;
+ display: none;
+}
+
+.slideout-menu-left {
+ left: 0;
+}
+
+.slideout-menu-right {
+ right: 0;
+}
+
+.slideout-panel {
+ position: relative;
+ z-index: 1;
+ will-change: transform;
+ min-height: 100vh;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+ overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+ display: block;
+}
+
+/* Animation
+---------------------------------- */
+@-webkit-keyframes shake {
+  0%, 100% {
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+  }
+
+  50% {
+    -webkit-transform:translate3d(-10px, 0, 0);
+    transform:translate3d(-10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+  }
+
+  50% {
+    -webkit-transform:translate3d(-10px, 0, 0);
+    transform:translate3d(-10px, 0, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name:shake;
+  animation-name:shake;
+  -webkit-animation-duration:2s;
+  animation-duration:2s;
+  -webkit-animation-iteration-count: 4;
+  animation-iteration-count: 4;
+}
+
+
+
+
+/* 追加機能
+---------------------------------- */
+
+
+.panel:before {
+  content: '';
+  display: block;
+  background-color: rgba(0,0,0,0);
+  transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.panel-open:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,.5);
+  z-index: 99;
+}
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------
+
+サイト移行のニュース文
+
+----------------------------------------------------------------------------------------------------------------------------*/
+
+
+#news-20190101 {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+#news-20190101 .midashi1 {
+    font-size: 15px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 60px;
+    border: 1px solid #BCBCBC;
+}
+
+
+#news-20190101 .midashi2 {
+    font-size: 23px;
+    margin-top: 0px;
+    margin-bottom: 60px;
+}
+
+
+#news-20190101 .midashi3 {
+margin-bottom:40px;
+}
+
+
+#news-20190101 .midashi3 p {
+    margin-top: 0px;
+}
+
+#news-20190101 .midashi3 .midashi-title {
+	font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+
+
+#news-20190101 .midashi4 {
+    margin: 70px 60px 0px 60px;
+    border: 1px solid #eaeaea;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 0px 70px 10px 70px;
+}
+
+#news-20190101 .midashi4 .midashi-title {
+	font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#news-20190101 .accordion_head.hanbai2 {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    float: none;
+}
+
+#news-20190101 .midashi4 .honbun {
+    width: auto;
+    margin: 0;
+    color: #5e5e5e;
+    text-align: left;
+    margin-top: -5px;
+}
+
+
+
+#news-20190101 .midashi5 {
+    margin: 50px 60px 0px 60px;
+    margin-bottom: 43px;
+    border: 1px solid #eaeaea;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 0px 70px 10px 70px;
+}
+
+#news-20190101 .midashi5 .midashi-title {
+	font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#news-20190101 .midashi5 .honbun {
+    width: auto;
+    margin: 0;
+    color: #5e5e5e;
+    text-align: left;
+    margin-top: -5px;
+}
+
+
+.hover-yuukou #news-20190101 a:after,
+.hover-yuukou #news-20190101 a:before {	transition: all 0.2s;}
+
+/*--*/
+
+.hover-yuukou #news-20190101 a  {	position: relative;}
+
+/*--*/
+
+.hover-yuukou #news-20190101 a:after {	position: absolute;	bottom: 0;	left: 0;	right: 0;	margin: auto;	width: 0%;	content: '.';	color: transparent;	background: #2880F1;	height: 1px;}
+
+/*--*/
+
+.hover-yuukou #news-20190101 a:hover:after {	width: 100%;}
+
+/*--*/
+
+.hover-yuukou #news-20190101 a:hover:after,
+.hover-yuukou #news-20190101 a:hover:before{	transition: all 0.3s;}
+
+
+
+ 
+ /*------------------------------------------------------------
+タブレット
+------------------------------------------------------------*/
+@media (min-width: 501px) and (max-width: 820px) {
+
+#news-20190101 .accordion_head.hanbai2 {
+    height: auto;
+}
+
+
+#news-20190101 .midashi4 .honbun,
+#news-20190101 .midashi5 .honbun {
+    margin-top: 0px;
+}
+
+#news-20190101 .midashi4 {
+    margin: 70px 0px 0px 0px;
+}
+
+
+#news-20190101 .midashi5 {
+    margin: 70px 0px 43px 0px;
+}
+
+
+ }/* タブレット表示 */
+
+
+
+
+/*------------------------------------------------------------
+スマホ
+------------------------------------------------------------*/
+@media (max-width: 500px) {
+
+
+
+
+#news-20190101 {
+    width: auto;
+    padding: 0px 20px 0px 20px;
+    margin-bottom: 60px;
+}
+
+
+#news-20190101 .midashi1 {
+    font-size: 13px;
+    width: auto;
+    margin:0px 20px 40px 20px;
+}
+
+
+#news-20190101 .midashi2 {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+
+#news-20190101 .midashi3{
+    font-size: 14px;
+}
+
+
+#news-20190101 .midashi3 .midashi-title,
+#news-20190101 .midashi4 .midashi-title {
+    font-size: 14px;
+}
+
+#news-20190101 .midashi4,
+#news-20190101 .midashi5 {
+    padding: 0px 0px 10px 0px;
+}
+
+
+#news-20190101 .midashi4 {
+    margin: 70px 0px 0px 0px;
+}
+
+#news-20190101 .midashi5 {
+    margin: 50px 0px 43px 0px;
+}
+
+#news-20190101 .accordion_head.hanbai2 {
+    font-size: 14px;
+    padding:0px;
+    margin-bottom:10px;
+}
+
+#news-20190101 .midashi4 .honbun,
+#news-20190101 .midashi5 .honbun {
+     margin-top: 0px; 
+     font-size:14px;
+}
+
+
+
+
+ }/* スマホ表示 */
+ 
+ 
+
+
+
