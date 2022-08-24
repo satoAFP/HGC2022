@@ -69,7 +69,8 @@ public class Slime_ResultMove : MonoBehaviour
         else
         {
             //リザルトシーンの時かつ、フェードが終わった時、ボタンを押せるようになる
-            if (SceneManager.GetActiveScene().name == "Result")
+            if (SceneManager.GetActiveScene().name == "Result"||
+                SceneManager.GetActiveScene().name == "LastResult")
             {
                 GameObject.Find("feed_not_tap").SetActive(false);
                 first = true;
