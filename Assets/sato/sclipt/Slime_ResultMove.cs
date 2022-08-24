@@ -42,20 +42,21 @@ public class Slime_ResultMove : MonoBehaviour
             pos.x += move_speed;
             this.gameObject.GetComponent<RectTransform>().position = pos;
 
-            //if (first)
-            //{
-            //    //SE流す
-            //    audio.PlayOneShot(pic);
-            //    first = false;
-            //}
             
             //位置が中心に来た時、リザルトへ移動
             if (this.gameObject.GetComponent<RectTransform>().localPosition.x > 0)  
             {
-                //リザルトシーンでないとき
-                if (SceneManager.GetActiveScene().name != "Result")
+                if (first)
                 {
-                    SceneManager.LoadScene("Result");
+                    //リザルトシーンでないとき
+                    if (SceneManager.GetActiveScene().name != "Result" || SceneManager.GetActiveScene().name != "Ending")
+                    {
+                        if (SceneManager.GetActiveScene().name != "Stage12")
+                            SceneManager.LoadScene("Result");
+                        else
+                            SceneManager.LoadScene("Ending");
+                    }
+                    first = false;
                 }
             }
             if (pos.x > stop_pos) 
@@ -71,6 +72,7 @@ public class Slime_ResultMove : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Result")
             {
                 GameObject.Find("feed_not_tap").SetActive(false);
+                first = true;
             }
         }
     }
