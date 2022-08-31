@@ -46,22 +46,25 @@ public class Scenemove : MonoBehaviour
     void FixedUpdate() 
     {
         //ステージシーンの時
-        if (SceneManager.GetActiveScene().name != "Title"&&
+        if (SceneManager.GetActiveScene().name != "Title" &&
             SceneManager.GetActiveScene().name != "StageSelect" &&
-            SceneManager.GetActiveScene().name != "Result")
+            SceneManager.GetActiveScene().name != "Result" &&
+            SceneManager.GetActiveScene().name != "LastResult") 
         {
             //ミッションがクリアされているかを記憶
             if (GameObject.Find("Player").GetComponent<Mission>().Clown_OK == true)
                 Clown_OK = true;
             else
                 Clown_OK = false;
+
             if (GameObject.Find("Player").GetComponent<Mission>().Mission_OK == true)
                 Mission_OK = true;
             else
                 Mission_OK = false;
         }
         
-        if (SceneManager.GetActiveScene().name == "Result")
+        if (SceneManager.GetActiveScene().name == "Result"||
+            SceneManager.GetActiveScene().name == "LastResult")
         {
             clown_time++;
             mission_time++;
@@ -111,7 +114,8 @@ public class Scenemove : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().name == "Result")
+        if (SceneManager.GetActiveScene().name == "Result" ||
+            SceneManager.GetActiveScene().name == "LastResult") 
             Mem_Mission.merge();
     }
 

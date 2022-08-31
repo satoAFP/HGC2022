@@ -49,12 +49,12 @@ public class Slime_ResultMove : MonoBehaviour
                 if (first)
                 {
                     //リザルトシーンでないとき
-                    if (SceneManager.GetActiveScene().name != "Result" || SceneManager.GetActiveScene().name != "Ending")
+                    if (SceneManager.GetActiveScene().name != "Result" || SceneManager.GetActiveScene().name != "LastResult")
                     {
                         if (SceneManager.GetActiveScene().name != "Stage12")
                             SceneManager.LoadScene("Result");
                         else
-                            SceneManager.LoadScene("Ending");
+                            SceneManager.LoadScene("LastResult");
                     }
                     first = false;
                 }
@@ -69,7 +69,8 @@ public class Slime_ResultMove : MonoBehaviour
         else
         {
             //リザルトシーンの時かつ、フェードが終わった時、ボタンを押せるようになる
-            if (SceneManager.GetActiveScene().name == "Result")
+            if (SceneManager.GetActiveScene().name == "Result"||
+                SceneManager.GetActiveScene().name == "LastResult")
             {
                 GameObject.Find("feed_not_tap").SetActive(false);
                 first = true;
