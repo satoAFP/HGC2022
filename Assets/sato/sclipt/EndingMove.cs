@@ -8,7 +8,7 @@ public class EndingMove : MonoBehaviour
     [SerializeField, Header("ç≈èIà⁄ìÆç¿ïW")] private float StopPos;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (gameObject.GetComponent<RectTransform>().localPosition.y <= StopPos)
             gameObject.GetComponent<RectTransform>().localPosition += new Vector3(0, MoveSpeed, 0);
