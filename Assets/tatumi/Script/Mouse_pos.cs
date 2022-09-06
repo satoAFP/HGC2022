@@ -54,15 +54,16 @@ public class Mouse_pos : MonoBehaviour
         }
     }
 
-    public IEnumerator Set_Active(GameObject a)
+    public IEnumerator Set_Active(GameObject me)
     {
+        //ˆê’èŠÔ•\¦ŒãAíœ
         for (int i = 0; i != 2; i++)
         {
             if (i == 0)
                 yield return new WaitForSeconds(1.0f);
             else
             {
-                Destroy(a.gameObject);
+                Destroy(me.gameObject);
             }
 
         }
